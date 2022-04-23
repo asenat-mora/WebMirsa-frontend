@@ -8,11 +8,10 @@
                     <input class="login-input" type="password" placeholder="Contraseña">
                     <a href="#"> <span class="login-span">Olvidaste tu contraseña?</span> </a>
 
-                    <router-link to="/" class="login-btn">
+                    <router-link to="/" class="login-btn"><!-- link -->
                         Login
                     </router-link>
 
-                    <!--  <button class="login-btn">login</button> -->
                     <p>No tengo una cuenta
                         <br>
                         <a href="formRegisterUser.html">

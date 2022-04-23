@@ -5,5 +5,7 @@
 <template>
   <main>
     <Navbar/>
+    <h1>Bienvenido</h1>
+    
   </main>
 </template>

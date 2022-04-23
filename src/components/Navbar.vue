@@ -1,5 +1,5 @@
 <template>
-    <div class="bodyNa">
+    <div class="bodyNav">
         <nav>
             <div class="divNav">
                 <i class='bx bx-menu' @click="menuOpenBtn"></i>
@@ -15,27 +15,45 @@
                             <a href="#">CATALOGO</a>
                             <i class='bx bxs-chevron-down htmlcss-arrow arrow' @click="htmlcssArrow"></i>
                             <ul class="htmlCss-sub-menu sub-menu">
-                                <li><a href="#">Producto</a></li>
+                                <!-- <li><a href="#">Producto</a>
+                                </li> -->
+                                <li class="more">
+                                    <span><a href="#">Producto</a>
+                                        <i class='bx bxs-chevron-right arrow more-arrow'></i>
+                                    </span>
+
+                                    <!-- 
+
+                                        no me sale el link :(, porque no me dirige a la pagina pa crear nuevo articulo
+                                     -->
+                                    <ul class="more-sub-menu sub-menu">
+                                        <li><router-link to="src/views/article.vue"><!-- link -->prueba</router-link></li>
+                                        <li><a href="#">Nuevo</a></li>
+                                        <li><a href="#">Editar</a></li>
+                                    </ul>
+                                </li>
+
+
+
+
                                 <li><a href="#">Marca</a></li>
                                 <li><a href="#">Categoria</a></li>
                                 <!-- <li class="more">
-                    <span><a href="#">More</a>
-                    <i class='bx bxs-chevron-right arrow more-arrow'></i>
-                  </span>
-                    <ul class="more-sub-menu sub-menu">
-                      <li><a href="#">Neumorphism</a></li>
-                    
-                    </ul>
-                  </li> -->
-
+                                    <span><a href="#">More</a>
+                                        <i class='bx bxs-chevron-right arrow more-arrow'></i>
+                                    </span>
+                                    <ul class="more-sub-menu sub-menu">
+                                        <li><a href="#">Neumorphism</a></li> 
+                                    </ul>
+                                </li> -->
                             </ul>
                         </li>
                         <li>
                             <a href="#">PUBLICIDAD</a>
                             <!-- <i class='bx bxs-chevron-down js-arrow arrow '></i>
-                <ul class="js-sub-menu sub-menu">
-                  <li><a href="#">Carrusel</a></li>
-                </ul> -->
+                            <ul class="js-sub-menu sub-menu">
+                                <li><a href="#">Carrusel</a></li>
+                            </ul> -->
                         </li>
                         <li><a href="#">REPORTE</a></li>
                         <li><a href="#">PERFILES</a></li>
@@ -99,6 +117,14 @@ export default {
 }
 
 </script>
+
+<style scoped>
+/* aqui van las cositas que solo van a modificar esta vista  */
+
+
+
+
+</style>
 
 
 
