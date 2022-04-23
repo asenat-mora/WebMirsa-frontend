@@ -1,0 +1,744 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@import url('https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css');
+
+/*
+----------------------------------------------
+--MENU
+----NADVAR
+----LOGIN
+----FORM REGISTER
+----------------------------------------------
+*/
+:root{
+    --fondo:#25294a;
+    --fondo2:#ecedf0;
+    --fondoForm:#2d325a;
+    --white: #ffffff;
+    --yellow:  #f0e556 ;
+    --light-purple: #8c91b6;
+    --light-blue: #51b1dd;
+    --borderForm: #3944a1;
+    --button-blue: #0084ff;  
+  }
+  
+  
+  a{
+    color: inherit;
+    text-decoration: none;
+  }
+  /*
+  ----------------------------------------------
+  -----NAVBAR
+  ----------------------------------------------
+  */
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  .bodyNa{
+    min-height: 100vh;
+  }
+  nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    height: 130px;
+    background: var(--fondo);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    z-index: 99;
+  }
+  nav .divNav{
+    height: 100%;
+    max-width: 1550px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    /* background: red; */
+    padding: 0 50px;
+  }
+  .divNav .logoNav a{
+    font-size: 50px;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  nav .divNav .navlinks{
+    line-height: 120px;
+    height: 100%;
+  }
+  nav .divNav .links-option{
+    display: flex;
+  }
+  nav .divNav .links-option li{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0 14px;
+  }
+  nav .divNav .links-option li a{
+    height: 100%;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--white);
+    font-size: 25px;
+    font-weight: 500;
+  }
+  .links-option li:hover .htmlcss-arrow,
+  .links-option li:hover .js-arrow{
+    transform: rotate(180deg);
+    }
+  
+  nav .divNav .links-option li .arrow{
+    /* background: red; */
+    height: 100%;
+    width: 22px;
+    line-height: 70px;
+    text-align: center;
+    display: inline-block;
+    color: var(--white);
+    transition: all 0.3s ease;
+  }
+  nav .divNav .links-option li .sub-menu{
+    position: absolute;
+    top: 70px;
+    left: 0;
+    line-height: 55px;
+    background: var(--fondo);
+    box-shadow: 0 1px 2px rgba(179, 92, 92, 0.2);
+    border-radius: 0 0 4px 4px;
+    display: none;
+    z-index: 2;
+  }
+  nav .divNav .links-option li:hover .htmlCss-sub-menu,
+  nav .divNav .links-option li:hover .js-sub-menu{
+    display: block;
+  }
+  .divNav .links-option li .sub-menu li{
+    padding: 0 22px;
+    border-bottom: 1px solid rgba(163, 60, 60, 0.753);
+  }
+  .divNav .links-option li .sub-menu a{
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .divNav .links-option li .sub-menu .more-arrow{
+   
+    line-height: 40px;
+  }
+  .divNav .links-option li .htmlCss-more-sub-menu{
+    /* line-height: 40px; */
+  }
+  .divNav .links-option li .sub-menu .more-sub-menu{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    border-radius: 0 4px 4px 4px;
+    z-index: 1;
+    display: none;
+  }
+  .links-option li .sub-menu .more:hover .more-sub-menu{
+    display: block;
+  }
+  .divNav .search-box{
+    position: relative;
+     height: 40px;
+    width: 40px;
+  }
+  .divNav .search-box i{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    line-height: 40px;
+    text-align: center;
+    font-size: 22px;
+    color: var(--white);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .divNav .search-box .input-box{
+    position: absolute;
+    right: calc(100% - 40px);
+    top: 80px;
+    height: 60px;
+    width: 300px;
+    background: var(--fondo);
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+  }
+  .divNav.showInput .search-box .input-box{
+    top: 65px;
+    opacity: 1;
+    pointer-events: auto;
+    background: var(--fondo);
+  }
+  .search-box .input-box::before{
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background: var(--fondo);
+    right: 10px;
+    top: -6px;
+    transform: rotate(45deg);
+  }
+  .search-box .input-box input{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+    height: 35px;
+    width: 280px;
+    outline: none;
+    padding: 0 15px;
+    font-size: 16px;
+    border: none;
+  }
+  .divNav .navlinks .sidebarLogo{
+    display: none;
+  }
+  .divNav .bx-menu{
+    display: none;
+  }
+  @media (max-width:920px) {
+    nav .divNav{
+      max-width: 100%;
+      padding: 0 25px;
+    }
+  
+    nav .divNav .logoNav a{
+      font-size: 30px;
+    }
+    nav .divNav .links-option li{
+      padding: 0 10px;
+      white-space: nowrap;
+    }
+    nav .divNav .links-option li a{
+      font-size: 18px;
+    }
+    .divNav .links-option li .sub-menu a{
+      font-size: 15px;
+    }
+  }
+  @media (max-width:800px){
+  
+    nav{
+      position: relative;
+    }
+    .divNav .bx-menu{
+      display: block;
+    }
+    /* colum menu */
+    nav .divNav .navlinks{
+      position: fixed;
+      top: 0;
+      left: -100%;
+      display: block;
+      max-width: 270px;
+      width: 100%;
+      background:  var(--fondo);
+      line-height: 40px;
+      padding: 20px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease;
+      z-index: 1000;
+    }
+    .divNav .navlinks .sidebarLogo{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sidebarLogo .menuNav{
+      font-size: 30px;
+      color: var(--white);
+    }
+    .sidebarLogo  i,
+    .divNav .bx-menu{
+      font-size: 50px;
+      color: var(--white);
+    }
+    nav .divNav .links-option{
+      display: block;
+      margin-top: 20px;
+    }
+    nav .divNav .links-option li .arrow{
+      line-height: 40px;
+    }
+  nav .divNav .links-option li{
+      display: block;
+    
+    }
+  
+  .divNav .links-option li .sub-menu a{
+      font-size: 20px;   
+    }
+  
+  nav .divNav .links-option li .sub-menu{
+    position: relative;
+    top: 0;
+    box-shadow: none;
+    display: none;
+  }
+  nav .divNav .links-option li .sub-menu li{
+    border-bottom: none;
+  
+  }
+  .divNav .links-option li .sub-menu .more-sub-menu{
+    display: none;
+    position: relative;
+    left: 0;
+  }
+  .divNav .links-option li .sub-menu .more-sub-menu li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .links-option li:hover .htmlcss-arrow,
+  .links-option li:hover .js-arrow{
+    transform: rotate(0deg);
+    }
+    .divNav .links-option li .sub-menu .more-sub-menu{
+      display: none;
+    }
+    .divNav .links-option li .sub-menu .more span{
+      /* background: red; */
+      display: flex;
+      align-items: center;
+      /* justify-content: space-between; */
+    }
+  
+    .links-option li .sub-menu .more:hover .more-sub-menu{
+      display: none;
+    }
+    nav .divNav .links-option li:hover .htmlCss-sub-menu,
+    nav .divNav .links-option li:hover .js-sub-menu{
+      display: none;
+    }
+  .divNav .navlinks.show1 .links-option .htmlCss-sub-menu,
+    .divNav .navlinks.show3 .links-option .js-sub-menu,
+    .divNav .navlinks.show2 .links-option .more .more-sub-menu{
+        display: block;
+      }
+      .divNav .navlinks.show1 .links-option .htmlcss-arrow,
+      .divNav .navlinks.show3 .links-option .js-arrow{
+          transform: rotate(180deg);
+  }
+      .divNav .navlinks.show2 .links-option .more-arrow{
+        transform: rotate(90deg);
+      }
+  }
+  @media (max-width:370px){
+    nav .divNav .navlinks{
+    max-width: 100%;
+  } 
+  }
+  
+  
+  /*
+  ----------------------------------------------
+  -----LOGIN
+  ----------------------------------------------
+  */
+  
+  .login-litle{
+    margin: 2em auto;/* altura */
+  }
+  
+  .login-body {
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    background-color: var(--fondo);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
+  .login-container {
+    height: 43.75em;
+    width: 62em;
+    margin: 4em auto;/* altura */
+    border-radius: 3px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    flex-direction: row;
+    overflow: hidden;
+  }
+  
+  .login-info-container {
+    width: 50%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 0.5rem;
+    background-color: var(--fondoForm);
+  }
+  
+  .login-image-container {
+    display: inline-flex;
+   /*  padding: 2rem; */
+    width: 50%;
+    /* background-color: var(--yellow); */
+  }
+  
+  .login-litle {
+    text-transform: capitalize;
+    font-size: 2.25rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+  
+  /* .social-login {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+  }
+  
+  .social-login-element {
+    width: 12.5rem;
+    height: 3.75rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    border: 1px solid var(--button-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .social-login-element img {
+    width: 1.875rem;
+    height: 1.875rem;
+    position: relative;
+    top: 0;
+    left: -0.625rem;
+  }
+  
+  .social-login-element:hover {
+    background-color: #fff;
+  } */
+  
+  .login-info-container > p {
+    font-size: 1.25em;
+    margin-top: 1.5em;
+  }
+  
+  .login-form {
+    height: 55%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .login-input, .login-btn {
+    width: 90%;
+    height: 3.125rem;
+    font-size: 1em;
+  }
+  
+  .login-input {
+    padding-left: 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+  }
+  
+  .login-input:hover {
+    border: 2px solid var(--button-bg);
+  }
+  
+  .login-btn {
+    padding: 15px;
+    width: 40%;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-blue);
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .login-form p {
+    margin: 0;
+  }
+  
+  .login-span {
+    color: var(--light-blue);
+    font-weight: 600;
+    cursor: pointer; 
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .login-container {
+        width: 70%;
+        margin-top: 3rem;
+    }
+    .login-info-container {
+        width: 100%;
+        border-radius: 5px;
+    }
+    
+    .login-image-container {
+        display: none;
+    }  
+  }
+  
+  @media screen and (max-width: 650px) {
+    .login-container {
+        width: 90%;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .login-container {
+        height: 90%;
+    }
+  
+    .social-login {
+        flex-direction: column;
+        align-items: center;
+        height: 30%;
+    }
+  
+    .login-info-container > p {
+        margin: 0;
+    }
+  }
+  
+  /*
+  ----------------------------------------------
+  -----REGISTER USER
+  ----------------------------------------------
+  */
+  
+  
+  
+  select {
+    appearance: none;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+  select:-moz-focusring {
+    color: transparent !important;
+    text-shadow: 0 0 0 var(--white);
+  }
+  ul {
+    list-style: none;
+  }
+  .register-body{
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    background-color: var(--fondo);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
+  .register-container {
+    max-width: 1000px;
+    margin:  6em auto;
+    padding: 0 1.5rem;
+    background: var(--fondoForm);
+    border-radius: 3px;
+  }
+  /* form elements
+  */
+  
+  .register-title{
+    text-transform: capitalize;
+    font-size: 2.25rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--white);
+    padding-top: 50px; 
+    min-height: 180px;
+    display: flex; 
+    justify-content: center;
+  }
+  .register-form li,
+  .register-form .grid > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+  .register-form select,
+  .register-form input{
+    border-radius: .25rem;
+    width: 100%;
+    font-size: 25px;
+    line-height: 2.5;
+    padding: 15px 10px;
+    border: 1px solid var(--borderForm);
+    color: var(--light-purple);
+    background: var(--fondoForm);
+    transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+      transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+  }
+  .register-form button{
+    background: var(--button-blue);
+    color: var(--white);
+    border-radius: .25rem;
+    border: 1px solid var(--borderForm);
+    width: 100%;
+    font-size: 23px;
+    line-height: 2.5;
+    padding: 12px 10px;
+    transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+      transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+  }
+  .register-form ::placeholder {
+    color: inherit;
+    opacity: 1;
+  }
+  .register-form select:focus,
+  .register-form input:focus,
+  .register-form textarea:focus,
+  .register-form button:enabled:hover,
+  .register-form button:focus,
+  .register-form input[type="checkbox"]:focus + label {
+    background: var(--fondoForm);
+  }
+  
+  .register-form select:focus,
+  .register-form input:focus,
+  .register-form textarea:focus {
+    transform: scale(1.02);
+  }
+  
+  .register-form *:required,
+  .register-form select {
+    background-repeat: no-repeat;
+    background-position: center right 12px;
+    background-size: 15px 15px;
+  }
+  
+  .register-form *:required {
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/asterisk.svg);  
+  }
+  
+  .register-form select {
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/down.svg);
+  }
+  
+  .register-form *:disabled {
+    cursor: default;
+    filter: blur(2px);
+  }
+  
+  /* form buttons*/
+  .register-form .required-msg {
+    display: none;
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/asterisk.svg)
+      no-repeat center left / 15px 15px;
+    padding-left: 20px;
+  }
+  
+  .register-form .btn-register {
+    width: 20%;
+    overflow: hidden;
+    transition: filter 0.2s;
+  }
+  .flex-container-register{
+    display: flex ;
+    justify-content: space-between;
+    padding-bottom: 30px;
+  }
+  /* .register-form button {
+    font-weight: bold;
+  } */
+  
+  .register-form button > * {
+    display: inline-block;
+    width: 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+  
+  .register-form button .back {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-110%, -50%);
+  }
+  
+  .register-form button:enabled:hover .back,
+  .register-form button:focus .back {
+    transform: translate(-50%, -50%);
+  }
+  
+  .register-form button:enabled:hover .front,
+  .register-form button:focus .front {
+    transform: translateX(110%);
+  }
+  
+  @media screen and (min-width: 760px) {
+    .register-form .grid {
+      display: grid;
+      grid-gap: 1.5rem;
+    }
+  
+    .register-form .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .register-form .grid-3 {
+      grid-template-columns: auto auto auto;
+      align-items: center;
+    }
+  
+    .register-form .grid > *:not(:last-child) {
+      margin-bottom: 0;
+    }
+  
+    .register-form .required-msg {
+      display: block;
+    }
+  
+  }
+  
+  @media screen and (min-width: 541px) {
+  /*   .register-form input[type="checkbox"] + label::before {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    .register-form input[type="checkbox"]:checked + label::after {
+      top: 3px;
+    }*/
+  } 
+  
+  /*
+  ----------------------------------------------
+  -----SESION USER
+  ----------------------------------------------
+  */
+  
+  .sesion-body{
+  background-color: var(--fondo2);
+  }
+
+  

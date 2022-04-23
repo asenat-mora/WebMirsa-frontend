@@ -1,9 +1,9 @@
 <script setup>
-
+    import Navbar from '@/components/Navbar.vue';
 </script>
 
 <template>
   <main>
-    <h1>Hello wosrld</h1>
+    <Navbar/>
   </main>
 </template>
