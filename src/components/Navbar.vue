@@ -57,14 +57,23 @@
                         </li>
                         <li><a href="#">REPORTE</a></li>
                         <li><a href="#">PERFILES</a></li>
-                        <li>
-                            <a href="#">MI PERFIL</a>
-                            <i class='bx bxs-chevron-down js-arrow arrow' @click="moreSubMenu"></i>
-                            <ul class="js-sub-menu sub-menu">
-                                <li><a href="#">Configuración</a></li>
-                                <li><a href="#">Cerrar sesión</a></li>
-                            </ul>
-                        </li>
+                        <template v-if="store.getIsLoggedIn">
+                            <li>
+                                <a href="#">MI PERFIL</a>
+                                <i class='bx bxs-chevron-down js-arrow arrow' @click="moreSubMenu"></i>
+                                <ul class="js-sub-menu sub-menu">
+                                    <li><a href="#">Configuración</a></li>
+                                    <li><a href="#" @click="handleLogoutButton">Cerrar sesión</a></li>
+                                </ul>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li >
+                                <router-link to ="/login">
+                                    Iniciar Sesion
+                                </router-link> 
+                            </li>
+                        </template>
 
                     </ul>
                 </div>
@@ -81,15 +90,23 @@
 
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
+import { authStore } from '../stores/auth';
+import { useRouter } from 'vue-router';
 export default {
     setup(){
-        const navLinks = ref(null);
-
-        onMounted(() => {
-            navLinks.value.focus();
-        })
-
+        const navLinks = ref('');
+        const store = authStore();
+        const router = useRouter();
+            
+        function handleLogoutButton (){
+            store.logout()
+                .then (() => {
+                    router.push('/')
+                }).catch(() => {
+                    router.push('/')
+                })
+        }
         function menuOpenBtn () {
             navLinks.value.style.left = "0";
         }
@@ -110,7 +127,9 @@ export default {
             menuOpenBtn,
             menuCloseBtn,
             htmlcssArrow,
-            moreSubMenu
+            moreSubMenu,
+            store,
+            handleLogoutButton
         }
     }
 
