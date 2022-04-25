@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import Article from '../views/Article.vue'
 import Categoria from '../views/Categoria.vue'
 import Marca from '../views/Marca.vue'
+import Registro from '../views/UserRegister.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/marca',
       name: 'marca',
       component: Marca
+    },
+    {
+      path: '/registro',
+      name: 'registro',
+      component: Registro
     }
   ]
 })

@@ -1,5 +1,11 @@
-<script setup>
+<script>
     import Navbar from '@/components/Navbar.vue';
+    export default{
+        name: 'Article',
+        components: {
+            Navbar
+        }
+    }
 </script>
 
 <template>

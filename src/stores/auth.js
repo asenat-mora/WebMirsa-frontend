@@ -14,7 +14,8 @@ export const authStore = defineStore({
         getIsLoggedIn: (state) => state.isLoggedIn,
         getUser: (state) => state.user,
         getToken: (state) => state.token,
-        getRefreshToken: (state) => state.refreshToken
+        getRefreshToken: (state) => state.refreshToken,
+        getIsAdmin: (state) => state.user.roles.indexOf(1) >= 0
     },
     actions:{
         login(payload){

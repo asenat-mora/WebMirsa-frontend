@@ -1,5 +1,5 @@
 <template>
-    <body class="login-body">
+    <div class="login-body">
         <div class="login-container">
             <div class="login-info-container">
                 <h1 class="login-litle">Iniciar Sesión</h1>
@@ -22,7 +22,7 @@
             </div>
             <img class="login-image-container" src="../assets/img/login/car.jpg" alt="">
         </div>
-    </body>
+    </div>
 </template>
 
 <script>
