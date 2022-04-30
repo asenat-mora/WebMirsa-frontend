@@ -5,6 +5,8 @@ import Article from '../views/Article.vue'
 import Categoria from '../views/Categoria.vue'
 import Marca from '../views/Marca.vue'
 import Registro from '../views/UserRegister.vue'
+import EditarProducto from '../views/ArticleEdit.vue'
+import ProductosMirsa from '../views/Productos.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,7 +40,19 @@ const router = createRouter({
       path: '/registro',
       name: 'registro',
       component: Registro
+    },
+    {
+      path: '/editProducto',
+      name: 'editProducto',
+      component: EditarProducto
+    },
+    {
+      path: '/productosMirsa',
+      name: 'productosMirsa',
+      component: ProductosMirsa
     }
+
+
   ]
 })
 

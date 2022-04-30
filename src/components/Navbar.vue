@@ -27,7 +27,8 @@
                                             </span>
                                             <ul class="more-sub-menu sub-menu">   
                                                 <li><router-link to="/article">Nuevo</router-link></li>
-                                                <li><a href="#">Editar</a></li>
+                                                <li><router-link to="/editProducto">Editar</router-link></li>
+                                                <!-- <li><a href="#">Editar</a></li> -->
                                             </ul>
                                         </li>
                                         <li class="more">
@@ -56,12 +57,6 @@
                             <template v-else>
                                 <li><a href="#">PUBLICIDAD</a></li>
                             </template>
-                            
-                            <!-- <i class='bx bxs-chevron-down js-arrow arrow '></i>
-                            <ul class="js-sub-menu sub-menu">
-                                <li><a href="#">Carrusel</a></li>
-                            </ul> -->
-                        
                         
                             <li>
                                 <a href="#">MI PERFIL</a>
@@ -73,29 +68,21 @@
                             </li>
                         </template>
 
-
+                         <!-- menu vistas al publico -->
                         <template v-else>
                             <li><a href="#">FILOSOFÍA</a></li>
                             <li><a href="#">HISTORIA</a></li>
-                            <li><a href="#">PRODUCTOS</a></li>
+                            <li>
+                                <router-link to ="/productosMirsa">PRODUCTOS</router-link> 
+                            </li>
                             <li><a href="#">COTIZACIÓN</a></li>
                             <li >
-                                <router-link to ="/login">
-                                    INICIAR SESION
-                                </router-link> 
+                                <router-link to ="/login">INICIAR SESION</router-link> 
                             </li>
-
-
                         </template>
 
                     </ul>
                 </div>
-                <!-- <div class="search-box">
-            <i class='bx bx-search'></i>
-            <div class="input-box">
-              <input type="text" placeholder="Search...">
-            </div>
-          </div> -->
             </div>
         </nav>
     </div>

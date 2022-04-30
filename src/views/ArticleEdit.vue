@@ -8,15 +8,33 @@
     }
 </script>
 
+
 <template>
 <Navbar/>
 <div class="body-register-product">
-    <div class="register-container-product">
+
+
+<div class="register-container-product">
         <header>Producto</header>
         <form class="form-register-product" action="#">
             <div class="form-first">
+
+
+                <div class="field-search">
+                    <div class="input-field-search">
+                        <label>Codigo</label>
+                        <input type="text" placeholder="Codigo del producto">  
+                    </div>
+                    <div class="button-search">
+                        <button class="searchbtn">
+                            <span class="btnBuscar">Buscar</span>
+                        </button>
+                    </div>
+                </div>
+
+
                 <div class="details-product">
-                    <span class="title">Detalles del producto</span>
+                    <span class="title">Detalles del producto</span>              
                     <div class="fields">
                         <div class="input-field">
                             <label>Nombre</label>
@@ -98,12 +116,12 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <!-- <button class="deletebtn">
+                    <button class="deletebtn">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
                     <button class="updatelbtn">
                         <span class="btnActualizar">Actualizar</span>
-                    </button>         -->
+                    </button>        
                     <button class="cancelbtn">
                         <span class="btnCancelar">Cancelar</span>
                     </button>
@@ -115,5 +133,6 @@
             </div>
         </form>
     </div>
+    
 </div>
 </template>
