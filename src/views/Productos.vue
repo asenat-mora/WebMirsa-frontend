@@ -18,7 +18,7 @@
                 <span class="marca">Ford</span>
             </div>
             <div class="main-images">
-                <img id="blue" class="blue active" src="src/assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="blue">
+                <img id="blue" class="blue active" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="blue">
                 <!--<img id="pink" class="pink" src="images/pink.png" alt="blue">-->
                 <!--<img id="yellow" class="yellow" src="images/yellow.png" alt="blue">-->
             </div>
