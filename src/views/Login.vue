@@ -7,11 +7,16 @@
                     <input class="login-input" type="email" v-model="email" placeholder="Correo electronico">
                     <input class="login-input" type="password" v-model="password" placeholder="Contraseña">
                     <a href="#"> <span class="login-span">Olvidaste tu contraseña?</span> </a>
-
+                    <VueRecaptcha
+                        :sitekey="siteKey"
+                        :load-recaptcha-script="true"
+                        @verify="handleSuccess"
+                        @error="handleError"
+                    ></VueRecaptcha>
                     <button class="login-btn" @click="invokeLogin">
                         Login
                     </button>
-
+                   
                     <p>No tengo una cuenta
                         <br>
                         <a href="formRegisterUser.html">
@@ -26,12 +31,28 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref,computed } from "vue";
 import { authStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import { VueRecaptcha } from 'vue-recaptcha';
+
 export default{
     name: 'Login',
+    components: {
+    VueRecaptcha
+    },
     setup(){
+        const siteKey = computed(() => {
+            return '6LdL3MAfAAAAAPXFeWcxj1o2zll7jmENlxHo-gHR';
+        });
+
+        const handleError = () => {
+        // Do some validation
+        };
+
+        const handleSuccess = (response) => {
+        // Do some validation
+        };
         const store = authStore();
         const router = useRouter();
 
@@ -55,7 +76,11 @@ export default{
         return {
             email,
             password,
-            invokeLogin
+            invokeLogin,
+            handleSuccess,
+            handleSuccess,
+            handleError,
+            siteKey
         }
     }
 }
