@@ -1,40 +1,40 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
+import axiosInstance from '@/helpers/axiosInstance'
 import jwt_decode from 'jwt-decode'
-
+    
 export const authStore = defineStore({
     id: 'auth',
     state: () => ({
         isLoggedIn: false,
-        user: null,
+        userId: null,
+        userRoles: [],
+        rToken: null,
         token: null,
-        refreshToken: null,
+        tokenExpiration: null,
     }),
     getters: {
         getIsLoggedIn: (state) => state.isLoggedIn,
-        getUser: (state) => state.user,
+        getUserId: (state) => state.userId,
+        getUserRoles: (state) => state.userRoles,
         getToken: (state) => state.token,
-        getRefreshToken: (state) => state.refreshToken,
-        getIsAdmin: (state) => state.user.roles.indexOf(1) >= 0
+        getRefreshToken: (state) => state.rToken,
+        getIsAdmin: (state) => state.userRoles.indexOf(1) >= 0,
+        getTokenExpiration: (state) => state.tokenExpiration,
     },
     actions:{
         login(payload){
             return new Promise((resolve, reject) => {
-                axios.post(import.meta.env.VITE_API_URL + '/api/auth/login', payload)
+                axiosInstance.post(import.meta.env.VITE_API_URL + '/api/auth/login', payload)
                     .then(response => {
-                        console.log(response)
                         const token = response.data.accessToken;
-                        const refreshToken = response.data.refreshToken;
-                        
-                        const {userId, roles} = jwt_decode(token);
-
+                        const rToken = response.data.refreshToken;
+                        const {userId, roles, exp} = jwt_decode(token);
                         this.isLoggedIn = true;
-                        this.user = {
-                            id: userId,
-                            roles: roles
-                        };
+                        this.userId = userId;
+                        this.userRoles = roles;
                         this.token = token;
-                        this.refreshToken = refreshToken;
+                        this.rToken = rToken;
+                        this.tokenExpiration = new Date(exp * 1000);
                         resolve(response);
                     })
                     .catch(error => {
@@ -46,14 +46,17 @@ export const authStore = defineStore({
         },
         logout(){
             return new Promise((resolve, reject) => {
-                axios.post(import.meta.env.VITE_API_URL + '/api/auth/logout', {
-                    refreshToken: this.refreshToken
+                axiosInstance.post(import.meta.env.VITE_API_URL + '/api/auth/logout', {
+                    refreshToken: this.rToken
                 })
                     .then(response => {
                         this.isLoggedIn = false;
-                        this.user = null;
+                        this.userId = null;
+                        this.userRoles = [];
                         this.token = null;
-                        this.refreshToken = null;
+                        this.rToken = null;
+                        this.tokenExpiration = null;
+
                         resolve(response);
                     })
                     .catch(error => {
@@ -61,7 +64,27 @@ export const authStore = defineStore({
                         reject(error)
                     })
             })
+        },
+        refreshAccessToken(){
+            return new Promise((resolve, reject) => {
+                axiosInstance.post(import.meta.env.VITE_API_URL + '/api/auth/refreshToken', {
+                    refreshToken: this.rToken
+                })
+                    .then(response => {
+                        const token = response.data.accessToken;
+                        const {userId, roles, exp} = jwt_decode(token);
+                        this.userId = userId;
+                        this.userRoles = roles;
+                        this.token = token;
+                        this.tokenExpiration = new Date(exp);
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        reject(error)
+                    })
+            })
         }
-    }
+    },
+    persist: true
 })
 

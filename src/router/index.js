@@ -7,6 +7,7 @@ import Marca from '../views/Marca.vue'
 import Registro from '../views/UserRegister.vue'
 import EditarProducto from '../views/ArticleEdit.vue'
 import ProductosMirsa from '../views/Productos.vue'
+import { authStore } from "@/stores/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,36 +25,70 @@ const router = createRouter({
     {
       path: '/article',
       name: 'article',
-      component: Article
+      component: Article,
+      meta : {
+        requiresAuth: true
+      }
     },
     {
       path: '/categoria',
       name: 'categoria',
-      component: Categoria
+      component: Categoria,
+      meta : {
+        requiresAuth: true
+      }
     },
     {
       path: '/marca',
       name: 'marca',
-      component: Marca
+      component: Marca,
+      meta : {
+        requiresAuth: true
+      }
     },
     {
       path: '/registro',
       name: 'registro',
-      component: Registro
+      component: Registro,
+      meta : {
+        requiresAuth: true
+      }
     },
     {
       path: '/editProducto',
       name: 'editProducto',
-      component: EditarProducto
+      component: EditarProducto,
+      meta : {
+        requiresAuth: true
+      }
     },
     {
       path: '/productosMirsa',
       name: 'productosMirsa',
-      component: ProductosMirsa
+      component: ProductosMirsa,
     }
 
 
   ]
 })
+
+
+
+
+router.beforeEach((to, from, next) => {
+    const store = authStore();
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+        if (!store.getIsLoggedIn) {
+            next('/login');
+            return
+        } else {
+            next();
+            return
+        }
+    }
+    next();
+})
+
+
 
 export default router;

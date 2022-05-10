@@ -13,7 +13,7 @@
                         @verify="handleSuccess"
                         @error="handleError"
                     ></VueRecaptcha>
-                    <button class="login-btn" @click="invokeLogin">
+                    <button class="login-btn" ref="loginBtn" disabled @click="invokeLogin">
                         Login
                     </button>
                    
@@ -42,6 +42,8 @@ export default{
     VueRecaptcha
     },
     setup(){
+        const loginBtn = ref('');
+
         const siteKey = computed(() => {
             return '6LdL3MAfAAAAAPXFeWcxj1o2zll7jmENlxHo-gHR';
         });
@@ -51,7 +53,7 @@ export default{
         };
 
         const handleSuccess = (response) => {
-        // Do some validation
+            loginBtn.value.disabled = false;
         };
         const store = authStore();
         const router = useRouter();
@@ -80,7 +82,8 @@ export default{
             handleSuccess,
             handleSuccess,
             handleError,
-            siteKey
+            siteKey,
+            loginBtn
         }
     }
 }

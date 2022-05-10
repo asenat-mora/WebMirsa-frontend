@@ -1,13 +1,3 @@
-<script>
-    import Navbar from '@/components/Navbar.vue';
-    export default{
-        name: 'Article',
-        components: {
-            Navbar
-        }
-    }
-</script>
-
 <template>
 <Navbar/>
 <div class="body-register-product">
@@ -33,32 +23,28 @@
                         </div>
                         <div class="input-field">
                             <label>Modelo</label>
-                            <select required>
-                                <option disabled selected>Selecciona un modelo</option>
-                                <option>modelo1</option>
-                                <option>modelo2</option>
-                                <option>modelo3</option>
-                            </select>
+                            <input type="text" placeholder="Modelo" required>
                         </div>
                         <div class="input-field">
                             <label>Marca</label>
                             <select required>
                                 <option disabled selected>Selecciona una marca</option>
-                                <option>Chevrolet</option>
-                                <option>Dina</option>
-                                <option>Ford</option>
+                                <option v-for="brand in brands" :value="brand.id">
+                                    {{ brand.name }}
+                                </option>
                             </select>
                         </div>
                         <div class="input-field">
                             <label>Categoria</label>
                             <select required>
                                 <option disabled selected>Selecciona una Categoria</option>
-                                <option>Calavera</option>
-                                <option>Plafon</option>
-                                <option>Frontal</option>
+                                <option v-for="autopart in autoparts" :value="autopart.id">
+                                    {{ autopart.name }}
+                                </option>
                             </select>
                         </div>
-                        <div class="input-field">
+                        
+                        <!-- <div class="input-field">
                             <label>Proveedor</label>
                             <select required>
                                 <option disabled selected>Proveedor del producto</option>
@@ -74,14 +60,14 @@
                                 <option>Activo</option>
                                 <option>Ocultar</option>
                             </select>
-                        </div> 
+                        </div>  -->
                         <div class="input-field-checkbox-colors">
                             <label>Color</label>
                             <div class="checkbox-container">
-                                <input class="checkbox-colors" type="checkbox" id="cbox" value="oranje">Naranja<br>
-                                <input class="checkbox-colors" type="checkbox" id="cbox" value="red">Rojo<br>
-                                <input class="checkbox-colors" type="checkbox" id="cbox" value="silver">Plateado<br>
-                                <input class="checkbox-colors" type="checkbox" id="cbox" value="orande-red">Naranga/rojo<br>
+                                <label v-for="color in colors">
+                                    <input type="checkbox" id="cbox" :value="color.id" @change="modifyColors($event)">
+                                    {{ color.name }}<br>
+                                </label>
                             </div>
                         </div>
                         <div class="input-field-text-area">
@@ -117,3 +103,80 @@
     </div>
 </div>
 </template>
+
+<script>
+    import Navbar from '@/components/Navbar.vue';
+    import axios from 'axios';
+    import { onBeforeMount , ref , reactive} from 'vue';
+    export default{
+        name: 'Article',
+        components: {
+            Navbar
+        },
+        setup(){
+            var brands= ref(null);
+            var colors = ref(null);
+            var autoparts= ref(null);
+            var colorsArray = ref([]);
+
+            function getAllColors(){
+                axios.get(import.meta.env.VITE_API_URL + '/api/color')
+                .then(response => {
+                    colors.value = response.data;
+                }).catch(error => {
+                    console.log(error);
+                });
+            }
+
+            function getAllBrands(){
+                axios.get( import.meta.env.VITE_API_URL + '/api/brand')
+                .then(response => {
+                    brands.value = response.data;
+                })
+                .catch(error =>{
+                    console.log(error);
+                })
+            }
+
+            function getAllAutoparts(){
+                axios.get(import.meta.env.VITE_API_URL + '/api/autopart')
+                .then(response => {
+                    autoparts.value = response.data;
+                }).catch(error => {
+                    console.log(error);
+                });
+            }
+
+            function modifyColors(event){
+
+                if(!colorsArray.value.includes(event.target.value)){
+                    colorsArray.value.push(event.target.value);
+                }
+                else{
+                    colorsArray.value.splice(colorsArray.value.indexOf(event.target.value), 1);
+                }
+
+                console.log(colorsArray.value);
+            }
+            
+            onBeforeMount(() => {
+                getAllBrands();
+                getAllColors();
+                getAllAutoparts();
+                
+            })
+            
+
+            return{
+                getAllBrands,
+                getAllColors,
+                getAllAutoparts,
+                modifyColors,
+                brands,
+                colors,
+                autoparts,
+                colorsArray
+            }
+        }
+    }
+</script>

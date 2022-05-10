@@ -27,7 +27,7 @@
     --line-blue: #4070f4;
     --red: #e31b23;
     --green: #18ac18;
-
+    --disabled-button: #777D74;
 
   }
   
@@ -409,6 +409,11 @@
     cursor: pointer;
     font-weight: bold;
   }
+
+  .login-btn:disabled {
+    background-color: var(--disabled-button);
+  }
+
   .login-form p {
     margin: 0;
   }
