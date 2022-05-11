@@ -1,3 +1,5 @@
+/* Define las rutas que estaran en la aplicacion 
+*/
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
@@ -26,7 +28,7 @@ const router = createRouter({
       path: '/article',
       name: 'article',
       component: Article,
-      meta : {
+      meta : {/* necesita autenticacion del usuario -- necesita hacer login */
         requiresAuth: true
       }
     },
@@ -74,7 +76,7 @@ const router = createRouter({
 
 
 
-
+/* funcion para evaluar si la ruta requiere inicio de sesion o no */
 router.beforeEach((to, from, next) => {
     const store = authStore();
     if(to.matched.some(record => record.meta.requiresAuth)) {
