@@ -10,7 +10,7 @@
                         <i class='bx bx-x' @click="menuCloseBtn"></i>
                     </div>
                     <ul class="links-option">
-                        <li><a href="#">INICIO</a></li>
+                        <li><router-link to="/">INICIO</router-link></li>
 
                         <template v-if="store.getIsLoggedIn">
                         

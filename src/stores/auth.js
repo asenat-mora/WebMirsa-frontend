@@ -73,10 +73,12 @@ export const authStore = defineStore({
                     .then(response => {
                         const token = response.data.accessToken;
                         const {userId, roles, exp} = jwt_decode(token);
+                        const decoded = jwt_decode(token);
+                        console.log(decoded)
                         this.userId = userId;
                         this.userRoles = roles;
                         this.token = token;
-                        this.tokenExpiration = new Date(exp);
+                        this.tokenExpiration = new Date(exp*1000);
                     })
                     .catch(error => {
                         console.log(error)

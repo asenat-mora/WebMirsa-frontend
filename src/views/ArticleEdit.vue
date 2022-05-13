@@ -1,7 +1,7 @@
 <script>
     import Navbar from '@/components/Navbar.vue';
     export default{
-        name: 'Article',
+        name: 'ArticleEdit',
         components: {
             Navbar
         }

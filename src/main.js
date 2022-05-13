@@ -20,8 +20,8 @@ const store = authStore();
 axios.interceptors.request.use(
     request => {
         if (store.getIsLoggedIn){
-            if(store.getTokenExpiration < new Date()){
-                console.log("here")
+            if(new Date(store.getTokenExpiration) < new Date()){
+                console.log("here2")
                 store.refreshAccessToken().then(() => {
                     console.log("refreshed")
                 })
