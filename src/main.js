@@ -1,9 +1,11 @@
+/* punto de inicio de la aplicacion */
+
 import { createApp, nextTick } from 'vue'
 import { createPinia } from 'pinia'
 
-import App from './App.vue'
+import App from './App.vue'/* componente que renderiza las demas vistas o componentes */
 import router from './router'
-import './assets/css/app.css'
+import './assets/css/app.css'/* importar hojas de estilos global */
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' 
 import { authStore } from "@/stores/auth";
 import axios from 'axios'
