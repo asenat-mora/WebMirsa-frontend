@@ -164,7 +164,7 @@
                 formData.append('image', file);
                 axiosInstance.post('https://api.imgur.com/3/image', formData, {
                     headers: {
-                        'Authorization': 'Client-ID'+ import.meta.env.VITE_IMGUR_CLIENT_ID
+                        'Authorization': 'Client-ID '+ import.meta.env.VITE_IMGUR_CLIENT_ID
                     }
                 }).then(response => {
                     productImage.value = response.data.data.link;
