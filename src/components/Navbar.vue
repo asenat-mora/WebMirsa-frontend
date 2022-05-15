@@ -28,7 +28,6 @@
                                             <ul class="more-sub-menu sub-menu">   
                                                 <li><router-link to="/article">Nuevo</router-link></li>
                                                 <li><router-link to="/editProducto">Editar</router-link></li>
-                                                 <li><router-link to="/ArticleList">Lista</router-link></li>
                                                 <!-- <li><a href="#">Editar</a></li> -->
                                             </ul>
                                         </li>
@@ -39,17 +38,15 @@
                                             <ul class="more-sub-menu sub-menu">   
                                                 <li><router-link to="/marca">Nuevo</router-link></li>
                                                 <li><a href="#">Editar</a></li>
-                                                <li><router-link to="/BrandList">Lista</router-link></li>
                                             </ul>
                                         </li>
                                         <li class="more">
-                                            <span><a href="#">Clasificación</a>
+                                            <span><a href="#">Categoria</a>
                                                 <i class='bx bxs-chevron-right arrow more-arrow'></i>
                                             </span>
                                             <ul class="more-sub-menu sub-menu">   
                                                 <li><router-link to="/categoria">Nuevo</router-link></li>
                                                 <li><a href="#">Editar</a></li>
-                                                <li><router-link to="/CategoriesList">Lista</router-link></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -80,7 +77,7 @@
                             </li>
                             <li><a href="#">COTIZACIÓN</a></li>
                             <li >
-                                <router-link to ="/login">ACCESO</router-link> 
+                                <router-link to ="/login">INICIAR SESION</router-link> 
                             </li>
                         </template>
 

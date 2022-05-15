@@ -69,7 +69,7 @@ export const authStore = defineStore({
         },
         refreshAccessToken(){/* Cuando el token expira y solicita uno nuevo */
             return new Promise((resolve, reject) => {
-                axiosInstance.post(import.meta.env.VITE_API_URL + '/api/auth/refreshToken', {/* VITE_API_URL--> URL del backend */
+                axiosInstance.post(import.meta.env.VITE_API_URL + '/api/auth/refreshToken', {
                     refreshToken: this.rToken/* requiere de un token de refresco para generar un nuevo token de acceso */
                 })
                     .then(response => {
