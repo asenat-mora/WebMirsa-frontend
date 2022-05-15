@@ -212,9 +212,18 @@
 
                 axios.post(import.meta.env.VITE_API_URL + '/api/item', item)
                 .then(response => {
+
+
+                    alert("¡Registro exitoso!");
+
+
                     console.log(response);
+
                 }).catch(error => {
                     console.log(error);
+
+                alert("¡Error en el registro!");
+
                 });
             }
             

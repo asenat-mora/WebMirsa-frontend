@@ -9,6 +9,9 @@ import Marca from '../views/Marca.vue'
 import Registro from '../views/UserRegister.vue'
 import EditarProducto from '../views/ArticleEdit.vue'
 import ProductosMirsa from '../views/Productos.vue'
+import ListaProductos from '../views/ArticleList.vue'
+import ListaMarcas from '../views/BrandList.vue'
+import ListaCategorias from '../views/CategoriesList.vue'
 import { authStore } from "@/stores/auth";
 
 const router = createRouter({
@@ -68,6 +71,21 @@ const router = createRouter({
       path: '/productosMirsa',
       name: 'productosMirsa',
       component: ProductosMirsa,
+    },
+    {
+      path: '/ArticleList',
+      name: 'ArticleList',
+      component: ListaProductos,
+    },
+    {
+      path: '/BrandList',
+      name: 'BrandList',
+      component: ListaMarcas,
+    },
+    {
+      path: '/CategoriesList',
+      name: 'CategoriesList',
+      component: ListaCategorias,
     }
 
 
