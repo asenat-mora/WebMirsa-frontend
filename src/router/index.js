@@ -4,14 +4,17 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Article from '../views/Article.vue'
-import Categoria from '../views/Categoria.vue'
-import Marca from '../views/Marca.vue'
+import Clasificacion from '../views/classification.vue'
+
+import AltaMarca from '../views/AddBrand.vue'
+import EditarMarca from '../views/BrandEdit.vue'
 import Registro from '../views/UserRegister.vue'
 import EditarProducto from '../views/ArticleEdit.vue'
 import ProductosMirsa from '../views/Productos.vue'
 import ListaProductos from '../views/ArticleList.vue'
 import ListaMarcas from '../views/BrandList.vue'
 import ListaCategorias from '../views/CategoriesList.vue'
+
 import { authStore } from "@/stores/auth";
 
 const router = createRouter({
@@ -36,17 +39,25 @@ const router = createRouter({
       }
     },
     {
-      path: '/categoria',
-      name: 'categoria',
-      component: Categoria,
+      path: '/classification',
+      name: 'classification',
+      component: Clasificacion,
       meta : {
         requiresAuth: true
       }
     },
     {
-      path: '/marca',
-      name: 'marca',
-      component: Marca,
+      path: '/AddBrand',
+      name: 'AddBrand',
+      component: AltaMarca,
+      meta : {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/BrandEdit',
+      name: 'BrandEdit',
+      component: EditarMarca,
       meta : {
         requiresAuth: true
       }

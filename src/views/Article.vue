@@ -93,12 +93,6 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <!-- <button class="deletebtn">
-                        <span class="btnEliminar">Eliminar</span>
-                    </button>
-                    <button class="updatelbtn">
-                        <span class="btnActualizar">Actualizar</span>
-                    </button>         -->
                     <button class="cancelbtn">
                         <span class="btnCancelar">Cancelar</span>
                     </button>

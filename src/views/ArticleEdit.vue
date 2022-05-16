@@ -8,7 +8,7 @@
             <div class="form-first">
                 <div class="field-search">
                     <div class="input-field-search">
-                        <label>Codigo</label>
+                        <label>C&oacute;digo</label>
                         <input type="text" placeholder="Codigo del producto">  
                     </div>
                     <div class="button-search">

@@ -11,6 +11,7 @@
                             <table class="GeneratedTable" >
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>CODIGO</th>
                                         <th>NOMBRE</th>
                                         <th>MARCA</th>
@@ -23,6 +24,7 @@
                                 </thead>
                                 <tbody>
                                 <tr v-for="datos in data">
+                                    <td>{{datos.id}}</td>
                                     <td>{{datos.code}}</td>
                                     <td>{{datos.name}}</td>
                                     <td>{{datos.brandName}}</td>
@@ -38,9 +40,6 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <!-- <button class="cancelbtn">
-                        <span class="btnCancelar">Cancelar</span>
-                    </button> -->
                     <button class="savebtn">
                         <span class="btnGuardar">Aceptar</span> 
                     </button>

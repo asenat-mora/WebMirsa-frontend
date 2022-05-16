@@ -2,10 +2,10 @@
 <Navbar/>
 <div class="body-register-product">
     <div class="register-container-product">
-        <header>Producto</header>
+        <header>Marcas</header>
             <div class="form-first">
                 <div class="details-product">
-                    <span class="title">Lista de productos</span>
+                    <span class="title">Lista de marcas</span>
                     <div class="fields">
                         <div class="container mt-4" id="app">
                             <table class="GeneratedTable" >
