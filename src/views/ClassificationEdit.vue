@@ -6,29 +6,29 @@
         <form class="form-register-marca" action = "#" @submit.prevent="">
             <div class="form-first">
                 <div class="details-marca">
-                    <span class="title">Editar Marca</span>
+                    <span class="title">Editar Clasificación</span>
                     <div class="fields">
                         <div class="input-field-text-area">
                             <label>Seleccionada</label>
-                            <select v-model="brandSelected" @change="loadName">
-                                <option selected disabled >Seleccione una marca</option>
-                                <option v-for="brand in brands" :value = "brand.id">
-                                    {{brand.name}}
+                            <select v-model="classificationSelected" @change="loadName">
+                                <option selected disabled >Seleccione una clasificación</option>
+                                <option v-for="classification in classifications" :value = "classification.id">
+                                    {{classification.name}}
                                 </option>
                             </select>
                         </div>
                         <div class="input-field">
 
                             <label>Nombre</label>
-                            <input type="text" placeholder="Nombre de la marca" required v-model="brandName">
+                            <input type="text" placeholder="Nombre de la marca" required v-model="classificationName">
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="deletebtn" @click="deleteBrand">
+                    <button class="deletebtn" @click="deleteClassification">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
-                    <button class="updatelbtn" @click="editBrand">
+                    <button class="updatelbtn" @click="editClassification">
                         <span class="btnActualizar">Actualizar</span>
                     </button>        
                     <button class="savebtn">
@@ -49,19 +49,19 @@
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
     export default{
-        name: 'BrandEdit',
+        name: 'ClassificationEdit',
         components: {
             Navbar
         },
         setup(){
-            var brandSelected = ref(null);
-            var brandName = ref(null);
-            const brands = ref(null);
+            var classificationSelected = ref(null);
+            var classificationName = ref(null);
+            const classifications = ref(null);
 
-            function getAllBrands(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/brand')
+            function getAllClassifications(){
+                axios.get(import.meta.env.VITE_API_URL + '/api/autopart')
                 .then(response => {
-                    brands.value = response.data;
+                    classifications.value = response.data;
                 })
                 .catch(error => {
                     console.log(error);
@@ -69,16 +69,16 @@
             }
 
             function loadName (){
-                brandName.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].name;
+                classificationName.value = classifications.value.filter(classification => classification.id == classificationSelected.value)[0].name;
             }
 
-            function deleteBrand(){
-                axios.delete(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value)
+            function deleteClassification(){
+                axios.delete(import.meta.env.VITE_API_URL + '/api/autopart/' + classificationSelected.value)
                 .then(response => {
                     alert("¡Registro eliminado!");
-                    getAllBrands();
-                    brandSelected.value= null;
-                    brandName.value = null;
+                    getAllClassifications();
+                    classificationSelected.value= null;
+                    classificationName.value = null;
                 })
                 .catch(error => {
                     console.log(error);
@@ -86,17 +86,17 @@
                 });
             }
 
-            function editBrand(){
-                axios.patch(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value,
+            function editClassification(){
+                axios.patch(import.meta.env.VITE_API_URL + '/api/autopart/' + classificationSelected.value,
                 {
-                    name: brandName.value
+                    name: classificationName.value
                 }
                 )
                 .then(response => {
                     alert("¡Registro actualizado!");
-                    getAllBrands();
-                    brandSelected.value= null;
-                    brandName.value = null;
+                    classificationName.value = null;
+                    getAllClassifications();
+                    classificationSelected.value= null;
                 })
                 .catch(error => {
                     console.log(error);
@@ -105,17 +105,18 @@
             }
 
             onBeforeMount(() => {
-                getAllBrands();
+                getAllClassifications();
             })
 
             return{
-                brandSelected,
-                brandName,
-                brands,
-                getAllBrands,
+                classifications,
+                classificationName,
+                classificationSelected,
+                editClassification,
+                deleteClassification,
                 loadName,
-                deleteBrand,
-                editBrand
+                getAllClassifications,
+
             }
         }
     }

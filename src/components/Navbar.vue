@@ -35,8 +35,8 @@
                                                 <i class='bx bxs-chevron-right arrow more-arrow'></i>
                                             </span>
                                             <ul class="more-sub-menu sub-menu">   
-                                                <li><router-link to="#">Nuevo</router-link></li>
-                                                <li><a href="#">Editar</a></li>
+                                                <li><router-link to="/AddClassification">Nuevo</router-link></li>
+                                                <li><router-link to="/EditClassification">Editar</router-link></li>
                                                 <li><router-link to="/CategoriesList">Lista</router-link></li>
                                             </ul>
                                         </li>

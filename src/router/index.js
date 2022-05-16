@@ -5,8 +5,8 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Article from '../views/Article.vue'
 import Clasificacion from '../views/classification.vue'
-
-import AltaMarca from '../views/AddBrand.vue'
+import AddBrand from '../views/AddBrand.vue'
+import Addclassification from '../views/Addclassification.vue'
 import EditarMarca from '../views/BrandEdit.vue'
 import Registro from '../views/UserRegister.vue'
 import EditarProducto from '../views/ArticleEdit.vue'
@@ -14,6 +14,7 @@ import ProductosMirsa from '../views/Productos.vue'
 import ListaProductos from '../views/ArticleList.vue'
 import ListaMarcas from '../views/BrandList.vue'
 import ListaCategorias from '../views/CategoriesList.vue'
+import ClassificationEdit from '../views/ClassificationEdit.vue'
 
 import { authStore } from "@/stores/auth";
 
@@ -49,7 +50,7 @@ const router = createRouter({
     {
       path: '/AddBrand',
       name: 'AddBrand',
-      component: AltaMarca,
+      component: AddBrand,
       meta : {
         requiresAuth: true
       }
@@ -97,7 +98,18 @@ const router = createRouter({
       path: '/CategoriesList',
       name: 'CategoriesList',
       component: ListaCategorias,
+    },
+    {
+        path: '/Addclassification',
+        name: 'Addclassification',
+        component: Addclassification,
+    },
+    {
+        path: '/EditClassification',
+        name: 'EditClassification',
+        component: ClassificationEdit,
     }
+
 
 
   ]

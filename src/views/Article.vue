@@ -3,7 +3,7 @@
 <div class="body-register-product">
     <div class="register-container-product">
         <header>Producto</header>
-        <form class="form-register-product" @submit.prevent="createItem">
+        <form class="form-register-product" action="#" @submit.prevent="createItem">
             <div class="form-first">
                 <div class="details-product">
                     <span class="title">Detalles del producto</span>

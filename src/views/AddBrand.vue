@@ -1,21 +1,17 @@
 
-<script setup>
-    import Navbar from '@/components/Navbar.vue';
-</script>
-
 <template>
 <Navbar/>
 <div class="body-register-marca">
    <div class="register-container-marca">
       <header>Alta de Marca</header>
-        <form class="form-register-marca" action="#">
+        <form class="form-register-marca" action="#" @submit.prevent="createBrand" >
             <div class="form-first">
                 <div class="details-marca">
                     <span class="title">Detalles de la Marca</span>
                     <div class="fields">
                         <div class="input-field">
                             <label>Nombre</label>
-                            <input type="text" placeholder="Nombre de la marca" required>
+                            <input type="text" placeholder="Nombre de la marca" v-model="brandName" required>
                         </div>
                     </div>
                 </div>
@@ -26,7 +22,7 @@
                     <button class="updatelbtn">
                         <span class="btnActualizar">Actualizar</span>
                     </button>    -->     
-                    <button class="savebtn">
+                    <button class="savebtn" type="submit">
                         <span class="btnGuardar">Guardar</span> 
                     </button>
                     <button class="cancelbtn">
@@ -39,35 +35,40 @@
 </div>
 </template>
 
-<!-- <script>
+<script>
     import Navbar from '@/components/Navbar.vue';
     import axios from 'axios';
-    import axiosInstance from '../helpers/axiosInstance';
-    /* import { onBeforeMount , ref} from 'vue'; */
+    import { ref } from 'vue';
     export default{
         name: 'AddBrand',
         components: {
             Navbar
         },
         setup(){
-            var brands= ref(null);
+            var brandName = ref(null);
+
 
             function createBrand(){
-                const Brand = {
-                    name: brandName.value,
+                
+                axios.post(import.meta.env.VITE_API_URL + '/api/brand', 
+                {
+                    name: brandName.value
                 }
-                axios.post(import.meta.env.VITE_API_URL + '/api/brand', brand)
+                )
                 .then(response => {
                     alert("¡Registro exitoso!");
-                    console.log(response);
+                    brandName.value = null;
                 }).catch(error => {
                     console.log(error);
                 alert("¡Error en el registro!");
                 });
             }
+
+            
             return{
-               BrandName,
+               brandName,
+               createBrand,
             }
         }
     }
-</script> -->
+</script> 
