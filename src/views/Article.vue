@@ -29,8 +29,8 @@
                             <label>Marca</label>
                             <select v-model="productBrand" required>
                                 <option disabled selected>Selecciona una marca</option>
-                                <option v-for="brand in brands" :value="brand.id">
-                                    {{ brand.name }}
+                                <option v-for="brand in brands" :value="brand.brandId">
+                                    {{ brand.brandName }}
                                 </option>
                             </select>
                         </div>

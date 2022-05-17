@@ -21,12 +21,12 @@
                                 </thead>
                                 <tbody>
                                 <tr v-for="datos in data">
-                                    <td align="center">{{datos.id_marca}}</td>
-                                    <td align="center">{{datos.nombre_marca}}</td>
-                                    <td align="center">{{datos.nombre}} {{datos.apellido}}</td>
-                                    <td align="center">{{datos.OPERACION}}</td>
+                                    <td align="center">{{datos.brandId}}</td>
+                                    <td align="center">{{datos.brandName}}</td>
+                                    <td align="center">{{datos.userName}} {{datos.userSurname}}</td>
+                                    <td align="center">{{datos.last_modification_description}}</td>
                                     <td align="center">{{datos.last_modification_date}}</td>
-                                    <td align="center">{{datos.ESTATUS}}</td>
+                                    <td align="center">{{datos.isDeleted}}</td>
                                 </tr>
                                 </tbody>
                             </table>
