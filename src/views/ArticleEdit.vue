@@ -22,7 +22,7 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>Nombre</label>
-                            <input type="text" placeholder="Producto" v-model="productName" required>
+                            <input type="text" placeholder="Producto" v-model="productName" required >
                         </div>
                         <div class="input-field">
                             <label>Codigo</label>
@@ -92,14 +92,7 @@
                     </button>
                     <button class="updatelbtn">
                         <span class="btnActualizar">Actualizar</span>
-                    </button>        
-                    <button class="cancelbtn">
-                        <span class="btnCancelar">Cancelar</span>
-                    </button>
-                    <button class="savebtn">
-                        <span class="btnGuardar">Guardar</span> 
-                    </button>
-                    
+                    </button>                           
                 </div>
             </div>
         </form>
@@ -254,4 +247,23 @@
             }
         }
     }
+
+        function searchCodeItem(event){
+            /* var file = event.target.files[0];
+                var formData = new FormData();
+                formData.append('image', file);
+                axiosInstance.post('https://api.imgur.com/3/image', formData, {
+                    headers: {
+                        'Authorization': 'Client-ID '+ import.meta.env.VITE_IMGUR_CLIENT_ID
+                    }
+                }).then(response => {
+                    productImage.value = response.data.data.link;
+                    console.log(response.data.data.link);
+                }).catch(error => {
+                    console.log(error);
+                });*/
+            }
+
+
+    
 </script>

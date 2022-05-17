@@ -55,7 +55,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="#">REPORTE</a></li>
-                                <li><a href="#">PERFILES</a></li>
+                                <li><a href="#">USUARIOS</a></li>
                             </template>
                             <template v-else>
                                 <li><a href="#">PUBLICIDAD</a></li>

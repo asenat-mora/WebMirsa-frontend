@@ -12,8 +12,8 @@
                             <label>Seleccionada</label>
                             <select v-model="brandSelected" @change="loadName">
                                 <option selected disabled >Seleccione una marca</option>
-                                <option v-for="brand in brands" :value = "brand.id">
-                                    {{brand.name}}
+                                <option v-for="brand in brands" :value = "brand.id_marca">
+                                    {{brand.nombre_marca}}
                                 </option>
                             </select>
                         </div>
@@ -29,13 +29,7 @@
                         <span class="btnEliminar">Eliminar</span>
                     </button>
                     <button class="updatelbtn" @click="editBrand">
-                        <span class="btnActualizar">Actualizar</span>
-                    </button>        
-                    <button class="savebtn">
-                        <span class="btnGuardar">Guardar</span> 
-                    </button>
-                    <button class="cancelbtn">
-                        <span class="btnCancelar">Cancelar</span>
+                        <span class="btnActualizar">Actualizar</span>       
                     </button>
                 </div>
             </div>
@@ -69,7 +63,7 @@
             }
 
             function loadName (){
-                brandName.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].name;
+                brandName.value = brands.value.filter(brand => brand.id_marca == brandSelected.value)[0].nombre_marca;
             }
 
             function deleteBrand(){

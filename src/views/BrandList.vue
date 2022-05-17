@@ -11,22 +11,22 @@
                             <table class="GeneratedTable" >
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>ID MARCA</th>
                                         <th>NOMBRE</th>
-                                        <th>QUIEN MODIFICO</th>
-                                        <th>OPERACION</th>
-                                        <th>ULTIMA MODIFICACION</th>
+                                        <th>QUIEN MODIFIC&Oacute;</th>
+                                        <th>OPERACI&Oacute;N</th>
+                                        <th>ULTIMA MODIFICACI&Oacute;N</th>
                                         <th>ESTATUS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-for="datos in data">
-                                    <td>{{datos.id}}</td>
-                                    <td>{{datos.name}}</td>
-                                    <td>{{datos.id_last_user}}</td>
-                                    <td>{{datos.last_modification_description}}</td>
-                                    <td>{{datos.last_modification_date}}</td>
-                                    <td>{{datos.isDeleted}}</td>
+                                    <td align="center">{{datos.id_marca}}</td>
+                                    <td align="center">{{datos.nombre_marca}}</td>
+                                    <td align="center">{{datos.nombre}} {{datos.apellido}}</td>
+                                    <td align="center">{{datos.OPERACION}}</td>
+                                    <td align="center">{{datos.last_modification_date}}</td>
+                                    <td align="center">{{datos.ESTATUS}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -34,9 +34,9 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="savebtn">
+<!--                     <button class="savebtn">
                         <span class="btnGuardar">Aceptar</span> 
-                    </button>
+                    </button> -->
                 </div>
             </div>
     </div>

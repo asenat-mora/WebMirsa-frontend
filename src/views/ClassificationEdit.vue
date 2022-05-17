@@ -29,13 +29,7 @@
                         <span class="btnEliminar">Eliminar</span>
                     </button>
                     <button class="updatelbtn" @click="editClassification">
-                        <span class="btnActualizar">Actualizar</span>
-                    </button>        
-                    <button class="savebtn">
-                        <span class="btnGuardar">Guardar</span> 
-                    </button>
-                    <button class="cancelbtn">
-                        <span class="btnCancelar">Cancelar</span>
+                        <span class="btnActualizar">Actualizar</span>      
                     </button>
                 </div>
             </div>
