@@ -3,7 +3,11 @@
         <nav>
             <div class="divNav">
                 <i class='bx bx-menu' @click="menuOpenBtn"></i>
-                <div class="logoNav"><a href="#">MIRSA</a></div>
+                
+                <div class="logoNav">
+                   <!--  <a href="#">MIRSA</a> -->
+                    <img class="nav-logo" src="../assets/img/logo-white-mirsa.png" alt="">
+                </div>
                 <div class="navlinks" ref="navLinks">
                     <div class="sidebarLogo">
                         <span class="menuNav">MENU</span>
@@ -54,8 +58,10 @@
                                         
                                     </ul>
                                 </li>
-                                <li><a href="#">REPORTE</a></li>
-                                <li><a href="#">USUARIOS</a></li>
+                                <template v-if="store.getIsAdmin">
+                                    <li><a href="#">REPORTE</a></li>
+                                    <li><a href="#">USUARIOS</a></li>
+                                </template>
                             <!-- </template>
                             <template v-else>
                                 <li><a href="#">PUBLICIDAD</a></li>

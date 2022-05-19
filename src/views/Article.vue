@@ -52,15 +52,7 @@
                                 <option>proveedor2</option>
                                 <option>proveedor3</option>
                             </select>
-                        </div>
-                        <div class="input-field">
-                            <label>Estatus</label>
-                            <select required>
-                                <option disabled selected>Visibilidad del articulo</option>
-                                <option>Activo</option>
-                                <option>Ocultar</option>
-                            </select>
-                        </div>  -->
+                        </div> -->
                         <div class="input-field-checkbox-colors">
                             <label>Color</label>
                             <div class="checkbox-container" required>

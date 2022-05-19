@@ -54,6 +54,16 @@
   -----NAVBAR
   ----------------------------------------------
   */
+
+  .home-logo{
+    display: block;
+    margin:  300px auto;
+  }
+
+  .nav-logo{
+
+    width: 150px;
+  }
   nav{
     position: relative;
     top: 0;
@@ -191,6 +201,12 @@
     .divNav .bx-menu{
       display: block;
     }
+    .home-logo{
+      display: block;
+      margin:  150px auto;
+      width: 300px;
+    }
+
     /* colum menu */
     nav .divNav .navlinks{
       position: fixed;
@@ -702,7 +718,7 @@
   */
   /* producto, categoria, marca */
   .body-register-marca,
- /*  .body-register-category, */
+  .body-register-category,
   .body-register-product{
       height: 100vh;
       display: flex;
@@ -710,13 +726,9 @@
       padding-top: 15px;
       justify-content: center;
       background: var(--fondo2);
+      box-sizing: border-box;
   }
-  .body-register-category{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    background: var(--fondo2);
-  }
+
   /* producto, categoria, marca */
   .register-container-marca,
   .register-container-category,
@@ -1043,8 +1055,9 @@ form .field-search {
    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center; */
-    background-color: var(--fondo);
+    justify-content: center; 
+    background-color: var(--fondo);*/
+    
   }
 .container-allproducts{
   display: grid;
@@ -1112,7 +1125,7 @@ justify-content: space-between; */
   .product-card .main-images img.active{
     opacity: 1;
   }
-  .product-card .details-card .product-name{
+/*   .product-card .details-card .product-name{
     font-size: 24px;
     font-weight: 500;
     color: #161616;
@@ -1122,12 +1135,12 @@ justify-content: space-between; */
     font-weight: 400;
     color: #333;
     text-align: justify;
-  }
+  } */
  /*  .product-card .details-card .stars i{
     margin: 0 -1px;
     color: #333;
   } */
-  .product-card .color-price .color-option{
+ /*  .product-card .color-price .color-option{
     display: flex;
     align-items: center;
   }
@@ -1142,8 +1155,8 @@ justify-content: space-between; */
     font-weight: 500;
     color: #333;
     margin-right: 8px;
-  }
-  .color-option  .circles{
+  } */
+/*   .color-option  .circles{
     display: flex;
   }
   .color-option  .circles .circle{
@@ -1183,7 +1196,7 @@ justify-content: space-between; */
     font-size: 25px;
     font-weight: 600;
     color: #707070;
-  }
+  } */
   /* .color-price .price .price_letter{
     font-size: 10px;
     font-weight: 600;
