@@ -21,6 +21,7 @@ export const authStore = defineStore({
         getToken: (state) => state.token,
         getRefreshToken: (state) => state.rToken,
         getIsAdmin: (state) => state.userRoles.indexOf(1) >= 0,
+        getIsCapturist: (state) => state.userRoles.indexOf(2) >= 0,
         getTokenExpiration: (state) => state.tokenExpiration,
     },
     actions:{/* acciones que modifican el estado */

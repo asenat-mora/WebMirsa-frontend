@@ -3,7 +3,11 @@
         <nav>
             <div class="divNav">
                 <i class='bx bx-menu' @click="menuOpenBtn"></i>
-                <div class="logoNav"><a href="#">MIRSA</a></div>
+                
+                <div class="logoNav">
+                   <!--  <a href="#">MIRSA</a> -->
+                    <img class="nav-logo" src="../assets/img/logo-white-mirsa.png" alt="">
+                </div>
                 <div class="navlinks" ref="navLinks">
                     <div class="sidebarLogo">
                         <span class="menuNav">MENU</span>
@@ -14,49 +18,54 @@
 
                         <template v-if="store.getIsLoggedIn">
                         
-                            <template v-if="store.getIsAdmin">
+                            <!-- <template v-if="store.getIsAdmin"> -->
                                 <li>
-                                    <a href="#">CATALOGO</a>
+                                    <a href="#">CAT&Aacute;LOGO</a>
                                     <i class='bx bxs-chevron-down htmlcss-arrow arrow' @click="htmlcssArrow"></i>
                                     <ul class="htmlCss-sub-menu sub-menu">
-                                        <!-- <li><a href="#">Producto</a>
-                                        </li> -->
+                                  
                                         <li class="more">
-                                            <span><a href="#">Producto</a>
+                                            <span><a href="#">Marcas</a>
+                                                <i class='bx bxs-chevron-right arrow more-arrow'></i>
+                                            </span>
+                                            <ul class="more-sub-menu sub-menu">   
+                                                <li><router-link to="/AddBrand">Nuevo</router-link></li>
+                                                <li><router-link to="/BrandEdit">Editar</router-link></li>
+                                                <li><router-link to="/BrandList">Lista</router-link></li>
+                                            </ul>
+                                        </li>
+                                        <li class="more">
+                                            <span><a href="#">Accesorios</a>
+                                                <i class='bx bxs-chevron-right arrow more-arrow'></i>
+                                            </span>
+                                            <ul class="more-sub-menu sub-menu">   
+                                                <li><router-link to="/AddClassification">Nuevo</router-link></li>
+                                                <li><router-link to="/EditClassification">Editar</router-link></li>
+                                                <li><router-link to="/ClassificationList">Lista</router-link></li>
+                                            </ul>
+                                        </li>
+                                        <li class="more">
+                                            <span><a href="#">Productos</a>
                                                 <i class='bx bxs-chevron-right arrow more-arrow'></i>
                                             </span>
                                             <ul class="more-sub-menu sub-menu">   
                                                 <li><router-link to="/article">Nuevo</router-link></li>
                                                 <li><router-link to="/editProducto">Editar</router-link></li>
+                                                 <li><router-link to="/ArticleList">Lista</router-link></li>
                                                 <!-- <li><a href="#">Editar</a></li> -->
                                             </ul>
                                         </li>
-                                        <li class="more">
-                                            <span><a href="#">Marca</a>
-                                                <i class='bx bxs-chevron-right arrow more-arrow'></i>
-                                            </span>
-                                            <ul class="more-sub-menu sub-menu">   
-                                                <li><router-link to="/marca">Nuevo</router-link></li>
-                                                <li><a href="#">Editar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="more">
-                                            <span><a href="#">Categoria</a>
-                                                <i class='bx bxs-chevron-right arrow more-arrow'></i>
-                                            </span>
-                                            <ul class="more-sub-menu sub-menu">   
-                                                <li><router-link to="/categoria">Nuevo</router-link></li>
-                                                <li><a href="#">Editar</a></li>
-                                            </ul>
-                                        </li>
+                                        
                                     </ul>
                                 </li>
-                                <li><a href="#">REPORTE</a></li>
-                                <li><a href="#">PERFILES</a></li>
-                            </template>
+                                <template v-if="store.getIsAdmin">
+                                    <li><a href="#">REPORTE</a></li>
+                                    <li><a href="#">USUARIOS</a></li>
+                                </template>
+                            <!-- </template>
                             <template v-else>
                                 <li><a href="#">PUBLICIDAD</a></li>
-                            </template>
+                            </template> -->
                         
                             <li>
                                 <a href="#">MI PERFIL</a>

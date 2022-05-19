@@ -2,8 +2,8 @@
 <Navbar/>
 <div class="body-register-product">
     <div class="register-container-product">
-        <header>Producto</header>
-        <form class="form-register-product" @submit.prevent="createItem">
+        <header>Alta de Producto</header>
+        <form class="form-register-product" action="#" @submit.prevent="createItem">
             <div class="form-first">
                 <div class="details-product">
                     <span class="title">Detalles del producto</span>
@@ -29,8 +29,8 @@
                             <label>Marca</label>
                             <select v-model="productBrand" required>
                                 <option disabled selected>Selecciona una marca</option>
-                                <option v-for="brand in brands" :value="brand.id">
-                                    {{ brand.name }}
+                                <option v-for="brand in brands" :value="brand.brandId">
+                                    {{ brand.brandName }}
                                 </option>
                             </select>
                         </div>
@@ -38,8 +38,8 @@
                             <label>Categoria</label>
                             <select v-model="productCategory" required>
                                 <option disabled selected>Selecciona una Categoria</option>
-                                <option v-for="autopart in autoparts" :value="autopart.id">
-                                    {{ autopart.name }}
+                                <option v-for="autopart in autoparts" :value="autopart.autopartId">
+                                    {{ autopart.autopartName }}
                                 </option>
                             </select>
                         </div>
@@ -52,15 +52,7 @@
                                 <option>proveedor2</option>
                                 <option>proveedor3</option>
                             </select>
-                        </div>
-                        <div class="input-field">
-                            <label>Estatus</label>
-                            <select required>
-                                <option disabled selected>Visibilidad del articulo</option>
-                                <option>Activo</option>
-                                <option>Ocultar</option>
-                            </select>
-                        </div>  -->
+                        </div> -->
                         <div class="input-field-checkbox-colors">
                             <label>Color</label>
                             <div class="checkbox-container" required>
@@ -78,6 +70,7 @@
                             <label>Imagen</label>
                             <div class="p-image">
                                 <i class="ri-pencil-line upload-button"></i>
+                                <!-- <input id="vImagen" type="image" width="200" height="200"> -->
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" required/>
                             </div>
                         </div>
@@ -93,12 +86,6 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <!-- <button class="deletebtn">
-                        <span class="btnEliminar">Eliminar</span>
-                    </button>
-                    <button class="updatelbtn">
-                        <span class="btnActualizar">Actualizar</span>
-                    </button>         -->
                     <button class="cancelbtn">
                         <span class="btnCancelar">Cancelar</span>
                     </button>
@@ -161,11 +148,18 @@
             function uploadImageToImgur(event){
                 var file = event.target.files[0];
                 var formData = new FormData();
+                /* document.getElementById("vImagen").src = file; */
+
                 formData.append('image', file);
                 axiosInstance.post('https://api.imgur.com/3/image', formData, {
                     headers: {
                         'Authorization': 'Client-ID '+ import.meta.env.VITE_IMGUR_CLIENT_ID
                     }
+
+
+
+
+
                 }).then(response => {
                     productImage.value = response.data.data.link;
                     console.log(response.data.data.link);
@@ -185,14 +179,12 @@
             }
 
             function modifyColors(event){
-
                 if(!colorsArray.value.includes(event.target.value)){
                     colorsArray.value.push(event.target.value);
                 }
                 else{
                     colorsArray.value.splice(colorsArray.value.indexOf(event.target.value), 1);
                 }
-
             }
 
 
