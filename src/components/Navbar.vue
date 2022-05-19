@@ -86,7 +86,7 @@
                             </li>
                             <li><a href="#">COTIZACIÓN</a></li>
                             <li >
-                                <router-link to ="/login">ACCESO</router-link> 
+                                <router-link to ="/login">INICIAR SESION</router-link> 
                             </li>
                         </template>
 

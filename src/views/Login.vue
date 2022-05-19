@@ -17,12 +17,12 @@
                         Login
                     </button>
                    
-                   <!--  <p>No tengo una cuenta
+                    <p>No tengo una cuenta
                         <br>
                         <a href="formRegisterUser.html">
                             <span class="login-span">Registrarse</span>
                         </a>
-                    </p> -->
+                    </p>
                 </form>
             </div>
             <img class="login-image-container" src="../assets/img/login/car.jpg" alt="">
