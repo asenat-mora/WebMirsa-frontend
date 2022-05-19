@@ -39,11 +39,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="details-btns">
+                <!-- <div class="details-btns">
                     <button class="savebtn">
                         <span class="btnGuardar">Aceptar</span> 
                     </button>
-                </div>
+                </div> -->
             </div>
     </div>
 </div>

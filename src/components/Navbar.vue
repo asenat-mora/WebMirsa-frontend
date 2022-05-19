@@ -37,7 +37,7 @@
                                             <ul class="more-sub-menu sub-menu">   
                                                 <li><router-link to="/AddClassification">Nuevo</router-link></li>
                                                 <li><router-link to="/EditClassification">Editar</router-link></li>
-                                                <li><router-link to="/CategoriesList">Lista</router-link></li>
+                                                <li><router-link to="/ClassificationList">Lista</router-link></li>
                                             </ul>
                                         </li>
                                         <li class="more">

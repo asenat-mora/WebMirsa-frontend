@@ -2,10 +2,10 @@
 <Navbar/>
 <div class="body-register-product">
     <div class="register-container-product">
-        <header>Producto</header>
+        <header>Accesorios</header>
             <div class="form-first">
                 <div class="details-product">
-                    <span class="title">Lista de Clasificación</span>
+                    <span class="title">Lista de Accesorios</span>
                     <div class="fields">
                         <div class="container mt-4" id="app">
                             <table class="GeneratedTable" >
@@ -21,9 +21,9 @@
                                 </thead>
                                 <tbody>
                                 <tr v-for="datos in data">
-                                    <td>{{datos.id}}</td>
-                                    <td>{{datos.name}}</td>
-                                    <td>{{datos.id_last_user}}</td>
+                                    <td>{{datos.autopartId}}</td>
+                                    <td>{{datos.AutopartName}}</td>
+                                    <td>{{datos.userName}} {{datos.userSurname}}</td>
                                     <td>{{datos.last_modification_description}}</td>
                                     <td>{{datos.last_modification_date}}</td>
                                     <td>{{datos.isDeleted}}</td>
@@ -48,7 +48,7 @@
     import axios from 'axios'
     import { onBeforeMount, ref } from 'vue';
     export default{
-        name : 'CategoriesList',
+        name : 'ClassificationList',
         components: {
             Navbar
         },

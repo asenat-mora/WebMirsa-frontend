@@ -2,21 +2,21 @@
 <Navbar/>
 <div class="body-register-category">
    <div class="register-container-category">
-      <header>Clasificacion</header>
-        <form class="form-register-category" action="#" @submit.prevent="">
+      <!-- <header>Alta de Accesorios</header> -->
+        <form class="form-register-category" action="#" @submit.prevent="createClassification">
             <div class="form-first">
                 <div class="details-category">
                     <span class="title">Detalle</span>
                     <div class="fields">
                         <div class="input-field">
-                            <label>Nombre</label>
-                            <input type="text" placeholder="tipo de articulo" v-model="clasificationName" required>
+                            <label>Nombre del autoparte</label>
+                            <input type="text" placeholder="tipo de accesorio" v-model="AutopartName" required>
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">
                     <button class="savebtn">
-                        <span class="btnGuardar" @click="createCategory">Guardar</span> 
+                        <span class="btnGuardar">Guardar</span> <!-- @click="createClassification" -->
                     </button>
                     <button class="cancelbtn">
                         <span class="btnCancelar">Cancelar</span>
@@ -33,22 +33,22 @@
     import axios from 'axios';
     import { ref } from 'vue';
     export default{
-        name: 'AddCategory',
+        name: 'AddClassification',
         components: {
             Navbar
         },
         setup(){
-            var clasificationName = ref(null);
+            var classificationName = ref(null);
 
-            function createCategory(){
+            function createClassification(){
                 axios.post(import.meta.env.VITE_API_URL + '/api/autopart', 
                 {
-                    name: clasificationName.value
+                    name: classificationName.value
                 }
                 )
                 .then(response => {
                     alert("¡Registro exitoso!");
-                    clasificationName.value = null;
+                    classificationName.value = null;
                 })
                 .catch(error => {
                     alert("¡Error al registrar!");
@@ -57,8 +57,8 @@
             }
 
             return {
-                clasificationName,
-                createCategory
+                classificationName,
+                createClassification
             }
 
         }

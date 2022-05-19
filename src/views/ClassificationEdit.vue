@@ -2,25 +2,25 @@
 <Navbar/>
 <div class="body-register-marca">
    <div class="register-container-marca">
-      <header>Marcas</header>
+      <header>Accesorios Autopartes</header>
         <form class="form-register-marca" action = "#" @submit.prevent="">
             <div class="form-first">
                 <div class="details-marca">
-                    <span class="title">Editar Clasificación</span>
+                    <span class="title">Editar Accesorio</span>
                     <div class="fields">
                         <div class="input-field-text-area">
                             <label>Seleccionada</label>
                             <select v-model="classificationSelected" @change="loadName">
                                 <option selected disabled >Seleccione una clasificación</option>
-                                <option v-for="classification in classifications" :value = "classification.id">
-                                    {{classification.name}}
+                                <option v-for="classification in classifications" :value = "classification.autopartId">
+                                    {{classification.AutopartName}}
                                 </option>
                             </select>
                         </div>
                         <div class="input-field">
 
                             <label>Nombre</label>
-                            <input type="text" placeholder="Nombre de la marca" required v-model="classificationName">
+                            <input type="text" placeholder="Nombre de la autoparte" required v-model="classificationName">
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
             }
 
             function loadName (){
-                classificationName.value = classifications.value.filter(classification => classification.id == classificationSelected.value)[0].name;
+                classificationName.value = classifications.value.filter(classification => classification.autopartId == classificationSelected.value)[0].AutopartName;
             }
 
             function deleteClassification(){
@@ -88,9 +88,9 @@
                 )
                 .then(response => {
                     alert("¡Registro actualizado!");
-                    classificationName.value = null;
                     getAllClassifications();
                     classificationSelected.value= null;
+                    classificationName.value = null;
                 })
                 .catch(error => {
                     console.log(error);
@@ -103,14 +103,16 @@
             })
 
             return{
-                classifications,
-                classificationName,
-                classificationSelected,
-                editClassification,
-                deleteClassification,
-                loadName,
-                getAllClassifications,
 
+                classificationSelected,
+
+                classificationName ,
+                classifications,
+                getAllClassifications,
+                loadName,
+                deleteClassification,
+                editClassification
+                
             }
         }
     }

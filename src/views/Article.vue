@@ -38,8 +38,8 @@
                             <label>Categoria</label>
                             <select v-model="productCategory" required>
                                 <option disabled selected>Selecciona una Categoria</option>
-                                <option v-for="autopart in autoparts" :value="autopart.id">
-                                    {{ autopart.name }}
+                                <option v-for="autopart in autoparts" :value="autopart.autopartId">
+                                    {{ autopart.AutopartName }}
                                 </option>
                             </select>
                         </div>
@@ -78,6 +78,7 @@
                             <label>Imagen</label>
                             <div class="p-image">
                                 <i class="ri-pencil-line upload-button"></i>
+                                 <input id="vImagen" type="image" width="200" height="200">
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" required/>
                             </div>
                         </div>
@@ -155,11 +156,18 @@
             function uploadImageToImgur(event){
                 var file = event.target.files[0];
                 var formData = new FormData();
+                document.getElementById("vImagen").src = file;
+
                 formData.append('image', file);
                 axiosInstance.post('https://api.imgur.com/3/image', formData, {
                     headers: {
                         'Authorization': 'Client-ID '+ import.meta.env.VITE_IMGUR_CLIENT_ID
                     }
+
+
+
+
+
                 }).then(response => {
                     productImage.value = response.data.data.link;
                     console.log(response.data.data.link);

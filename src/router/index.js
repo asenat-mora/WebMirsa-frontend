@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Article from '../views/Article.vue'
-import Clasificacion from '../views/classification.vue'
+/* import Clasificacion from '../views/classification.vue' */
 import AddBrand from '../views/AddBrand.vue'
 import Addclassification from '../views/Addclassification.vue'
 import EditarMarca from '../views/BrandEdit.vue'
@@ -13,7 +13,7 @@ import EditarProducto from '../views/ArticleEdit.vue'
 import ProductosMirsa from '../views/Productos.vue'
 import ListaProductos from '../views/ArticleList.vue'
 import ListaMarcas from '../views/BrandList.vue'
-import ListaCategorias from '../views/CategoriesList.vue'
+import ListaClasificacion from '../views/ClassificationList.vue'
 import ClassificationEdit from '../views/ClassificationEdit.vue'
 
 import { authStore } from "@/stores/auth";
@@ -39,14 +39,14 @@ const router = createRouter({
         requiresAuth: true
       }
     },
-    {
+/*     {
       path: '/classification',
       name: 'classification',
       component: Clasificacion,
       meta : {
         requiresAuth: true
       }
-    },
+    }, */
     {
       path: '/AddBrand',
       name: 'AddBrand',
@@ -88,26 +88,42 @@ const router = createRouter({
       path: '/ArticleList',
       name: 'ArticleList',
       component: ListaProductos,
+      meta : {
+        requiresAuth: true
+      }
     },
     {
       path: '/BrandList',
       name: 'BrandList',
       component: ListaMarcas,
+      meta : {
+        requiresAuth: true
+      }
     },
-    {
-      path: '/CategoriesList',
-      name: 'CategoriesList',
-      component: ListaCategorias,
-    },
+
     {
         path: '/Addclassification',
         name: 'Addclassification',
         component: Addclassification,
+        meta : {
+          requiresAuth: true
+        }
     },
     {
         path: '/EditClassification',
         name: 'EditClassification',
         component: ClassificationEdit,
+        meta : {
+          requiresAuth: true
+        }
+    },
+    {
+      path: '/ClassificationList',
+      name: 'ClassificationList',
+      component: ListaClasificacion,
+      meta : {
+        requiresAuth: true
+      }
     }
 
 
