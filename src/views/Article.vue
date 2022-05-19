@@ -2,7 +2,7 @@
 <Navbar/>
 <div class="body-register-product">
     <div class="register-container-product">
-        <header>Producto</header>
+        <header>Alta de Producto</header>
         <form class="form-register-product" action="#" @submit.prevent="createItem">
             <div class="form-first">
                 <div class="details-product">
@@ -39,7 +39,7 @@
                             <select v-model="productCategory" required>
                                 <option disabled selected>Selecciona una Categoria</option>
                                 <option v-for="autopart in autoparts" :value="autopart.autopartId">
-                                    {{ autopart.AutopartName }}
+                                    {{ autopart.autopartName }}
                                 </option>
                             </select>
                         </div>
@@ -78,7 +78,7 @@
                             <label>Imagen</label>
                             <div class="p-image">
                                 <i class="ri-pencil-line upload-button"></i>
-                                 <input id="vImagen" type="image" width="200" height="200">
+                                <!-- <input id="vImagen" type="image" width="200" height="200"> -->
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" required/>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
             function uploadImageToImgur(event){
                 var file = event.target.files[0];
                 var formData = new FormData();
-                document.getElementById("vImagen").src = file;
+                /* document.getElementById("vImagen").src = file; */
 
                 formData.append('image', file);
                 axiosInstance.post('https://api.imgur.com/3/image', formData, {
@@ -187,14 +187,12 @@
             }
 
             function modifyColors(event){
-
                 if(!colorsArray.value.includes(event.target.value)){
                     colorsArray.value.push(event.target.value);
                 }
                 else{
                     colorsArray.value.splice(colorsArray.value.indexOf(event.target.value), 1);
                 }
-
             }
 
 

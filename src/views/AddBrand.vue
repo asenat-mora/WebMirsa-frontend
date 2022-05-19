@@ -15,13 +15,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="details-btns">
-                    <!-- <button class="deletebtn">
-                        <span class="btnEliminar">Eliminar</span>
-                    </button>
-                    <button class="updatelbtn">
-                        <span class="btnActualizar">Actualizar</span>
-                    </button>    -->     
+                <div class="details-btns">  
                     <button class="savebtn" type="submit">
                         <span class="btnGuardar">Guardar</span> 
                     </button>

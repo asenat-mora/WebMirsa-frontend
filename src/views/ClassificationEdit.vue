@@ -13,7 +13,7 @@
                             <select v-model="classificationSelected" @change="loadName">
                                 <option selected disabled >Seleccione una clasificación</option>
                                 <option v-for="classification in classifications" :value = "classification.autopartId">
-                                    {{classification.AutopartName}}
+                                    {{classification.autopartName}}
                                 </option>
                             </select>
                         </div>
@@ -63,7 +63,7 @@
             }
 
             function loadName (){
-                classificationName.value = classifications.value.filter(classification => classification.autopartId == classificationSelected.value)[0].AutopartName;
+                classificationName.value = classifications.value.filter(classification => classification.autopartId == classificationSelected.value)[0].autopartName;
             }
 
             function deleteClassification(){
@@ -105,7 +105,6 @@
             return{
 
                 classificationSelected,
-
                 classificationName ,
                 classifications,
                 getAllClassifications,

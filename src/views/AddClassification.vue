@@ -2,7 +2,7 @@
 <Navbar/>
 <div class="body-register-category">
    <div class="register-container-category">
-      <!-- <header>Alta de Accesorios</header> -->
+      <header>Alta de Accesorios</header>
         <form class="form-register-category" action="#" @submit.prevent="createClassification">
             <div class="form-first">
                 <div class="details-category">
@@ -10,7 +10,7 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>Nombre del autoparte</label>
-                            <input type="text" placeholder="tipo de accesorio" v-model="AutopartName" required>
+                            <input type="text" placeholder="tipo de accesorio" v-model="classificationName" required>
                         </div>
                     </div>
                 </div>

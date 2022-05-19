@@ -52,7 +52,7 @@
                                 <select v-model="productCategory" required>
                                     <option disabled>Selecciona una Categoria</option>
                                     <option v-for="autopart in autoparts" :value="autopart.autopartId">
-                                        {{ autopart.AutopartName }}
+                                        {{ autopart.autopartName }}
                                     </option>
                                 </select>
                             </div>
@@ -261,7 +261,6 @@ export default {
             productBrand,
             productCategory,
             productSide,
-            productDescription,
             productImage,
             txtCodigo, vProductoNombre, vCodigoProducto, vPrecio, vModelo, vDescripcion, vImagen, uploadImageToImgur
         }
@@ -284,7 +283,7 @@ export default {
             var inputElements = nElementsColors.querySelectorAll("input");
             var i = 0;
             for (i = 0; i < inputElements.length; i++) {
-                debugger;
+               /*  debugger; */
                 var cNombreColor = "Row_" + (i + 1);
                 document.getElementById(cNombreColor).checked = false;
             }
@@ -357,7 +356,7 @@ export default {
 
             const item = {
                 name: this.vProductoNombre,
-                description: this.productDescription,
+                description: this.vDescripcion,
                 price: this.vPrecio,
                 image: this.productImage,
                 colors: this.colorsArray,
@@ -367,7 +366,7 @@ export default {
                 brand: this.productBrand,
                 autoPart: this.productCategory              
             }
- debugger;
+ /* debugger; */
             axios.patch(import.meta.env.VITE_API_URL + '/api/item/' + this.vidItem, item)
                 .then(response => {
                     alert("¡Registro actualizado!");

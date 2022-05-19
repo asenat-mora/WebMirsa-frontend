@@ -18,7 +18,6 @@
                             </select>
                         </div>
                         <div class="input-field">
-
                             <label>Nombre</label>
                             <input type="text" placeholder="Nombre de la marca" required v-model="brandName">
                         </div>

@@ -6,7 +6,7 @@ import Login from '../views/Login.vue'
 import Article from '../views/Article.vue'
 /* import Clasificacion from '../views/classification.vue' */
 import AddBrand from '../views/AddBrand.vue'
-import Addclassification from '../views/Addclassification.vue'
+import AddClassification from '../views/AddClassification.vue'
 import EditarMarca from '../views/BrandEdit.vue'
 import Registro from '../views/UserRegister.vue'
 import EditarProducto from '../views/ArticleEdit.vue'
@@ -102,9 +102,9 @@ const router = createRouter({
     },
 
     {
-        path: '/Addclassification',
-        name: 'Addclassification',
-        component: Addclassification,
+        path: '/AddClassification',
+        name: 'AddClassification',
+        component: AddClassification,
         meta : {
           requiresAuth: true
         }

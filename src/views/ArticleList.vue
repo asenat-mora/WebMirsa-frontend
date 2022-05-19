@@ -39,11 +39,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="details-btns">
-                    <button class="savebtn">
-                        <span class="btnGuardar">Aceptar</span> 
-                    </button>
-                </div> -->
             </div>
     </div>
 </div>
@@ -62,6 +57,13 @@
             var data = ref();
             function getData(){
                 axios.get(import.meta.env.VITE_API_URL + '/api/item').then(response => {
+                    
+                    response.data.forEach(element =>{
+                        let colors = element.colors;
+                        let colorNames = colors.map(element =>element.name).join(", ");
+                        element.colors = colorNames;
+                    })
+                    
                     data.value = response.data
                 }).catch(error => {
                     console.log(error)

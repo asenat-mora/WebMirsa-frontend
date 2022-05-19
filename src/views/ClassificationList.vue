@@ -22,7 +22,7 @@
                                 <tbody>
                                 <tr v-for="datos in data">
                                     <td>{{datos.autopartId}}</td>
-                                    <td>{{datos.AutopartName}}</td>
+                                    <td>{{datos.autopartName}}</td>
                                     <td>{{datos.userName}} {{datos.userSurname}}</td>
                                     <td>{{datos.last_modification_description}}</td>
                                     <td>{{datos.last_modification_date}}</td>
