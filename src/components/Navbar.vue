@@ -14,7 +14,7 @@
 
                         <template v-if="store.getIsLoggedIn">
                         
-                            <template v-if="store.getIsAdmin">
+                            <!-- <template v-if="store.getIsAdmin"> -->
                                 <li>
                                     <a href="#">CAT&Aacute;LOGO</a>
                                     <i class='bx bxs-chevron-down htmlcss-arrow arrow' @click="htmlcssArrow"></i>
@@ -56,10 +56,10 @@
                                 </li>
                                 <li><a href="#">REPORTE</a></li>
                                 <li><a href="#">USUARIOS</a></li>
-                            </template>
+                            <!-- </template>
                             <template v-else>
                                 <li><a href="#">PUBLICIDAD</a></li>
-                            </template>
+                            </template> -->
                         
                             <li>
                                 <a href="#">MI PERFIL</a>

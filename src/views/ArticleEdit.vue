@@ -30,7 +30,7 @@
                             <div class="input-field">
                                 <label>Precio</label>
                                 <input type="number" min="1" step="any" placeholder="Precio unitario"
-                                    v-model="vPrecio" />
+                                    v-model="vPrecio" :disabled="store.getIsCapturist" />
                             </div>
                             <div class="input-field">
                                 <label>Modelo</label>
@@ -115,12 +115,14 @@ import Navbar from '@/components/Navbar.vue';
 import axios from 'axios';
 import axiosInstance from '../helpers/axiosInstance';
 import { onBeforeMount, ref } from 'vue';
+import { authStore } from '../stores/auth';
 export default {
     name: 'Article',
     components: {
         Navbar
     },
     setup() {
+        let store = authStore();
         var brands = ref(null);
         var colors = ref(null);
         var autoparts = ref(null);
@@ -251,6 +253,7 @@ export default {
             getAllAutoparts,
             //modifyColors,
             brands,
+            store,
             colors,
             autoparts,
             colorsArray,
