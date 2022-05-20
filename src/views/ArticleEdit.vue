@@ -1,14 +1,3 @@
-<script>
-    import Navbar from '@/components/Navbar.vue';
-    export default{
-        name: 'ArticleEdit',
-        components: {
-            Navbar
-        }
-    }
-</script>
-
-
 <template>
     <Navbar />
     <div class="body-register-product">
