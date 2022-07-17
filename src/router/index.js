@@ -2,9 +2,10 @@
 */
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Philosophy from '../views/Philosophy.vue'
+
 import Login from '../views/Login.vue'
 import Article from '../views/Article.vue'
-/* import Clasificacion from '../views/classification.vue' */
 import AddBrand from '../views/AddBrand.vue'
 import AddClassification from '../views/AddClassification.vue'
 import EditarMarca from '../views/BrandEdit.vue'
@@ -15,6 +16,10 @@ import ListaProductos from '../views/ArticleList.vue'
 import ListaMarcas from '../views/BrandList.vue'
 import ListaClasificacion from '../views/ClassificationList.vue'
 import ClassificationEdit from '../views/ClassificationEdit.vue'
+import AddColor from '../views/AddColor.vue'
+import EditColor from '../views/EditColor.vue'
+import ListColor from '../views/ListColor.vue'
+
 
 import { authStore } from "@/stores/auth";
 
@@ -26,6 +31,12 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+    {
+      path: '/Philosophy',
+      name: 'Philosophy',
+      component: Philosophy
+    },
+
     {
       path: '/login',
       name: 'login',
@@ -39,14 +50,6 @@ const router = createRouter({
         requiresAuth: true
       }
     },
-/*     {
-      path: '/classification',
-      name: 'classification',
-      component: Clasificacion,
-      meta : {
-        requiresAuth: true
-      }
-    }, */
     {
       path: '/AddBrand',
       name: 'AddBrand',
@@ -124,7 +127,35 @@ const router = createRouter({
       meta : {
         requiresAuth: true
       }
+    },
+    {
+      path: '/AddColor',
+      name: 'AddColor',
+      component: AddColor,
+      meta : {
+        requiresAuth: true
+      }
+  },
+  {
+    path: '/EditColor',
+    name: 'EditColor',
+    component: EditColor,
+    meta : {
+      requiresAuth: true
     }
+},
+{
+  path: '/ListColor',
+  name: 'ListColor',
+  component: ListColor,
+  meta : {
+    requiresAuth: true
+  }
+},
+
+
+
+
 
 
 

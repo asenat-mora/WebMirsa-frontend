@@ -2,13 +2,13 @@
 <Navbar/>
 <div class="body-register-category">
    <div class="register-container-category">
-      <header>Alta de Accesorios</header>
+      <header>ALTA DE ACCESORIO</header>
         <form class="form-register-category" action="#" @submit.prevent="createClassification">
             <div class="form-first">
                 <div class="details-category">
-                    <span class="title">Detalle</span>
+                    <!-- <span class="title">Detalle</span> -->
                     <div class="fields">
-                        <div class="input-field">
+                        <div class="input-field-b">
                             <label>Nombre del autoparte</label>
                             <input type="text" placeholder="tipo de accesorio" v-model="classificationName" required>
                         </div>

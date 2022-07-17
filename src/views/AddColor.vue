@@ -3,19 +3,15 @@
 <Navbar/>
 <div class="body-register-marca">
    <div class="register-container-marca">
-      <header>ALTA DE MARCA</header>
+      <header>ALTA DE COLOR</header>
         <form class="form-register-marca" action="#" @submit.prevent="createBrand" >
             <div class="form-first">
                 <div class="details-marca">
-                    <span class="title">DETALLES DE MARCA</span>
+                   <!--  <span class="title">DETALLES DE MARCA</span> -->
                     <div class="fields">
                         <div class="input-field-b">
                             <label>Nombre</label>
-                            <input type="text" placeholder="Nombre de la marca" v-model="brandName" required>
-                        </div>
-                        <div class="input-field-b">
-                            <label>Clave</label>
-                            <input type="text" placeholder="Nombre de la marca" v-model="brandName" required>
+                            <input type="text" placeholder="Nombre del color" v-model="brandName" required>
                         </div>
                     </div>
                 </div>

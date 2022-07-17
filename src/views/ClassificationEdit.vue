@@ -2,13 +2,13 @@
 <Navbar/>
 <div class="body-register-marca">
    <div class="register-container-marca">
-      <header>Accesorios Autopartes</header>
+      <header>EDITAR ACCESORIO</header>
         <form class="form-register-marca" action = "#" @submit.prevent="">
             <div class="form-first">
                 <div class="details-marca">
-                    <span class="title">Editar Accesorio</span>
+                    <!-- <span class="title">EDITAR ACCESORIO</span> -->
                     <div class="fields">
-                        <div class="input-field-text-area">
+                        <div class="input-field-b">
                             <label>Seleccionada</label>
                             <select v-model="classificationSelected" @change="loadName">
                                 <option selected disabled >Seleccione una clasificación</option>
@@ -17,10 +17,10 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="input-field">
+                        <div class="input-field-b">
 
                             <label>Nombre</label>
-                            <input type="text" placeholder="Nombre de la autoparte" required v-model="classificationName">
+                            <input type="text" placeholder="Nuevo nombre" required v-model="classificationName">
                         </div>
                     </div>
                 </div>

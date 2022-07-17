@@ -2,7 +2,7 @@
 <Navbar/>
 <div class="body-register-marca">
    <div class="register-container-marca">
-      <header>EDITAR MARCA</header>
+      <header>EDITAR COLOR</header>
         <form class="form-register-marca" action = "#" @submit.prevent="">
             <div class="form-first">
                 <div class="details-marca">
@@ -10,24 +10,24 @@
                     <div class="fields">
                         <div class="input-field-b">
                             <label>Seleccionada</label>
-                            <select v-model="brandSelected" @change="loadName">
-                                <option selected disabled >Seleccione una marca</option>
-                                <option v-for="brand in brands" :value = "brand.brandId">
-                                    {{brand.brandName}}
+                            <select v-model="colorSelected" @change="loadName">
+                                <option selected disabled >Seleccione un color</option>
+                                <option v-for="color in color" :value = "color.colorId">
+                                    {{color.colorName}}
                                 </option>
                             </select>
                         </div>
                         <div class="input-field-b">
                             <label>Nombre</label>
-                            <input type="text" placeholder="Nuevo nombre" required v-model="brandName">
+                            <input type="text" placeholder="Nuevo nombre" required v-model="colorName">
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="deletebtn" @click="deleteBrand">
+                    <button class="deletebtn" @click="deleteColor">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
-                    <button class="updatelbtn" @click="editBrand">
+                    <button class="updatelbtn" @click="editColor">
                         <span class="btnActualizar">Actualizar</span>       
                     </button>
                 </div>
@@ -42,19 +42,19 @@
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
     export default{
-        name: 'BrandEdit',
+        name: 'EditColor',
         components: {
             Navbar
         },
         setup(){
-            var brandSelected = ref(null);
-            var brandName = ref(null);
-            const brands = ref(null);
+            var colorSelected = ref(null);
+            var colorName = ref(null);
+            const colors = ref(null);
 
-            function getAllBrands(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/brand')
+            function getAllColors(){
+                axios.get(import.meta.env.VITE_API_URL + '/api/color')
                 .then(response => {
-                    brands.value = response.data;
+                    colors.value = response.data;
                 })
                 .catch(error => {
                     console.log(error);
@@ -62,16 +62,16 @@
             }
 
             function loadName (){
-                brandName.value = brands.value.filter(brand => brand.brandId == brandSelected.value)[0].brandName;
+                colorName.value = colors.value.filter(color => color.colorId == colorSelected.value)[0].colorName;
             }
 
-            function deleteBrand(){
-                axios.delete(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value)
+            function deleteColor(){
+                axios.delete(import.meta.env.VITE_API_URL + '/api/color/' + colorSelected.value)
                 .then(response => {
                     alert("¡Registro eliminado!");
-                    getAllBrands();
-                    brandSelected.value= null;
-                    brandName.value = null;
+                    getAllColors();
+                    colorSelected.value= null;
+                    colorName.value = null;
                 })
                 .catch(error => {
                     console.log(error);
@@ -79,17 +79,17 @@
                 });
             }
 
-            function editBrand(){
-                axios.patch(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value,
+            function editColor(){
+                axios.patch(import.meta.env.VITE_API_URL + '/api/color/' + colorSelected.value,
                 {
-                    name: brandName.value
+                    name: colorName.value
                 }
                 )
                 .then(response => {
                     alert("¡Registro actualizado!");
-                    getAllBrands();
-                    brandSelected.value= null;
-                    brandName.value = null;
+                    getAllColors();
+                    colorSelected.value= null;
+                    colorName.value = null;
                 })
                 .catch(error => {
                     console.log(error);
@@ -98,17 +98,17 @@
             }
 
             onBeforeMount(() => {
-                getAllBrands();
+                getAllColors();
             })
 
             return{
-                brandSelected,
-                brandName,
-                brands,
-                getAllBrands,
+                colorSelected,
+                colorName,
+                colors,
+                getAllColors,
                 loadName,
-                deleteBrand,
-                editBrand
+                deleteColor,
+                editColor
             }
         }
     }
