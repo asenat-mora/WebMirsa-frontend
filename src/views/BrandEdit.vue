@@ -12,8 +12,8 @@
                             <label>Seleccionada</label>
                             <select v-model="brandSelected" @change="loadName">
                                 <option selected disabled >Seleccione una marca</option>
-                                <option v-for="brand in brands" :value = "brand.brandId">
-                                    {{brand.brandName}}
+                                <option v-for="brand in brands" :value = "brand.id">
+                                    {{brand.name}}
                                 </option>
                             </select>
                         </div>
@@ -62,7 +62,7 @@
             }
 
             function loadName (){
-                brandName.value = brands.value.filter(brand => brand.brandId == brandSelected.value)[0].brandName;
+                brandName.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].name;
             }
 
             function deleteBrand(){

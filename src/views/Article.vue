@@ -29,8 +29,8 @@
                             <label>Marca</label>
                             <select v-model="productBrand" required>
                                 <option disabled selected>Selecciona una marca</option>
-                                <option v-for="brand in brands" :value="brand.brandId">
-                                    {{ brand.brandName }}
+                                <option v-for="brand in brands" :value="brand.id">
+                                    {{ brand.name }}
                                 </option>
                             </select>
                         </div>
@@ -38,8 +38,8 @@
                             <label>Accesorio</label>
                             <select v-model="productCategory" required>
                                 <option disabled selected>Selecciona una Categoria</option>
-                                <option v-for="autopart in autoparts" :value="autopart.autopartId">
-                                    {{ autopart.autopartName }}
+                                <option v-for="autopart in autoparts" :value="autopart.id">
+                                    {{ autopart.name }}
                                 </option>
                             </select>
                         </div>
@@ -169,7 +169,7 @@
             }
 
             function getAllAutoparts(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/autopart')
+                axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
                 .then(response => {
                     autoparts.value = response.data;
                 }).catch(error => {
@@ -201,7 +201,7 @@
                     colors: colorsArray.value
                 }
 
-                axios.post(import.meta.env.VITE_API_URL + '/api/item', item)
+                axios.post(import.meta.env.VITE_API_URL + '/api/product', item)
                 .then(response => {
 
 

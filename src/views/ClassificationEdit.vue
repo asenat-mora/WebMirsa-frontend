@@ -12,8 +12,8 @@
                             <label>Seleccionada</label>
                             <select v-model="classificationSelected" @change="loadName">
                                 <option selected disabled >Seleccione una clasificación</option>
-                                <option v-for="classification in classifications" :value = "classification.autopartId">
-                                    {{classification.autopartName}}
+                                <option v-for="classification in classifications" :value = "classification.id">
+                                    {{classification.name}}
                                 </option>
                             </select>
                         </div>
@@ -53,7 +53,7 @@
             const classifications = ref(null);
 
             function getAllClassifications(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/autopart')
+                axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
                 .then(response => {
                     classifications.value = response.data;
                 })
@@ -63,11 +63,11 @@
             }
 
             function loadName (){
-                classificationName.value = classifications.value.filter(classification => classification.autopartId == classificationSelected.value)[0].autopartName;
+                classificationName.value = classifications.value.filter(classification => classification.id == classificationSelected.value)[0].name;
             }
 
             function deleteClassification(){
-                axios.delete(import.meta.env.VITE_API_URL + '/api/autopart/' + classificationSelected.value)
+                axios.delete(import.meta.env.VITE_API_URL + '/api/accessory' + classificationSelected.value)
                 .then(response => {
                     alert("¡Registro eliminado!");
                     getAllClassifications();
@@ -81,7 +81,7 @@
             }
 
             function editClassification(){
-                axios.patch(import.meta.env.VITE_API_URL + '/api/autopart/' + classificationSelected.value,
+                axios.patch(import.meta.env.VITE_API_URL + '/api/accessory' + classificationSelected.value,
                 {
                     name: classificationName.value
                 }

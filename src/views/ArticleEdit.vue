@@ -39,8 +39,8 @@
                                 <label>Marca</label>
                                 <select v-model="productBrand" required>
                                     <option disabled>Selecciona una marca</option>
-                                    <option v-for="brand in brands" :value="brand.brandId">
-                                        {{ brand.brandName }}
+                                    <option v-for="brand in brands" :value="brand.id">
+                                        {{ brand.name }}
                                     </option>
                                 </select>
                             </div>
@@ -48,8 +48,8 @@
                                 <label>Accesorio</label>
                                 <select v-model="productCategory" required>
                                     <option disabled>Selecciona una Categoria</option>
-                                    <option v-for="autopart in autoparts" :value="autopart.autopartId">
-                                        {{ autopart.autopartName }}
+                                    <option v-for="autopart in autoparts" :value="autopart.id">
+                                        {{ autopart.name }}
                                     </option>
                                 </select>
                             </div>
@@ -175,7 +175,7 @@ export default {
         }
 
         function getAllAutoparts() {
-            axios.get(import.meta.env.VITE_API_URL + '/api/autopart')
+            axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
                 .then(response => {
                     autoparts.value = response.data;
                 }).catch(error => {
@@ -204,50 +204,10 @@ export default {
 
         }
 
-
-
-        /*      function modifyColors(event) {
-                 if (!colorsArray.value.includes(event.target.value)) {
-                     colorsArray.value.push(event.target.value);
-                 }
-                 else {
-                     colorsArray.value.splice(colorsArray.value.indexOf(event.target.value), 1);
-                 }
-             }
-      */
-
-        /* 
-                function createItem() {
-                    const item = {
-                        name: vProductoNombre.value,
-                        code: vCodigoProducto.value,
-                        price: productPrice.value,
-                        model: productModel.value,
-                        brand: productBrand.value,
-                        autoPart: productCategory.value,
-                        side: productSide.value,
-                        description: productDescription.value,
-                        image: productImage.value,
-                        colors: colorsArray.value
-                    }
-        
-                    axios.post(import.meta.env.VITE_API_URL + '/api/item', item)
-                        .then(response => {
-                            alert("¡Registro exitoso!");
-                            console.log(response);
-                        }).catch(error => {
-                            console.log(error);
-        
-                            alert("¡Error en el registro!");
-        
-                        });
-                } */
-
         onBeforeMount(() => {
             getAllBrands();
             getAllColors();
             getAllAutoparts();
-            //getCodeItem();
         })
 
         return {
@@ -283,6 +243,7 @@ export default {
             this.vDescripcion = '';
             this.productBrand = '';
             this.productCategory = '';
+            this.productImage = '';
             document.getElementById("vImagen").src = '';
 
             var nElementsColors = document.getElementById("listColors");
@@ -296,11 +257,11 @@ export default {
 
         },
         getCodeItem() {
-            axios.get(import.meta.env.VITE_API_URL + '/api/item/code/' + this.txtCodigo)
+            axios.get(import.meta.env.VITE_API_URL + '/api/product/code/' + this.txtCodigo)
                 .then(response => {
-
+                    
                     //Pintar los valores encontrados en el formaulario
-                    this.vProductoNombre = response.data.name;
+                    this.vProductoNombre = response.data.sku;
                     this.vCodigoProducto = response.data.code;
                     this.vPrecio = response.data.price;
                     this.vModelo = response.data.model;
@@ -308,12 +269,13 @@ export default {
                     this.vidItem = response.data.id;
 
                     //Cambiar los combos, con el valor encontrado
-                    this.productBrand = response.data.brandId;
-                    this.productCategory = response.data.autoPartId;
+                    this.productBrand = response.data.brand.id;
+                    this.productCategory = response.data.accessory.id;
+                    this.productImage = response.data.image;
 
                     //Actualizar los colores
-                    for (let i in response.data.colors) {
-                        var nColorEncontrado = response.data.colors[i];
+                    for (let i in response.data.productcolor) {
+                        var nColorEncontrado = response.data.productcolor[i].color.id;
                         var cNombreColor = "Row_" + nColorEncontrado;
                         document.getElementById(cNombreColor).checked = true;
                     }
@@ -324,16 +286,15 @@ export default {
                     //Actualiza la imagen
                     document.getElementById("vImagen").src = response.data.image;
 
-
                 }).catch(error => {
                     alert("¡Producto no encontrado, favor de intentarlo nuevamente!");
-                    clearForm();
+                    this.clearForm();
                     console.log(error);
                 });
         },
         deleteItem() {
             const itemx = { id: this.vidItem }
-            axios.delete(import.meta.env.VITE_API_URL + '/api/item/' + this.vidItem, itemx)
+            axios.delete(import.meta.env.VITE_API_URL + '/api/product/' + this.vidItem, itemx)
                 .then(response => {
                     alert("¡Registro eliminado!");
                     clearForm();
@@ -361,7 +322,7 @@ export default {
             }
 
             const item = {
-                name: this.vProductoNombre,
+                sku: this.vProductoNombre,
                 description: this.vDescripcion,
                 price: this.vPrecio,
                 image: this.productImage,
@@ -369,11 +330,11 @@ export default {
                 model: this.vModelo,
                 code: this.vCodigoProducto,
                 side: this.productSide,
-                brand: this.productBrand,
-                autoPart: this.productCategory              
+                brandId: this.productBrand,
+                accessoryId: this.productCategory              
             }
  /* debugger; */
-            axios.patch(import.meta.env.VITE_API_URL + '/api/item/' + this.vidItem, item)
+            axios.patch(import.meta.env.VITE_API_URL + '/api/product/' + this.vidItem, item)
                 .then(response => {
                     alert("¡Registro actualizado!");
                     console.log(response);

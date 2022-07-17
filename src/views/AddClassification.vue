@@ -41,7 +41,7 @@
             var classificationName = ref(null);
 
             function createClassification(){
-                axios.post(import.meta.env.VITE_API_URL + '/api/autopart', 
+                axios.post(import.meta.env.VITE_API_URL + '/api/accessory', 
                 {
                     name: classificationName.value
                 }
