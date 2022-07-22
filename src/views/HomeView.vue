@@ -5,13 +5,23 @@
 
 
 <template>
+<div class="body-v">
+	
+  <Navbar>
+  </Navbar>
 
-  <Navbar/>
   
-  <div class="content-home">
+  
+ 
+ 
+ <div class="content-home">
+
     <p>
-      <h1>LE DAMOS LUZ, COLOR Y VIDA AL AUTOMOVIL...</h1>
+		<h1>LE DAMOS LUZ, COLOR Y VIDA AL AUTOMOVIL...</h1>
     </p>
+
+
+
   </div>
   <!--   <img class="home-logo" src="../assets/img/logo.png" alt=""> -->
 
@@ -63,4 +73,5 @@
 			</div>
 		</footer>
 
+</div>
 </template>

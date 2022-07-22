@@ -1,4 +1,5 @@
 <template>
+
   <div class="bodyNav">
     <nav>
       <div class="divNav">
@@ -112,7 +113,9 @@
       </div>
     </nav>
   </div>
+
 </template>
+
 
 <script>
 import { ref } from "vue";

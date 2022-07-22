@@ -1,8 +1,47 @@
 <template>
 <Navbar/>
-<div class="body-register-product">
-    <div class="register-container-product">
-        <header>Marcas</header>
+<div class="body-register-marca">
+    <div class="register-container-marca">
+        <header>MARCAS</header>
+        <!-- barra de filtros -->
+        <div class="container-filter">
+            <div class="filter-options">
+                 <div class="filter-a">
+                            <label>Marca</label>
+                            <select v-model="productBrand" required>
+                                <option disabled selected>Selecciona una marca</option>
+                                <option v-for="brand in brands" :value="brand.brandId">
+                                    {{ brand.brandName }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="filter-b">
+                            <label>Accesorio</label>
+                            <select v-model="productCategory" required>
+                                <option disabled selected>Selecciona una Categoria</option>
+                                <option v-for="autopart in autoparts" :value="autopart.autopartId">
+                                    {{ autopart.autopartName }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="filter-c">
+                            <label>Lado</label>
+                            <select v-model="productSide" required>
+                                <option disabled selected>Selecciona un lado</option>
+                                <option value="Derecho">Derecho</option>
+                                <option value="Izquierdo">Izquierdo</option>
+                                <option value="Ambos">Ambos</option>
+                            </select>
+                        </div>
+                        <div class="button-search">
+                            <button class="searchbtn" @click="getCodeItem">
+                                <span class="btnBuscar">Buscar</span>
+                            </button>
+                        </div>
+            
+            </div>
+        </div>
+            <!-- tabla de productos -->
             <div class="form-first">
                 <div class="details-product">
                     <span class="title">Lista de marcas</span>
@@ -32,11 +71,6 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="details-btns">
-<!--                     <button class="savebtn">
-                        <span class="btnGuardar">Aceptar</span> 
-                    </button> -->
                 </div>
             </div>
     </div>

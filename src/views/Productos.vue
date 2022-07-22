@@ -1,71 +1,150 @@
 <script>
-    import Navbar from '@/components/Navbar.vue';
-    export default{
-        name: 'Article',
-        components: {
-            Navbar
-        }
-    }
+import Navbar from "@/components/Navbar.vue";
+export default {
+  name: "Article",
+  components: {
+    Navbar,
+  },
+};
 </script>
-<template> 
-<Navbar/>
+<template>
 
-<div class="body-productosMirsa">
-    <div class="container-allproducts">
+  <!--   <nav>
+      <Navbar />
+    </nav> -->
 
-        <div class="product-card">           
-            <div class="logo-cart">
-                <span class="marca">Ford</span>
-            </div>
-            <div class="main-images">
-                <img id="blue" class="blue active" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="blue">
-                <!--<img id="pink" class="pink" src="images/pink.png" alt="blue">-->
-                <!--<img id="yellow" class="yellow" src="images/yellow.png" alt="blue">-->
-            </div>
-            <div class="details-card">
-                <span class="product-name">Mica plafon</span>
-                <p>Escudo con reversa <br> luhdfglou injfdcgoui ncgñfoiujknvchñinvch</p>
-            </div>
-            <div class="color-price">
-                <div class="color-option">
-                    <span class="color">Colour:</span>
-                    <div class="circles">
-                    <span class="circle blue active"  id="blue"></span>
-                    <span class="circle pink " id="pink"></span>
-                    <span class="circle yellow " id="yellow"></span>
-                    <span class="circle yellow " id="yellow"></span>
-                    <span class="circle yellow " id="yellow"></span>
-                    <span class="circle yellow " id="yellow"></span>
-                </div>
-            </div>
-            <div class="price">
-                <span class="price_num">$125.00</span>
-                <!-- <span class="price_letter">Nine dollar only</span> -->
-            </div>
-            </div>
-            <div class="button">
-                <!-- <div class="button-add"></div> -->
-                <button class="button-add">Añadir Cotización</button>
+    <div class="body-product">
+        <!--  <h1 class="h1">Productos</h1> -->
+        <div class="bar-filter">
+            <h3>BÚSQUEDA EXPRESS</h3>
+             <div class="filter-options">
+                 <div class="filter-a">
+                            <label>Marca</label>
+                            <select v-model="productBrand" required>
+                                <option disabled selected>Selecciona una marca</option>
+                                <option v-for="brand in brands" :value="brand.brandId">
+                                    {{ brand.brandName }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="filter-b">
+                            <label>Accesorio</label>
+                            <select v-model="productCategory" required>
+                                <option disabled selected>Selecciona una Categoria</option>
+                                <option v-for="autopart in autoparts" :value="autopart.autopartId">
+                                    {{ autopart.autopartName }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="filter-c">
+                            <label>Lado</label>
+                            <select v-model="productSide" required>
+                                <option disabled selected>Selecciona un lado</option>
+                                <option value="Derecho">Derecho</option>
+                                <option value="Izquierdo">Izquierdo</option>
+                                <option value="Ambos">Ambos</option>
+                            </select>
+                        </div>
+                        <div class="button-search">
+                            <button class="searchbtn" @click="getCodeItem">
+                                <span class="btnBuscar">Buscar</span>
+                            </button>
+                        </div>
             </div>
         </div>
 
-
+        <div class="container">
+           <!--  <h1 class="h1">Productos</h1> -->
+            <div class="content">
+                 <!-- items -->
+                <div class="card-item">
+                    <div class="product-a">
+                            <img class="im" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="prueba"/>
+                    </div>
+                    <div class="info">
+                        <span class="pku">PKU</span>
+                        <span class="name">Accesorio</span>
+                        <span class="brand">Marca</span>
+                        <span class="description">descripcion</span>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="product-a">
+                            <img class="im" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="prueba"/>
+                    </div>
+                    <div class="info">
+                        <span class="name">Accesorio</span>
+                        <span class="brand">Marca</span>
+                        <span class="description">descripcion</span>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="product-a">
+                            <img class="im" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="prueba"/>
+                    </div>
+                    <div class="info">
+                        <span class="name">Accesorio</span>
+                        <span class="brand">Marca</span>
+                        <span class="description">descripcion</span>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="product-a">
+                            <img class="im" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="prueba"/>
+                    </div>
+                    <div class="info">
+                        <span class="name">Accesorio</span>
+                        <span class="brand">Marca</span>
+                        <span class="description">descripcion</span>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="product-a">
+                            <img class="im" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="prueba"/>
+                    </div>
+                    <div class="info">
+                        <span class="name">Accesorio</span>
+                        <span class="brand">Marca</span>
+                        <span class="description">descripcion</span>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="product-a">
+                            <img class="im" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="prueba"/>
+                    </div>
+                    <div class="info">
+                        <span class="name">Accesorio</span>
+                        <span class="brand">Marca</span>
+                        <span class="description">descripcion</span>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="product-a">
+                            <img class="im" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="prueba"/>
+                    </div>
+                    <div class="info">
+                        <span class="name">Accesorio</span>
+                        <span class="brand">Marca</span>
+                        <span class="description">descripcion</span>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <div class="product-a">
+                            <img class="im" src="../assets/img/products/micaPlafonFordEscudoConReversa1F.png" alt="prueba"/>
+                    </div>
+                    <div class="info">
+                        <span class="name">Accesorio</span>
+                        <span class="brand">Marca</span>
+                        <span class="description">descripcion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
-</div>
 
 </template>
 
 <!-- <script>
-   let circle = document.querySelector(".color-option");
 
-   circle.addEventListener("click", (e)=>{
-     let target = e.target;
-     if(target.classList.contains("circle")){
-       circle.querySelector(".active").classList.remove("active");
-       target.classList.add("active");
-       document.querySelector(".main-images .active").classList.remove("active");
-       document.querySelector(`.main-images .${target.id}`).classList.add("active");
-     }
-   });
 </script> -->

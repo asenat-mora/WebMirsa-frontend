@@ -24,6 +24,7 @@
   --fondoForm:#2d325a;
   --white: #ffffff;
   --yellow:  #f0e556 ;
+  --guinda: #910028;
   --light-blue: #51b1dd;
   --borderForm: #3944a1;
   --button-blue: #0084ff;     
@@ -43,6 +44,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.body-v{
+  height: 100vh;
+}
+
 a{
   color: inherit;
   text-decoration: none;
@@ -53,21 +58,14 @@ a{
 -----NAVBAR
 ----------------------------------------------
 */
-.bodyNav{
-/*   position: fixed; */
-}
 .logo-navbar{
   width: 160px;/* tamaño de logo */
 }
 nav{
-  
-
- position: relative;
-
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;/* para celular si funciona */
   background: var(--fondo);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   z-index: 99;
@@ -80,7 +78,6 @@ nav .divNav{
   align-items: center;
   justify-content: space-between;
   margin: auto;
-  /* background: red; */
   padding: 0 50px;
 }
 .divNav .logoNav a{
@@ -90,8 +87,8 @@ nav .divNav{
   font-weight: 600;
 }
 nav .divNav .navlinks{
-  line-height: 7vh;/* tamaño del nadvar */
-  height: 100%;
+  line-height: 7vh;
+/*   height: 100%; */
 }
 nav .divNav .option-menu{
   display: flex;
@@ -194,9 +191,6 @@ nav .divNav .option-menu li:hover .js-sub-menu{
 }
   /*dimencion  768 x 1024 ipad */
 @media (max-width:800px){
-  nav{
-    position: relative;
-  }
   .divNav .bars-menu{
     display: block;
   }
@@ -372,12 +366,10 @@ nav .divNav .option-menu li .arrow{
   .login-container {
     height: 43.75em;
     width: 62em;
-  /*   margin: 2em ; */
     border-radius: 3px;
     display: flex;
     align-self: center;
     justify-content: center;
-    /* flex-direction: row; */
     overflow: hidden;
   }
   .login-info-container {
@@ -391,7 +383,6 @@ nav .divNav .option-menu li .arrow{
   }
   .login-image-container {
     display: inline-flex;
-   /*  padding: 2rem; */
     width: 50%;
   }
   .login-litle {
@@ -468,14 +459,7 @@ nav .divNav .option-menu li .arrow{
     .login-image-container {
         display: none;
     }  
-}
-  
-/* @media screen and (max-width: 650px) {
-  .login-container {
-     width: 90%;
-}
-  } */
-  
+} 
 @media screen and (max-width: 480px) {
   .login-container {
     height: 40em;
@@ -638,7 +622,6 @@ nav .divNav .option-menu li .arrow{
 	cursor: pointer;
 	background-color:  #33383b;
 	border-radius: 4px;
- 
 	font-size: 24px;
 	color: #ffffff;
 	line-height: 32px;
@@ -783,53 +766,36 @@ nav .divNav .option-menu li .arrow{
 ----------------------------------------------
 */
 
-  /* producto, categoria, marca */
+  /* producto, categoria, marca, color */
   .body-register-marca,
   .body-register-category,
   .body-register-product{
-
-
-
-
-   /*  position: absolute; */
-
-
-
-
-
     display: inline-block;
     height: 100vh;
       display: flex;
       align-items: start;
-      padding-top: 10px;
+     /*  padding-top: 85px; *//* espacio entre el nav y el body*/
       justify-content: center;
       background: var(--fondo2);
       box-sizing: border-box;
   }
 
   /* formulario
-  producto, categoria, marca */
+  producto, categoria, marca, color */
   .register-container-marca,
   .register-container-category,
   .register-container-product{
-      position: relative;
-      width: 98%;
-      border-radius: 5px;
-      padding: 30px;
-      margin: 0 15px;
-      background-color: #fff;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    
+    margin: 85px 0;
+     border-radius: 5px;
+     padding: 30px;
+     background-color: #fff;
+     box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   }
   .register-container-marca,
   .register-container-category{
-    width: 50%;
-  }
-
-
-
-  .register-container-marca,
-  .register-container-category{
-    height: 500px;
+    width: 98%;
+    height: 450px;
   }
 
   /* titulo */
@@ -860,10 +826,10 @@ nav .divNav .option-menu li .arrow{
   .register-container-marca .form-register-marca,
   .register-container-category .form-register-category,
   .register-container-product .form-register-product{
-      position: relative;
-      margin-top: 16px;
-      min-height: 490px;
-      overflow: hidden;
+    position: relative;
+    margin-top: 16px;
+    /* min-height: 450px; */
+    overflow: hidden;
   }
   form.secActive .form-first{
       opacity: 0;
@@ -882,10 +848,10 @@ nav .divNav .option-menu li .arrow{
   .register-container-marca .form-register-marca .fields,
   .register-container-category .form-register-category .fields,
   .register-container-product .form-register-product .fields{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
+    display: flex;
+    align-items: stretch; /* center */
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 /* columnas */
   form .fields .input-field-text-area,
@@ -942,7 +908,7 @@ nav .divNav .option-menu li .arrow{
       align-items: center;
   }
   /* Botones */
-  .register-container-product button,/* para listas */
+   .register-container-product button,/* para listas */
   .register-container-marca form button,
   .register-container-category form button,
   .register-container-product form button{
@@ -1016,12 +982,53 @@ nav .divNav .option-menu li .arrow{
     height: 42px;
 }
 
+/*------------------- 
+--------Filtro-------
+--------------------*/
+.container-filter{
+  margin: 10px 0;
+  background-color: #ebeff3; /* ebeff3 */
+  
+}
+
+.filter-options{
+  display: flex;
+/*   width: calc(100% / 1 - 15px); */
+  flex-direction: row;
+  /* justify-content: space-between; */
+ /*  margin: 0 15px; */
+ padding: 8px;
+ justify-content: center
+
+}
+.filter-options button{
+ margin: 6px 0 0 20px;
+ border: none;
+ width: 100%;
+ border-radius: .25rem;
+ font-size: 16px;
+ color: var(--white);
+ height: 45px;
+ cursor: pointer;
+ transition: all 0.3s linear;
+
+}
+/* 
+  display: flex;
+    align-items: stretch; center
+    justify-content: space-between;
+    flex-wrap: wrap; */
+
+
+
   /*dimencion  768 ipad mini*/
   @media (max-width: 768px) {
-    /* contenedor */
+
+     /* contenedor */
     .register-container-marca,
     .register-container-category{
       width: 100%;
+      margin: 90px 0 0 0;
     }
     /* columnas */
     form .fields .input-field-text-area,
@@ -1031,8 +1038,7 @@ nav .divNav .option-menu li .arrow{
         width: calc(100% / 3 - 15px);
     }
 
-
-
+  
 
 
 
@@ -1053,6 +1059,20 @@ nav .divNav .option-menu li .arrow{
   .register-container-product form button{
     max-width: 130px;
   }
+
+  .filter-options button{
+    margin: 6px 0 0 10px;
+    border: none;
+    width: 100%;
+    border-radius: .25rem;
+    font-size: 16px;
+    color: var(--white);
+    height: 45px;
+    cursor: pointer;
+    transition: all 0.3s linear;
+   
+   }
+
   }
   /*dimencion  375 celular*/
   @media (max-width: 375px) {
@@ -1068,13 +1088,14 @@ nav .divNav .option-menu li .arrow{
     .body-register-product{
       padding-top: 0;
     }
-
+    
     .register-container-marca,
     .register-container-category,
     .register-container-product{
       height: none;
       min-width: 100%;
       padding-top: none;
+      margin: 60px 0 0 0;
     }
     /* titulo */
     .register-container-marca header,
@@ -1179,4 +1200,94 @@ nav .divNav .option-menu li .arrow{
 } */
 
   
+}
+/*---------------------------------- 
+plantilla de un producto
+------------------------------------*/
+
+.body-product{
+  background-color: var(--fondo);
+  padding: 1em;
+  margin: 0;
+  height: 100vh;;
+  display: flex;
+  
+}
+
+.body-product .bar-filter{
+background-color: var(--fondo2);
+width: 260px;
+
+}
+.bar-filter .filter-options{
+  display: flex;
+  flex-direction: column
+}
+
+.content{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #0084ff;
+ 
+}
+
+/* .body-product .h1{
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  color: #e9e9ec;
+  text-align: center;
+} */
+
+.body-product .card-item{
+  padding: 0.5em 1em;
+  max-width: 280px;
+  display: flex;
+  flex-flow: column;
+  border-radius: 6px;
+  box-shadow: 0 0 0.1em rgb(0 0 0 / 20%);
+  background-color: var(--white);
+  cursor: pointer;
+  transition-property: box-shadow;
+  transition-duration: 0.3s;
+  margin: 10px;
+}
+.card-item .im{
+  width: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+}
+.card-item .info{
+  border-top: 1px solid rgb(230, 230, 230);/* linea */
+  padding: 1em;
+  display: flex;
+  flex-flow: column;
+}
+.card-item .pku{
+  background-color: var(--guinda);
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    max-width: max-content;
+    padding: 0 0.2em;
+    border-radius: 3px;
+    font-size: 10px;
+}
+.card-item .name {
+  margin-top: 0.3em;
+  font-size: 1.1em;
+  color: rgb(255, 56, 92);
+}
+.card-item .brand{
+  font-weight: 600;
+  font-size: 0.8em;
+  margin-bottom: 1em;
+  text-transform: uppercase;
+}
+.card-item .description{
+  color: rgb(50, 50, 50);
+  font-size: 0.9em;
 }
