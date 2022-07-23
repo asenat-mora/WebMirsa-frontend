@@ -1,19 +1,24 @@
 <script setup>
     import Navbar from '@/components/Navbar.vue';
-	
+	import Footer from '@/components/Footer.vue';
 </script>
 
-
-<template>
-<div class="body-v">
 	
-  <Navbar>
-  </Navbar>
+<template>
 
-  
+	<!-- <Navbar/> -->
+		<div class="containerB">
+			<p>
+				<h1>LE DAMOS LUZ, COLOR Y VIDA AL AUTOMOVIL...</h1>
+				
+			</p>
+		</div>
+	<!-- <Footer/> -->
+</template>
+	
   
  
- 
+ <!-- 
  <div class="content-home">
 
     <p>
@@ -22,11 +27,11 @@
 
 
 
-  </div>
+  </div> -->
   <!--   <img class="home-logo" src="../assets/img/logo.png" alt=""> -->
 
 
-  <footer class="footer-distributed">
+  <!-- <footer class="footer-distributed">
 
 			<div class="footer-left">
 				<h3>MIRSA</h3>
@@ -71,7 +76,6 @@
 					<a href="https://www.facebook.com/MikasInfanteRuiz/?bookmark_t=page"><font-awesome-icon icon="fa-brands fa-facebook-square" /></a>
 				</div>
 			</div>
-		</footer>
+		</footer> -->
 
-</div>
-</template>
+

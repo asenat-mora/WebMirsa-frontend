@@ -37,22 +37,16 @@
   }
   
   /*------GLOBAL------*/
-*{
+ *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-}
-
-.body-v{
+} 
+/* ---------------------------INICIO-V2----------------------------------*/
+.body{
   height: 100vh;
 }
-
-a{
-  color: inherit;
-  text-decoration: none;
-}
-
 /*
 ----------------------------------------------
 -----NAVBAR
@@ -62,13 +56,16 @@ a{
   width: 160px;/* tamaño de logo */
 }
 nav{
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--fondo);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(29, 24, 24, 0.2);
   z-index: 99;
+  height: 65px;
+  margin: 0 !important;
+  border-bottom: 2px solid #c92b2b;
 }
 nav .divNav{
   height: 100%;
@@ -88,7 +85,6 @@ nav .divNav{
 }
 nav .divNav .navlinks{
   line-height: 7vh;
-/*   height: 100%; */
 }
 nav .divNav .option-menu{
   display: flex;
@@ -105,7 +101,7 @@ nav .divNav .option-menu li a{
   height: 100%;
   text-decoration: none;
   white-space: nowrap;
-  color: var(--white);
+  color: #1a1a1a;
   font-size: 20px;
   font-weight: 500;
 }
@@ -330,184 +326,11 @@ nav .divNav .option-menu li .arrow{
   font-size: 15px;   
 }
 }
-/*
-  ----------------------------------------------
-  -----FILOSOFIA
-  ----------------------------------------------
-  */
-
-  .container-phi{
-    margin: 20px 40px;
-    background-color: var(--borderForm);
-  }
-  .container-phi .H1{
-    color: #ac2626;
-  }
 
 
-
-/*
-  ----------------------------------------------
-  -----LOGIN
-  ----------------------------------------------
-  */
-  .login-litle{
-    margin: 2em auto;/* altura */
-  }
-  .login-body {
-    font-family: 'Poppins', sans-serif;
-    height: 100vh;
-    background-color: var(--fondo);
-    display: flex;
-    align-items: start;
-/*     padding-top: 10px; */
-    justify-content: center;
-  }
-  .login-container {
-    height: 43.75em;
-    width: 62em;
-    border-radius: 3px;
-    display: flex;
-    align-self: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .login-info-container {
-    width: 50%;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding-top: 0.5rem;
-    background-color: var(--fondoForm);
-  }
-  .login-image-container {
-    display: inline-flex;
-    width: 50%;
-  }
-  .login-litle {
-    text-transform: capitalize;
-    font-size: 2.15rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-    color: var(--white);
-  }
-  .login-info-container > p {
-    font-size: 1.25em;
-    margin-top: 1.5em;
-  }
-  .login-form {
-    height: 55%;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .login-input, .login-btn {
-    width: 90%;
-    height: 3.125rem;
-    font-size: 1em;
-  }
-  .login-input {
-   /*  background-color: #3a406e; */
-    padding-left: 20px;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    box-sizing: border-box;
-  }
-/*   .login-input:hover {
-    border: 2px solid var(--button-bg);
-  } */
-  .login-btn {
-    padding: 15px;
-    width: 40%;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--white);
-    border: none;
-    border-radius: 5px;
-    background-color: var(--button-blue);
-    cursor: pointer;
-    font-weight: bold;
-  }
-
- /*  .login-btn:disabled {
-    background-color: var(--disabled-button);
-  } */
-
-  .login-form p {
-    margin: 0;
-  }
-  .login-span {
-    color: var(--light-blue);
-    font-weight: 600;
-    cursor: pointer; 
-  }
-@media screen and (max-width: 1000px) {
-    .login-container {
-        width: 70%;
-        margin-top: 3rem;
-    }
-    .login-info-container {
-        width: 100%;
-        border-radius: 5px;
-    }
-    
-    .login-image-container {
-        display: none;
-    }  
-} 
-@media screen and (max-width: 480px) {
-  .login-container {
-    height: 40em;
-    width: 28em;
-  }
-  .login-litle {
-    font-size: 2rem;
-    letter-spacing: 2px;
-  }
-  .login-form {
-    height: 100%;
-    width: 85%;
-  }
-  .login-input, .login-btn {
-    width: 95%;
-    height: 3rem;
-    font-size: 1em;
-  }
-  .login-input {
-    padding-left: 20px;
-  }
-  .login-btn {
-    padding: 10px;
-    width: 35%;
-  }
-  .login-form p {
-    margin: 0;
-  }
-  .login-span {
-    font-weight: 400;
-  }
-}
-
-/* ----------------------------------------
-----FOOTER
-------------------------------------------*/
-/*-------HOME-------*/
-.content-home{
-  width: 100%;
-  display: inline-block;
-  background: rgb(255, 255, 255);
-  height: 94vh;
-  text-align: center;
-  font-size: 14px;
-}
-
-/*------FOOTER------*/
-
+/*-------------------------------------------
+-----------------FOOTER
+--------------------------------------------*/
 .footer-distributed{
 	background: var(--fondo);
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
@@ -525,14 +348,13 @@ nav .divNav .option-menu li .arrow{
   width: 32%;
 }
 
-/* Footer left */
+/*----Footer left----*/
   /* The company logo */
 .footer-distributed h3{
 	color:  #ffffff;
 	margin: 0 25px;
   font-weight: bold;
 }
-
 /* Footer links */
 .footer-distributed .footer-links{
 	color:  #ffffff;
@@ -553,7 +375,6 @@ nav .divNav .option-menu li .arrow{
 	font-weight: normal;
 	margin: 0 20px;
 }
-
 /* Footer Center */
 .footer-distributed .footer-center .icon{
 	background-color:  #33383b;
@@ -596,7 +417,6 @@ nav .divNav .option-menu li .arrow{
 .footer-distributed .footer-links .link-1:before {
   content: none;
 }
-
 /* Footer Right */
 .footer-distributed .footer-company-about{
 	line-height: 14px;
@@ -627,8 +447,6 @@ nav .divNav .option-menu li .arrow{
 	line-height: 32px;
 	margin-bottom: 5px;
 }
-
-/* ipad*/
 @media (max-width: 1024px) {
 
   .footer-distributed{
@@ -696,7 +514,6 @@ nav .divNav .option-menu li .arrow{
     line-height: 40px;
   }
 }
-
 @media(max-width: 600px){
 
   /* Footer left */
@@ -735,7 +552,6 @@ nav .divNav .option-menu li .arrow{
   }
 
 }
-
 @media (max-width: 400px) {
 
   .footer-distributed .footer-left,
@@ -758,6 +574,8 @@ nav .divNav .option-menu li .arrow{
     font-size: 24px;
   }
 }
+
+/* -----------------------------FIN-V2-----------------------------------*/
 
 
 /*
@@ -1201,20 +1019,180 @@ nav .divNav .option-menu li .arrow{
 
   
 }
+
+/*---------------------------------------------
+-------------------INICIO----------------------
+----------------------------------------------*/
+.containerB{
+    height: 100vh;
+    background-color: var(--fondo2);
+}
+/*---------------------------------------------
+-------------------FILOSOFIA-------------------
+---------------------------------------------*/
+.container-phi{
+  background-color: var(--fondo2);
+}
+.container-phi .section{
+  margin: 0px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.section .card {
+  padding:  25px 30px;
+  color: #2d325a;
+  font-size: 20px;
+  text-align: justify;
+}
+.section .card .H1{
+  color: #3944a1;
+}
+.section .card .op{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.section .card .Va{
+  color: #ffffff;
+  padding: 0.5em 1em;
+  max-width: 320px;
+  display: flex;
+  flex-flow: column;
+  border-radius: 6px;
+  box-shadow: 0 0 5em rgb(0 0 0 / 20%);
+  background-color: #2b54a1e5;
+  cursor: pointer;
+  transition-property: box-shadow;
+  transition-duration: 0.3s;
+  margin: 10px;
+}
+.section .card .txt{
+  font-size: 18px;
+}
+@media (max-width: 768px){
+  .container-phi .section{
+    margin: 0px 10px;
+  }
+  .section .card {
+    padding:  15px 20px;
+    font-size: 18px;
+  }
+  .section .card .Va{
+    padding: 0.2em 1em;
+    width: 280px;
+  }
+  .section .card .txt{
+    font-size: 15px;
+  }
+}
+@media (max-width: 375px){
+  .container-phi .section{
+    margin: 0px 5px;
+  }
+  .section .card {
+    padding:  8px 15px;
+    font-size: 17px;
+  }
+  .section .card .Va{
+    padding: 0.2em 1em;
+    width: 280px;
+  }
+  .section .card .txt{
+    font-size: 15px;
+  }
+}
+/*---------------------------------------------
+-------------------HISTORIA--------------------
+---------------------------------------------*/
+.container-hi{
+  background-color: var(--fondo2);
+}
+.container-hi .section{
+  margin: 0px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.container-hi .section .H1{
+  margin: 18px 0;
+  text-align: center;
+  color: #2d325a;
+}
+.container-hi .section .txt{
+  text-align: justify;
+  padding:  25px 30px;
+  color: #2d325a;
+  font-size: 20px;
+  text-align: justify;
+}
+.container-hi .section .H3{
+  margin: 15px 0;
+  color: #3944a1
+}
+.container-hi .section .p-txt{
+  margin: 12px 0;  
+}
+@media (max-width: 768px){
+  .container-hi .section{
+    margin: 0px 10px;
+  }
+  .container-hi .section .H1{
+    margin: 14px 0;
+  }
+  .container-hi .section .txt{
+    padding:  5px 15px;
+    font-size: 18px;
+  }
+  .container-hi .section .p-txt{
+    margin: 8px 0;  
+  }
+}
+@media (max-width: 375px){
+  .container-hi .section{
+    margin: 0px 10px;
+    font-size: 12px;
+  }
+  .container-hi .section .H1{
+    margin: 14px 0;
+  }
+  .container-hi .section .txt{
+    padding:  5px 15px;
+    font-size: 16px;
+  }
+  .container-hi .section .H3{
+    margin: 0;
+  }
+  .container-hi .section .p-txt{
+    margin: 6px 0;  
+  }
+}
+/*---------------------------------------------
+-------------------PRODUCTOS-------------------
+---------------------------------------------*/
+.container-pro{
+  background-color: var(--fondo2);
+  height: 100vh;  
+}
+.container-pro .section{
+  margin: 0px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.container-pro .section .H1{
+  margin: 10px 0;
+  text-align: center;
+  color: #2d325a;
+}
+/* hasta qui todo chido------------------- */
+
+
 /*---------------------------------- 
 plantilla de un producto
 ------------------------------------*/
 
-.body-product{
-  background-color: var(--fondo);
-  padding: 1em;
-  margin: 0;
-  height: 100vh;;
-  display: flex;
-  
-}
 
-.body-product .bar-filter{
+
+.container-pro .bar-filter{
 background-color: var(--fondo2);
 width: 260px;
 
@@ -1231,7 +1209,7 @@ width: 260px;
  
 }
 
-/* .body-product .h1{
+/* .container-pro .h1{
   display: block;
   font-size: 2em;
   margin-block-start: 0.67em;
@@ -1243,7 +1221,7 @@ width: 260px;
   text-align: center;
 } */
 
-.body-product .card-item{
+.container-pro .card-item{
   padding: 0.5em 1em;
   max-width: 280px;
   display: flex;
@@ -1291,3 +1269,166 @@ width: 260px;
   color: rgb(50, 50, 50);
   font-size: 0.9em;
 }
+.card-item .model{
+  color: rgb(172, 64, 64);
+  font-size: 0.9em;
+}
+
+
+
+/*---------------------------------------------
+-------------------COTIZACION------------------
+---------------------------------------------*/
+
+
+
+
+/*---------------------------------------------
+--------------------ACCESO---------------------
+---------------------------------------------*/
+
+  .login-litle{
+    margin: 2em auto;/* altura */
+  }
+  .login-body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    background-color: var(--fondo);
+    display: flex;
+    align-items: start;
+/*     padding-top: 10px; */
+    justify-content: center;
+  }
+  .login-container {
+    height: 43.75em;
+    width: 62em;
+    border-radius: 3px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .login-info-container {
+    width: 50%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 0.5rem;
+    background-color: var(--fondoForm);
+  }
+  .login-image-container {
+    display: inline-flex;
+    width: 50%;
+  }
+  .login-litle {
+    text-transform: capitalize;
+    font-size: 2.15rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+  .login-info-container > p {
+    font-size: 1.25em;
+    margin-top: 1.5em;
+  }
+  .login-form {
+    height: 55%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .login-input, .login-btn {
+    width: 90%;
+    height: 3.125rem;
+    font-size: 1em;
+  }
+  .login-input {
+   /*  background-color: #3a406e; */
+    padding-left: 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+  }
+/*   .login-input:hover {
+    border: 2px solid var(--button-bg);
+  } */
+  .login-btn {
+    padding: 15px;
+    width: 40%;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-blue);
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+ /*  .login-btn:disabled {
+    background-color: var(--disabled-button);
+  } */
+
+  .login-form p {
+    margin: 0;
+  }
+  .login-span {
+    color: var(--light-blue);
+    font-weight: 600;
+    cursor: pointer; 
+  }
+@media screen and (max-width: 1000px) {
+    .login-container {
+        width: 70%;
+        margin-top: 3rem;
+    }
+    .login-info-container {
+        width: 100%;
+        border-radius: 5px;
+    }
+    
+    .login-image-container {
+        display: none;
+    }  
+} 
+@media screen and (max-width: 480px) {
+  .login-container {
+    height: 40em;
+    width: 28em;
+  }
+  .login-litle {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+  .login-form {
+    height: 100%;
+    width: 85%;
+  }
+  .login-input, .login-btn {
+    width: 95%;
+    height: 3rem;
+    font-size: 1em;
+  }
+  .login-input {
+    padding-left: 20px;
+  }
+  .login-btn {
+    padding: 10px;
+    width: 35%;
+  }
+  .login-form p {
+    margin: 0;
+  }
+  .login-span {
+    font-weight: 400;
+  }
+}
+
+/*---------------------------------------------
+-------------------SISTEMA-WEB-----------------
+---------------------------------------------*/

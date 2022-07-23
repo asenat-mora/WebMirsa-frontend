@@ -1,5 +1,5 @@
 <template>
-<Navbar/>
+<!-- <Navbar/> -->
 <div class="body-register-marca">
     <div class="register-container-marca">
         <header>MARCAS</header>

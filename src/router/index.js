@@ -1,8 +1,13 @@
 /* Define las rutas que estaran en la aplicacion 
 */
 import { createRouter, createWebHistory } from 'vue-router'
+/* Vista cliente */
 import HomeView from '../views/HomeView.vue'
 import Philosophy from '../views/Philosophy.vue'
+import History from '../views/History.vue'
+import Products from '../views/Products.vue'
+
+
 
 import Login from '../views/Login.vue'
 import Article from '../views/Article.vue'
@@ -11,7 +16,7 @@ import AddClassification from '../views/AddClassification.vue'
 import EditarMarca from '../views/BrandEdit.vue'
 import Registro from '../views/UserRegister.vue'
 import EditarProducto from '../views/ArticleEdit.vue'
-import ProductosMirsa from '../views/Productos.vue'
+
 import ListaProductos from '../views/ArticleList.vue'
 import ListaMarcas from '../views/BrandList.vue'
 import ListaClasificacion from '../views/ClassificationList.vue'
@@ -36,6 +41,18 @@ const router = createRouter({
       name: 'Philosophy',
       component: Philosophy
     },
+    {
+      path: '/History',
+      name: 'History',
+      component: History
+    },
+    {
+      path: '/Products',
+      name: 'Products',
+      component: Products,
+    },
+
+
 
     {
       path: '/login',
@@ -82,11 +99,7 @@ const router = createRouter({
         requiresAuth: true
       }
     },
-    {
-      path: '/productosMirsa',
-      name: 'productosMirsa',
-      component: ProductosMirsa,
-    },
+
     {
       path: '/ArticleList',
       name: 'ArticleList',
