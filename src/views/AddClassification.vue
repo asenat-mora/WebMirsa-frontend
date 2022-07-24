@@ -1,5 +1,5 @@
 <template>
-<Navbar/>
+
 <div class="body-register-category">
    <div class="register-container-category">
       <header>ALTA DE ACCESORIO</header>

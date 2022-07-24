@@ -1,5 +1,5 @@
 <template>
-<Navbar/>
+
 <div class="body-register-product">
     <div class="register-container-product">
         <header>COLORES</header>

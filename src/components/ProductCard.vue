@@ -4,7 +4,7 @@
             <img class="im" :src="url" alt="prueba"/>
         </div>
         <div class="info">
-            <span class="pku">{{sku}}</span>
+            <span class="sku">{{sku}}</span>
             <span class="name">{{accessory}}</span>
             <span class="brand">{{brand}}</span>
             <span class="model">{{model}}</span>

@@ -1,5 +1,5 @@
 <template>
-<Navbar/>
+
 <div class="body-register-marca">
    <div class="register-container-marca">
       <header>EDITAR COLOR</header>

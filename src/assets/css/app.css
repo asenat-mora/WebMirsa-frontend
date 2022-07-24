@@ -20,7 +20,7 @@
 */
 :root{
   --fondo:#1a1a1a;/* nadvar azul 25294a guinda 910028 negrito 1a1a1a */
-  --fondo2:#e9ecf7;
+  --fondo2:#f3f3f3d5;   /* #e9ecf7 */
   --fondoForm:#2d325a;
   --white: #ffffff;
   --yellow:  #f0e556 ;
@@ -1186,41 +1186,43 @@ nav .divNav .option-menu li .arrow{
 /* hasta qui todo chido------------------- */
 
 
-/*---------------------------------- 
-plantilla de un producto
-------------------------------------*/
+.container-pro .filtro {
+ /*  display: flex; */
+  
+   /*  width:  300px; */
+}
 
 
 
+/* barra buscador y filtro */
 .container-pro .bar-filter{
-background-color: var(--fondo2);
-width: 260px;
-
-}
-.bar-filter .filter-options{
+  background-color: #e08181;
+  height: 50px;
+  }
+.container-pro .bar-filter .filter-options{
   display: flex;
-  flex-direction: column
+  flex-direction: row;
 }
-
-.content{
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #0084ff;
- 
+/* .container-pro .filter-options label{
+  font-size: 15px;
 }
-
-/* .container-pro .h1{
-  display: block;
-  font-size: 2em;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-  color: #e9e9ec;
-  text-align: center;
+.container-pro .filter-options{
+  font-size: 10px;
 } */
 
+
+
+
+
+
+
+
+/*----plantilla de un producto----*/
+.container-pro .section .content{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #d897f7d5;
+}
 .container-pro .card-item{
   padding: 0.5em 1em;
   max-width: 280px;
@@ -1240,41 +1242,38 @@ width: 260px;
   border-radius: 3px;
 }
 .card-item .info{
-  border-top: 1px solid rgb(230, 230, 230);/* linea */
-  padding: 1em;
+  border-top: 1px solid rgb(245, 237, 237);/* linea */
+  padding: 4px 0;
   display: flex;
   flex-flow: column;
 }
-.card-item .pku{
-  background-color: var(--guinda);
-    color: rgb(255, 255, 255);
-    font-weight: 600;
-    max-width: max-content;
-    padding: 0 0.2em;
-    border-radius: 3px;
-    font-size: 10px;
+.card-item .sku{
+  background-color: #3944a1;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  max-width: max-content;
+  padding: 0 0.2em;
+  border-radius: 3px;
+  font-size: 12px;
 }
 .card-item .name {
   margin-top: 0.3em;
-  font-size: 1.1em;
+  font-size: 16px;
   color: rgb(255, 56, 92);
 }
 .card-item .brand{
   font-weight: 600;
-  font-size: 0.8em;
-  margin-bottom: 1em;
+  font-size: 12.5px;
   text-transform: uppercase;
-}
-.card-item .description{
-  color: rgb(50, 50, 50);
-  font-size: 0.9em;
 }
 .card-item .model{
   color: rgb(172, 64, 64);
-  font-size: 0.9em;
+  font-size: 14px;
 }
-
-
+.card-item .description{
+  color: rgb(50, 50, 50);
+  font-size: 12px;
+}
 
 /*---------------------------------------------
 -------------------COTIZACION------------------
