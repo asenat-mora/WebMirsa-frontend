@@ -80,7 +80,7 @@
                       <router-link to="/editProducto">EDITAR</router-link>
                     </li>
                     <li>
-                      <router-link to="/ArticleList">LISTA</router-link>
+                      <router-link to="/productSearch">LISTA</router-link>
                     </li>
                   </ul>
                 </li>
@@ -130,7 +130,7 @@
           <template v-else>
             <li><a href="/Philosophy">FILOSOFIA</a></li>
             <li><a href="/History">HISTORIA</a></li>
-            <li><a href="/Products">PRODUCTOS</a></li>
+            <li><a href="/productSearch">PRODUCTOS</a></li>
               <!-- <router-link to="/Products">PRODUCTOS</router-link> -->
     
             <li><a href="#">COTIZACIÓN</a></li>

@@ -1197,12 +1197,49 @@ nav .divNav .option-menu li .arrow{
 /* barra buscador y filtro */
 .container-pro .bar-filter{
   background-color: #e08181;
-  height: 50px;
-  }
-.container-pro .bar-filter .filter-options{
-  display: flex;
-  flex-direction: row;
+  height: auto;
 }
+
+.filter-options{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.filter-options .option-first-row {
+    flex-basis: 46%;
+}
+
+.filter-options .option-second-row {
+    flex-basis: 30%;
+}
+
+.option-first-row,.option-second-row  .select{
+    --ms-tag-font-size: 0.85rem;
+    --ms-ring-width: 0px;
+}
+
+
+@media (max-width: 768px){
+    .filter-options .option-second-row {
+        flex-basis: 46%;
+    }
+}
+
+
+@media (max-width: 480px){
+    .filter-options .option-first-row {
+        flex-basis: 100%;
+    }
+    
+    .filter-options .option-second-row {
+        flex-basis: 100%;
+    }
+    
+}
+
+
+
 /* .container-pro .filter-options label{
   font-size: 15px;
 }
