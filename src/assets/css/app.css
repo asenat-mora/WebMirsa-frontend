@@ -1185,18 +1185,9 @@ nav .divNav .option-menu li .arrow{
 }
 /* hasta qui todo chido------------------- */
 
-
-.container-pro .filtro {
- /*  display: flex; */
-  
-   /*  width:  300px; */
-}
-
-
-
 /* barra buscador y filtro */
 .container-pro .bar-filter{
-  background-color: #e08181;
+  /* background-color: #e08181; */
   height: auto;
 }
 
@@ -1258,7 +1249,7 @@ nav .divNav .option-menu li .arrow{
 .container-pro .section .content{
   display: flex;
   flex-wrap: wrap;
-  background-color: #d897f7d5;
+  /* background-color: #d897f7d5; */
 }
 .container-pro .card-item{
   padding: 0.5em 1em;
@@ -1329,7 +1320,7 @@ nav .divNav .option-menu li .arrow{
   .login-body {
     font-family: 'Poppins', sans-serif;
     height: 100vh;
-    background-color: var(--fondo);
+    /* background-color: var(--fondo); */
     display: flex;
     align-items: start;
 /*     padding-top: 10px; */
