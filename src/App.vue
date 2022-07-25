@@ -1,9 +1,18 @@
 <script setup>
 import { RouterView } from 'vue-router'
+import Navbar from '@/components/Navbar.vue';
+import Footer from '@/components/Footer.vue';
+import { authStore } from "@/stores/auth";
+
+const store = authStore();
 </script>
 
 <template>
-    <router-view :key ="$route.path"/>
+    
+    <Navbar />
+        <router-view :key ="$route.path"/>
+    <Footer v-if="!store.getIsLoggedIn" />
+    
 </template>
 
 <style>

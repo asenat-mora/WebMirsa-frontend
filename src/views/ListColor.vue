@@ -2,31 +2,31 @@
 
 <div class="body-register-product">
     <div class="register-container-product">
-        <header>Accesorios</header>
+        <header>COLORES</header>
             <div class="form-first">
                 <div class="details-product">
-                    <span class="title">Lista de Accesorios</span>
+                    <span class="title">Lista de colores</span>
                     <div class="fields">
                         <div class="container mt-4" id="app">
                             <table class="GeneratedTable" >
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>ID COLOR</th>
                                         <th>NOMBRE</th>
-                                        <th>QUIEN MODIFICO</th>
-                                        <th>OPERACION</th>
-                                        <th>ULTIMA MODIFICACION</th>
+                                        <th>QUIEN MODIFIC&Oacute;</th>
+                                        <th>OPERACI&Oacute;N</th>
+                                        <th>ULTIMA MODIFICACI&Oacute;N</th>
                                         <th>ESTATUS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-for="datos in data">
-                                    <td>{{datos.autopartId}}</td>
-                                    <td>{{datos.autopartName}}</td>
-                                    <td>{{datos.userName}} {{datos.userSurname}}</td>
-                                    <td>{{datos.last_modification_description}}</td>
-                                    <td>{{datos.last_modification_date}}</td>
-                                    <td>{{datos.isDeleted}}</td>
+                                    <td align="center">{{datos.colorId}}</td>
+                                    <td align="center">{{datos.colorName}}</td>
+                                    <td align="center">{{datos.userName}} {{datos.userSurname}}</td>
+                                    <td align="center">{{datos.last_modification_description}}</td>
+                                    <td align="center">{{datos.last_modification_date}}</td>
+                                    <td align="center">{{datos.isDeleted}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -34,9 +34,9 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="savebtn">
+<!--                     <button class="savebtn">
                         <span class="btnGuardar">Aceptar</span> 
-                    </button>
+                    </button> -->
                 </div>
             </div>
     </div>
@@ -48,14 +48,14 @@
     import axios from 'axios'
     import { onBeforeMount, ref } from 'vue';
     export default{
-        name : 'ClassificationList',
+        name : 'ListColor',
         components: {
             Navbar
         },
         setup(){
             var data = ref();
             function getData(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/autopart').then(response => {
+                axios.get(import.meta.env.VITE_API_URL + '/api/color').then(response => {
                     data.value = response.data
                 }).catch(error => {
                     console.log(error)

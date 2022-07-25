@@ -2,7 +2,7 @@
     <div class="login-body">
         <div class="login-container">
             <div class="login-info-container">
-                <h1 class="login-litle">Iniciar Sesión</h1>
+                <h1 class="login-litle">INICIAR SESION</h1>
                 <form class="login-form" v-on:submit.prevent >
                     <input class="login-input" type="email" v-model="email" placeholder="Correo electronico">
                     <input class="login-input" type="password" v-model="password" placeholder="Contraseña">

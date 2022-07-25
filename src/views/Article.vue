@@ -1,19 +1,19 @@
 <template>
-<Navbar/>
+
 <div class="body-register-product">
     <div class="register-container-product">
-        <header>Alta de Producto</header>
+        <header>ALTA DE PRODUCTO</header>
         <form class="form-register-product" action="#" @submit.prevent="createItem">
             <div class="form-first">
                 <div class="details-product">
-                    <span class="title">Detalles del producto</span>
+                    <span class="title">DETALLE DEL PRODUCTO</span>
                     <div class="fields">
                         <div class="input-field">
-                            <label>Nombre</label>
+                            <label>SKU</label>
                             <input type="text" placeholder="Producto" v-model="productName" required>
                         </div>
                         <div class="input-field">
-                            <label>Codigo</label>
+                            <label>Clave</label>
                             <input type="text" placeholder="Codigo de producto" v-model="productCode" required>
                         </div>
                         <div class="input-field">
@@ -29,30 +29,33 @@
                             <label>Marca</label>
                             <select v-model="productBrand" required>
                                 <option disabled selected>Selecciona una marca</option>
-                                <option v-for="brand in brands" :value="brand.brandId">
-                                    {{ brand.brandName }}
+                                <option v-for="brand in brands" :value="brand.id">
+                                    {{ brand.name }}
                                 </option>
                             </select>
                         </div>
                         <div class="input-field">
-                            <label>Categoria</label>
+                            <label>Accesorio</label>
                             <select v-model="productCategory" required>
                                 <option disabled selected>Selecciona una Categoria</option>
-                                <option v-for="autopart in autoparts" :value="autopart.autopartId">
-                                    {{ autopart.autopartName }}
+                                <option v-for="autopart in autoparts" :value="autopart.id">
+                                    {{ autopart.name }}
                                 </option>
                             </select>
                         </div>
-                        
-                        <!-- <div class="input-field">
-                            <label>Proveedor</label>
-                            <select required>
-                                <option disabled selected>Proveedor del producto</option>
-                                <option>Mirsa</option>
-                                <option>proveedor2</option>
-                                <option>proveedor3</option>
+                        <div class="input-field"><!-- input-field-text-area -->
+                            <label>Lado</label>
+                            <select v-model="productSide" required>
+                                <option disabled selected>Selecciona un lado</option>
+                                <option value="Derecho">Derecho</option>
+                                <option value="Izquierdo">Izquierdo</option>
+                                <option value="Ambos">Ambos</option>
                             </select>
-                        </div> -->
+                        </div>
+                        <div class="input-field-text-area">
+                            <label>Descripción</label>
+                            <textarea type="text" class="text-area-register" name="descripcionRegister" placeholder="Descripción del producto" v-model="productDescription" required></textarea>
+                        </div>
                         <div class="input-field-checkbox-colors">
                             <label>Color</label>
                             <div class="checkbox-container" required>
@@ -62,27 +65,23 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="input-field-text-area">
-                            <label>Descripción</label>
-                            <textarea type="text" class="text-area-register" name="descripcionRegister" placeholder="Descripción del producto" v-model="productDescription" required></textarea>
+                        <div class="input-field-checkbox-colors">
+                            <label>Combinación</label>
+                            <div class="checkbox-container" required>
+                                <label v-for="color in colors" >
+                                    <input type="checkbox" id="cbox" :value="color.id" @change="modifyColors($event)">
+                                    {{ color.name }}<br>
+                                </label>
+                            </div>
                         </div>
                         <div class="input-field-image">
                             <label>Imagen</label>
                             <div class="p-image">
-                                <i class="ri-pencil-line upload-button"></i>
                                 <!-- <input id="vImagen" type="image" width="200" height="200"> -->
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" required/>
                             </div>
                         </div>
-                        <div class="input-field-text-area">
-                            <label>Lado</label>
-                            <select v-model="productSide" required>
-                                <option disabled selected>Selecciona un lado</option>
-                                <option value="Derecho">Derecho</option>
-                                <option value="Izquierdo">Izquierdo</option>
-                                <option value="Ambos">Ambos</option>
-                            </select>
-                        </div>
+
                     </div>
                 </div>
                 <div class="details-btns">
@@ -170,7 +169,7 @@
             }
 
             function getAllAutoparts(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/autopart')
+                axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
                 .then(response => {
                     autoparts.value = response.data;
                 }).catch(error => {
@@ -202,7 +201,7 @@
                     colors: colorsArray.value
                 }
 
-                axios.post(import.meta.env.VITE_API_URL + '/api/item', item)
+                axios.post(import.meta.env.VITE_API_URL + '/api/product', item)
                 .then(response => {
 
 

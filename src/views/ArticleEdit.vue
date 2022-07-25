@@ -1,14 +1,14 @@
 <template>
-    <Navbar />
+
     <div class="body-register-product">
         <div class="register-container-product">
-            <header>Producto</header>
+            <header>EDITAR PRODUCTO</header>
             <form class="form-register-product" action="#">
                 <div class="form-first">
                     <div class="field-search">
                         <div class="input-field-search">
-                            <label>C&oacute;digo</label>
-                            <input type="text" placeholder="Codigo del producto" id="txtCodigo" v-model="txtCodigo" />
+                            <label>Buscar por Clave</label>
+                            <input type="text" placeholder="Clave" id="txtCodigo" v-model="txtCodigo" />
                         </div>
                         <div class="button-search">
                             <button class="searchbtn" @click="getCodeItem">
@@ -17,20 +17,19 @@
                         </div>
                     </div>
                     <div class="details-product">
-                        <span class="title">Editar producto</span>
+                        <span class="title">EDITAR PRODUCTO</span>
                         <div class="fields">
                             <div class="input-field">
-                                <label>Nombre</label>
+                                <label>SKU</label>
                                 <input type="text" placeholder="Nombre del producto" v-model="vProductoNombre" />
                             </div>
                             <div class="input-field">
-                                <label>Codigo</label>
+                                <label>Clave</label>
                                 <input type="text" placeholder="Codigo de producto" v-model="vCodigoProducto" />
                             </div>
                             <div class="input-field">
                                 <label>Precio</label>
-                                <input type="number" min="1" step="any" placeholder="Precio unitario"
-                                    v-model="vPrecio" :disabled="store.getIsCapturist" />
+                                <input type="number" min="1" step="any" placeholder="Precio unitario" v-model="vPrecio" :disabled="store.getIsCapturist" />
                             </div>
                             <div class="input-field">
                                 <label>Modelo</label>
@@ -40,21 +39,32 @@
                                 <label>Marca</label>
                                 <select v-model="productBrand" required>
                                     <option disabled>Selecciona una marca</option>
-
-                                    <option v-for="brand in brands" :value="brand.brandId">
-                                        {{ brand.brandName }}
+                                    <option v-for="brand in brands" :value="brand.id">
+                                        {{ brand.name }}
                                     </option>
-
                                 </select>
                             </div>
                             <div class="input-field">
-                                <label>Categoria</label>
+                                <label>Accesorio</label>
                                 <select v-model="productCategory" required>
                                     <option disabled>Selecciona una Categoria</option>
-                                    <option v-for="autopart in autoparts" :value="autopart.autopartId">
-                                        {{ autopart.autopartName }}
+                                    <option v-for="autopart in autoparts" :value="autopart.id">
+                                        {{ autopart.name }}
                                     </option>
                                 </select>
+                            </div>
+                            <div class="input-field">
+                                <label>Lado</label>
+                                <select v-model="productSide" required>
+                                    <option disabled selected>Selecciona un lado</option>
+                                    <option value="Derecho">Derecho</option>
+                                    <option value="Izquierdo">Izquierdo</option>
+                                    <option value="Ambos">Ambos</option>
+                                </select>
+                            </div>
+                            <div class="input-field-text-area">
+                                <label>Descripción</label>
+                                <textarea type="text" class="text-area-register" name="descripcionRegister" v-model="vDescripcion" placeholder="Descripción del producto"></textarea>
                             </div>
                             <div class="input-field-checkbox-colors">
                                 <label>Color</label>
@@ -66,31 +76,24 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="input-field-text-area">
-                                <label>Descripción</label>
-                                <textarea type="text" class="text-area-register" name="descripcionRegister"
-                                    v-model="vDescripcion" placeholder="Descripción del producto"></textarea>
+                            <div class="input-field-checkbox-colors">
+                                <label>Combinación</label>
+                                <div class="checkbox-container" id="listColors" required>
+                                    <label v-for="color in colors">                                  
+                                        <input type="checkbox" :id="['Row_' + color.id]" :value="color.id" />
+                                        {{ color.name }}<br />
+                                    </label>
+                                </div>
                             </div>
                             <div class="input-field-image">
                                 <label>Imagen</label>
                                 <div class="p-image">
                                     <i class="ri-pencil-line upload-button"></i>
-
                                     <input id="vImagen" type="image" width="200" height="200">
-                                    <input class="file-upload" type="file" accept="image/*"
-                                        @change="uploadImageToImgur($event)" />
-
+                                    <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" />
                                 </div>
                             </div>
-                            <div class="input-field-text-area">
-                                <label>Lado</label>
-                                <select v-model="productSide" required>
-                                    <option disabled selected>Selecciona un lado</option>
-                                    <option value="Derecho">Derecho</option>
-                                    <option value="Izquierdo">Izquierdo</option>
-                                    <option value="Ambos">Ambos</option>
-                                </select>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -172,7 +175,7 @@ export default {
         }
 
         function getAllAutoparts() {
-            axios.get(import.meta.env.VITE_API_URL + '/api/autopart')
+            axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
                 .then(response => {
                     autoparts.value = response.data;
                 }).catch(error => {
@@ -201,50 +204,10 @@ export default {
 
         }
 
-
-
-        /*      function modifyColors(event) {
-                 if (!colorsArray.value.includes(event.target.value)) {
-                     colorsArray.value.push(event.target.value);
-                 }
-                 else {
-                     colorsArray.value.splice(colorsArray.value.indexOf(event.target.value), 1);
-                 }
-             }
-      */
-
-        /* 
-                function createItem() {
-                    const item = {
-                        name: vProductoNombre.value,
-                        code: vCodigoProducto.value,
-                        price: productPrice.value,
-                        model: productModel.value,
-                        brand: productBrand.value,
-                        autoPart: productCategory.value,
-                        side: productSide.value,
-                        description: productDescription.value,
-                        image: productImage.value,
-                        colors: colorsArray.value
-                    }
-        
-                    axios.post(import.meta.env.VITE_API_URL + '/api/item', item)
-                        .then(response => {
-                            alert("¡Registro exitoso!");
-                            console.log(response);
-                        }).catch(error => {
-                            console.log(error);
-        
-                            alert("¡Error en el registro!");
-        
-                        });
-                } */
-
         onBeforeMount(() => {
             getAllBrands();
             getAllColors();
             getAllAutoparts();
-            //getCodeItem();
         })
 
         return {
@@ -280,6 +243,7 @@ export default {
             this.vDescripcion = '';
             this.productBrand = '';
             this.productCategory = '';
+            this.productImage = '';
             document.getElementById("vImagen").src = '';
 
             var nElementsColors = document.getElementById("listColors");
@@ -293,11 +257,11 @@ export default {
 
         },
         getCodeItem() {
-            axios.get(import.meta.env.VITE_API_URL + '/api/item/code/' + this.txtCodigo)
+            axios.get(import.meta.env.VITE_API_URL + '/api/product/code/' + this.txtCodigo)
                 .then(response => {
-
+                    
                     //Pintar los valores encontrados en el formaulario
-                    this.vProductoNombre = response.data.name;
+                    this.vProductoNombre = response.data.sku;
                     this.vCodigoProducto = response.data.code;
                     this.vPrecio = response.data.price;
                     this.vModelo = response.data.model;
@@ -305,12 +269,13 @@ export default {
                     this.vidItem = response.data.id;
 
                     //Cambiar los combos, con el valor encontrado
-                    this.productBrand = response.data.brandId;
-                    this.productCategory = response.data.autoPartId;
+                    this.productBrand = response.data.brand.id;
+                    this.productCategory = response.data.accessory.id;
+                    this.productImage = response.data.image;
 
                     //Actualizar los colores
-                    for (let i in response.data.colors) {
-                        var nColorEncontrado = response.data.colors[i];
+                    for (let i in response.data.productcolor) {
+                        var nColorEncontrado = response.data.productcolor[i].color.id;
                         var cNombreColor = "Row_" + nColorEncontrado;
                         document.getElementById(cNombreColor).checked = true;
                     }
@@ -321,16 +286,15 @@ export default {
                     //Actualiza la imagen
                     document.getElementById("vImagen").src = response.data.image;
 
-
                 }).catch(error => {
                     alert("¡Producto no encontrado, favor de intentarlo nuevamente!");
-                    clearForm();
+                    this.clearForm();
                     console.log(error);
                 });
         },
         deleteItem() {
             const itemx = { id: this.vidItem }
-            axios.delete(import.meta.env.VITE_API_URL + '/api/item/' + this.vidItem, itemx)
+            axios.delete(import.meta.env.VITE_API_URL + '/api/product/' + this.vidItem, itemx)
                 .then(response => {
                     alert("¡Registro eliminado!");
                     clearForm();
@@ -358,7 +322,7 @@ export default {
             }
 
             const item = {
-                name: this.vProductoNombre,
+                sku: this.vProductoNombre,
                 description: this.vDescripcion,
                 price: this.vPrecio,
                 image: this.productImage,
@@ -366,11 +330,11 @@ export default {
                 model: this.vModelo,
                 code: this.vCodigoProducto,
                 side: this.productSide,
-                brand: this.productBrand,
-                autoPart: this.productCategory              
+                brandId: this.productBrand,
+                accessoryId: this.productCategory              
             }
  /* debugger; */
-            axios.patch(import.meta.env.VITE_API_URL + '/api/item/' + this.vidItem, item)
+            axios.patch(import.meta.env.VITE_API_URL + '/api/product/' + this.vidItem, item)
                 .then(response => {
                     alert("¡Registro actualizado!");
                     console.log(response);
