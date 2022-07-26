@@ -43,7 +43,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 } 
-/* ---------------------------INICIO-V2----------------------------------*/
+
 .body{
   height: 100vh;
 }
@@ -574,10 +574,6 @@ nav .divNav .option-menu li .arrow{
     font-size: 24px;
   }
 }
-
-/* -----------------------------FIN-V2-----------------------------------*/
-
-
 /*
 ----------------------------------------------
 -----FORMULARIOS ARTICLE, PRODUCT, BRAND
@@ -1187,7 +1183,6 @@ nav .divNav .option-menu li .arrow{
 
 /* barra buscador y filtro */
 .container-pro .bar-filter{
-  /* background-color: #e08181; */
   height: auto;
 }
 
@@ -1196,27 +1191,49 @@ nav .divNav .option-menu li .arrow{
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
-
 .filter-options .option-first-row {
     flex-basis: 46%;
 }
-
 .filter-options .option-second-row {
     flex-basis: 30%;
 }
-
-.option-first-row,.option-second-row  .select{
-    --ms-tag-font-size: 0.85rem;
-    --ms-ring-width: 0px;
+.filter-options .option-first-row .txtbox{
+  font-size: 14px;
+  border-radius: 2px;
+  border: 1px solid var(--border-gray);
+  display: flex;
+  width: 100%;
+  height: 30px;
+  padding-left: 14px;
 }
 
+.option-first-row,.option-second-row  .select{
+    --ms-tag-font-size: 0.7rem;
+    --ms-ring-width: 0px;
+    
+}
+
+.container-pro .filter-buttons{
+  display: flex;
+  justify-content: center;
+}
+.bar-filter .filter-buttons button{
+  background-color: var(--green);
+  color: #ffffff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  border-radius: .25rem;
+  height: 45px;
+  width: 160px;
+}
 
 @media (max-width: 768px){
     .filter-options .option-second-row {
         flex-basis: 46%;
     }
 }
-
 
 @media (max-width: 480px){
     .filter-options .option-first-row {
@@ -1302,6 +1319,28 @@ nav .divNav .option-menu li .arrow{
   color: rgb(50, 50, 50);
   font-size: 12px;
 }
+.card-item .product-a .buttons{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card-item .product-a .buttons button{
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  border-radius: .25rem;
+  height: 25px;
+  width: 60px;
+}
+.card-item .product-a .edit{
+  background-color: var(--button-blue);
+}
+.card-item .product-a .delete{
+  background-color: var(--red);
+}
+
 
 /*---------------------------------------------
 -------------------COTIZACION------------------

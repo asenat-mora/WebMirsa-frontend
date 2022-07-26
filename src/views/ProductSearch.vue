@@ -116,7 +116,7 @@ onBeforeMount(() => {
             <div class="filter-options">
                 <div class="option-first-row">
                     <label>Descripción</label>
-                    <input class="option" type="text" v-model="description" placeholder="Producto">
+                    <input class="txtbox" type="text" v-model="description" placeholder="Producto">
                 </div>
                 <div class="option-first-row">
                     <label>Color</label>
