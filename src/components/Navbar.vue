@@ -77,9 +77,6 @@
                       <router-link to="/article">NUEVO</router-link>
                     </li>
                     <li>
-                      <router-link to="/editProducto">EDITAR</router-link>
-                    </li>
-                    <li>
                       <router-link to="/productSearch">LISTA</router-link>
                     </li>
                   </ul>

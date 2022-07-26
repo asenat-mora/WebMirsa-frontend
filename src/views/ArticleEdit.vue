@@ -3,9 +3,10 @@
     <div class="body-register-product">
         <div class="register-container-product">
             <header>EDITAR PRODUCTO</header>
-            <form class="form-register-product" action="#">
+            <form class="form-register-product" a>
+                
                 <div class="form-first">
-                    <div class="field-search">
+                    <!-- <div class="field-search">
                         <div class="input-field-search">
                             <label>Buscar por Clave</label>
                             <input type="text" placeholder="Clave" id="txtCodigo" v-model="txtCodigo" />
@@ -15,9 +16,9 @@
                                 <span class="btnBuscar">Buscar</span>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="details-product">
-                        <span class="title">EDITAR PRODUCTO</span>
+                        <!-- <span class="title">EDITAR PRODUCTO</span> -->
                         <div class="fields">
                             <div class="input-field">
                                 <label>SKU</label>
@@ -76,7 +77,8 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="input-field-checkbox-colors">
+
+                            <!-- <div class="input-field-checkbox-colors">
                                 <label>Combinación</label>
                                 <div class="checkbox-container" id="listColors" required>
                                     <label v-for="color in colors">                                  
@@ -84,7 +86,7 @@
                                         {{ color.name }}<br />
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="input-field-image">
                                 <label>Imagen</label>
                                 <div class="p-image">
@@ -98,11 +100,14 @@
                     </div>
 
                     <div class="details-btns">
-                        <button class="deletebtn" @click="deleteItem">
+                        <button type="button" class="deletebtn" @click="deleteItem($event)">
                             <span class="btnEliminar">Eliminar</span>
                         </button>
-                        <button class="updatelbtn" @click="updateItem">
+                        <button type="button" class="updatelbtn" @click="updateItem($event)">
                             <span class="btnActualizar">Actualizar</span>
+                        </button>
+                        <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
                         </button>
                     </div>
                 </div>
@@ -117,7 +122,8 @@ import Navbar from '@/components/Navbar.vue';
 
 import axios from 'axios';
 import axiosInstance from '../helpers/axiosInstance';
-import { onBeforeMount, ref } from 'vue';
+import { useRoute , useRouter } from 'vue-router';
+import { onBeforeMount, ref, onMounted} from 'vue';
 import { authStore } from '../stores/auth';
 export default {
     name: 'Article',
@@ -125,6 +131,8 @@ export default {
         Navbar
     },
     setup() {
+        const route = useRoute();
+        const router = useRouter();
         let store = authStore();
         var brands = ref(null);
         var colors = ref(null);
@@ -204,16 +212,66 @@ export default {
 
         }
 
+        function getProductInfo(){
+            vidItem.value = route.params.id;
+            
+            axios.get(import.meta.env.VITE_API_URL + '/api/product/' + vidItem.value)
+                .then(response => {
+                    
+                    //Pintar los valores encontrados en el formaulario
+                    vProductoNombre.value = response.data.sku;
+                    vCodigoProducto.value = response.data.code;
+                    vPrecio.value = response.data.price;
+                    vModelo.value = response.data.model;
+                    vDescripcion.value = response.data.description;
+                    vidItem.value = response.data.id;
+
+                    //Cambiar los combos, con el valor encontrado
+                    productBrand.value = response.data.brandId;
+                    productCategory.value = response.data.accessoryId;
+                    productImage.value = response.data.image;
+
+                    //Actualizar los colores
+                    for (let i in response.data.productcolor) {
+                        var nColorEncontrado = response.data.productcolor[i].color.id;
+                        var cNombreColor = "Row_" + nColorEncontrado;
+                        document.getElementById(cNombreColor).checked = true;
+                    }
+
+                    //Actualiza Lado
+                    productSide.value = response.data.side
+
+                    //Actualiza la imagen
+                    document.getElementById("vImagen").src = response.data.image;
+
+                }).catch(error => {
+                    alert("¡Producto no encontrado, favor de intentarlo nuevamente!");
+                    console.log(error);
+                });
+        }
+
+        function goBack(e){
+            e.preventDefault();
+            router.back();
+        }
+
         onBeforeMount(() => {
+            
             getAllBrands();
             getAllColors();
             getAllAutoparts();
-        })
+        }),
+
+        onMounted(() => {
+            getProductInfo();
+        });
 
         return {
             getAllBrands,
             getAllColors,
             getAllAutoparts,
+            getProductInfo,
+            goBack,
             //modifyColors,
             brands,
             store,
@@ -228,7 +286,7 @@ export default {
             productCategory,
             productSide,
             productImage,
-            txtCodigo, vProductoNombre, vCodigoProducto, vPrecio, vModelo, vDescripcion, vImagen, uploadImageToImgur
+            txtCodigo, vProductoNombre, vCodigoProducto, vPrecio, vModelo, vDescripcion, vImagen, uploadImageToImgur, vidItem, router
         }
     },
     methods: {
@@ -292,12 +350,14 @@ export default {
                     console.log(error);
                 });
         },
-        deleteItem() {
+        deleteItem(e) {
+            e.preventDefault();
             const itemx = { id: this.vidItem }
             axios.delete(import.meta.env.VITE_API_URL + '/api/product/' + this.vidItem, itemx)
                 .then(response => {
                     alert("¡Registro eliminado!");
                     clearForm();
+                    this.$router.go(-1);
                     console.log(response);
                 })
                 .catch(error => {
@@ -307,8 +367,9 @@ export default {
         },
 
 
-        updateItem() {
-
+        updateItem(e) {
+            e.preventDefault();
+            
             //Recorre colores y los almacena en un array
             let nColores = document.getElementById('listColors').getElementsByTagName('input').length;
 

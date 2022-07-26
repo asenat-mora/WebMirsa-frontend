@@ -87,8 +87,8 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/editProducto",
-			name: "editProducto",
+			path: "/productEdit/:id",
+			name: "productEdit",
 			component: EditarProducto,
 			meta: {
 				requiresAuth: true,

@@ -160,6 +160,7 @@ onBeforeMount(() => {
                         :model="product.model"
                         :description="product.description"
                         :url="product.image"
+                        :id= "product.id"
                     />
             </div>
             </template>
