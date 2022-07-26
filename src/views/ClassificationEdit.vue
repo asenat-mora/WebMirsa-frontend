@@ -67,7 +67,7 @@
             }
 
             function deleteClassification(){
-                axios.delete(import.meta.env.VITE_API_URL + '/api/accessory' + classificationSelected.value)
+                axios.delete(import.meta.env.VITE_API_URL + '/api/accessory/' + classificationSelected.value)
                 .then(response => {
                     alert("¡Registro eliminado!");
                     getAllClassifications();
@@ -81,7 +81,7 @@
             }
 
             function editClassification(){
-                axios.patch(import.meta.env.VITE_API_URL + '/api/accessory' + classificationSelected.value,
+                axios.patch(import.meta.env.VITE_API_URL + '/api/accessory/' + classificationSelected.value,
                 {
                     name: classificationName.value
                 }
