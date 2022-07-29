@@ -10,21 +10,12 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>SKU</label>
-                            <input type="text" placeholder="Producto" v-model="productName" required>
+                            <input type="text" placeholder="Codigo de producto" v-model="productName" required>
                         </div>
-                        <div class="input-field">
+<!--                         <div class="input-field">
                             <label>Clave</label>
                             <input type="text" placeholder="Codigo de producto" v-model="productCode" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Precio</label>
-                            <input type="number" min="1" step="any" placeholder="Precio unitario" v-model="productPrice" required>
-                            <!-- <input type="number" placeholder="Modelo de producto" required> -->
-                        </div>
-                        <div class="input-field">
-                            <label>Modelo</label>
-                            <input type="text" placeholder="Modelo" v-model="productModel" required>
-                        </div>
+                        </div> -->
                         <div class="input-field">
                             <label>Marca</label>
                             <select v-model="productBrand" required>
@@ -43,6 +34,14 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="input-field">
+                            <label>Modelo</label>
+                            <input type="text" placeholder="Modelo" v-model="productModel" required>
+                        </div>
+                        <div class="input-field">
+                            <label>Precio*</label>
+                            <input type="number" min="1" step="any" placeholder="Precio unitario" v-model="productPrice" required>
+                        </div>                                
                         <div class="input-field"><!-- input-field-text-area -->
                             <label>Lado</label>
                             <select v-model="productSide" required>
@@ -51,10 +50,6 @@
                                 <option value="Izquierdo">Izquierdo</option>
                                 <option value="Ambos">Ambos</option>
                             </select>
-                        </div>
-                        <div class="input-field-text-area">
-                            <label>Descripción</label>
-                            <textarea type="text" class="text-area-register" name="descripcionRegister" placeholder="Descripción del producto" v-model="productDescription" required></textarea>
                         </div>
                         <div class="input-field-checkbox-colors">
                             <label>Color</label>
@@ -65,14 +60,10 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="input-field-checkbox-colors">
-                            <label>Combinación</label>
-                            <div class="checkbox-container" required>
-                                <label v-for="color in colors" >
-                                    <input type="checkbox" id="cbox" :value="color.id" @change="modifyColors($event)">
-                                    {{ color.name }}<br>
-                                </label>
-                            </div>
+
+                        <div class="input-field-text-area">
+                            <label>Descripción</label>
+                            <textarea type="text" class="text-area-register" name="descripcionRegister" placeholder="Descripción del producto" v-model="productDescription" required></textarea>
                         </div>
                         <div class="input-field-image">
                             <label>Imagen</label>

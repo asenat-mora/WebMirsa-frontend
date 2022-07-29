@@ -1,6 +1,6 @@
 
 <template>
-<Navbar/>
+
 <div class="body-register-marca">
    <div class="register-container-marca">
       <header>ALTA DE COLOR</header>

@@ -11,7 +11,7 @@
             <a href="#">PRODUCTOS</a>
             <a href="#">COTIZACIÓN</a>
           </p>
-          <p class="footer-company-name">MIKAS INFANTE RUIS S.A DE C.V.</p>
+          <p class="footer-company-name">MIKAS INFANTE RUIZ S.A DE C.V.</p>
         </div>
 
         <div class="footer-center">
@@ -35,9 +35,6 @@
 
         <div class="footer-right">
           <p class="footer-company-about">
-            <span>About the company</span>
-            Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-            <br><br>
             HORARIOS: <br><br>
             Lunes a Viernes 8:00 am - 18:00 pm
           </p>
