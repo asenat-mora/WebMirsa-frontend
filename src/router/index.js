@@ -23,6 +23,7 @@ import ListColor from '../views/ListColor.vue'
 import ProductSearch from '../views/ProductSearch.vue'
 
 
+
 import { authStore } from "@/stores/auth";
 
 const router = createRouter({

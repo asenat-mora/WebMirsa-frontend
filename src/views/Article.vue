@@ -12,10 +12,6 @@
                             <label>SKU</label>
                             <input type="text" placeholder="Codigo de producto" v-model="productName" required>
                         </div>
-<!--                         <div class="input-field">
-                            <label>Clave</label>
-                            <input type="text" placeholder="Codigo de producto" v-model="productCode" required>
-                        </div> -->
                         <div class="input-field">
                             <label>Marca</label>
                             <select v-model="productBrand" required>
@@ -67,8 +63,7 @@
                         </div>
                         <div class="input-field-image">
                             <label>Imagen</label>
-                            <div class="p-image">
-                                <!-- <input id="vImagen" type="image" width="200" height="200"> -->
+                            <div class="p-image">  
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" required/>
                             </div>
                         </div>
@@ -76,9 +71,6 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="cancelbtn">
-                        <span class="btnCancelar">Cancelar</span>
-                    </button>
                     <button class="savebtn">
                         <span class="btnGuardar">Guardar</span> 
                     </button>

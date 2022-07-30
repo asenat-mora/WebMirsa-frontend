@@ -10,7 +10,7 @@
 		<div class="containerB">
 
 			<div class="front-page">
-				<img src="../assets/img/portada-mirsa.jpeg" alt="" />
+				<img src="../assets/img/portada_mirsa_a.jpg" alt="" />
 			</div>
 
 		</div>

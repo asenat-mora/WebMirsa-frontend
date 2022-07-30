@@ -19,8 +19,8 @@
 ----------------------------------------------
 */
 :root{
-  --fondo:#1a1a1a;/* nadvar azul 25294a guinda 910028 negrito 1a1a1a */
-  --fondo2:#f3f3f3d5;   /* #e9ecf7 */
+  --fondo:#131212;/* nadvar azul 25294a guinda 910028 negrito 1a1a1a */
+  --fondo2:#e9ecf7;   /* #e9ecf7 f3f3f3d5*/
   --fondoForm:#2d325a;
   --white: #ffffff;
   --yellow:  #f0e556 ;
@@ -323,7 +323,7 @@ nav .divNav .option-menu li .arrow{
 --------------------------------------------*/
 .footer-distributed{
 	background: var(--fondo);
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	/* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12); */
 	box-sizing: border-box;
 	width: 100%;
 	text-align: center;
@@ -616,7 +616,6 @@ nav .divNav .option-menu li .arrow{
   .register-container-product .form-register-product{
     position: relative;
     margin-top: 16px;
-    /* min-height: 450px; */
     overflow: hidden;
   }
   form.secActive .form-first{
@@ -978,16 +977,23 @@ nav .divNav .option-menu li .arrow{
 -------------------INICIO----------------------
 ----------------------------------------------*/
 .containerB{
-    height: 100vh;
+   /*  height: 100vh; */
     background-color: var(--fondo2);
 }
 .containerB .front-page{
   display: flex;
-  justify-content: center
+  justify-content: center;
+  background-color: ;
+ 
 }
 .containerB .front-page img{
-/*   width: 100vh; */
-  height: 100vh;
+  margin: 2.5em;
+  width: 90vh;
+  height: 90vh;
+  border-radius: 25px;
+  -moz-box-shadow: 0px 0px 50px #25a7cf;
+  -webkit-box-shadow: 0px 0px 50px #25a7cf;
+  box-shadow: 0px 0px 50px #07546b;
 }
 /*---------------------------------------------
 -------------------FILOSOFIA-------------------
@@ -1002,12 +1008,12 @@ nav .divNav .option-menu li .arrow{
 }
 .section .card {
   padding:  25px 30px;
-  color: #2d325a;
+  color: #1c1c1d;
   font-size: 20px;
   text-align: justify;
 }
 .section .card .H1{
-  color: #3944a1;
+  color: #0e2974;/* 0e2974 */
 }
 .section .card .op{
   display: flex;
@@ -1023,7 +1029,8 @@ nav .divNav .option-menu li .arrow{
   flex-flow: column;
   border-radius: 6px;
   box-shadow: 0 0 5em rgb(0 0 0 / 20%);
-  background-color: #2b54a1e5;
+  background-color: #01213d;
+  box-shadow: 0px 0px 25px #5876ad;
   cursor: pointer;
   transition-property: box-shadow;
   transition-duration: 0.3s;
@@ -1068,17 +1075,17 @@ nav .divNav .option-menu li .arrow{
 -------------------HISTORIA--------------------
 ---------------------------------------------*/
 .container-hi{
-  background-color: var(--fondo2);
+  background-color: var(--fondo2); /* f3f3f3d5 */
 }
 .container-hi .section{
-  margin: 0px 20px;
+  margin: 0px 60px;
   display: flex;
   flex-direction: column;
 }
 .container-hi .section .H1{
-  margin: 25px 0;
+  margin: 1em;
   text-align: center;
-  color: #2d325a;
+  color: #0e2974;
 }
 .container-hi .section .txt{
   text-align: justify;
@@ -1089,7 +1096,7 @@ nav .divNav .option-menu li .arrow{
 }
 .container-hi .section .H3{
   margin: 15px 0;
-  color: #3944a1
+  color: var(--guinda);
 }
 .container-hi .section .p-txt{
   margin: 12px 0;  
@@ -1149,11 +1156,15 @@ nav .divNav .option-menu li .arrow{
 /*---barra buscador y filtro---*/
 .container-pro .bar-filter{
   height: auto;
+  background-color: #242425;
 }
 .filter-options{
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+.filter-options label{
+  color: #fffF;
 }
 .filter-options .option-first-row {
     flex-basis: 46%;
@@ -1162,19 +1173,31 @@ nav .divNav .option-menu li .arrow{
     flex-basis: 30%;
 }
 .filter-options .option-first-row .txtbox{
-  font-size: 14px;
-  border-radius: 2px;
-  border: 1px solid var(--border-gray);
   display: flex;
   width: 100%;
-  height: 30px;
   padding-left: 14px;
+
+  font-size: 1rem;
+  border-radius: 4px;
+  border-width: 1px;
+  line-height: 2.700;
+  border-color: #D1D5DB;
+  
+  
 }
 
 .option-first-row,.option-second-row  .select{
+  --ms-font-size: 1rem;
     --ms-tag-font-size: 0.7rem;
     --ms-ring-width: 0px;
+    --ms-tag-bg: #808080;
+    --ms-line-height: 1.375;
+    --ms-border-color: #D1D5DB;
+    --ms-border-width: 1px;
+    --ms-radius: 4px;
     
+    --ms-placeholder-color: #9CA3AF;/* aqui me quede */
+
 }
 
 .container-pro .filter-buttons{
@@ -1191,6 +1214,7 @@ nav .divNav .option-menu li .arrow{
   border-radius: .25rem;
   height: 45px;
   width: 160px;
+  margin-bottom: 6px;
 }
 
 @media (max-width: 768px){

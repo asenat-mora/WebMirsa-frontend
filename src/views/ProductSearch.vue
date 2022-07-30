@@ -7,7 +7,6 @@ import { stringify } from "query-string";
 const brands = ref(null);
 const accessories = ref(null);
 const colors = ref(null);
-/* const descriptions = ref(null); */
 const products = ref(null);
 const selectedBrands = ref([]);
 const sides = ref(['Derecho', 'Izquierdo', 'Ambos']);
