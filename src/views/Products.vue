@@ -5,6 +5,6 @@ import ProductForm from "@/components/ProductForm.vue";
 
 
 <template>
-    <ProductForm/>
+    <ProductForm mode="Create"/>
     
 </template>

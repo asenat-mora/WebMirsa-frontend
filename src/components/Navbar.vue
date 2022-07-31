@@ -74,7 +74,7 @@
                   </span>
                   <ul class="more-sub-menu sub-menu">
                     <li>
-                      <router-link to="/article">NUEVO</router-link>
+                      <router-link to="/productCreate">NUEVO</router-link>
                     </li>
                     <li>
                       <router-link to="/productSearch">LISTA</router-link>

@@ -40,7 +40,7 @@
 
     function goToEdit(){
         
-        router.push({name: "productEdit", params: {id: props.id}});
+        router.push({name: "ProductEdit", params: {id: props.id}});
     }
 
 </script>
