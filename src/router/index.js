@@ -7,13 +7,10 @@ import Philosophy from '../views/Philosophy.vue'
 import History from '../views/History.vue'
 import Products from '../views/Products.vue'
 import Login from '../views/Login.vue'
-import Article from '../views/Article.vue'
 import AddBrand from '../views/AddBrand.vue'
 import AddClassification from '../views/AddClassification.vue'
 import EditarMarca from '../views/BrandEdit.vue'
 import Registro from '../views/UserRegister.vue'
-import EditarProducto from '../views/ArticleEdit.vue'
-import ListaProductos from '../views/ArticleList.vue'
 import ListaMarcas from '../views/BrandList.vue'
 import ListaClasificacion from '../views/ClassificationList.vue'
 import ClassificationEdit from '../views/ClassificationEdit.vue'
@@ -21,6 +18,10 @@ import AddColor from '../views/AddColor.vue'
 import EditColor from '../views/EditColor.vue'
 import ListColor from '../views/ListColor.vue'
 import ProductSearch from '../views/ProductSearch.vue'
+import Product from '../views/Product.vue'
+import ProductEdit from '../views/ProductEdit.vue'
+import ArticleList from '../views/ArticleList.vue'
+
 
 
 import { authStore } from "@/stores/auth";
@@ -54,15 +55,6 @@ const router = createRouter({
 			component: Login,
 		},
 		{
-			path: "/article",
-			name: "article",
-			component: Article,
-			meta: {
-				/* necesita autenticacion del usuario -- necesita hacer login */
-				requiresAuth: true,
-			},
-		},
-		{
 			path: "/AddBrand",
 			name: "AddBrand",
 			component: AddBrand,
@@ -87,18 +79,9 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/editProducto",
-			name: "editProducto",
-			component: EditarProducto,
-			meta: {
-				requiresAuth: true,
-			},
-		},
-
-		{
 			path: "/ArticleList",
 			name: "ArticleList",
-			component: ListaProductos,
+			component: ArticleList,
 			meta: {
 				requiresAuth: true,
 			},
@@ -164,6 +147,22 @@ const router = createRouter({
             path: "/productSearch",
             name: "ProductSearch",
             component: ProductSearch,
+        },
+        {
+            path: "/productCreate",
+            name: "ProductCreate",
+            component: Product,
+            meta: {
+				requiresAuth: true,
+			},
+        },
+        {
+            path: "/productEdit/:id",
+            name: "ProductEdit",
+            component: ProductEdit,
+            meta: {
+				requiresAuth: true,
+			},
         }
 	],
 });

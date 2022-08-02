@@ -7,7 +7,6 @@ import { stringify } from "query-string";
 const brands = ref(null);
 const accessories = ref(null);
 const colors = ref(null);
-/* const descriptions = ref(null); */
 const products = ref(null);
 const selectedBrands = ref([]);
 const sides = ref(['Derecho', 'Izquierdo', 'Ambos']);
@@ -116,7 +115,7 @@ onBeforeMount(() => {
             <div class="filter-options">
                 <div class="option-first-row">
                     <label>Descripción</label>
-                    <input class="option" type="text" v-model="description" placeholder="Producto">
+                    <input class="txtbox" type="text" v-model="description" placeholder="Modelo">
                 </div>
                 <div class="option-first-row">
                     <label>Color</label>
@@ -160,6 +159,7 @@ onBeforeMount(() => {
                         :model="product.model"
                         :description="product.description"
                         :url="product.image"
+                        :id= "product.id"
                     />
             </div>
             </template>

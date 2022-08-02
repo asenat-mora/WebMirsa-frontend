@@ -8,10 +8,11 @@
 
 	<!-- <Navbar/> -->
 		<div class="containerB">
-			<p>
-				<h1>LE DAMOS LUZ, COLOR Y VIDA AL AUTOMOVIL...</h1>
-				
-			</p>
+
+			<div class="front-page">
+				<img src="../assets/img/portada_mirsa_a.jpg" alt="" />
+			</div>
+
 		</div>
 	<!-- <Footer/> -->
 </template>

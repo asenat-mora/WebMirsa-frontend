@@ -19,8 +19,8 @@
 ----------------------------------------------
 */
 :root{
-  --fondo:#1a1a1a;/* nadvar azul 25294a guinda 910028 negrito 1a1a1a */
-  --fondo2:#f3f3f3d5;   /* #e9ecf7 */
+  --fondo:#131212;/* nadvar azul 25294a guinda 910028 negrito 1a1a1a */
+  --fondo2:#e9ecf7;   /* #e9ecf7 f3f3f3d5*/
   --fondoForm:#2d325a;
   --white: #ffffff;
   --yellow:  #f0e556 ;
@@ -43,7 +43,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 } 
-/* ---------------------------INICIO-V2----------------------------------*/
+
 .body{
   height: 100vh;
 }
@@ -77,12 +77,7 @@ nav .divNav{
   margin: auto;
   padding: 0 50px;
 }
-.divNav .logoNav a{
-  font-size: 50px;
-  color: var(--white);
-  text-decoration: none;
-  font-weight: 600;
-}
+
 nav .divNav .navlinks{
   line-height: 7vh;
 }
@@ -117,7 +112,7 @@ nav .divNav .option-menu li .arrow{
   line-height: 70px;
   text-align: center;
   display: inline-block;
-  color: var(--white);
+  color: #1a1a1a;;
   transition: all 0.3s ease;
 }
 nav .divNav .option-menu li .sub-menu{
@@ -125,7 +120,7 @@ nav .divNav .option-menu li .sub-menu{
   top: 70px;
   left: 0;
   line-height: 55px;
-  background: var(--fondo);
+  background: var(--white);
   box-shadow: 0 1px 2px rgba(179, 92, 92, 0.2);
   border-radius: 0 0 4px 4px;
   display: none;
@@ -140,7 +135,7 @@ nav .divNav .option-menu li:hover .js-sub-menu{
   border-bottom: 1px solid rgba(163, 60, 60, 0.753);
 }
 .divNav .option-menu li .sub-menu a{
-  color: var(--white);
+  color: #1a1a1a;
   font-size: 14px;
   font-weight: 500;
 }
@@ -170,9 +165,6 @@ nav .divNav .option-menu li:hover .js-sub-menu{
   nav .divNav{
     max-width: 100%;
     padding: 0 20px;
-  }
-  nav .divNav .logoNav a{
-    font-size: 30px;
   }
   nav .divNav .option-menu li{
     padding: 0 15px;
@@ -223,7 +215,7 @@ nav .divNav .option-menu li:hover .js-sub-menu{
   .sidebarLogo  .xmark,
   .divNav .bars-menu{
     font-size: 50px;
-    color: var(--white);
+    color: #1a1a1a;/* menu lineas */
   }
   nav .divNav .option-menu{
     display: block;
@@ -234,7 +226,6 @@ nav .divNav .option-menu li:hover .js-sub-menu{
   }
 nav .divNav .option-menu li{
     display: block;
-  
   }
 
 .divNav .option-menu li .sub-menu a{
@@ -313,7 +304,6 @@ nav .divNav .navlinks{
 .sidebarLogo  .xmark,
 .divNav .bars-menu{
   font-size: 30px;
-  color: var(--white);
 }
 nav .divNav .option-menu{
   display: block;
@@ -333,7 +323,7 @@ nav .divNav .option-menu li .arrow{
 --------------------------------------------*/
 .footer-distributed{
 	background: var(--fondo);
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	/* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12); */
 	box-sizing: border-box;
 	width: 100%;
 	text-align: center;
@@ -425,13 +415,6 @@ nav .divNav .option-menu li .arrow{
 	font-weight: normal;
 	margin: 0 8px;
 }
-.footer-distributed .footer-company-about span{
-	display: block;
-	color:  #ffffff;
-	font-size: 17px;
-	font-weight: bold;
-	margin-bottom: 16px;
-}
 .footer-distributed .footer-icons{
 	margin-top: 20px;
 }
@@ -506,10 +489,6 @@ nav .divNav .option-menu li .arrow{
     width: 34%;
     text-align: center;
   }
-  .footer-distributed .footer-company-about{
-    font-size: 12px;
-  /* margin: 10px 15px 6px; */
-  }
   .footer-distributed .footer-icons a{
     line-height: 40px;
   }
@@ -547,10 +526,6 @@ nav .divNav .option-menu li .arrow{
     width: 34%;
     text-align: center;
   }
-  .footer-distributed .footer-company-about{
-    font-size: 10px;
-  }
-
 }
 @media (max-width: 400px) {
 
@@ -574,10 +549,6 @@ nav .divNav .option-menu li .arrow{
     font-size: 24px;
   }
 }
-
-/* -----------------------------FIN-V2-----------------------------------*/
-
-
 /*
 ----------------------------------------------
 -----FORMULARIOS ARTICLE, PRODUCT, BRAND
@@ -589,10 +560,9 @@ nav .divNav .option-menu li .arrow{
   .body-register-category,
   .body-register-product{
     display: inline-block;
-    height: 100vh;
+/*     height: 100vh; */
       display: flex;
       align-items: start;
-     /*  padding-top: 85px; *//* espacio entre el nav y el body*/
       justify-content: center;
       background: var(--fondo2);
       box-sizing: border-box;
@@ -603,12 +573,12 @@ nav .divNav .option-menu li .arrow{
   .register-container-marca,
   .register-container-category,
   .register-container-product{
-    
-    margin: 85px 0;
+     margin: 10px 0;
      border-radius: 5px;
-     padding: 30px;
+     padding: 2.5em;
      background-color: #fff;
      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+     width: 98%;
   }
   .register-container-marca,
   .register-container-category{
@@ -646,7 +616,6 @@ nav .divNav .option-menu li .arrow{
   .register-container-product .form-register-product{
     position: relative;
     margin-top: 16px;
-    /* min-height: 450px; */
     overflow: hidden;
   }
   form.secActive .form-first{
@@ -769,7 +738,6 @@ nav .divNav .option-menu li .arrow{
 }
 .field-search label{
   margin-right: 15px;
- /*  position: relative; */
   font-size: 20px;
   font-weight: 500;
   color: #333;
@@ -801,23 +769,17 @@ nav .divNav .option-menu li .arrow{
 }
 
 /*------------------- 
---------Filtro-------
+--------Filtro-Marcas----
 --------------------*/
 .container-filter{
   margin: 10px 0;
-  background-color: #ebeff3; /* ebeff3 */
-  
+  background-color: #ebeff3;
 }
-
 .filter-options{
   display: flex;
-/*   width: calc(100% / 1 - 15px); */
   flex-direction: row;
-  /* justify-content: space-between; */
- /*  margin: 0 15px; */
  padding: 8px;
  justify-content: center
-
 }
 .filter-options button{
  margin: 6px 0 0 20px;
@@ -829,16 +791,7 @@ nav .divNav .option-menu li .arrow{
  height: 45px;
  cursor: pointer;
  transition: all 0.3s linear;
-
 }
-/* 
-  display: flex;
-    align-items: stretch; center
-    justify-content: space-between;
-    flex-wrap: wrap; */
-
-
-
   /*dimencion  768 ipad mini*/
   @media (max-width: 768px) {
 
@@ -1024,8 +977,23 @@ nav .divNav .option-menu li .arrow{
 -------------------INICIO----------------------
 ----------------------------------------------*/
 .containerB{
-    height: 100vh;
+   /*  height: 100vh; */
     background-color: var(--fondo2);
+}
+.containerB .front-page{
+  display: flex;
+  justify-content: center;
+  background-color: ;
+ 
+}
+.containerB .front-page img{
+  margin: 2.5em;
+  width: 90vh;
+  height: 90vh;
+  border-radius: 25px;
+  -moz-box-shadow: 0px 0px 50px #25a7cf;
+  -webkit-box-shadow: 0px 0px 50px #25a7cf;
+  box-shadow: 0px 0px 50px #07546b;
 }
 /*---------------------------------------------
 -------------------FILOSOFIA-------------------
@@ -1040,12 +1008,12 @@ nav .divNav .option-menu li .arrow{
 }
 .section .card {
   padding:  25px 30px;
-  color: #2d325a;
+  color: #1c1c1d;
   font-size: 20px;
   text-align: justify;
 }
 .section .card .H1{
-  color: #3944a1;
+  color: #0e2974;/* 0e2974 */
 }
 .section .card .op{
   display: flex;
@@ -1061,7 +1029,8 @@ nav .divNav .option-menu li .arrow{
   flex-flow: column;
   border-radius: 6px;
   box-shadow: 0 0 5em rgb(0 0 0 / 20%);
-  background-color: #2b54a1e5;
+  background-color: #01213d;
+  box-shadow: 0px 0px 25px #5876ad;
   cursor: pointer;
   transition-property: box-shadow;
   transition-duration: 0.3s;
@@ -1106,17 +1075,17 @@ nav .divNav .option-menu li .arrow{
 -------------------HISTORIA--------------------
 ---------------------------------------------*/
 .container-hi{
-  background-color: var(--fondo2);
+  background-color: var(--fondo2); /* f3f3f3d5 */
 }
 .container-hi .section{
-  margin: 0px 20px;
+  margin: 0px 60px;
   display: flex;
   flex-direction: column;
 }
 .container-hi .section .H1{
-  margin: 18px 0;
+  margin: 1em;
   text-align: center;
-  color: #2d325a;
+  color: #0e2974;
 }
 .container-hi .section .txt{
   text-align: justify;
@@ -1127,7 +1096,7 @@ nav .divNav .option-menu li .arrow{
 }
 .container-hi .section .H3{
   margin: 15px 0;
-  color: #3944a1
+  color: var(--guinda);
 }
 .container-hi .section .p-txt{
   margin: 12px 0;  
@@ -1183,40 +1152,76 @@ nav .divNav .option-menu li .arrow{
   text-align: center;
   color: #2d325a;
 }
-/* hasta qui todo chido------------------- */
 
-/* barra buscador y filtro */
+/*---barra buscador y filtro---*/
 .container-pro .bar-filter{
-  /* background-color: #e08181; */
   height: auto;
+  background-color: #242425;
 }
-
 .filter-options{
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
-
+.filter-options label{
+  color: #fffF;
+}
 .filter-options .option-first-row {
     flex-basis: 46%;
 }
-
 .filter-options .option-second-row {
     flex-basis: 30%;
 }
+.filter-options .option-first-row .txtbox{
+  display: flex;
+  width: 100%;
+  padding-left: 14px;
 
-.option-first-row,.option-second-row  .select{
-    --ms-tag-font-size: 0.85rem;
-    --ms-ring-width: 0px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border-width: 1px;
+  line-height: 2.700;
+  border-color: #D1D5DB;
+  
+  
 }
 
+.option-first-row,.option-second-row  .select{
+  --ms-font-size: 1rem;
+    --ms-tag-font-size: 0.7rem;
+    --ms-ring-width: 0px;
+    --ms-tag-bg: #808080;
+    --ms-line-height: 1.375;
+    --ms-border-color: #D1D5DB;
+    --ms-border-width: 1px;
+    --ms-radius: 4px;
+    
+    --ms-placeholder-color: #9CA3AF;/* aqui me quede */
+
+}
+
+.container-pro .filter-buttons{
+  display: flex;
+  justify-content: center;
+}
+.bar-filter .filter-buttons button{
+  background-color: var(--green);
+  color: #ffffff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  border-radius: .25rem;
+  height: 45px;
+  width: 160px;
+  margin-bottom: 6px;
+}
 
 @media (max-width: 768px){
     .filter-options .option-second-row {
         flex-basis: 46%;
     }
 }
-
 
 @media (max-width: 480px){
     .filter-options .option-first-row {
@@ -1228,22 +1233,6 @@ nav .divNav .option-menu li .arrow{
     }
     
 }
-
-
-
-/* .container-pro .filter-options label{
-  font-size: 15px;
-}
-.container-pro .filter-options{
-  font-size: 10px;
-} */
-
-
-
-
-
-
-
 
 /*----plantilla de un producto----*/
 .container-pro .section .content{
@@ -1301,6 +1290,26 @@ nav .divNav .option-menu li .arrow{
 .card-item .description{
   color: rgb(50, 50, 50);
   font-size: 12px;
+}
+.card-item .product-a .buttons{
+  display: flex;
+  justify-content: space-evenly;
+}
+.card-item .product-a .buttons button{
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  border-radius: .25rem;
+  height: 25px;
+  width: 60px;
+}
+.card-item .product-a .edit{
+  background-color: var(--button-blue);
+}
+.card-item .product-a .delete{
+  background-color: var(--red);
 }
 
 /*---------------------------------------------
