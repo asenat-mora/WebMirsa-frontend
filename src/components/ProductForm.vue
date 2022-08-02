@@ -11,6 +11,7 @@
                         <div class="input-field">
                             <label>SKU</label>
                             <input type="text" placeholder="Codigo de producto" v-model="productSKU" required>
+                            <div class="error" v-if="vSku"> {{ errors.sku }}</div>
                         </div>
                         <div class="input-field">
                             <label>Marca</label>
@@ -20,6 +21,7 @@
                                     {{ brand.name }}
                                 </option>
                             </select>
+                            <div class="error" v-if="vBrand"> {{ errors.brand }}</div>
                         </div>
                         <div class="input-field">
                             <label>Accesorio</label>
@@ -29,6 +31,7 @@
                                     {{ accessory.name }}
                                 </option>
                             </select>
+                            
                         </div>
                         <div class="input-field">
                             <label>Modelo</label>
@@ -51,6 +54,7 @@
                             <label>Color</label>
                             <div class="checkbox-container" required>
                                 <Multiselect v-model="arrayColors" mode="tags" :close-on-select="false" :searchable="false" :create-option="false" :options="colors" placeholder="Seleccione un color"/>
+                                <div class="error" v-if="vColors"> {{ errors.colors }}</div>
                             </div>
                         </div>
 
@@ -63,15 +67,16 @@
                             <div class="p-image">
                                 <!-- <input id="vImagen" type="image" width="200" height="200"> -->
                                 <!-- <i class="ri-pencil-line upload-button"></i> -->
-                                <input id="vImagen" :src="productImage" type="image" width="200" height="200">
+                                <input id="vImagen" :src="productImage || defaultImageSrc" type="image" width="200" height="200">
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" required/>
                             </div>
+                            <div class="error" v-if="vImage"> {{ errors.image }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">
                     <template v-if="mode === 'Create'">
-                        <button type="button" class="savebtn" @click="createProduct($event)">
+                        <button type="button" class="savebtn" @click="validateForm($event, mode)">  <!-- @click="createProduct($event)" -->
                             <span class="btnGuardar">Guardar</span> 
                         </button>
                     </template>
@@ -80,7 +85,7 @@
                         <button type="button" class="deletebtn" @click="deleteItem($event)">
                             <span class="btnEliminar">Eliminar</span>
                         </button>
-                        <button type="button" class="updatelbtn" @click="updateProduct($event)">
+                        <button type="button" class="updatelbtn" @click="validateForm($event, mode)">
                             <span class="btnActualizar">Actualizar</span>
                         </button>
                     </template>
@@ -103,10 +108,17 @@
     
     import { useRouter } from 'vue-router';
     import Multiselect from '@vueform/multiselect'
-    import { ref, watch } from 'vue';
+    import { ref, watch, onMounted } from 'vue';
 
     const router = useRouter();
+    const defaultImageSrc = 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png';
     let arrayColors = ref([]);
+    let errors = ref(null);
+    
+    let vSku = ref(false);
+    let vColors = ref(false);
+    let vBrand = ref(false);
+    let vImage = ref(false);
 
     const props = defineProps({
         brands: Object,
@@ -135,7 +147,7 @@
         props.productAccessory = '';
         props.productSide = '';
         props.productImage = '';
-        props.arrayColors = [];
+        arrayColors = [];
     }
 
     function uploadImageToImgur(event) {
@@ -167,7 +179,7 @@
             accessoryId: props.productAccessory,
             side: props.productSide,
             description: props.productDescription,
-            image: props.productImage || 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png',
+            image: props.productImage || defaultImageSrc,
             colors: props.productColors
         }
 
@@ -223,9 +235,61 @@
         router.back();
     }
 
-    watch(props.productColors, (newValue, oldValue) => {
+    function checkSku(){
+        if(!props.productSKU){
+            vSku.value = true
+            errors.value.sku = 'Campo obligatorio'
+            return;
+        }
+
+        if(props.productSKU.length < 5 || props.productSKU.length > 10){
+            errors.value.sku = 'El SKU debe tener entre 5 y 10 caracteres'
+            vSku.value = true
+        }
+    }
+
+    function checkColors(){
+        if(arrayColors.value.length < 1){
+            errors.value.colors = 'Debe seleccionar al menos un color'
+            vColors.value = true
+        }
+    }
+
+    function checkBrand(){
+        if(!props.productBrand){
+            errors.value.brand = 'Debe seleccionar una marca'
+            vBrand.value = true
+        }
+    }
+
+    function checkImage(){
+        if(!props.productImage){
+            errors.value.image = 'Debe subir una imagen'
+            vImage.value = true
+        }
+    }
+
+    function validateForm(event, mode){
+        errors.value = {}
+        checkSku()
+        checkColors()
+        checkBrand()
+        checkImage()
+
+        if(!vColors && !vSku && !vBrand){
+            if(mode === 'Create'){
+                createProduct(event)
+            }
+            updateProduct(event)
+        }
+        
+    }
+
+    watch(() => props.productColors, (newValue, oldValue) => {
         arrayColors.value = newValue;
     });
+
+    
 
 </script>
 

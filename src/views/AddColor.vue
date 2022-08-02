@@ -12,6 +12,7 @@
                         <div class="input-field-b">
                             <label>Nombre</label>
                             <input type="text" placeholder="Nombre del color" v-model="brandName" required>
+                            <div>Error</div>
                         </div>
                     </div>
                 </div>
