@@ -4,20 +4,20 @@
 <div class="body-register-marca">
    <div class="register-container-marca">
       <header>ALTA DE MARCA</header>
-        <form class="form-register-marca">
+        <form class="form-register-marca" @submit.prevent="validateForm">
             <div class="form-first">
                 <div class="details-marca">
                     <span class="title">DETALLES DE MARCA</span>
                     <div class="fields">
                         <div class="input-field-b">
                             <label>Nombre*</label>
-                            <input type="text" placeholder="Nombre de la marca" v-model="brandName">
+                            <input type="text" placeholder="Nombre de la marca" v-model="brandName" >
                             <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">  
-                    <button class="savebtn" type="button" @click="validateForm">
+                    <button class="savebtn" type="submit" >
                         <span class="btnGuardar">Guardar</span> 
                     </button>
                 </div>
@@ -58,14 +58,15 @@
             }
 
             function checkName(){
-                if(!brandName){
+                if(!brandName.value){
                     vName.value = true;
-                    errors.name = "El nombre de la marca es requerido";
+                    errors.value.name = "El nombre de la marca es requerido";
+                    return;
                 }
 
-                if(brandName.length < 3 || brandName.length > 20){
+                if(brandName.value.length < 3 || brandName.value.length > 20){
                     vName.value = true;
-                    errors.name = "El nombre de la marca debe tener entre 3 y 20 caracteres";
+                    errors.value.name = "El nombre de la marca debe tener entre 3 y 20 caracteres";
                 }
             }
 
