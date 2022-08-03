@@ -31,7 +31,7 @@
   --border-gray: #aaa;
   --button-gray: #777D74;
   --line-blue: #4070f4;
-  --red: #e31b23;
+  --red: #c2171d;
   --green: #18ac18;
   --disabled-button: #777D74;
   }
@@ -196,9 +196,9 @@ nav .divNav .option-menu li:hover .js-sub-menu{
     display: block;
     max-width: 270px;
     width: 100%;
-    background:  var(--fondo);
-    line-height: 40px;
-    padding: 20px;
+    background:  var(--white);
+    line-height: 45px;
+    padding: 0 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.5s ease;
     z-index: 1000;
@@ -209,17 +209,18 @@ nav .divNav .option-menu li:hover .js-sub-menu{
     justify-content: space-between;
   }
   .sidebarLogo .menuNav{
-    font-size: 30px;
-    color: var(--white);
+    font-size: 28px;
+    color: #1a1a1a;
+    margin-top: 25px;
   }
   .sidebarLogo  .xmark,
   .divNav .bars-menu{
-    font-size: 50px;
+    font-size: 40px;
     color: #1a1a1a;/* menu lineas */
   }
   nav .divNav .option-menu{
     display: block;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   nav .divNav .option-menu li .arrow{
     line-height: 40px;
@@ -229,7 +230,7 @@ nav .divNav .option-menu li{
   }
 
 .divNav .option-menu li .sub-menu a{
-    font-size: 20px;   
+    font-size: 16px;   
   }
 
 nav .divNav .option-menu li .sub-menu{
@@ -646,7 +647,7 @@ nav .divNav .option-menu li .arrow{
   form .fields .input-field-checkbox-colors,
   form .fields .input-field{
       display: flex;
-      width: calc(100% / 4 - 15px);
+      width: calc(100% / 3 - 25px);
       flex-direction: column;
       margin: 10px 0;
   }
@@ -689,13 +690,23 @@ nav .divNav .option-menu li .arrow{
   .input-field select:focus{
       box-shadow: 0 3px 6px rgba(138, 10, 10, 0.13);
   }
+  /*-----alerta de error-----*/
+  .input-field .error,
+  .input-field-checkbox-colors .error,
+  .input-field-text-area .error,
+  .input-field-image .error
+  .input-field-b .error{
+    color: var(--red);
+    font-size: 0.85rem;
+  }
+
   .details-btns{
       display: flex;
       justify-content: space-around;
       align-items: center;
   }
   /* Botones */
-   .register-container-product button,/* para listas */
+  .register-container-product button,/* para listas */
   .register-container-marca form button,
   .register-container-category form button,
   .register-container-product form button{
@@ -983,7 +994,6 @@ nav .divNav .option-menu li .arrow{
 .containerB .front-page{
   display: flex;
   justify-content: center;
-  background-color: ;
  
 }
 .containerB .front-page img{

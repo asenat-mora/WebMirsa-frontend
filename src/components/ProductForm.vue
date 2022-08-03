@@ -9,12 +9,12 @@
                     <span class="title">DETALLE DEL PRODUCTO</span>
                     <div class="fields">
                         <div class="input-field">
-                            <label>SKU</label>
+                            <label>SKU*</label>
                             <input type="text" placeholder="Codigo de producto" v-model="productSKU" required>
                             <div class="error" v-if="vSku"> {{ errors.sku }}</div>
                         </div>
                         <div class="input-field">
-                            <label>Marca</label>
+                            <label>Marca*</label>
                             <select v-model="productBrand" required>
                                 <option disabled selected>Selecciona una marca</option>
                                 <option v-for="brand in brands" :value="brand.id">
@@ -24,49 +24,50 @@
                             <div class="error" v-if="vBrand"> {{ errors.brand }}</div>
                         </div>
                         <div class="input-field">
-                            <label>Accesorio</label>
+                            <label>Accesorio*</label>
                             <select v-model="productAccessory" required>
                                 <option disabled selected>Selecciona una Categoria</option>
                                 <option v-for="accessory in accessories" :value="accessory.id">
                                     {{ accessory.name }}
                                 </option>
                             </select>
-                            
+                            <div class="error" v-if="vAccesory"> {{ errors.accessory }}</div>
                         </div>
                         <div class="input-field">
-                            <label>Modelo</label>
+                            <label>Modelo*</label>
                             <input type="text" placeholder="Modelo" v-model="productModel" required>
+                            <div class="error" v-if="vModel"> {{ errors.model }}</div>
                         </div>
-                        <div class="input-field">
-                            <label>Precio*</label>
-                            <input type="number" min="1" step="any" placeholder="Precio unitario" v-model="productPrice" required>
-                        </div>                                
                         <div class="input-field"><!-- input-field-text-area -->
-                            <label>Lado</label>
+                            <label>Lado*</label>
                             <select v-model="productSide" required>
                                 <option disabled selected>Selecciona un lado</option>
                                 <option value="Derecho">Derecho</option>
                                 <option value="Izquierdo">Izquierdo</option>
                                 <option value="Ambos">Ambos</option>
                             </select>
+                            <div class="error" v-if="vSide"> {{ errors.side }}</div>
                         </div>
+                        <div class="input-field">
+                            <label>Precio</label>
+                            <input type="number" min="1" step="any" placeholder="Precio unitario" v-model="productPrice" required>
+                            <div class="error" v-if="vPrice"> {{ errors.price }}</div>
+                        </div>                                
                         <div class="input-field-checkbox-colors">
-                            <label>Color</label>
+                            <label>Color*</label>
                             <div class="checkbox-container" required>
                                 <Multiselect v-model="arrayColors" mode="tags" :close-on-select="false" :searchable="false" :create-option="false" :options="colors" placeholder="Seleccione un color"/>
                                 <div class="error" v-if="vColors"> {{ errors.colors }}</div>
                             </div>
                         </div>
-
                         <div class="input-field-text-area">
-                            <label>Descripción</label>
+                            <label>Descripción*</label>
                             <textarea type="text" class="text-area-register" name="descripcionRegister" placeholder="Descripción del producto" v-model="productDescription" required></textarea>
+                            <div class="error" v-if="vDescription"> {{ errors.description }}</div>
                         </div>
                         <div class="input-field-image">
-                            <label>Imagen</label>
+                            <label>Imagen*</label>
                             <div class="p-image">
-                                <!-- <input id="vImagen" type="image" width="200" height="200"> -->
-                                <!-- <i class="ri-pencil-line upload-button"></i> -->
                                 <input id="vImagen" :src="productImage || defaultImageSrc" type="image" width="200" height="200">
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" required/>
                             </div>
@@ -94,7 +95,6 @@
                     </button>
                 </div>
                 
-    
             </div>
         </form>
     </div>
@@ -118,7 +118,12 @@
     let vSku = ref(false);
     let vColors = ref(false);
     let vBrand = ref(false);
+    let vAccesory = ref(false);
+    let vModel = ref(false);
+    let vPrice = ref(false);
     let vImage = ref(false);
+    let vSide = ref(false);
+    let vDescription = ref(false);
 
     const props = defineProps({
         brands: Object,
@@ -236,14 +241,22 @@
     }
 
     function checkSku(){
+        /* Busca que el SKU este definido */
         if(!props.productSKU){
             vSku.value = true
             errors.value.sku = 'Campo obligatorio'
             return;
         }
-
-        if(props.productSKU.length < 5 || props.productSKU.length > 10){
+        /* quita espacios y los guarda en otra variable */
+        let skuNoSpace = props.productSKU.replace(/ /g, '');
+        /* checa la longitud de la cadena, sin contar espacios */
+        if(skuNoSpace.length < 5 || skuNoSpace.length > 10){
             errors.value.sku = 'El SKU debe tener entre 5 y 10 caracteres'
+            vSku.value = true
+        }
+        /* valida los caracteres aceptados */
+        if(!/^[a-zA-Z0-9 ]+$/.test(props.productSKU)){
+            errors.value.sku = 'El SKU debe contener solo letras y números'
             vSku.value = true
         }
     }
@@ -262,6 +275,51 @@
         }
     }
 
+    function checkAccesory(){
+        if(!props.productAccessory){
+            errors.value.accessory = 'Debe seleccionar un tipo de accesotio'
+            vAccesory.value = true
+        }
+    }
+
+    function checkModel(){
+        if(!props.productModel){
+            vModel.value = true
+            errors.value.model = 'campo oblicatorio'
+            return;
+        }
+        if(props.productModel.length < 4 || props.productSKU.length > 11 ){
+           errors.value.model = 'El modelo debe tener entre 4 y 11 caracteres'
+           vModel.value = true
+        }
+    }
+
+    function checkPrice(){
+        if(props.productPrice<0 || props.productPrice>10000){
+            errors.value.price = 'El precio debe estar entre 0 y 10000'
+            vPrice.value = true
+        }
+    }
+
+    function checkSide(){
+        if(!props.productSide){
+            errors.value.side = 'Debe seleccionar un lado'
+            vSide.value = true
+        }
+    }
+
+    function checkDescription(){
+        if(!props.productDescription){
+            vDescription.value = true
+            errors.value.description = 'Campo obligatorio'
+            return;
+        }
+        if(props.productDescription.length < 10 || props.productDescription.length > 80){
+            errors.value.description = 'La descripción  debe tener entre 10 y 80 caracteres'
+            vDescription.value = true
+        }
+    } 
+
     function checkImage(){
         if(!props.productImage){
             errors.value.image = 'Debe subir una imagen'
@@ -274,9 +332,14 @@
         checkSku()
         checkColors()
         checkBrand()
+        checkAccesory()
+        checkModel()
+        checkPrice()
+        checkSide()
+        checkDescription()
         checkImage()
 
-        if(!vColors && !vSku && !vBrand){
+        if(!vColors && !vSku && !vBrand && !vAccesory && !vModel && !vPrice && !vSide && !vDescription){
             if(mode === 'Create'){
                 createProduct(event)
             }

@@ -103,7 +103,7 @@
             </li>
             <!-- opciones admin -->
             <template v-if="store.getIsAdmin">
-              <li><a href="#">REPORTE</a></li>
+              <!-- <li><a href="#">REPORTE</a></li> -->
               <li><a href="#">USUARIOS</a></li>
             </template>
 
