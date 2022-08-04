@@ -3,14 +3,14 @@
 <div class="body-register-marca">
    <div class="register-container-marca">
       <header>EDITAR MARCA</header>
-        <form class="form-register-marca" action = "#" @submit.prevent="">
+        <form class="form-register-marca">
             <div class="form-first">
                 <div class="details-marca">
                     <!-- <span class="title">EDITAR MARCA</span> -->
                     <div class="fields">
                         <div class="input-field-b">
                             <label>Seleccionada</label>
-                            <select v-model="brandSelected" @change="loadName">
+                            <select v-model="brandSelected" @change="loadAttributes">
                                 <option selected disabled >Seleccione una marca</option>
                                 <option v-for="brand in brands" :value = "brand.id">
                                     {{brand.name}}
@@ -18,16 +18,21 @@
                             </select>
                         </div>
                         <div class="input-field-b">
-                            <label>Nombre</label>
+                            <label>Nombre*</label>
                             <input type="text" placeholder="Nuevo nombre" required v-model="brandName">
+                            <div class="error" v-if="vName"> {{ errors.name }}</div>
+                        </div>
+                        <div class="input-field-b">
+                            <label>Clave*</label>
+                            <input type="text" placeholder="Nueva clave" required v-model="key">
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="deletebtn" @click="deleteBrand">
+                    <button type="button" class="deletebtn" @click="deleteBrand">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
-                    <button class="updatelbtn" @click="editBrand">
+                    <button type="button" class="updatelbtn" @click="validateForm">
                         <span class="btnActualizar">Actualizar</span>       
                     </button>
                 </div>
@@ -49,6 +54,10 @@
         setup(){
             var brandSelected = ref(null);
             var brandName = ref(null);
+            var errors = ref(null);
+            var key = ref(null);
+            var vName = ref(null);
+          
             const brands = ref(null);
 
             function getAllBrands(){
@@ -61,8 +70,10 @@
                 })
             }
 
-            function loadName (){
+            function loadAttributes (){
                 brandName.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].name;
+                key.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].key;
+                
             }
 
             function deleteBrand(){
@@ -72,6 +83,7 @@
                     getAllBrands();
                     brandSelected.value= null;
                     brandName.value = null;
+                    key.value = null;
                 })
                 .catch(error => {
                     console.log(error);
@@ -82,7 +94,8 @@
             function editBrand(){
                 axios.patch(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value,
                 {
-                    name: brandName.value
+                    name: brandName.value,
+                    key:  key.value
                 }
                 )
                 .then(response => {
@@ -90,25 +103,64 @@
                     getAllBrands();
                     brandSelected.value= null;
                     brandName.value = null;
+                    key.value = null;
                 })
                 .catch(error => {
                     console.log(error);
                     alert("¡Error en el registro!");
                 });
             }
+            
+            function checkName(){
+                /* Busca que el nombre este definido */
+                if(!brandName.value){
+                    vName.value = true;
+                    errors.value.name = "El nombre de la marca es requerido";
+                    return;
+                }
+                /* checa la longitud de la cadena, sin contar espacios */
+                if(brandName.value.length < 3 || brandName.value.length > 20){
+                    vName.value = true;
+                    errors.value.name = "El nombre de la marca debe tener entre 3 y 20 caracteres";
+                    return;
+                }
+                /* valida los caracteres aceptados */
+                if(!/^[a-zA-Z ]+$/.test(brandName.value)){
+                    errors.value.name = 'El nombre debe contener solo letras'
+                    vName.value = true
+                    console.log(brandName.value);
+                }
+                
+            }
 
+            function validateForm(){
+                errors.value = {};
+                checkName();
+
+                if(!vName){
+                    editBrand();
+                }
+            }
+            
             onBeforeMount(() => {
                 getAllBrands();
             })
 
+            
+
             return{
+                errors,
                 brandSelected,
                 brandName,
                 brands,
                 getAllBrands,
-                loadName,
+                loadAttributes,
                 deleteBrand,
-                editBrand
+                editBrand,
+                key,
+                vName,
+                checkName,
+                validateForm
             }
         }
     }

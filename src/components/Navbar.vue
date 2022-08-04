@@ -56,7 +56,7 @@
                   </span>
                   <ul class="more-sub-menu sub-menu">
                     <li>
-                      <router-link to="/AddClassification">NUEVO</router-link>
+                      <router-link to="/AddAccesory">NUEVO</router-link>
                     </li>
                     <li>
                       <router-link to="/EditClassification">EDITAR</router-link>

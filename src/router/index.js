@@ -8,7 +8,7 @@ import History from '../views/History.vue'
 import Products from '../views/Products.vue'
 import Login from '../views/Login.vue'
 import AddBrand from '../views/AddBrand.vue'
-import AddClassification from '../views/AddClassification.vue'
+import AddAccesory from '../views/AddAccesory.vue'
 import EditarMarca from '../views/BrandEdit.vue'
 import Registro from '../views/UserRegister.vue'
 import ListaMarcas from '../views/BrandList.vue'
@@ -96,9 +96,9 @@ const router = createRouter({
 		},
 
 		{
-			path: "/AddClassification",
-			name: "AddClassification",
-			component: AddClassification,
+			path: "/AddAccesory",
+			name: "AddAccesory",
+			component: AddAccesory,
 			meta: {
 				requiresAuth: true,
 			},

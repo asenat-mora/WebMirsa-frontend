@@ -694,7 +694,7 @@ nav .divNav .option-menu li .arrow{
   .input-field .error,
   .input-field-checkbox-colors .error,
   .input-field-text-area .error,
-  .input-field-image .error
+  .input-field-image .error,
   .input-field-b .error{
     color: var(--red);
     font-size: 0.85rem;
