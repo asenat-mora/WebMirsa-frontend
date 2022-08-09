@@ -59,10 +59,10 @@
                       <router-link to="/AddAccesory">NUEVO</router-link>
                     </li>
                     <li>
-                      <router-link to="/AccesoryEdit ">EDITAR</router-link>
+                      <router-link to="/AccesoryEdit">EDITAR</router-link>
                     </li>
                     <li>
-                      <router-link to="/AccesoryList ">LISTA</router-link>
+                      <router-link to="/AccesoryList">LISTA</router-link>
                     </li>
                   </ul>
                 </li>

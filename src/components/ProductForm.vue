@@ -348,7 +348,7 @@
         
     }
 
-    watch(() => props.productColors, (newValue, oldValue) => {
+    watch(props.productColors, (newValue, oldValue) => {
         arrayColors.value = newValue;
     });
 

@@ -3,7 +3,7 @@
 <div class="body-register-marca">
    <div class="register-container-marca">
       <header>EDITAR ACCESORIO</header>
-        <form class="form-register-marca" action = "#" @submit.prevent="">
+        <form class="form-register-marca">
             <div class="form-first">
                 <div class="details-marca">
                     <!-- <span class="title">EDITAR ACCESORIO</span> -->
@@ -15,20 +15,22 @@
                                 <option v-for="accesory in accesories" :value = "accesory.id">
                                     {{accesory.name}}
                                 </option>
+                                
                             </select>
                         </div>
                         <div class="input-field-b">
 
                             <label>Nombre</label>
                             <input type="text" placeholder="Nuevo nombre" required v-model="accesoryName">
+                            <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="deletebtn" @click="deleteAccessory">
+                    <button  type="button" class="deletebtn" @click="deleteAccessory">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
-                    <button class="updatelbtn" @click="updateAccessory">
+                    <button type="button" class="updatelbtn" @click="validateForm">
                         <span class="btnActualizar">Actualizar</span>      
                     </button>
                 </div>
@@ -51,6 +53,8 @@
             var accesorySelected = ref(null);
             var accesoryName = ref(null);
             const accesories = ref(null);
+            var errors = ref(null);
+            var vName = ref(false);
 
             function getAllAccessories(){
                 axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
@@ -124,7 +128,7 @@
                 checkName();
 
                 if(!vName.value){
-                    updateBrand();
+                    updateAccessory();
                 }
             }
 
@@ -142,7 +146,9 @@
                 deleteAccessory,
                 updateAccessory,
                 checkName,
-                validateForm
+                validateForm,
+                errors,
+                vName
                 
             }
         }

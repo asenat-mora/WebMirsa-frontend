@@ -3,7 +3,7 @@
 <div class="body-register-category">
    <div class="register-container-category">
       <header>ALTA DE ACCESORIO</header>
-        <form class="form-register-category" action="#" @submit.prevent="validateForm">
+        <form class="form-register-category" @submit.prevent="validateForm">
             <div class="form-first">
                 <div class="details-category">
                     <!-- <span class="title">Detalle</span> -->
@@ -74,7 +74,7 @@
                     return;
                 }
                 /* valida los caracteres aceptados */
-                if(!/^[a-zA-Z ]+$/.test(accesoryName)){
+                if(!/^[a-zA-Z ]+$/.test(accesoryName.value)){
                     errors.value.name = 'El nombre debe contener solo letras'
                     vName.value = true
                 }

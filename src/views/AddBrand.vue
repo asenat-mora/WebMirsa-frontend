@@ -80,7 +80,7 @@
                     return;
                 }
                 /* valida los caracteres aceptados */
-                if(!/^[a-zA-Z ]+$/.test(brandName)){
+                if(!/^[a-zA-Z ]+$/.test(brandName.value)){
                     errors.value.name = 'El nombre debe contener solo letras'
                     vName.value = true
                 }
@@ -97,11 +97,13 @@
                 if(key.value.length < 3 || key.value.length > 20){
                     vkey.value = true;
                     errors.value.key = "La clave de marca debe tener entre 3 y 20 caracteres";
+                    return;
                 }
                 /* valida los caracteres aceptados */
-                if(!/^[a-zA-Z ]+$/.test(key)){
-                    errors.value.key = 'La clave debe contener solo letras'
+                if(!/^[a-zA-Z ]+$/.test(key.value)){
                     vkey.value = true
+                    errors.value.key = 'La clave debe contener solo letras'
+                    
                 }
             }
 
@@ -110,7 +112,7 @@
                 checkName();
                 checkKey();
 
-                if(!vName && !vkey){
+                if(!vName.value && !vkey.value){
                     createBrand();
                 }
             }

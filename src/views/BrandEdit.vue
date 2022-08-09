@@ -117,6 +117,7 @@
             
             function checkName(){
                 /* Busca que el nombre este definido */
+                
                 if(!brandName.value){
                     vName.value = true;
                     errors.value.name = "El nombre de la marca es requerido";
@@ -136,8 +137,10 @@
                 }
                 
             }
+
             function checkKey(){
                 /* Busca que la clave este definida */
+                
                 if(!key.value){
                     vKey.value = true;
                     errors.value.key = "La clave es requerida";
@@ -160,8 +163,7 @@
                 errors.value = {};
                 checkName();
                 checkKey();
-
-                if(!vName && !vKey){
+                if(!vName.value && !vKey.value){
                     updateBrand();
                 }
             }

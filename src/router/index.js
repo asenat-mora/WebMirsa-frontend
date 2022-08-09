@@ -27,10 +27,7 @@ import AddColor from '../views/AddColor.vue'
 import ColorEdit from '../views/ColorEdit.vue'
 import ColorList from '../views/ColorList.vue'
 
-/* creo ya no sirve, verificar */
 import ArticleList from '../views/ArticleList.vue'
-
-
 
 import { authStore } from "@/stores/auth";
 
@@ -108,8 +105,8 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/AccesoryEdit ",
-			name: "AccesoryEdit ",
+			path: "/AccesoryEdit",
+			name: "AccesoryEdit",
 			component: AccesoryEdit,
 			meta: {
 				requiresAuth: true,
