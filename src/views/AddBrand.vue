@@ -1,4 +1,3 @@
-
 <template>
 
 <div class="body-register-marca">
@@ -46,7 +45,7 @@
             var key = ref(null);
             
             var errors = ref(null);
-            var vkey = ref(null);
+            var vkey = ref(false);
             var vName = ref(false);
 
             function createBrand(){
@@ -111,7 +110,7 @@
                 checkName();
                 checkKey();
 
-                if(!vName){
+                if(!vName && !vkey){
                     createBrand();
                 }
             }

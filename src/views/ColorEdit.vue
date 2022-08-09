@@ -27,7 +27,7 @@
                     <button class="deletebtn" @click="deleteColor">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
-                    <button class="updatelbtn" @click="editColor">
+                    <button class="updatelbtn" @click="updateColor">
                         <span class="btnActualizar">Actualizar</span>       
                     </button>
                 </div>
@@ -42,7 +42,7 @@
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
     export default{
-        name: 'EditColor',
+        name: 'updateColor',
         components: {
             Navbar
         },
@@ -79,7 +79,7 @@
                 });
             }
 
-            function editColor(){
+            function updateColor(){
                 axios.patch(import.meta.env.VITE_API_URL + '/api/color/' + colorSelected.value,
                 {
                     name: colorName.value
@@ -108,7 +108,7 @@
                 getAllColors,
                 loadName,
                 deleteColor,
-                editColor
+                updateColor
             }
         }
     }

@@ -10,7 +10,7 @@
                     <div class="fields">
                         <div class="input-field-b">
                             <label>Nombre del Accesorio*</label>
-                            <input type="text" placeholder="tipo de accesorio" v-model="accesoryName">
+                            <input type="text" placeholder="Tipo de accesorio" v-model="accesoryName">
                             <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>
                         <!-- <div class="input-field-b">
@@ -24,9 +24,6 @@
                     <button class="savebtn">
                         <span class="btnGuardar">Guardar</span> <!-- @click="createAccesory" -->
                     </button>
-                    <button class="cancelbtn">
-                        <span class="btnCancelar">Cancelar</span>
-                    </button>
                 </div>
             </div>
         </form>
@@ -39,7 +36,7 @@
     import axios from 'axios';
     import { ref } from 'vue';
     export default{
-        name: 'AddClassification',
+        name: 'AddAccesory',
         components: {
             Navbar
         },
@@ -51,7 +48,7 @@
             function createAccesory(){
                 axios.post(import.meta.env.VITE_API_URL + '/api/accessory', 
                 {
-                    name: accesoryName.value,
+                    name: accesoryName.value
                 }
                 )
                 .then(response => {
@@ -86,18 +83,20 @@
             function validateForm(){
                 errors.value = {};
                 checkName();
-                if(!vName){
+                
+                if(!vName.value){
                     createAccesory();
                 }
             }
 
             return {
-                validateForm,
+                errors,
                 accesoryName,
-                createAccesory,
                 vName,
                 checkName,
-                errors
+                validateForm,
+                createAccesory,
+                
             }
 
         }

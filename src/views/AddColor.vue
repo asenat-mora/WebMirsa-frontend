@@ -1,27 +1,23 @@
-
 <template>
 
 <div class="body-register-marca">
    <div class="register-container-marca">
       <header>ALTA DE COLOR</header>
-        <form class="form-register-marca" action="#" @submit.prevent="createBrand" >
+        <form class="form-register-marca"  ><!-- action="#" @submit.prevent="validateForm" -->
             <div class="form-first">
                 <div class="details-marca">
                    <!--  <span class="title">DETALLES DE MARCA</span> -->
                     <div class="fields">
                         <div class="input-field-b">
                             <label>Nombre</label>
-                            <input type="text" placeholder="Nombre del color" v-model="brandName" required>
-                            <div>Error</div>
+                            <input type="text" placeholder="Nombre del color" v-model="colorName">
+                            <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">  
-                    <button class="savebtn" type="submit">
+                    <button class="savebtn" type="submit"  @click="createColor">
                         <span class="btnGuardar">Guardar</span> 
-                    </button>
-                    <button class="cancelbtn">
-                        <span class="btnCancelar">Cancelar</span>
                     </button>
                 </div>
             </div>
@@ -35,24 +31,26 @@
     import axios from 'axios';
     import { ref } from 'vue';
     export default{
-        name: 'AddBrand',
+        name: 'AddColor',
         components: {
             Navbar
         },
         setup(){
-            var brandName = ref(null);
+            var colorName = ref(null);
+            var errors = ref(null);
+            var vName = ref(false);
 
 
-            function createBrand(){
+            function createColor(){
                 
-                axios.post(import.meta.env.VITE_API_URL + '/api/brand', 
+                axios.post(import.meta.env.VITE_API_URL + '/api/color', 
                 {
-                    name: brandName.value
+                    name: colorName.value
                 }
                 )
                 .then(response => {
                     alert("¡Registro exitoso!");
-                    brandName.value = null;
+                    colorName.value = null;
                 }).catch(error => {
                     console.log(error);
                 alert("¡Error en el registro!");
@@ -60,9 +58,42 @@
             }
 
             
+            function checkName(){
+                /* Busca que el nombre este definido */
+                if(!colorName.value){
+                    vName.value = true;
+                    errors.value.name = "El nombre del color es requerido";
+                    return;
+                }
+                /* checa la longitud de la cadena, sin contar espacios */
+                if(colorName.value.length < 3 || colorName.value.length > 20){
+                    vName.value = true;
+                    errors.value.name = "El nombre del color debe tener entre 3 y 20 caracteres";
+                    return;
+                }
+                /* valida los caracteres aceptados */
+                if(!/^[a-zA-Z ]+$/.test(colorName.value)){
+                    errors.value.name = 'El nombre debe contener solo letras'
+                    vName.value = true
+                }
+            }
+            
+            function validateForm(){
+                errors.value = {};
+                checkName();
+
+                if(!vName.value){
+                    createColor();
+                }
+            }
+
             return{
-               brandName,
-               createBrand,
+               colorName,
+               errors,
+               vName,
+               checkName,
+               createColor,
+               validateForm
             }
         }
     }

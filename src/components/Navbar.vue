@@ -59,10 +59,10 @@
                       <router-link to="/AddAccesory">NUEVO</router-link>
                     </li>
                     <li>
-                      <router-link to="/EditClassification">EDITAR</router-link>
+                      <router-link to="/AccesoryEdit ">EDITAR</router-link>
                     </li>
                     <li>
-                      <router-link to="/ClassificationList">LISTA</router-link>
+                      <router-link to="/AccesoryList ">LISTA</router-link>
                     </li>
                   </ul>
                 </li>
@@ -74,7 +74,7 @@
                   </span>
                   <ul class="more-sub-menu sub-menu">
                     <li>
-                      <router-link to="/productCreate">NUEVO</router-link>
+                      <router-link to="/AddProduct">NUEVO</router-link>
                     </li>
                     <li>
                       <router-link to="/productSearch">LISTA</router-link>
@@ -92,10 +92,10 @@
                       <router-link to="/AddColor">NUEVO</router-link>
                     </li>
                     <li>
-                      <router-link to="/EditColor">EDITAR</router-link>
+                      <router-link to="/ColorEdit">EDITAR</router-link>
                     </li>
                     <li>
-                      <router-link to="/ListColor">LISTA</router-link>
+                      <router-link to="/ColorList">LISTA</router-link>
                     </li>
                   </ul>
                 </li>
@@ -130,7 +130,7 @@
             <li><a href="/productSearch">PRODUCTOS</a></li>
               <!-- <router-link to="/Products">PRODUCTOS</router-link> -->
     
-            <li><a href="#">COTIZACIÓN</a></li>
+            <li><a href="/Cotizacion">COTIZACIÓN</a></li>
             <li>
               <router-link to="/login">ACCESO</router-link>
             </li>

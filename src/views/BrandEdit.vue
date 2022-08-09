@@ -25,6 +25,7 @@
                         <div class="input-field-b">
                             <label>Clave*</label>
                             <input type="text" placeholder="Nueva clave" required v-model="key">
+                            <div class="error" v-if="vKey"> {{ errors.key }}</div>
                         </div>
                     </div>
                 </div>
@@ -56,7 +57,10 @@
             var brandName = ref(null);
             var errors = ref(null);
             var key = ref(null);
-            var vName = ref(null);
+            
+            var vName = ref(false);
+            var vKey = ref(false);
+            
           
             const brands = ref(null);
 
@@ -91,7 +95,7 @@
                 });
             }
 
-            function editBrand(){
+            function updateBrand(){
                 axios.patch(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value,
                 {
                     name: brandName.value,
@@ -132,34 +136,55 @@
                 }
                 
             }
+            function checkKey(){
+                /* Busca que la clave este definida */
+                if(!key.value){
+                    vKey.value = true;
+                    errors.value.key = "La clave es requerida";
+                    return;
+                }
+                /* checa la longitud de la cadena, sin contar espacios */
+                if(key.value.length < 3 || key.value.length > 20){
+                    vKey.value = true;
+                    errors.value.key = "La clave de marca debe tener entre 3 y 20 caracteres";
+                    return;
+                }
+                /* valida los caracteres aceptados */
+                if(!/^[a-zA-Z ]+$/.test(key.value)){
+                    errors.value.key = 'La clave debe contener solo letras'
+                    vKey.value = true
+                }
+            }
 
             function validateForm(){
                 errors.value = {};
                 checkName();
+                checkKey();
 
-                if(!vName){
-                    editBrand();
+                if(!vName && !vKey){
+                    updateBrand();
                 }
             }
-            
+
             onBeforeMount(() => {
                 getAllBrands();
             })
 
-            
 
             return{
-                errors,
                 brandSelected,
                 brandName,
+                errors,
+                key,
+                vName,
+                vKey,
                 brands,
                 getAllBrands,
                 loadAttributes,
                 deleteBrand,
-                editBrand,
-                key,
-                vName,
+                updateBrand,
                 checkName,
+                checkKey,
                 validateForm
             }
         }

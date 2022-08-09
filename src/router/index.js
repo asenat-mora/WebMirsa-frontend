@@ -6,20 +6,28 @@ import HomeView from '../views/HomeView.vue'
 import Philosophy from '../views/Philosophy.vue'
 import History from '../views/History.vue'
 import Products from '../views/Products.vue'
+import Cotizacion from '../views/Cotizacion.vue'
 import Login from '../views/Login.vue'
-import AddBrand from '../views/AddBrand.vue'
-import AddAccesory from '../views/AddAccesory.vue'
-import EditarMarca from '../views/BrandEdit.vue'
+/* Usuario */
 import Registro from '../views/UserRegister.vue'
-import ListaMarcas from '../views/BrandList.vue'
-import ListaClasificacion from '../views/ClassificationList.vue'
-import ClassificationEdit from '../views/ClassificationEdit.vue'
-import AddColor from '../views/AddColor.vue'
-import EditColor from '../views/EditColor.vue'
-import ListColor from '../views/ListColor.vue'
-import ProductSearch from '../views/ProductSearch.vue'
-import Product from '../views/Product.vue'
+/* Marcas */
+import AddBrand from '../views/AddBrand.vue'
+import BrandEdit from '../views/BrandEdit.vue'
+import BrandList from '../views/BrandList.vue'
+/* Accesorios */
+import AddAccesory from '../views/AddAccesory.vue'
+import AccesoryEdit from '../views/AccesoryEdit.vue'
+import AccesoryList from '../views/AccesoryList.vue'
+/* Productos */
+import AddProduct from '../views/AddProduct.vue'
 import ProductEdit from '../views/ProductEdit.vue'
+import ProductSearch from '../views/ProductSearch.vue'
+/* Colores */
+import AddColor from '../views/AddColor.vue'
+import ColorEdit from '../views/ColorEdit.vue'
+import ColorList from '../views/ColorList.vue'
+
+/* creo ya no sirve, verificar */
 import ArticleList from '../views/ArticleList.vue'
 
 
@@ -50,9 +58,22 @@ const router = createRouter({
 			component: Products,
 		},
 		{
+			path: "/Cotizacion",
+			name: "Cotizacion",
+			component: Cotizacion,
+		},
+		{
 			path: "/login",
 			name: "login",
 			component: Login,
+		},
+		{
+			path: "/registro",
+			name: "registro",
+			component: Registro,
+			meta: {
+				requiresAuth: true,
+			},
 		},
 		{
 			path: "/AddBrand",
@@ -65,23 +86,7 @@ const router = createRouter({
 		{
 			path: "/BrandEdit",
 			name: "BrandEdit",
-			component: EditarMarca,
-			meta: {
-				requiresAuth: true,
-			},
-		},
-		{
-			path: "/registro",
-			name: "registro",
-			component: Registro,
-			meta: {
-				requiresAuth: true,
-			},
-		},
-		{
-			path: "/ArticleList",
-			name: "ArticleList",
-			component: ArticleList,
+			component: BrandEdit,
 			meta: {
 				requiresAuth: true,
 			},
@@ -89,12 +94,11 @@ const router = createRouter({
 		{
 			path: "/BrandList",
 			name: "BrandList",
-			component: ListaMarcas,
+			component: BrandList,
 			meta: {
 				requiresAuth: true,
 			},
 		},
-
 		{
 			path: "/AddAccesory",
 			name: "AddAccesory",
@@ -104,21 +108,42 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/EditClassification",
-			name: "EditClassification",
-			component: ClassificationEdit,
+			path: "/AccesoryEdit ",
+			name: "AccesoryEdit ",
+			component: AccesoryEdit,
 			meta: {
 				requiresAuth: true,
 			},
 		},
 		{
-			path: "/ClassificationList",
-			name: "ClassificationList",
-			component: ListaClasificacion,
+			path: "/AccesoryList",
+			name: "AccesoryList",
+			component: AccesoryList,
 			meta: {
 				requiresAuth: true,
 			},
 		},
+		{
+            path: "/AddProduct",
+            name: "AddProduct",
+            component: AddProduct,
+            meta: {
+				requiresAuth: true,
+			},
+        },
+		{
+            path: "/productEdit/:id",
+            name: "ProductEdit",
+            component: ProductEdit,
+            meta: {
+				requiresAuth: true,
+			},
+        },
+		{
+            path: "/productSearch",
+            name: "ProductSearch",
+            component: ProductSearch,
+        },
 		{
 			path: "/AddColor",
 			name: "AddColor",
@@ -128,42 +153,33 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/EditColor",
-			name: "EditColor",
-			component: EditColor,
+			path: "/ColorEdit",
+			name: "ColorEdit",
+			component: ColorEdit,
 			meta: {
 				requiresAuth: true,
 			},
 		},
 		{
-			path: "/ListColor",
-			name: "ListColor",
-			component: ListColor,
+			path: "/ColorList",
+			name: "ColorList",
+			component: ColorList,
 			meta: {
 				requiresAuth: true,
 			},
 		},
-        {
-            path: "/productSearch",
-            name: "ProductSearch",
-            component: ProductSearch,
-        },
-        {
-            path: "/productCreate",
-            name: "ProductCreate",
-            component: Product,
-            meta: {
+		
+		{
+			path: "/ArticleList",
+			name: "ArticleList",
+			component: ArticleList,
+			meta: {
 				requiresAuth: true,
 			},
-        },
-        {
-            path: "/productEdit/:id",
-            name: "ProductEdit",
-            component: ProductEdit,
-            meta: {
-				requiresAuth: true,
-			},
-        }
+		}
+        
+        
+        
 	],
 });
 
