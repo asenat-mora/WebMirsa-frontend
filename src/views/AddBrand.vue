@@ -73,8 +73,10 @@
                     errors.value.name = "El nombre de la marca es requerido";
                     return;
                 }
+                /*quita espacios y los guarda en otra variable */
+                let nameNoSpace = brandName.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(brandName.value.length < 3 || brandName.value.length > 20){
+                if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
                     vName.value = true;
                     errors.value.name = "El nombre de la marca debe tener entre 3 y 20 caracteres";
                     return;
@@ -93,8 +95,9 @@
                     errors.value.key = "La clave es requerida";
                     return;
                 }
+                let keyNoSpace = key.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(key.value.length < 3 || key.value.length > 20){
+                if(keyNoSpace.length < 3 || keyNoSpace.length > 20){
                     vkey.value = true;
                     errors.value.key = "La clave de marca debe tener entre 3 y 20 caracteres";
                     return;
@@ -103,12 +106,13 @@
                 if(!/^[a-zA-Z ]+$/.test(key.value)){
                     vkey.value = true
                     errors.value.key = 'La clave debe contener solo letras'
-                    
+                 
                 }
             }
 
             function validateForm(){
                 errors.value = {};
+                vName.value, vkey.value = false;
                 checkName();
                 checkKey();
 

@@ -71,6 +71,10 @@
             }
 
             function deleteAccessory(){
+                /* resetea los valores del formulario */
+                errors.value = {};
+                vName.value = false;
+                
                 axios.delete(import.meta.env.VITE_API_URL + '/api/accessory/' + accesorySelected.value)
                 .then(response => {
                     alert("¡Registro eliminado!");
@@ -108,8 +112,10 @@
                     errors.value.name = "El nombre del accesorio es requerido";
                     return;
                 }
+                /*quita espacios y los guarda en otra variable */
+                let nameNoSpace = accesoryName.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(accesoryName.value.length < 3 || accesoryName.value.length > 20){
+                if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
                     vName.value = true;
                     errors.value.name = "El nombre del accesorio debe tener entre 3 y 20 caracteres";
                     return;
@@ -118,13 +124,14 @@
                 if(!/^[a-zA-Z ]+$/.test(accesoryName.value)){
                     errors.value.name = 'El nombre debe contener solo letras'
                     vName.value = true
-                    console.log(accesoryName.value);
+                    /* console.log(accesoryName.value); */
                 }
                 
             }
 
             function validateForm(){
                 errors.value = {};
+                vName.value = false;
                 checkName();
 
                 if(!vName.value){
@@ -137,9 +144,8 @@
             })
 
             return{
-
                 accesorySelected,
-                accesoryName ,
+                accesoryName,
                 accesories,
                 getAllAccessories,
                 loadName,

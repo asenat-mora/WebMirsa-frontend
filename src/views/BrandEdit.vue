@@ -81,6 +81,10 @@
             }
 
             function deleteBrand(){
+                /* resetea los valores del formulario */
+                errors.value = {};
+                vName.value = false;
+                
                 axios.delete(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value)
                 .then(response => {
                     alert("¡Registro eliminado!");
@@ -117,14 +121,15 @@
             
             function checkName(){
                 /* Busca que el nombre este definido */
-                
                 if(!brandName.value){
                     vName.value = true;
                     errors.value.name = "El nombre de la marca es requerido";
                     return;
                 }
+                /*quita espacios y los guarda en otra variable */
+                let nameNoSpace = brandName.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(brandName.value.length < 3 || brandName.value.length > 20){
+                if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
                     vName.value = true;
                     errors.value.name = "El nombre de la marca debe tener entre 3 y 20 caracteres";
                     return;
@@ -133,21 +138,22 @@
                 if(!/^[a-zA-Z ]+$/.test(brandName.value)){
                     errors.value.name = 'El nombre debe contener solo letras'
                     vName.value = true
-                    console.log(brandName.value);
+                    /* console.log(brandName.value); */
                 }
                 
             }
 
             function checkKey(){
                 /* Busca que la clave este definida */
-                
                 if(!key.value){
                     vKey.value = true;
                     errors.value.key = "La clave es requerida";
                     return;
                 }
+                /*quita espacios y los guarda en otra variable */
+                let nameNoSpace = key.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(key.value.length < 3 || key.value.length > 20){
+                if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
                     vKey.value = true;
                     errors.value.key = "La clave de marca debe tener entre 3 y 20 caracteres";
                     return;
@@ -161,6 +167,8 @@
 
             function validateForm(){
                 errors.value = {};
+                vName.value = false;
+                vKey.value = false;
                 checkName();
                 checkKey();
                 if(!vName.value && !vKey.value){

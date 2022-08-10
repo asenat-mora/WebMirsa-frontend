@@ -329,6 +329,8 @@
 
     function validateForm(event, mode){
         errors.value = {}
+        vColors.value, vSku.value, vBrand.value, vAccesory.value, vModel.value, vPrice.value, vSide.value, vDescription.value = false;
+
         checkSku()
         checkColors()
         checkBrand()
@@ -339,11 +341,13 @@
         checkDescription()
         checkImage()
 
-        if(!vColors && !vSku && !vBrand && !vAccesory && !vModel && !vPrice && !vSide && !vDescription){
+        if(!vColors.value && !vSku.value && !vBrand.value && !vAccesory.value && !vModel.value && !vPrice.value && !vSide.value && !vDescription.value){
             if(mode === 'Create'){
                 createProduct(event)
             }
-            updateProduct(event)
+            else{
+                updateProduct(event)
+            }
         }
         
     }

@@ -114,27 +114,25 @@ onBeforeMount(() => {
         <div class="bar-filter">
             <div class="filter-options">
                 <div class="option-first-row">
-                    <label>Descripción</label>
-                    <input class="txtbox" type="text" v-model="description" placeholder="Modelo">
-                </div>
-                <div class="option-first-row">
-                    <label>Color</label>
-                    <Multiselect class="select" v-model="selectedColors" mode="tags" :close-on-select="false" :searchable="false" :create-option="false" :options="colors" placeholder="Seleccione un color"/>
-                </div>
-
-                <div class="option-second-row">
                     <label>Marca</label>
                     <Multiselect class="select" v-model="selectedBrands" mode="tags" :close-on-select="false" :searchable="false" :create-option="false" :options="brands" placeholder="Seleccione una marca" />
                 </div>
-                <div class="option-second-row">
+                <div class="option-first-row">
                     <label>Accesorio</label>
                     <Multiselect class="select" v-model="selectedAccessories" mode="tags" :close-on-select="false" :searchable="false" :create-option="false" :options="accessories" placeholder="Seleccione un accesorio"/>
                 </div>
-                
+                <div class="option-second-row">
+                    <label>Color</label>
+                    <Multiselect class="select" v-model="selectedColors" mode="tags" :close-on-select="false" :searchable="false" :create-option="false" :options="colors" placeholder="Seleccione un color"/>
+                </div>
                 <div class="option-second-row">   
                     <label>Lado</label>
                     <Multiselect class="select" v-model="selectedSide" :close-on-select="true" :searchable="false" :create-option="false" :options="sides" placeholder="Lados"/>
-                </div>            
+                </div>  
+                <div class="option-second-row">
+                    <label>Descripción</label>
+                    <input class="txtbox" type="text" v-model="description" placeholder="Modelo">
+                </div>          
             </div>
             <div class="filter-buttons">
                 <button class="button" @click="search">Buscar</button>

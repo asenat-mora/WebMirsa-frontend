@@ -3,7 +3,7 @@
 <div class="body-register-marca">
    <div class="register-container-marca">
       <header>ALTA DE COLOR</header>
-        <form class="form-register-marca"  ><!-- action="#" @submit.prevent="validateForm" -->
+        <form class="form-register-marca"  @submit.prevent="validateForm">
             <div class="form-first">
                 <div class="details-marca">
                    <!--  <span class="title">DETALLES DE MARCA</span> -->
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="details-btns">  
-                    <button class="savebtn" type="submit"  @click="createColor">
+                    <button class="savebtn" type="submit">
                         <span class="btnGuardar">Guardar</span> 
                     </button>
                 </div>
@@ -42,7 +42,6 @@
 
 
             function createColor(){
-                
                 axios.post(import.meta.env.VITE_API_URL + '/api/color', 
                 {
                     name: colorName.value
@@ -65,8 +64,10 @@
                     errors.value.name = "El nombre del color es requerido";
                     return;
                 }
+                /*quita espacios y los guarda en otra variable */
+                let nameNoSpace = colorName.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(colorName.value.length < 3 || colorName.value.length > 20){
+                if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
                     vName.value = true;
                     errors.value.name = "El nombre del color debe tener entre 3 y 20 caracteres";
                     return;
@@ -80,6 +81,7 @@
             
             function validateForm(){
                 errors.value = {};
+                vName.value = false;
                 checkName();
 
                 if(!vName.value){

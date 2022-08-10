@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="savebtn">
+                    <button class="savebtn" type="submit">
                         <span class="btnGuardar">Guardar</span> <!-- @click="createAccesory" -->
                     </button>
                 </div>
@@ -67,8 +67,10 @@
                     errors.value.name = "El nombre del accesorio es requerido";
                     return;
                 }
+                /*quita espacios y los guarda en otra variable */
+                let nameNoSpace = accesoryName.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(accesoryName.value.length < 3 || accesoryName.value.length > 20){
+                if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
                     vName.value = true;
                     errors.value.name = "El nombre del accesorio debe tener entre 3 y 20 caracteres";
                     return;
@@ -82,6 +84,8 @@
 
             function validateForm(){
                 errors.value = {};
+                vName.value = false;
+
                 checkName();
                 
                 if(!vName.value){
