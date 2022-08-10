@@ -328,7 +328,7 @@
 
     function validateForm(event, mode){
         errors.value = {}
-        vColors.value, vSku.value, vBrand.value, vAccesory.value, vModel.value, vPrice.value, vSide.value, vDescription.value = false;
+        vColors.value = vSku.value = vBrand.value = vAccesory.value = vModel.value = vPrice.value = vSide.value = vDescription.value = false;
 
         checkSku()
         checkColors()

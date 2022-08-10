@@ -112,7 +112,7 @@
 
             function validateForm(){
                 errors.value = {};
-                vName.value, vkey.value = false;
+                vName.value = vkey.value = false;
                 checkName();
                 checkKey();
 
