@@ -45,6 +45,7 @@
 
 <script>
     import Navbar from '@/components/Navbar.vue';
+    import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
     export default{
@@ -87,7 +88,7 @@
                 
                 axios.delete(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value)
                 .then(response => {
-                    alert("¡Registro eliminado!");
+                    notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
                     getAllBrands();
                     brandSelected.value= null;
                     brandName.value = null;
@@ -95,7 +96,7 @@
                 })
                 .catch(error => {
                     console.log(error);
-                    alert("¡Error en el registro!");
+                    notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
                 });
             }
 
@@ -107,7 +108,7 @@
                 }
                 )
                 .then(response => {
-                    alert("¡Registro actualizado!");
+                    notify({title: "Exito", text: "¡Registro actualizado!", type: "success"});
                     getAllBrands();
                     brandSelected.value= null;
                     brandName.value = null;
@@ -115,7 +116,7 @@
                 })
                 .catch(error => {
                     console.log(error);
-                    alert("¡Error en el registro!");
+                    notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
                 });
             }
             

@@ -33,6 +33,7 @@
 
 <script>
     import Navbar from '@/components/Navbar.vue';
+    import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import axios from 'axios';
     import { ref } from 'vue';
     export default{
@@ -52,12 +53,12 @@
                 }
                 )
                 .then(response => {
-                    alert("¡Registro exitoso!");
+                    notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
                     accesoryName.value = null;
                 })
                 .catch(error => {
-                    alert("¡Error al registrar!");
-                    console.log(error)
+                    notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+                    /* console.log(error) */
                 })
             }
             function checkName(){
