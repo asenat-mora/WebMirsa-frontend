@@ -105,7 +105,7 @@
 
     import axios from 'axios';
     import axiosInstance from '../helpers/axiosInstance';
-    
+    import { notify } from "@kyvg/vue3-notification";
     import { useRouter } from 'vue-router';
     import Multiselect from '@vueform/multiselect'
     import { ref, watch, onMounted } from 'vue';
@@ -209,16 +209,15 @@
             side: props.productSide,
             description: props.productDescription,
             image: props.productImage,
-            colors: props.productColors
+            colors: arrayColors.value
         }
 
         axios.patch(import.meta.env.VITE_API_URL + '/api/product/' + props.productId, product)
             .then(response => {
-                alert("¡Registro actualizado!");
-                console.log(response);
+                notify({title: "Exito", text: "¡Registro actualizado!", type: "success"});
             }).catch(error => {
                 console.log(error);
-                alert("¡Error al actualizar!");
+                notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
             });
     }
 
@@ -233,7 +232,7 @@
             .catch(error => {
                 console.log(error);
             });
-    }
+    }   
 
     function goBack(event){
         event.preventDefault();
