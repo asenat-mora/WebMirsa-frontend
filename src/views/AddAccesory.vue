@@ -21,8 +21,11 @@
                     </div>
                 </div>
                 <div class="details-btns">
+                    <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
+                    </button>
                     <button class="savebtn" type="submit">
-                        <span class="btnGuardar">Guardar</span> <!-- @click="createAccesory" -->
+                        <span class="btnGuardar">Registrar</span> <!-- @click="createAccesory" -->
                     </button>
                 </div>
             </div>

@@ -9,7 +9,7 @@
                     <!-- <span class="title">EDITAR MARCA</span> -->
                     <div class="fields">
                         <div class="input-field-b">
-                            <label>Seleccionada</label>
+                            <label>Selector de marca*</label>
                             <select v-model="brandSelected" @change="loadAttributes">
                                 <option selected disabled >Seleccione una marca</option>
                                 <option v-for="brand in brands" :value = "brand.id">
@@ -32,6 +32,9 @@
                 <div class="details-btns">
                     <button type="button" class="deletebtn" @click="deleteBrand">
                         <span class="btnEliminar">Eliminar</span>
+                    </button>
+                    <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
                     </button>
                     <button type="button" class="updatelbtn" @click="validateForm">
                         <span class="btnActualizar">Actualizar</span>       
@@ -154,9 +157,9 @@
                 /*quita espacios y los guarda en otra variable */
                 let nameNoSpace = key.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
+                if(nameNoSpace.length < 1 || nameNoSpace.length > 3){
                     vKey.value = true;
-                    errors.value.key = "La clave de marca debe tener entre 3 y 20 caracteres";
+                    errors.value.key = "La clave de marca debe tener entre 1 y 3 caracteres";
                     return;
                 }
                 /* valida los caracteres aceptados */
