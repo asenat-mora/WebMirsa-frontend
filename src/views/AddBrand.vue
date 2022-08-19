@@ -39,6 +39,7 @@
     import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import axios from 'axios';
     import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
     export default{
         name: 'AddBrand',
         components: {
@@ -51,6 +52,12 @@
             var errors = ref(null);
             var vkey = ref(false);
             var vName = ref(false);
+            var router = useRouter();
+
+            const fieldsMap = {
+                name: "Nombre",
+                key: "Clave"
+            }
 
             function createBrand(){
                 
@@ -66,7 +73,12 @@
                     key.value = null;
                 }).catch(error => {
                     console.log(error);
-                    notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+                    if(error.response.status === 409){
+                        notify({title: "Advertencia", text: "¡El campo " + fieldsMap[error.response.data.target] + " se encuentra duplicado!", type: "warn"});
+                    }else{
+                        notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+                    }
+                    
                 });
             }
 
@@ -124,6 +136,11 @@
                     createBrand();
                 }
             }
+
+            function goBack(event){
+                event.preventDefault();
+                router.back();
+            }
             
             return{
                 brandName,
@@ -134,7 +151,10 @@
                 checkKey,
                 vName,
                 vkey,
-                key
+                key,
+                fieldsMap,
+                router, 
+                goBack
 
             }
         }
