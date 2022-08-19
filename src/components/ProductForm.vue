@@ -105,7 +105,7 @@
 
     import axios from 'axios';
     import axiosInstance from '../helpers/axiosInstance';
-    import { notify } from "@kyvg/vue3-notification";
+    import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import { useRouter } from 'vue-router';
     import Multiselect from '@vueform/multiselect'
     import { ref, watch, onMounted } from 'vue';
@@ -190,11 +190,11 @@
 
         axios.post(import.meta.env.VITE_API_URL + '/api/product', product)
         .then(response => {
-            alert("¡Registro exitoso!");
+            notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
             clearForm();
         }).catch(error => {
             console.log(error);
-            alert("¡Error en el registro!");
+            notify({title: "Error", text: "¡Error en el registro!", type: "error"});
         });
     }
 
@@ -225,12 +225,13 @@
         event.preventDefault();
         axios.delete(import.meta.env.VITE_API_URL + '/api/product/' + props.productId,)
             .then(response => {
-                alert("¡Registro eliminado!");
+                notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
                 router.back();
                 console.log(response);
             })
             .catch(error => {
                 console.log(error);
+                notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
             });
     }   
 

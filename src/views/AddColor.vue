@@ -28,6 +28,7 @@
 
 <script>
     import Navbar from '@/components/Navbar.vue';
+    import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import axios from 'axios';
     import { ref } from 'vue';
     export default{
@@ -48,11 +49,11 @@
                 }
                 )
                 .then(response => {
-                    alert("¡Registro exitoso!");
+                    notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
                     colorName.value = null;
                 }).catch(error => {
                     console.log(error);
-                alert("¡Error en el registro!");
+                    notify({title: "Error", text: "¡Error en el registro!", type: "error"});
                 });
             }
 

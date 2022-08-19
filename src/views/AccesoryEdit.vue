@@ -9,7 +9,7 @@
                     <!-- <span class="title">EDITAR ACCESORIO</span> -->
                     <div class="fields">
                         <div class="input-field-b">
-                            <label>Seleccionada</label>
+                            <label>Selector de accesorio*</label>
                             <select v-model="accesorySelected" @change="loadName">
                                 <option selected disabled >Seleccione una clasificación</option>
                                 <option v-for="accesory in accesories" :value = "accesory.id">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="input-field-b">
 
-                            <label>Nombre</label>
+                            <label>Nombre*</label>
                             <input type="text" placeholder="Nuevo nombre" required v-model="accesoryName">
                             <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>
@@ -29,6 +29,9 @@
                 <div class="details-btns">
                     <button  type="button" class="deletebtn" @click="deleteAccessory">
                         <span class="btnEliminar">Eliminar</span>
+                    </button>
+                    <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
                     </button>
                     <button type="button" class="updatelbtn" @click="validateForm">
                         <span class="btnActualizar">Actualizar</span>      
@@ -42,6 +45,7 @@
 
 <script>
     import Navbar from '@/components/Navbar.vue';
+    import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
     export default{
@@ -77,14 +81,14 @@
                 
                 axios.delete(import.meta.env.VITE_API_URL + '/api/accessory/' + accesorySelected.value)
                 .then(response => {
-                    alert("¡Registro eliminado!");
+                    notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
                     getAllAccessories();
                     accesorySelected.value= null;
                     accesoryName.value = null;
                 })
                 .catch(error => {
                     console.log(error);
-                    alert("¡Error en el registro!");
+                    notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
                 });
             }
 
@@ -95,14 +99,14 @@
                 }
                 )
                 .then(response => {
-                    alert("¡Registro actualizado!");
+                    notify({title: "Exito", text: "¡Registro actualizado!", type: "success"});
                     getAllAccessories();
                     accesorySelected.value= null;
                     accesoryName.value = null;
                 })
                 .catch(error => {
                     console.log(error);
-                    alert("¡Error en el registro!");
+                    notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
                 });
             }
             function checkName(){

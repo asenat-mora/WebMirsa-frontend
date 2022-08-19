@@ -14,7 +14,7 @@ const store = authStore();
     <Navbar />
     
     <router-view :key ="$route.path"/>
-    <notifications position="bottom left"/>
+    <notifications position="bottom left" /><!-- classes="my-notification" -->
     <Footer v-if="!store.getIsLoggedIn" />
     
     

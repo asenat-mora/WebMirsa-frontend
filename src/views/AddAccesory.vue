@@ -21,8 +21,11 @@
                     </div>
                 </div>
                 <div class="details-btns">
+                    <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
+                    </button>
                     <button class="savebtn" type="submit">
-                        <span class="btnGuardar">Guardar</span> <!-- @click="createAccesory" -->
+                        <span class="btnGuardar">Registrar</span> <!-- @click="createAccesory" -->
                     </button>
                 </div>
             </div>
@@ -33,6 +36,7 @@
 
 <script>
     import Navbar from '@/components/Navbar.vue';
+    import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import axios from 'axios';
     import { ref } from 'vue';
     export default{
@@ -52,12 +56,12 @@
                 }
                 )
                 .then(response => {
-                    alert("¡Registro exitoso!");
+                    notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
                     accesoryName.value = null;
                 })
                 .catch(error => {
-                    alert("¡Error al registrar!");
-                    console.log(error)
+                    notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+                    /* console.log(error) */
                 })
             }
             function checkName(){

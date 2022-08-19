@@ -9,7 +9,7 @@
                     <!-- <span class="title">EDITAR MARCA</span> -->
                     <div class="fields">
                         <div class="input-field-b">
-                            <label>Seleccionada</label>
+                            <label>Selector de marca*</label>
                             <select v-model="brandSelected" @change="loadAttributes">
                                 <option selected disabled >Seleccione una marca</option>
                                 <option v-for="brand in brands" :value = "brand.id">
@@ -33,6 +33,9 @@
                     <button type="button" class="deletebtn" @click="deleteBrand">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
+                    <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
+                    </button>
                     <button type="button" class="updatelbtn" @click="validateForm">
                         <span class="btnActualizar">Actualizar</span>       
                     </button>
@@ -45,6 +48,7 @@
 
 <script>
     import Navbar from '@/components/Navbar.vue';
+    import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
     export default{
@@ -87,7 +91,7 @@
                 
                 axios.delete(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value)
                 .then(response => {
-                    alert("¡Registro eliminado!");
+                    notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
                     getAllBrands();
                     brandSelected.value= null;
                     brandName.value = null;
@@ -95,7 +99,7 @@
                 })
                 .catch(error => {
                     console.log(error);
-                    alert("¡Error en el registro!");
+                    notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
                 });
             }
 
@@ -107,7 +111,7 @@
                 }
                 )
                 .then(response => {
-                    alert("¡Registro actualizado!");
+                    notify({title: "Exito", text: "¡Registro actualizado!", type: "success"});
                     getAllBrands();
                     brandSelected.value= null;
                     brandName.value = null;
@@ -115,7 +119,7 @@
                 })
                 .catch(error => {
                     console.log(error);
-                    alert("¡Error en el registro!");
+                    notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
                 });
             }
             
@@ -153,9 +157,9 @@
                 /*quita espacios y los guarda en otra variable */
                 let nameNoSpace = key.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
+                if(nameNoSpace.length < 1 || nameNoSpace.length > 3){
                     vKey.value = true;
-                    errors.value.key = "La clave de marca debe tener entre 3 y 20 caracteres";
+                    errors.value.key = "La clave de marca debe tener entre 1 y 3 caracteres";
                     return;
                 }
                 /* valida los caracteres aceptados */

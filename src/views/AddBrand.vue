@@ -21,8 +21,11 @@
                     </div>
                 </div>
                 <div class="details-btns">  
+                    <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
+                    </button>
                     <button class="savebtn" type="submit" >
-                        <span class="btnGuardar">Guardar</span> 
+                        <span class="btnGuardar">Registrar</span> 
                     </button>
                 </div>
             </div>
@@ -33,6 +36,7 @@
 
 <script>
     import Navbar from '@/components/Navbar.vue';
+    import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import axios from 'axios';
     import { ref } from 'vue';
     export default{
@@ -57,12 +61,12 @@
                 }
                 )
                 .then(response => {
-                    alert("¡Registro exitoso!");
+                    notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
                     brandName.value = null;
                     key.value = null;
                 }).catch(error => {
                     console.log(error);
-                alert("¡Error en el registro!");
+                    notify({title: "Error", text: "¡Error en el registro!", type: "error"});
                 });
             }
 
@@ -83,7 +87,7 @@
                 }
                 /* valida los caracteres aceptados */
                 if(!/^[a-zA-Z ]+$/.test(brandName.value)){
-                    errors.value.name = 'El nombre debe contener solo letras'
+                    errors.value.name = "El nombre debe contener solo letras";
                     vName.value = true
                 }
             }
@@ -97,15 +101,15 @@
                 }
                 let keyNoSpace = key.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
-                if(keyNoSpace.length < 3 || keyNoSpace.length > 20){
+                if(keyNoSpace.length < 1 || keyNoSpace.length > 3){
                     vkey.value = true;
-                    errors.value.key = "La clave de marca debe tener entre 3 y 20 caracteres";
+                    errors.value.key = "La clave de marca debe tener entre 1 y 3 caracteres";
                     return;
                 }
                 /* valida los caracteres aceptados */
                 if(!/^[a-zA-Z ]+$/.test(key.value)){
                     vkey.value = true
-                    errors.value.key = 'La clave debe contener solo letras'
+                    errors.value.key = "La clave debe contener solo letras";
                  
                 }
             }

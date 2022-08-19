@@ -742,7 +742,7 @@ nav .divNav .option-menu li .arrow{
       background-color: var(--fondo);
   }
 /* ------Buscador--------- */
-.field-search{
+/* .field-search{
   width: 100%;
   display: flex;
   background-color: #ebeff3;
@@ -777,14 +777,14 @@ nav .divNav .option-menu li .arrow{
     border: 1px solid var(--border-gray);
     padding: 0 15px;
     height: 42px;
-}
+} */
 
 /*------------------- 
 --------Filtro-Marcas----
 --------------------*/
 .container-filter{
   margin: 10px 0;
-  background-color: #ebeff3;
+  background-color: #b9d3ec;
 }
 .filter-options{
   display: flex;
@@ -819,20 +819,6 @@ nav .divNav .option-menu li .arrow{
     form .fields .input-field{
         width: calc(100% / 3 - 15px);
     }
-
-  
-
-
-
-/*       .register-container-product form{
-          overflow-y: scroll;
-      }
-      .register-container-product form::-webkit-scrollbar{
-         display: none;
-      }
-      .register-container-product form button{
-          width: 200px;
-      } */
    
   /* Botones */
   .register-container-product button,/* para listas */
@@ -983,6 +969,9 @@ nav .divNav .option-menu li .arrow{
 
   
 }
+/*------Alertas------*/
+
+
 
 /*---------------------------------------------
 -------------------INICIO----------------------
