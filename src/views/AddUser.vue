@@ -14,14 +14,9 @@
                             <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>
                         <div class="input-field-b">
-                            <label>Apellido Paterno*</label>
+                            <label>Apellidos*</label>
                             <input type="text" placeholder="Nombre de la marca" v-model="userLastNameP" >
                             <div class="error" v-if="vLastNameP"> {{ errors.name }}</div>
-                        </div>
-                        <div class="input-field-b">
-                            <label>Apellido Materno*</label>
-                            <input type="text" placeholder="Nombre de la marca" v-model="userLastNameM" >
-                            <div class="error" v-if="vLastNameM"> {{ errors.name }}</div>
                         </div>
                         <div class="input-field-b">
                             <label>Correo*</label>
