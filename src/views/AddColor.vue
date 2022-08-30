@@ -16,8 +16,11 @@
                     </div>
                 </div>
                 <div class="details-btns">  
+                    <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
+                    </button>
                     <button class="savebtn" type="submit">
-                        <span class="btnGuardar">Guardar</span> 
+                        <span class="btnGuardar">Registrar</span> 
                     </button>
                 </div>
             </div>
@@ -31,6 +34,7 @@
     import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import axios from 'axios';
     import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
     export default{
         name: 'AddColor',
         components: {
@@ -40,7 +44,11 @@
             var colorName = ref(null);
             var errors = ref(null);
             var vName = ref(false);
+            var router = useRouter();
 
+            const fieldsMap = {
+                name: "Nombre"
+            }
 
             function createColor(){
                 axios.post(import.meta.env.VITE_API_URL + '/api/color', 
@@ -52,8 +60,12 @@
                     notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
                     colorName.value = null;
                 }).catch(error => {
-                    console.log(error);
-                    notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+                    if(error.response.status === 409){
+                        /* Validar duplicidad de datos */
+                        notify({title: "Advertencia", text: "¡El nombre " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn"});
+                    }else{
+                        notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+                    }
                 });
             }
 
@@ -90,13 +102,21 @@
                 }
             }
 
+            function goBack(event){
+                event.preventDefault();
+                router.back();
+            }
+
             return{
-               colorName,
-               errors,
-               vName,
-               checkName,
-               createColor,
-               validateForm
+                colorName,
+                errors,
+                vName,
+                checkName,
+                createColor,
+                validateForm,
+                fieldsMap,
+                router, 
+                goBack
             }
         }
     }

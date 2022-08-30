@@ -7,6 +7,7 @@
                     <input class="login-input" type="email" v-model="email" placeholder="Correo electronico">
                     <input class="login-input" type="password" v-model="password" placeholder="Contraseña">
                     <a href="#"> <span class="login-span">Olvidaste tu contraseña?</span> </a>
+                    <!--recaptcha -->
                     <VueRecaptcha
                         :sitekey="siteKey"
                         :load-recaptcha-script="true"
@@ -16,13 +17,6 @@
                     <button class="login-btn" ref="loginBtn" disabled @click="invokeLogin">
                         Login
                     </button>
-                   
-                   <!--  <p>No tengo una cuenta
-                        <br>
-                        <a href="formRegisterUser.html">
-                            <span class="login-span">Registrarse</span>
-                        </a>
-                    </p> -->
                 </form>
             </div>
             <img class="login-image-container" src="../assets/img/login/car.jpg" alt="">
@@ -43,7 +37,6 @@ export default{
     },
     setup(){
         const loginBtn = ref('');
-
         const siteKey = computed(() => {
             return '6LdL3MAfAAAAAPXFeWcxj1o2zll7jmENlxHo-gHR';
         });
@@ -57,7 +50,6 @@ export default{
         };
         const store = authStore();
         const router = useRouter();
-
         const email = ref('')
         const password = ref('')
 
@@ -66,7 +58,6 @@ export default{
                 email: email.value,
                 password: password.value
             }
-        
             store.login(payload).then(() => {
                 router.push('/')
             }).catch((error) => {

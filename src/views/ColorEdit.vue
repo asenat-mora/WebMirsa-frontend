@@ -28,6 +28,9 @@
                     <button class="deletebtn" type="button" @click="deleteColor">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
+                    <button type="button" class="cancelbtn" @click="goBack($event)">
+                            <span class="btnCancelar">Volver</span>
+                    </button>
                     <button class="updatelbtn" type="button" @click="validateForm">
                         <span class="btnActualizar">Actualizar</span>       
                     </button>
@@ -43,6 +46,7 @@
     import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
+    import { useRouter } from 'vue-router';
     export default{
         name: 'ColorEdit',
         components: {
@@ -54,6 +58,11 @@
             const colors = ref(null);
             var errors = ref(null);
             var vName = ref(false);
+            var router = useRouter();
+
+            const fieldsMap = {
+                name: "Nombre"
+            }
 
             function getAllColors(){
                 axios.get(import.meta.env.VITE_API_URL + '/api/color')
@@ -101,7 +110,12 @@
                 })
                 .catch(error => {
                     console.log(error);
-                    notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
+                    if(error.response.status === 409){
+                        /* Validar duplicidad de datos */
+                        notify({title: "Advertencia", text: "¡El campo " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn"});                       
+                    }else{
+                        notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
+                    }
                 });
             }
             function checkName(){
@@ -139,6 +153,11 @@
                 getAllColors();
             })
 
+            function goBack(event){
+                event.preventDefault();
+                router.back();
+            }
+
             return{
                 colorSelected,
                 colorName,
@@ -150,7 +169,10 @@
                 checkName,
                 validateForm,
                 errors,
-                vName
+                vName,
+                fieldsMap,
+                router, 
+                goBack
             }
         }
     }

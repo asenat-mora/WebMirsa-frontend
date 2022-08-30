@@ -51,6 +51,7 @@
     import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
+    import { useRouter } from 'vue-router';
     export default{
         name: 'BrandEdit',
         components: {
@@ -63,10 +64,14 @@
             var key = ref(null);
             
             var vName = ref(false);
-            var vKey = ref(false);
-            
-          
+            var vKey = ref(false);       
             const brands = ref(null);
+            var router = useRouter();
+
+            const fieldsMap = {
+                name: "Nombre",
+                key: "Clave"
+            }
 
             function getAllBrands(){
                 axios.get(import.meta.env.VITE_API_URL + '/api/brand')
@@ -119,7 +124,15 @@
                 })
                 .catch(error => {
                     console.log(error);
-                    notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
+                    if(error.response.status === 409){
+                        /* Validar duplicidad de datos */
+                        notify({title: "Advertencia", text: "¡El campo " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn"});                       
+                    }else{
+                        notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
+                    }
+
+
+                    
                 });
             }
             
@@ -184,6 +197,10 @@
                 getAllBrands();
             })
 
+            function goBack(event){
+                event.preventDefault();
+                router.back();
+            }
 
             return{
                 brandSelected,
@@ -199,7 +216,10 @@
                 updateBrand,
                 checkName,
                 checkKey,
-                validateForm
+                validateForm,
+                fieldsMap,
+                router, 
+                goBack
             }
         }
     }

@@ -1,5 +1,4 @@
-/* Define las rutas que estaran en la aplicacion 
-*/
+/* Define las rutas que estaran en la aplicacion */
 import { createRouter, createWebHistory } from 'vue-router'
 /* Vista cliente */
 import HomeView from '../views/HomeView.vue'
@@ -8,8 +7,12 @@ import History from '../views/History.vue'
 import Products from '../views/Products.vue'
 import Cotizacion from '../views/Cotizacion.vue'
 import Login from '../views/Login.vue'
+
 /* Usuario */
-import Registro from '../views/UserRegister.vue'
+/* import Registro from '../views/UserRegister.vue' */
+import AddUser from '../views/AddUser.vue'
+import UserEdit from '../views/UserEdit.vue'
+
 /* Marcas */
 import AddBrand from '../views/AddBrand.vue'
 import BrandEdit from '../views/BrandEdit.vue'
@@ -64,14 +67,14 @@ const router = createRouter({
 			name: "login",
 			component: Login,
 		},
-		{
+/* 		{
 			path: "/registro",
 			name: "registro",
 			component: Registro,
 			meta: {
 				requiresAuth: true,
 			},
-		},
+		}, */
 		{
 			path: "/AddBrand",
 			name: "AddBrand",
@@ -161,6 +164,22 @@ const router = createRouter({
 			path: "/ColorList",
 			name: "ColorList",
 			component: ColorList,
+			meta: {
+				requiresAuth: true,
+			},
+		},
+		{
+			path: "/AddUser",
+			name: "AddUser",
+			component: AddUser,
+			meta: {
+				requiresAuth: true,
+			},
+		},
+		{
+			path: "/UserEdit",
+			name: "UserEdit",
+			component: UserEdit,
 			meta: {
 				requiresAuth: true,
 			},

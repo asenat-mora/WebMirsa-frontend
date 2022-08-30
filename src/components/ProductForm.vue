@@ -125,6 +125,10 @@
     let vSide = ref(false);
     let vDescription = ref(false);
 
+    const fieldsMap = {
+        sku: "SKU"
+    }
+
     const props = defineProps({
         brands: Object,
         colors: Object,
@@ -194,7 +198,12 @@
             clearForm();
         }).catch(error => {
             console.log(error);
-            notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+            if(error.response.status === 409){
+                /* Validar duplicidad de datos */
+                notify({title: "Advertencia", text: "¡El campo " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn"});
+            }else{
+                notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+            }
         });
     }
 
@@ -217,7 +226,12 @@
                 notify({title: "Exito", text: "¡Registro actualizado!", type: "success"});
             }).catch(error => {
                 console.log(error);
-                notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
+                if(error.response.status === 409){
+                    /* Validar duplicidad de datos */
+                    notify({title: "Advertencia", text: "¡El campo " + fieldsMap[error.response.data.target] + " se encuentra duplicado!", type: "warn"});
+                }else{
+                    notify({title: "Error", text: "¡Error en el registro!", type: "error"});
+                }
             });
     }
 

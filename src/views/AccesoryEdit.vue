@@ -48,6 +48,7 @@
     import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
+    import { useRouter } from 'vue-router';
     export default{
         name: 'AccesoryEdit',
         components: {
@@ -59,6 +60,11 @@
             const accesories = ref(null);
             var errors = ref(null);
             var vName = ref(false);
+            var router = useRouter();
+
+            const fieldsMap = {
+                name: "Nombre"
+            }
 
             function getAllAccessories(){
                 axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
@@ -106,7 +112,12 @@
                 })
                 .catch(error => {
                     console.log(error);
-                    notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
+                    if(error.response.status === 409){
+                        /* Validar duplicidad de datos */
+                        notify({title: "Advertencia", text: "¡El campo " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn"});                       
+                    }else{
+                        notify({title: "Error", text: "¡Error al actualizar!", type: "error"});
+                    }
                 });
             }
             function checkName(){
@@ -147,6 +158,11 @@
                 getAllAccessories();
             })
 
+            function goBack(event){
+                event.preventDefault();
+                router.back();
+            }
+
             return{
                 accesorySelected,
                 accesoryName,
@@ -158,7 +174,10 @@
                 checkName,
                 validateForm,
                 errors,
-                vName
+                vName,
+                fieldsMap,
+                router, 
+                goBack
                 
             }
         }

@@ -74,6 +74,7 @@
                 }).catch(error => {
                     console.log(error);
                     if(error.response.status === 409){
+                        /* Validar duplicidad de datos */
                         notify({title: "Advertencia", text: "¡El campo " + fieldsMap[error.response.data.target] + " se encuentra duplicado!", type: "warn"});
                     }else{
                         notify({title: "Error", text: "¡Error en el registro!", type: "error"});
