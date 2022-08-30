@@ -108,7 +108,7 @@
     import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import { useRouter } from 'vue-router';
     import Multiselect from '@vueform/multiselect'
-    import { ref, watch, onMounted } from 'vue';
+    import { ref, watch } from 'vue';
 
     const router = useRouter();
     const defaultImageSrc = 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png';
