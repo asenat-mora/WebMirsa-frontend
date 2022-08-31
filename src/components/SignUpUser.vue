@@ -10,23 +10,23 @@
                         <div class="fields">
                             <div class="input-field-b">
                                 <label>Nombre*</label>
-                                <input type="text" placeholder="Nombre de la marca" v-model="name">
-                                <div class="error" v-if="vName"> {{  errors.name  }}</div>
+                                <input type="text" v-model="name">
+                                <div class="error" v-if="vName"> {{ errors.name }}</div>
                             </div>
                             <div class="input-field-b">
                                 <label>Apellidos*</label>
-                                <input type="text" placeholder="Nombre de la marca" v-model="surname">
-                                <div class="error" v-if="vLastNameP"> {{  errors.name  }}</div>
+                                <input type="text" v-model="surName">
+                                <div class="error" v-if="vUserName"> {{ errors.surName }}</div>
                             </div>
                             <div class="input-field-b">
                                 <label>Correo*</label>
-                                <input type="text" placeholder="Clave de la marca" v-model="email">
-                                <div class="error" v-if="vEmail"> {{  errors.key  }}</div>
+                                <input type="text" v-model="email">
+                                <div class="error" v-if="vEmail"></div>
                             </div>
                             <div class="input-field-b">
                                 <label>Correo de Verificación*</label>
-                                <input type="text" placeholder="Clave de la marca" v-model="verificationEmail">
-                                <div class="error" v-if="vEmail"> {{  errors.key  }}</div>
+                                <input type="text" v-model="verificationEmail">
+                                <div class="error" v-if="vEmailVerify"> </div>
                             </div>
                             <div class="input-field-b">
                                 <label>Rol*</label>
@@ -34,17 +34,18 @@
                                     <option selected disabled>Seleccione un Rol para el usuario</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Capturista</option>
+                                <div class="error" v-if="vUserRol"> {{ errors.rol }}</div>
                                 </select>
                             </div>
                             <div class="input-field-b">
                                 <label>Password*</label>
-                                <input type="text" placeholder="Nombre de la marca" v-model="password">
-                                <div class="error" v-if="vPassword"> {{  errors.name  }}</div>
+                                <input type="password" v-model="password">
+                               <!--  <div class="error" v-if="vPassword"> {{ errors.name }}</div> -->
                             </div>
                             <div class="input-field-b">
                                 <label>Confirmaci&oacute;n de Password*</label>
-                                <input type="text" placeholder="Nombre de la marca" v-model="confirmPassword">
-                                <div class="error" v-if="vPassword"> {{  errors.name  }}</div>
+                                <input type="password" v-model="confirmPassword">
+                                <!-- <div class="error" v-if="vPassword"> {{ errors.name }}</div> -->
                             </div>
 
                         </div>
@@ -72,15 +73,19 @@
     import { notify } from "@kyvg/vue3-notification";
 
     const router = useRouter();
-
     const password = ref(null);
     const confirmPassword = ref(null);
-
+    let errors = ref(null);
+    let vName = ref(false);
+    let vUserName = ref(false);
+    let vEmail = ref(false);
+    let vEmailVerify = ref(false);
+    let vUserRol = ref(false);
 
     const props = defineProps({
         id: Number,
         name: String,
-        surname: String,
+        surName: String,
         email: String,
         verificationEmail: String,
         userRol: String,
@@ -88,12 +93,21 @@
         mode: String
     })
 
-    function goBack(event){
+    function clearForm(){
+        props.name = '';
+        props.surName = '';
+        props.email = '';
+        props.verificationEmail = '';
+        props.userRol = '';
+
+    }
+
+    function goBack(event) {
         event.preventDefault();
         router.back();
     }
 
-    function createUser(){
+    function createUser() {
         const user = {
             name: props.name,
             surname: props.surname,
@@ -104,20 +118,20 @@
         }
 
         axios.post(import.meta.env.VITE_API_URL + '/api/users/signUp', user)
-            .then(response =>{
-                notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
+            .then(response => {
+                notify({ title: "Exito", text: "¡Registro exitoso!", type: "success" });
+                clearForm();
             }).catch(error => {
-                if(error.response.status === 409){
-                
-                notify({title: "Advertencia", text: "¡El correo ya se encuentra registrado!", type: "warn"});
-            }else{
-                notify({title: "Error", text: "¡Error en el registro!", type: "error"});
-            }
+                if (error.response.status === 409) {
+
+                    notify({ title: "Advertencia", text: "¡El correo ya se encuentra registrado!", type: "warn" });
+                } else {
+                    notify({ title: "Error", text: "¡Error en el registro!", type: "error" });
+                }
             })
-        
     }
 
-    function updateUser(){
+    function updateUser() {
         const user = {
             name: props.name,
             surname: props.surname,
@@ -128,27 +142,131 @@
         }
 
         axios.patch(import.meta.env.VITE_API_URL + '/api/users/' + props.id, user)
-            .then(response =>{
-                notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
+            .then(response => {
+                notify({ title: "Exito", text: "¡Registro exitoso!", type: "success" });
             }).catch(error => {
-                if(error.response.status === 409){
-                notify({title: "Advertencia", text: "¡El correo ya se encuentra registrado!", type: "warn"});
-            }else{
-                notify({title: "Error", text: "¡Error en la actualización!", type: "error"});
-            }
+                if (error.response.status === 409) {
+                    notify({ title: "Advertencia", text: "¡El correo ya se encuentra registrado!", type: "warn" });
+                } else {
+                    notify({ title: "Error", text: "¡Error en la actualización!", type: "error" });
+                }
             })
     }
 
-    function validateFields(event, mode){
-        event.preventDefault();
-        if(mode === 'Create'){
-            createUser();
-        }else{
-            
-            updateUser();
+    /* validaciones */
+    function checkName() {
+        /* Busca que el nombre este definido */
+        if (!props.name) {
+            vName.value = true;
+            errors.value.name = "El nombre de usuario es requerido";
+            return;
+        }
+        /*quita espacios y los guarda en otra variable */
+        let nameNoSpace = props.name.replace(/ /g, '');
+        /* checa la longitud de la cadena, sin contar espacios */
+        if (nameNoSpace.length < 3 || nameNoSpace.length > 20) {
+            errors.value.name = "El nombre debe tener entre 3 y 20 caracteres alfabeticos";
+            vName.value = true;
+        }
+        /* valida los caracteres aceptados */
+        if (!/^[a-zA-Z ]+$/.test(props.name)) {
+            errors.value.name = "El nombre debe contener solo letras";
+            vName.value = true
         }
     }
 
+    function checkUserName() {
+        /* Busca que el nombre este definido */
+        if (!props.surName) {
+            vUserName.value = true;
+            errors.value.surName = "Campo obligatorio";
+            return;
+        }
+        /*quita espacios y los guarda en otra variable */
+        let surnameNoSpace = props.surName.replace(/ /g, '');
+        /* checa la longitud de la cadena, sin contar espacios */
+        if (surnameNoSpace.length < 3 || surnameNoSpace.length > 20) {
+            errors.value.surName = "Los apellidos deben tener entre 3 y 20 caracteres alfabeticos";
+            vUserName.value = true;
+        }
+        /* valida los caracteres aceptados */
+        if (!/^[a-zA-Z ]+$/.test(props.surName)) {
+            errors.value.surName = "Debe contener solo letras";
+            vUserName.value = true
+        }
+    }
+
+    function checkEmail() {
+        /* Busca que el nombre este definido */
+        if (!props.email) {
+            vEmail.value = true;
+            errors.value.email = "El correo del usuario es requerido";
+            return;
+        }
+        /*quita espacios y los guarda en otra variable */
+        let emailNoSpace = props.email.replace(/ /g, '');
+        /* checa la longitud de la cadena, sin contar espacios */
+        if (emailNoSpace.length < 8 || emailNoSpace.length > 20) {
+            errors.value.email = "El correo debe tener entre 8 y 20 caracteres alfabeticos";
+            vEmail.value = true;
+        }
+        /* valida los caracteres aceptados */
+        if (!/^[a-zA-Z ]+$/.test(props.email)) {
+            errors.value.email = "El correo debe contener [letras, @ y . ]";
+            vEmail.value = true
+        }
+    }
+
+    function checkEmailVerify() {
+        /* Busca que el email este definido */
+        if (!props.verificationEmail) {
+            vEmailVerify.value = true;
+            errors.value.verificationEmail = "Campo obligatorio";
+            return;
+        }
+        /*quita espacios y los guarda en otra variable */
+        let emailVerifyNoSpace = props.verificationEmail.replace(/ /g, '');
+        /* checa la longitud de la cadena, sin contar espacios */
+        if (emailVerifyNoSpace.length < 8 || emailVerifyNoSpace.length > 20) {
+            errors.value.verificationEmail = "Los apellidos deben tener entre 3 y 20 caracteres alfabeticos";
+            vEmailVerify.value = true;
+        }
+        /* valida los caracteres aceptados */
+        if (!/^[a-zA-Z ]+$/.test(props.verificationEmail)) {
+            errors.value.verificationEmail = "Debe contener solo letras";
+            vEmailVerify.value = true
+        }
+    }
+  
+    function checkRol() {
+        if(!props.userRol){
+            errors.value.rol = 'Debe seleccionar un rol';
+            vUserRol.value = true;
+        }
+    }
+
+    function validateFields(event, mode) {
+        errors.value = {}
+        vName.value = vUserName.value = vEmail.value = vEmailVerify.value = vUserRol.value;
+
+        checkName()
+        checkUserName()
+        checkEmail()
+        checkEmailVerify()
+        checkRol()
+
+        event.preventDefault();
+
+        if(!vName.value && !vUserName.value && !vEmail.value && !vEmailVerify.value && vUserRol.value){
+            if (mode === 'Create') {
+                createUser(event);
+            } else {
+                updateUser(event);
+            }
+        }
+
+        
+    }
 
 
 </script>
