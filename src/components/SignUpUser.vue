@@ -15,18 +15,18 @@
                             </div>
                             <div class="input-field-b">
                                 <label>Apellidos*</label>
-                                <input type="text" v-model="surName">
-                                <div class="error" v-if="vUserName"> {{ errors.surName }}</div>
+                                <input type="text" v-model="surname">
+                                <div class="error" v-if="vSurname"> {{ errors.surname }}</div>
                             </div>
                             <div class="input-field-b">
                                 <label>Correo*</label>
                                 <input type="text" v-model="email">
-                                <div class="error" v-if="vEmail"></div>
+                                <div class="error" v-if="vEmail"> {{ errors.email }} </div>
                             </div>
                             <div class="input-field-b">
                                 <label>Correo de Verificación*</label>
                                 <input type="text" v-model="verificationEmail">
-                                <div class="error" v-if="vEmailVerify"> </div>
+                                <div class="error" v-if="vEmailVerify"> {{ errors.verificationEmail }} </div>
                             </div>
                             <div class="input-field-b">
                                 <label>Rol*</label>
@@ -34,8 +34,8 @@
                                     <option selected disabled>Seleccione un Rol para el usuario</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Capturista</option>
-                                <div class="error" v-if="vUserRol"> {{ errors.rol }}</div>
                                 </select>
+                                <div class="error" v-if="vUserRol">{{ errors.rol }}</div>
                             </div>
                             <div class="input-field-b">
                                 <label>Password*</label>
@@ -77,7 +77,7 @@
     const confirmPassword = ref(null);
     let errors = ref(null);
     let vName = ref(false);
-    let vUserName = ref(false);
+    let vSurname = ref(false);
     let vEmail = ref(false);
     let vEmailVerify = ref(false);
     let vUserRol = ref(false);
@@ -85,17 +85,17 @@
     const props = defineProps({
         id: Number,
         name: String,
-        surName: String,
+        surname: String,
         email: String,
         verificationEmail: String,
-        userRol: String,
+        userRol: Number,
         id: Number,
         mode: String
     })
 
     function clearForm(){
         props.name = '';
-        props.surName = '';
+        props.surname = '';
         props.email = '';
         props.verificationEmail = '';
         props.userRol = '';
@@ -175,24 +175,24 @@
         }
     }
 
-    function checkUserName() {
+    function checkSurname() {
         /* Busca que el nombre este definido */
-        if (!props.surName) {
-            vUserName.value = true;
-            errors.value.surName = "Campo obligatorio";
+        if (!props.surname) {
+            vSurname.value = true;
+            errors.value.surname = "Campo obligatorio";
             return;
         }
         /*quita espacios y los guarda en otra variable */
-        let surnameNoSpace = props.surName.replace(/ /g, '');
+        let surnameNoSpace = props.surname.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (surnameNoSpace.length < 3 || surnameNoSpace.length > 20) {
-            errors.value.surName = "Los apellidos deben tener entre 3 y 20 caracteres alfabeticos";
-            vUserName.value = true;
+            errors.value.surname = "Los apellidos deben tener entre 3 y 20 caracteres alfabeticos";
+            vSurname.value = true;
         }
         /* valida los caracteres aceptados */
-        if (!/^[a-zA-Z ]+$/.test(props.surName)) {
-            errors.value.surName = "Debe contener solo letras";
-            vUserName.value = true
+        if (!/^[a-zA-Z ]+$/.test(props.surname)) {
+            errors.value.surname = "Debe contener solo letras";
+            vSurname.value = true
         }
     }
 
@@ -247,17 +247,17 @@
 
     function validateFields(event, mode) {
         errors.value = {}
-        vName.value = vUserName.value = vEmail.value = vEmailVerify.value = vUserRol.value;
+        vName.value = vSurname.value = vEmail.value = vEmailVerify.value = vUserRol.value = false;
 
         checkName()
-        checkUserName()
+        checkSurname()
         checkEmail()
         checkEmailVerify()
         checkRol()
 
         event.preventDefault();
 
-        if(!vName.value && !vUserName.value && !vEmail.value && !vEmailVerify.value && vUserRol.value){
+        if(!vName.value && !vSurname.value && !vEmail.value && !vEmailVerify.value && vUserRol.value){
             if (mode === 'Create') {
                 createUser(event);
             } else {
