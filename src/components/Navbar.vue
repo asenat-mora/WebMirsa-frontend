@@ -99,7 +99,7 @@
               <ul class="js-sub-menu sub-menu">
                 <li><router-link to="/AddUser">ALTA</router-link></li>
                 <li><router-link to="/UserEdit">EDITAR</router-link></li>
-                <li><router-link to="#">DETALLE</router-link></li>
+                <li><router-link to="/UserList">DETALLE</router-link></li>
               </ul>
             </li>  
             <li><a href="#">ADMINISTRADOR</a>

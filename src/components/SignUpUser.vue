@@ -24,28 +24,27 @@
                                 <div class="error" v-if="vEmail"> {{ errors.email }} </div>
                             </div>
                             <div class="input-field-b">
-                                <label>Correo de Verificación*</label>
+                                <label>Correo de Verificaci&oacute;n*</label>
                                 <input type="text" v-model="verificationEmail">
                                 <div class="error" v-if="vEmailVerify"> {{ errors.verificationEmail }} </div>
                             </div>
                             <div class="input-field-b">
-                                <label>Rol*</label>
+                                <label>Contrase&ntilde;a*</label>
+                                <input type="password" v-model="password">
+                                <div class="error" v-if="vPassword"> {{ errors.password }}</div>
+                            </div>
+                            <div class="input-field-b">
+                                <label>Confirmaci&oacute;n de contrase&ntilde;a*</label>
+                                <input type="password" v-model="confirmPassword">
+                                <div class="error" v-if="vPasswordVerify"> {{ errors.verificationPassword }}</div>
+                            </div>
+                            <div class="input-field-b">
+                                <label>Rol de usuario*</label>
                                 <select v-model="userRol">
-                                    <option selected disabled>Seleccione un Rol para el usuario</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Capturista</option>
                                 </select>
                                 <div class="error" v-if="vUserRol">{{ errors.rol }}</div>
-                            </div>
-                            <div class="input-field-b">
-                                <label>Password*</label>
-                                <input type="password" v-model="password">
-                               <!--  <div class="error" v-if="vPassword"> {{ errors.name }}</div> -->
-                            </div>
-                            <div class="input-field-b">
-                                <label>Confirmaci&oacute;n de Password*</label>
-                                <input type="password" v-model="confirmPassword">
-                                <!-- <div class="error" v-if="vPassword"> {{ errors.name }}</div> -->
                             </div>
 
                         </div>
@@ -80,6 +79,8 @@
     let vSurname = ref(false);
     let vEmail = ref(false);
     let vEmailVerify = ref(false);
+    let vPassword = ref(false);/* aqui me quede */
+    let vPasswordVerify = ref(false);
     let vUserRol = ref(false);
 
     const props = defineProps({
@@ -89,6 +90,7 @@
         email: String,
         verificationEmail: String,
         userRol: Number,
+        password: String,
         id: Number,
         mode: String
     })
@@ -98,8 +100,9 @@
         props.surname = '';
         props.email = '';
         props.verificationEmail = '';
+        props.password = '';
+        props.verificationPassword = '';
         props.userRol = '';
-
     }
 
     function goBack(event) {
@@ -158,7 +161,7 @@
         /* Busca que el nombre este definido */
         if (!props.name) {
             vName.value = true;
-            errors.value.name = "El nombre de usuario es requerido";
+            errors.value.name = "Campo obligatorio";
             return;
         }
         /*quita espacios y los guarda en otra variable */
@@ -200,19 +203,19 @@
         /* Busca que el nombre este definido */
         if (!props.email) {
             vEmail.value = true;
-            errors.value.email = "El correo del usuario es requerido";
+            errors.value.email = "Campo obligatorio";
             return;
         }
         /*quita espacios y los guarda en otra variable */
         let emailNoSpace = props.email.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (emailNoSpace.length < 8 || emailNoSpace.length > 20) {
-            errors.value.email = "El correo debe tener entre 8 y 20 caracteres alfabeticos";
+            errors.value.email = "El correo debe tener entre 8 y 20 caracteres";
             vEmail.value = true;
         }
         /* valida los caracteres aceptados */
-        if (!/^[a-zA-Z ]+$/.test(props.email)) {
-            errors.value.email = "El correo debe contener [letras, @ y . ]";
+        if (!/^[.@_a-zA-Z0-9 ]+$/.test(props.email)) {
+            errors.value.email = "Caracteres aceptados '@._' ";
             vEmail.value = true
         }
     }
@@ -228,40 +231,84 @@
         let emailVerifyNoSpace = props.verificationEmail.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (emailVerifyNoSpace.length < 8 || emailVerifyNoSpace.length > 20) {
-            errors.value.verificationEmail = "Los apellidos deben tener entre 3 y 20 caracteres alfabeticos";
+            errors.value.verificationEmail = "El correo debe tener entre 8 y 20 caracteres";
             vEmailVerify.value = true;
         }
         /* valida los caracteres aceptados */
-        if (!/^[a-zA-Z ]+$/.test(props.verificationEmail)) {
-            errors.value.verificationEmail = "Debe contener solo letras";
-            vEmailVerify.value = true
+        if (!/^[.@_a-zA-Z0-9 ]+$/.test(props.email)) {
+            errors.value.email = "Caracteres aceptados '@._' ";
+            vEmail.value = true
         }
     }
   
     function checkRol() {
         if(!props.userRol){
-            errors.value.rol = 'Debe seleccionar un rol';
+            errors.value.rol = 'Seleccionar un rol';
             vUserRol.value = true;
+        }
+    }
+
+    function checkPassword() {
+        /* Busca que el nombre este definido */
+        if (!props.password) {
+            vPassword.value = true;
+            errors.value.password = "Campo obligatorio";
+            return;
+        }
+        /*quita espacios y los guarda en otra variable */
+        let passwordNoSpace = props.password.replace(/ /g, '');
+        /* checa la longitud de la cadena, sin contar espacios */
+        if (passwordNoSpace.length < 8 || passwordNoSpace.length > 20) {
+            errors.value.password = "El password debe tener entre 8 y 20 caracteres";
+            vPassword.value = true;
+        }
+        /* valida los caracteres aceptados .@*+?^${}()|[\] */ 
+        if (!/^[a-zA-Z0-9.@*+?^${}()|[\] ]+$/.test(props.password)) {
+            errors.value.password = "Caracteres aceptados";
+            vPassword.value = true
+        }
+    }
+
+    function checkPasswordVerify() {
+        /* Busca que el nombre este definido */
+        if (!props.verificationPassword) {
+            vPasswordVerify.value = true;
+            errors.value.verificationPassword = "Confiarmar su contraseña";
+            return;
+        }
+        /*quita espacios y los guarda en otra variable */
+        let passwordNoSpace = props.verificationPassword.replace(/ /g, '');
+        /* checa la longitud de la cadena, sin contar espacios */
+        if (passwordNoSpace.length < 8 || passwordNoSpace.length > 20) {
+            errors.value.verificationPassword = "El password debe tener entre 8 y 20 caracteres";
+            vPasswordVerify.value = true;
+        }
+        /* valida los caracteres aceptados */
+        if (!/^[a-zA-Z0-9.@*+?^${}()|[\] ]+$/.test(props.password)) {
+            errors.value.password = "Caracteres aceptados";
+            vPassword.value = true
         }
     }
 
     function validateFields(event, mode) {
         errors.value = {}
-        vName.value = vSurname.value = vEmail.value = vEmailVerify.value = vUserRol.value = false;
+        vName.value = vSurname.value = vEmail.value = vEmailVerify.value = vPassword.value = vPasswordVerify.value = vUserRol.value = false;
 
         checkName()
         checkSurname()
         checkEmail()
         checkEmailVerify()
         checkRol()
+        checkPassword()
+        checkPasswordVerify()
 
         event.preventDefault();
 
-        if(!vName.value && !vSurname.value && !vEmail.value && !vEmailVerify.value && vUserRol.value){
+        if(!vName.value && !vSurname.value && !vEmail.value && !vEmailVerify.value && vPassword.value && vPasswordVerify.value && vUserRol.value){
             if (mode === 'Create') {
-                createUser(event);
+                createUser();
             } else {
-                updateUser(event);
+                updateUser();
             }
         }
 

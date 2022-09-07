@@ -21,7 +21,8 @@
     "query-string": "^7.1.1",
     "vue": "^3.2.31",
     "vue-recaptcha": "^2.0.2",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vue3-easy-data-table": "^1.4.16"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",

@@ -9,9 +9,9 @@ import Cotizacion from '../views/Cotizacion.vue'
 import Login from '../views/Login.vue'
 
 /* Usuario */
-/* import Registro from '../views/UserRegister.vue' */
 import AddUser from '../views/AddUser.vue'
 import UserEdit from '../views/UserEdit.vue'
+import UserList from '../views/UserList.vue'
 
 /* Marcas */
 import AddBrand from '../views/AddBrand.vue'
@@ -67,14 +67,6 @@ const router = createRouter({
 			name: "login",
 			component: Login,
 		},
-/* 		{
-			path: "/registro",
-			name: "registro",
-			component: Registro,
-			meta: {
-				requiresAuth: true,
-			},
-		}, */
 		{
 			path: "/AddBrand",
 			name: "AddBrand",
@@ -177,14 +169,21 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/UserEdit/:id",
+			path: "/UserEdit",
 			name: "UserEdit",
 			component: UserEdit,
 			meta: {
 				requiresAuth: true,
 			},
 		},
-		
+		{
+			path: "/UserList",
+			name: "UserList",
+			component: UserList,
+			meta: {
+				requiresAuth: true,
+			},
+		},
 		{
 			path: "/ArticleList",
 			name: "ArticleList",
