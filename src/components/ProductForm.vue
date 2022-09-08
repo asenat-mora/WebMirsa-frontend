@@ -113,6 +113,15 @@
     const defaultImageSrc = 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png';
     let arrayColors = ref([]);
     let errors = ref(null);
+
+    let productSKU = ref(null);
+    let productDescription = ref(null);
+    let productPrice = ref(null);
+    let productModel = ref(null);
+    let productSide = ref(null);
+    let productImage = ref(null);
+    let productBrand = ref(null);
+    let productAccessory = ref(null);
     
     let vSku = ref(false);
     let vColors = ref(false);
@@ -132,14 +141,14 @@
         brands: Object,
         colors: Object,
         accessories: Object,
-        productDescription: String,
-        productSKU: String,
-        productPrice: Number,
-        productModel: String,
-        productBrand: Number || String,
-        productAccessory: Number || String,
-        productSide: String,
-        productImage: String,
+        productDescriptionP: String,
+        productSKUP: String,
+        productPriceP: Number,
+        productModelP: String,
+        productBrandP: Number || String,
+        productAccessoryP: Number || String,
+        productSideP: String,
+        productImageP: String,
         productColors: Array,
         mode: String,
         productId: Number,
@@ -147,15 +156,15 @@
 
 
     function clearForm(){
-        props.productDescription = '';
-        props.productSKU = '';
-        props.productPrice = '';
-        props.productModel = '';
-        props.productBrand = '';
-        props.productAccessory = '';
-        props.productSide = '';
-        props.productImage = '';
-        arrayColors = [];
+        productDescription.value = '';
+        productSKU.value = '';
+        productPrice.value = '';
+        productModel.value = '';
+        productBrand.value = '';
+        productAccessory.value = '';
+        productSide.value = '';
+        productImage.value = '';
+        arrayColors.value = [];
     }
 
     function uploadImageToImgur(event) {
@@ -180,21 +189,22 @@
     function createProduct(event){
         event.preventDefault();
         const product = {
-            sku: props.productSKU,
-            price: props.productPrice,
-            model: props.productModel,
-            brandId: props.productBrand,
-            accessoryId: props.productAccessory,
-            side: props.productSide,
-            description: props.productDescription,
-            image: props.productImage || defaultImageSrc,
+            sku: productSKU.value,
+            price: productPrice.value,
+            model: productModel.value,
+            brandId: productBrand.value,
+            accessoryId: productAccessory.value,
+            side: productSide.value,
+            description: productDescription.value,
+            image: productImage.value || defaultImageSrc,
             colors: arrayColors.value
         }
 
         axios.post(import.meta.env.VITE_API_URL + '/api/product', product)
         .then(response => {
-            notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
             clearForm();
+            notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
+            
         }).catch(error => {
             console.log(error);
             if(error.response.status === 409){
@@ -209,14 +219,14 @@
     function updateProduct(event){
         event.preventDefault();
         const product = {
-            sku: props.productSKU,
-            price: props.productPrice,
-            model: props.productModel,
-            brandId: props.productBrand,
-            accessoryId: props.productAccessory,
-            side: props.productSide,
-            description: props.productDescription,
-            image: props.productImage,
+            sku: productSKU.value,
+            price: productPrice.value,
+            model: productModel.value,
+            brandId: productBrand.value,
+            accessoryId: productAccessory.value,
+            side: productSide.value,
+            description: productDescription.value,
+            image: productImage.value,
             colors: arrayColors.value
         }
 
@@ -255,20 +265,20 @@
 
     function checkSku(){
         /* Busca que el SKU este definido */
-        if(!props.productSKU){
+        if(!productSKU){
             vSku.value = true
             errors.value.sku = 'Campo obligatorio'
             return;
         }
         /* quita espacios y los guarda en otra variable */
-        let skuNoSpace = props.productSKU.replace(/ /g, '');
+        let skuNoSpace = productSKU.value.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if(skuNoSpace.length < 5 || skuNoSpace.length > 10){
             errors.value.sku = 'El SKU debe tener entre 5 y 10 caracteres'
             vSku.value = true
         }
         /* valida los caracteres aceptados */
-        if(!/^[a-zA-Z0-9 ]+$/.test(props.productSKU)){
+        if(!/^[a-zA-Z0-9 ]+$/.test(productSKU.value)){
             errors.value.sku = 'El SKU debe contener solo letras y números'
             vSku.value = true
         }
@@ -282,59 +292,59 @@
     }
 
     function checkBrand(){
-        if(!props.productBrand){
+        if(!productBrand.value){
             errors.value.brand = 'Debe seleccionar una marca'
             vBrand.value = true
         }
     }
 
     function checkAccesory(){
-        if(!props.productAccessory){
+        if(!productAccessory.value){
             errors.value.accessory = 'Debe seleccionar un tipo de accesotio'
             vAccesory.value = true
         }
     }
 
     function checkModel(){
-        if(!props.productModel){
+        if(!productModel.value){
             vModel.value = true
             errors.value.model = 'campo oblicatorio'
             return;
         }
-        if(props.productModel.length < 4 || props.productSKU.length > 11 ){
+        if(productModel.value.length < 4 || productModel.value.length > 11 ){
            errors.value.model = 'El modelo debe tener entre 4 y 11 caracteres'
            vModel.value = true
         }
     }
 
     function checkPrice(){
-        if(props.productPrice<0 || props.productPrice>10000){
+        if(productPrice.value<0 || productPrice.value>10000){
             errors.value.price = 'El precio debe estar entre 0 y 10000'
             vPrice.value = true
         }
     }
 
     function checkSide(){
-        if(!props.productSide){
+        if(!productSide.value){
             errors.value.side = 'Debe seleccionar un lado'
             vSide.value = true
         }
     }
 
     function checkDescription(){
-        if(!props.productDescription){
+        if(!productDescription.value){
             vDescription.value = true
             errors.value.description = 'Campo obligatorio'
             return;
         }
-        if(props.productDescription.length < 10 || props.productDescription.length > 80){
+        if(productDescription.value.length < 10 || productDescription.value.length > 80){
             errors.value.description = 'La descripción  debe tener entre 10 y 80 caracteres'
             vDescription.value = true
         }
     } 
 
     function checkImage(){
-        if(!props.productImage){
+        if(!productImage.value){
             errors.value.image = 'Debe subir una imagen'
             vImage.value = true
         }
@@ -352,7 +362,7 @@
         checkPrice()
         checkSide()
         checkDescription()
-        checkImage()
+        //checkImage()
 
         if(!vColors.value && !vSku.value && !vBrand.value && !vAccesory.value && !vModel.value && !vPrice.value && !vSide.value && !vDescription.value){
             if(mode === 'Create'){
@@ -369,7 +379,17 @@
         arrayColors.value = newValue;
     });
 
-    
+    watch(()=> props.productSKUP, (newValue, oldValue) => {
+        productSKU.value = props.productSKUP;
+        productAccessory.value = props.productAccessoryP;
+        productSide.value = props.productSideP;
+        productBrand.value = props.productBrandP;
+        productModel.value = props.productModelP;
+        productPrice.value = props.productPriceP;
+        productDescription.value = props.productDescriptionP;
+        productImage.value = props.productImageP;
+    });
+
 
 </script>
 
