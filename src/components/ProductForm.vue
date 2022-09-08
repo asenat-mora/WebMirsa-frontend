@@ -176,6 +176,8 @@
         productSide.value = '';
         productImage.value = '';
         arrayColors.value = [];
+        subBrandsLabel.value = [];
+        productSubBrands.value = [];
     }
 
     function uploadImageToImgur(event) {
@@ -197,6 +199,7 @@
     }
 
     function getSubBrandsLabel(){
+        productSubBrands.value = [];
         axios.get(import.meta.env.VITE_API_URL + '/api/sub-brand/brand/' + productBrand.value)
         .then(response => {
             subBrandsLabel.value = mapSubBrands(response.data);
@@ -224,7 +227,8 @@
             side: productSide.value,
             description: productDescription.value,
             image: productImage.value || defaultImageSrc,
-            colors: arrayColors.value
+            colors: arrayColors.value,
+            subBrands: productSubBrands.value
         }
 
         axios.post(import.meta.env.VITE_API_URL + '/api/product', product)
