@@ -188,7 +188,7 @@
             side: props.productSide,
             description: props.productDescription,
             image: props.productImage || defaultImageSrc,
-            colors: props.productColors
+            colors: arrayColors.value
         }
 
         axios.post(import.meta.env.VITE_API_URL + '/api/product', product)

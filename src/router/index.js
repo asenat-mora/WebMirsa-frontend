@@ -17,7 +17,7 @@ import UserList from '../views/UserList.vue'
 import AddBrand from '../views/AddBrand.vue'
 import BrandEdit from '../views/BrandEdit.vue'
 import BrandList from '../views/BrandList.vue'
-import AddSubbrand from '../views/AddSubbrand.vue'
+import AddSubBrand from '../views/AddSubBrand.vue'
 
 /* Accesorios */
 import AddAccesory from '../views/AddAccesory.vue'
@@ -94,9 +94,9 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/AddSubbrand",
-			name: "AddSubbrand",
-			component: AddSubbrand,
+			path: "/AddSubBrand",
+			name: "AddSubBrand",
+			component: AddSubBrand,
 			meta: {
 				requiresAuth: true,
 			},

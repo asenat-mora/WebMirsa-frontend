@@ -42,7 +42,7 @@
                         </div>
                       </span>
                       <ul class="more-sub-menu sub-menu">
-                        <li><router-link to="/AddSubbrand">NUEVO</router-link></li>
+                        <li><router-link to="/AddSubBrand">NUEVO</router-link></li>
                         <li><router-link to="#">DETALLE</router-link></li>
                       </ul>
                     </li>
