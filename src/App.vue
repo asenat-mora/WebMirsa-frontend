@@ -4,14 +4,19 @@ import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import { authStore } from "@/stores/auth";
 
+
 const store = authStore();
 </script>
 
 <template>
+
     
     <Navbar />
-        <router-view :key ="$route.path"/>
+    
+    <router-view :key ="$route.path"/>
+    <notifications position="bottom left" /><!-- classes="my-notification" -->
     <Footer v-if="!store.getIsLoggedIn" />
+    
     
 </template>
 

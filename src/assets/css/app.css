@@ -31,7 +31,7 @@
   --border-gray: #aaa;
   --button-gray: #777D74;
   --line-blue: #4070f4;
-  --red: #e31b23;
+  --red: #c2171d;
   --green: #18ac18;
   --disabled-button: #777D74;
   }
@@ -196,9 +196,9 @@ nav .divNav .option-menu li:hover .js-sub-menu{
     display: block;
     max-width: 270px;
     width: 100%;
-    background:  var(--fondo);
-    line-height: 40px;
-    padding: 20px;
+    background:  var(--white);
+    line-height: 45px;
+    padding: 0 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.5s ease;
     z-index: 1000;
@@ -209,17 +209,18 @@ nav .divNav .option-menu li:hover .js-sub-menu{
     justify-content: space-between;
   }
   .sidebarLogo .menuNav{
-    font-size: 30px;
-    color: var(--white);
+    font-size: 28px;
+    color: #1a1a1a;
+    margin-top: 25px;
   }
   .sidebarLogo  .xmark,
   .divNav .bars-menu{
-    font-size: 50px;
+    font-size: 40px;
     color: #1a1a1a;/* menu lineas */
   }
   nav .divNav .option-menu{
     display: block;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   nav .divNav .option-menu li .arrow{
     line-height: 40px;
@@ -229,7 +230,7 @@ nav .divNav .option-menu li{
   }
 
 .divNav .option-menu li .sub-menu a{
-    font-size: 20px;   
+    font-size: 16px;   
   }
 
 nav .divNav .option-menu li .sub-menu{
@@ -556,6 +557,7 @@ nav .divNav .option-menu li .arrow{
 */
 
   /* producto, categoria, marca, color */
+  .body-register-user,
   .body-register-marca,
   .body-register-category,
   .body-register-product{
@@ -570,6 +572,7 @@ nav .divNav .option-menu li .arrow{
 
   /* formulario
   producto, categoria, marca, color */
+  .register-container-user,
   .register-container-marca,
   .register-container-category,
   .register-container-product{
@@ -580,13 +583,15 @@ nav .divNav .option-menu li .arrow{
      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
      width: 98%;
   }
+  .register-container-user,
   .register-container-marca,
   .register-container-category{
     width: 98%;
-    height: 450px;
+    /* height: 450px; */
   }
 
   /* titulo */
+  .register-container-user header,
   .register-container-marca header,
   .register-container-category header,
   .register-container-product header{
@@ -598,6 +603,7 @@ nav .divNav .option-menu li .arrow{
       text-align: center;
   }
   /* linea divisora - producto, categoria, marca */
+  .register-container-user header::before,
   .register-container-marca header::before,
   .register-container-category header::before,
   .register-container-product header::before{
@@ -611,6 +617,7 @@ nav .divNav .option-menu li .arrow{
       background-color: var(--line-blue);
   }
 /* producto, categoria, marca*/
+  .register-container-user .form-register-user,
   .register-container-marca .form-register-marca,
   .register-container-category .form-register-category,
   .register-container-product .form-register-product{
@@ -624,6 +631,7 @@ nav .divNav .option-menu li .arrow{
       transform: translateX(-100%);
   }
 /* descripcion - producto, categoria, marca */
+  .details-user .title,
   .details-marca .title,
   .details-category .title,
   .details-product .title{
@@ -632,6 +640,7 @@ nav .divNav .option-menu li .arrow{
     color: #272626;
   }
 /* producto, categoria, marca */
+  .register-container-user .form-register-user .fields,
   .register-container-marca .form-register-marca .fields,
   .register-container-category .form-register-category .fields,
   .register-container-product .form-register-product .fields{
@@ -646,7 +655,7 @@ nav .divNav .option-menu li .arrow{
   form .fields .input-field-checkbox-colors,
   form .fields .input-field{
       display: flex;
-      width: calc(100% / 4 - 15px);
+      width: calc(100% / 3 - 25px);
       flex-direction: column;
       margin: 10px 0;
   }
@@ -689,13 +698,24 @@ nav .divNav .option-menu li .arrow{
   .input-field select:focus{
       box-shadow: 0 3px 6px rgba(138, 10, 10, 0.13);
   }
+  /*-----alerta de error-----*/
+  .input-field .error,
+  .input-field-checkbox-colors .error,
+  .input-field-text-area .error,
+  .input-field-image .error,
+  .input-field-b .error{
+    color: var(--red);
+    font-size: 0.85rem;
+  }
+
   .details-btns{
       display: flex;
       justify-content: space-around;
       align-items: center;
   }
   /* Botones */
-   .register-container-product button,/* para listas */
+  .register-container-user button,
+  .register-container-product button,/* para listas */
   .register-container-marca form button,
   .register-container-category form button,
   .register-container-product form button{
@@ -731,7 +751,7 @@ nav .divNav .option-menu li .arrow{
       background-color: var(--fondo);
   }
 /* ------Buscador--------- */
-.field-search{
+/* .field-search{
   width: 100%;
   display: flex;
   background-color: #ebeff3;
@@ -766,14 +786,14 @@ nav .divNav .option-menu li .arrow{
     border: 1px solid var(--border-gray);
     padding: 0 15px;
     height: 42px;
-}
+} */
 
 /*------------------- 
 --------Filtro-Marcas----
 --------------------*/
 .container-filter{
   margin: 10px 0;
-  background-color: #ebeff3;
+  background-color: #b9d3ec;
 }
 .filter-options{
   display: flex;
@@ -808,20 +828,6 @@ nav .divNav .option-menu li .arrow{
     form .fields .input-field{
         width: calc(100% / 3 - 15px);
     }
-
-  
-
-
-
-/*       .register-container-product form{
-          overflow-y: scroll;
-      }
-      .register-container-product form::-webkit-scrollbar{
-         display: none;
-      }
-      .register-container-product form button{
-          width: 200px;
-      } */
    
   /* Botones */
   .register-container-product button,/* para listas */
@@ -972,6 +978,9 @@ nav .divNav .option-menu li .arrow{
 
   
 }
+/*------Alertas------*/
+
+
 
 /*---------------------------------------------
 -------------------INICIO----------------------
@@ -983,12 +992,11 @@ nav .divNav .option-menu li .arrow{
 .containerB .front-page{
   display: flex;
   justify-content: center;
-  background-color: ;
  
 }
 .containerB .front-page img{
   margin: 2.5em;
-  width: 90vh;
+  width: 95vh;
   height: 90vh;
   border-radius: 25px;
   -moz-box-shadow: 0px 0px 50px #25a7cf;
@@ -1172,7 +1180,7 @@ nav .divNav .option-menu li .arrow{
 .filter-options .option-second-row {
     flex-basis: 30%;
 }
-.filter-options .option-first-row .txtbox{
+.filter-options .option-second-row .txtbox{
   display: flex;
   width: 100%;
   padding-left: 14px;
@@ -1180,23 +1188,20 @@ nav .divNav .option-menu li .arrow{
   font-size: 1rem;
   border-radius: 4px;
   border-width: 1px;
-  line-height: 2.700;
+  line-height: 2.35;
   border-color: #D1D5DB;
-  
-  
 }
 
 .option-first-row,.option-second-row  .select{
   --ms-font-size: 1rem;
-    --ms-tag-font-size: 0.7rem;
+    --ms-tag-font-size: 0.8rem;
     --ms-ring-width: 0px;
-    --ms-tag-bg: #808080;
-    --ms-line-height: 1.375;
+    --ms-tag-bg: #929191;
+    --ms-line-height: 1.275;
     --ms-border-color: #D1D5DB;
     --ms-border-width: 1px;
     --ms-radius: 4px;
-    
-    --ms-placeholder-color: #9CA3AF;/* aqui me quede */
+    --ms-placeholder-color: #56595f;/* color de letra placeholder */
 
 }
 
@@ -1315,9 +1320,142 @@ nav .divNav .option-menu li .arrow{
 /*---------------------------------------------
 -------------------COTIZACION------------------
 ---------------------------------------------*/
+.container-coti{
+/*   height: 93.5vh;   */
+/* display: grid;
+grid-template-rows: 1fr 1fr; */
+}
+/*-----encabezado-----*/
+.container-coti .section-a{
+  background-color: #334788;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 6rem;
+  align-content: center;
+  font-size: 0.85rem;
+}
+/*----Encabezado---.*/
+.container-coti .H1{
+  color: #888bb6;
+}
+.container-coti .H1B{
+  color: #ffffff;
+}
+/*-----formulario-----*/
+.container-coti .section-b{
+  width: 98%;
+  margin: auto;
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  height: 50vh;
 
+}
+/* subSeccion A*/
+.container-coti .section-b .subSection-A h2{
+  text-align: center;
+}
+.container-coti .section-b .subSection-A{
+  text-align: center;
+  line-height : 2.5rem;
+}
+.container-coti .section-b .subSection-A h2{
+  padding: 10px 0;
+}
+.container-coti .section-b .container-colum{
+  display: grid;/* crear 2 columnas para formulario */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+/* subSeccion A*/
+    /* card de un producto */
+.container-coti .section-b .subSection-b{
+  background-color: var(--fondo2);
+}
+.container-coti .section-b .subSection-b h2{
+  text-align: center;
+  margin: 10px;
+}
+.container-coti .section-b .subSection-b .card-product{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: #e1e2f3;
+  gap: 20px;
+  margin: 2.5px 10px;
+  max-width: 400px;
+}
+.container-coti .section-b .subSection-b .card-product img{
+  width: 100%;
+  height: 100%;
+}
+.container-coti .section-b .subSection-b .card-product .txt-info{
+  display: flex;
+  flex-flow: column;
+  font-size: 14px;
+}
+/* ------------------ */
+.container-coti .section-b .subSection-A input{
+  height: 2rem;
+  width: 60%;
 
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid var(--border-gray);
+  padding: 0 8px;
+  height: 2rem;
+  margin: 8px 0;
+}
+.container-coti .section-b .container-colum .row3 label{
+  text-align: left;
+}
+.container-coti .section-b .subSection-A .txt-area{
+  height: 80px;
+  width: 80%;
+  resize: none;
+}
+/* subSeccionC */
+.container-coti .section-c{
+ /*  background-color: rgb(143, 42, 42); *//* no esta listo */
+  border-top: 1px solid rgb(218, 218, 218);
+/*   height: 10vh; */
+}
+.container-coti .section-c .details{
+  margin: 0 20px;
+}
+.container-coti .section-c .details p{
+  color: #777D74;
+}
+.container-coti .section-c .details .recvue{
+  display: flex;
+  justify-content: flex-end;
+} 
+/* botones */
+.container-coti .details button{
+  color: var(--white);
+  display: flex;
+  border: none;
+  border-radius: .25rem;
+  width: 100%;
+  font-size: 16px;
+  margin: 20px 0;
+  align-items: center;
+  height: 35px;
+  max-width: 160px;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
 
+.container-coti .details-btns{
+  display: flex;
+  justify-content: flex-end;
+}
 
 /*---------------------------------------------
 --------------------ACCESO---------------------

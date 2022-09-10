@@ -1,10 +1,89 @@
+<script>
+    import Navbar from '../components/Navbar.vue'
+    import axios from 'axios'
+    import { onBeforeMount, ref } from 'vue';
+
+
+    async function getAllBrands() {
+        return axios.get(import.meta.env.VITE_API_URL + "/api/brand");
+    }
+
+    function search(){
+    let queryObject = {
+        brands: selectedBrands.value,
+        accessories: selectedAccessories.value,
+        colors: selectedColors.value,
+        side: selectedSide.value,
+    };
+
+    if (description.value.length > 0) {
+        console.log(description.value.length);
+        queryObject.description = description.value;
+    }
+
+    var query = stringify(queryObject, {arrayFormat: 'bracket'});
+    
+    getProductsFiltered(query).then(response => {
+        products.value = response.data;
+        console.log(products.value.length)
+    });
+    }
+
+    onBeforeMount(() => {
+  try {
+    const results = Promise.all([
+      getAllBrands(),
+      getAllAccessories(),
+      getAllProducts(),
+      getAllColors(),
+    ]);
+    results.then((response) => {
+      brands.value = response[0].data.map((brand) => {
+        return {
+          value: brand.id,
+          label: brand.name,
+        };
+      });
+      
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+    export default{
+        name : 'BrandList',
+        components: {
+            Navbar
+        },
+        setup(){
+            var data = ref();
+            function getData(){
+                axios.get(import.meta.env.VITE_API_URL + '/api/brand').then(response => {
+                    data.value = response.data
+                }).catch(error => {
+                    console.log(error)
+                })
+            }
+            onBeforeMount(() => {
+                getData();
+            });
+
+            return {
+                data,
+                getData
+            }
+        }
+    }
+</script>
+
 <template>
 
 <div class="body-register-marca">
     <div class="register-container-marca">
-        <header>MARCAS</header>
-        <!-- barra de filtros -->
-        <div class="container-filter">
+        <header>lISTA DE MARCAS</header>
+        <!-- barra de busqueda -->
+        <!-- <div class="container-filter">
             <div class="filter-options">
                  <div class="filter-a">
                             <label>Marca</label>
@@ -40,11 +119,25 @@
                         </div>
             
             </div>
+        </div> -->
+        <div class="bar-filter">
+            <div class="filter-options">
+                <div class="option-first-row">
+                    <!-- <label>Marca</label> -->
+                    <input class="txtbox" type="text" v-model="brand" placeholder="Marca">
+                </div>
+                        
+            </div>
+            <div class="filter-buttons">
+                <button class="button" @click="search">Buscar</button>
+            </div>
         </div>
-            <!-- tabla de productos -->
+        
+
+        <!-- tabla de productos -->
             <div class="form-first">
                 <div class="details-product">
-                    <span class="title">Lista de marcas</span>
+                    <!-- <span class="title">Lista de marcas</span> -->
                     <div class="fields">
                         <div class="container mt-4" id="app">
                             <table class="GeneratedTable" >
@@ -56,6 +149,7 @@
                                         <th>OPERACI&Oacute;N</th>
                                         <th>ULTIMA MODIFICACI&Oacute;N</th>
                                         <th>ESTATUS</th>
+                                        <th>DETALLE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,33 +170,3 @@
     </div>
 </div>
 </template>
-
-<script>
-    import Navbar from '../components/Navbar.vue'
-    import axios from 'axios'
-    import { onBeforeMount, ref } from 'vue';
-    export default{
-        name : 'BrandList',
-        components: {
-            Navbar
-        },
-        setup(){
-            var data = ref();
-            function getData(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/brand').then(response => {
-                    data.value = response.data
-                }).catch(error => {
-                    console.log(error)
-                })
-            }
-            onBeforeMount(() => {
-                getData();
-            });
-
-            return {
-                data,
-                getData
-            }
-        }
-    }
-</script>

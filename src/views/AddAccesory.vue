@@ -1,26 +1,26 @@
 <template>
 
-<div class="body-register-marca">
-   <div class="register-container-marca">
-      <header>ALTA DE COLOR</header>
-        <form class="form-register-marca"  @submit.prevent="validateForm">
+<div class="body-register-category">
+   <div class="register-container-category">
+      <header>ALTA DE ACCESORIO</header>
+        <form class="form-register-category" @submit.prevent="validateForm">
             <div class="form-first">
-                <div class="details-marca">
-                   <!--  <span class="title">DETALLES DE MARCA</span> -->
+                <div class="details-category">
+                    <!-- <span class="title">Detalle</span> -->
                     <div class="fields">
                         <div class="input-field-b">
-                            <label>Nombre</label>
-                            <input type="text" placeholder="Nombre del color" v-model="colorName">
+                            <label>Nombre del Accesorio*</label>
+                            <input type="text" placeholder="Tipo de accesorio" v-model="accesoryName">
                             <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="details-btns">  
+                <div class="details-btns">
                     <button type="button" class="cancelbtn" @click="goBack($event)">
                             <span class="btnCancelar">Volver</span>
                     </button>
                     <button class="savebtn" type="submit">
-                        <span class="btnGuardar">Registrar</span> 
+                        <span class="btnGuardar">Registrar</span> <!-- @click="createAccesory" -->
                     </button>
                 </div>
             </div>
@@ -36,69 +36,70 @@
     import { ref } from 'vue';
     import { useRouter } from 'vue-router';
     export default{
-        name: 'AddColor',
+        name: 'AddAccesory',
         components: {
             Navbar
         },
         setup(){
-            var colorName = ref(null);
+            var accesoryName = ref(null);
             var errors = ref(null);
-            var vName = ref(false);
+            var vName = ref(null);
             var router = useRouter();
 
             const fieldsMap = {
-                name: "Nombre"
+                name: "Nombre",
+                key: "Clave"
             }
 
-            function createColor(){
-                axios.post(import.meta.env.VITE_API_URL + '/api/color', 
+            function createAccesory(){
+                axios.post(import.meta.env.VITE_API_URL + '/api/accessory', 
                 {
-                    name: colorName.value
+                    name: accesoryName.value
                 }
                 )
                 .then(response => {
                     notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
-                    colorName.value = null;
-                }).catch(error => {
-                    if(error.response.status === 409){
+                    accesoryName.value = null;
+                })
+                .catch(error => {
+                     if(error.response.status === 409){
                         /* Validar duplicidad de datos */
                         notify({title: "Advertencia", text: "¡El nombre " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn"});
                     }else{
                         notify({title: "Error", text: "¡Error en el registro!", type: "error"});
                     }
-                });
+                })
             }
-
-            
             function checkName(){
                 /* Busca que el nombre este definido */
-                if(!colorName.value){
+                if(!accesoryName.value){
                     vName.value = true;
-                    errors.value.name = "El nombre del color es requerido";
+                    errors.value.name = "El nombre del accesorio es requerido";
                     return;
                 }
                 /*quita espacios y los guarda en otra variable */
-                let nameNoSpace = colorName.value.replace(/ /g, '');
+                let nameNoSpace = accesoryName.value.replace(/ /g, '');
                 /* checa la longitud de la cadena, sin contar espacios */
                 if(nameNoSpace.length < 3 || nameNoSpace.length > 20){
                     vName.value = true;
-                    errors.value.name = "El nombre del color debe tener entre 3 y 20 caracteres";
+                    errors.value.name = "El nombre del accesorio debe tener entre 3 y 20 caracteres";
                     return;
                 }
                 /* valida los caracteres aceptados */
-                if(!/^[a-zA-Z ]+$/.test(colorName.value)){
+                if(!/^[a-zA-Z ]+$/.test(accesoryName.value)){
                     errors.value.name = 'El nombre debe contener solo letras'
                     vName.value = true
                 }
             }
-            
+
             function validateForm(){
                 errors.value = {};
                 vName.value = false;
-                checkName();
 
+                checkName();
+                
                 if(!vName.value){
-                    createColor();
+                    createAccesory();
                 }
             }
 
@@ -107,17 +108,19 @@
                 router.back();
             }
 
-            return{
-                colorName,
+            return {
                 errors,
+                accesoryName,
                 vName,
                 checkName,
-                createColor,
                 validateForm,
+                createAccesory,
                 fieldsMap,
                 router, 
                 goBack
+                
             }
+
         }
     }
-</script> 
+</script>

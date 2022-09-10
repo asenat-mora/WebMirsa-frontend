@@ -7,8 +7,10 @@
     const brands = ref(null);
     const colors = ref(null);
     const accessories = ref(null);
+    const subBrandsLabel = ref([]);
     const colorsMapped = ref([]);
     const productColors = ref([]);
+    const productSubBrands = ref([]);
     const product = ref({});
     const route = useRoute();
 
@@ -16,7 +18,10 @@
         axios.get(import.meta.env.VITE_API_URL + '/api/product/' + route.params.id)
             .then(response => {
                 product.value = response.data;
+                mapSubBrandsItem(product.value.productsubbrand, productSubBrands);
+                getSubBrandsLabel();
                 mapColorsItem(product.value.productcolor, productColors);
+                
             })
             .catch(error => {
                 console.log(error);
@@ -68,6 +73,28 @@
         });
     }
 
+    function getSubBrandsLabel(){
+        axios.get(import.meta.env.VITE_API_URL + '/api/sub-brand/brand/' + product.value.brandId)
+        .then(response => {
+            mapSubBrands(response.data, subBrandsLabel);
+        })
+    }
+
+    function mapSubBrands(subBrandsRawArray, resultingSubBrands){
+        subBrandsRawArray.forEach(subBrand => {
+            resultingSubBrands.value.push({
+                label: subBrand.name,
+                value: subBrand.id
+            });
+        })
+    }
+
+    function mapSubBrandsItem(subBrandsRawArray, resultingSubBrands){
+        subBrandsRawArray.forEach(object => {
+            resultingSubBrands.value.push( object.subbrand.id);
+        })
+    }
+
     onBeforeMount(() => {
         getProductById();
         getAllBrands();
@@ -85,13 +112,15 @@
                 :productId="product.id"
                 mode="Update"
                 :productColors="productColors" 
-                :productDescription="product.description"
-                :productSKU="product.sku" 
-                :productPrice="product.price"
-                :productModel="product.model" 
-                :productBrand="product.brandId"
-                :productAccessory="product.accessoryId"
-                :productSide="product.side"
-                :productImage="product.image" 
+                :productDescriptionP="product.description"
+                :productSKUP="product.sku" 
+                :productPriceP="product.price"
+                :productModelP="product.model" 
+                :productBrandP="product.brandId"
+                :productAccessoryP="product.accessoryId"
+                :productSideP="product.side"
+                :productImageP="product.image" 
+                :productSubBrandsP="productSubBrands"
+                :subBrandsLabelP="subBrandsLabel"
                 />
 </template>

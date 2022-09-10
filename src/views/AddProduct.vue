@@ -59,5 +59,5 @@
 </script>
 
 <template>
-    <ProductForm :brands="brands" :colors="colorsMapped" :accessories="accessories" mode="Create" />
+    <ProductForm :brands="brands" :colors="colorsMapped" :accessories="accessories" mode="Create" :productColors="productColors"/>
 </template>

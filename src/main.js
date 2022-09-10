@@ -1,8 +1,7 @@
 /* punto de inicio de la aplicacion */
 
-import { createApp, nextTick } from 'vue'
+import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
 import App from './App.vue'/* componente que renderiza las demas vistas o componentes */
 import router from './router'
 import './assets/css/app.css'/* importar hojas de estilos global */
@@ -13,7 +12,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' 
 import { authStore } from "@/stores/auth";
-import axios from 'axios'
+import axios from 'axios';
+import Notifications from '@kyvg/vue3-notification'
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -23,6 +23,7 @@ library.add(fas, far, fab)
 
 app.use(pinia)
 app.use(router)
+app.use(Notifications)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 const store = authStore();
