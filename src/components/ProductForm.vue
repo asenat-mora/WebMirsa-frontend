@@ -258,7 +258,8 @@
             side: productSide.value,
             description: productDescription.value,
             image: productImage.value,
-            colors: arrayColors.value
+            colors: arrayColors.value,
+            subBrands: productSubBrands.value
         }
 
         axios.patch(import.meta.env.VITE_API_URL + '/api/product/' + props.productId, product)

@@ -53,12 +53,12 @@
         const router = useRouter();
         let subBrandName = ref(null);
         let brandSelected = ref(null);
+        var vName = ref(false);
         
         function getAllBrands() {
         axios.get(import.meta.env.VITE_API_URL + '/api/brand')
             .then(response => {
                 brands.value = response.data;
-                
             })
             .catch(error => {
                 
@@ -74,12 +74,45 @@
             .then(response => {
                 notify({title: "Exito", text: "¡Registro exitoso!", type: "success"});
                 //aqui va el clear
+                    subBrandName.value = null;
             })
             .catch(error => {
                 notify({title: "Error", text: "¡Error en el registro!", type: "error"});
                 console.log(error);
             })
         }
+
+        function checkName() {
+            /* Busca que el nombre este definido */
+            if (!subBrandName.value) {
+                vName.value = true;
+                errors.value.name = "El nombre de la sub-marca es requerido";
+                return;
+            }
+            /*quita espacios y los guarda en otra variable */
+            let nameNoSpace = subBrandName.value.replace(/ /g, "");
+            /* checa la longitud de la cadena, sin contar espacios */
+            if (nameNoSpace.length < 3 || nameNoSpace.length > 20) {
+                vName.value = true;
+                errors.value.name ="El nombre debe tener entre 3 y 20 caracteres";
+                return;
+            }
+            /* valida los caracteres aceptados */
+            if (!/^[a-zA-Z ]+$/.test(subBrandName.value)) {
+                errors.value.name = "El nombre debe contener solo letras";
+                vName.value = true;
+            }
+        }
+
+/*         function validateForm() {
+            errors.value = {};
+            vName.value = false;
+            checkName();
+
+            if (!vName.value) {
+                createSubBrand();
+            }
+        } */
 
         function goBack(event){
             event.preventDefault();
@@ -91,4 +124,8 @@
             getAllBrands();
         })
         
+
+
+
+
     </script>
