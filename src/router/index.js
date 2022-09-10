@@ -17,7 +17,7 @@ import UserList from '../views/UserList.vue'
 import AddBrand from '../views/AddBrand.vue'
 import BrandEdit from '../views/BrandEdit.vue'
 import BrandList from '../views/BrandList.vue'
-import AddSubBrand from '../views/AddSubBrand.vue'
+import AddSubBrand from '../views/AddSubbrand.vue'
 
 /* Accesorios */
 import AddAccesory from '../views/AddAccesory.vue'
