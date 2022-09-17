@@ -1,74 +1,122 @@
 <template>
 
-<div class="body-register-product">
-    <div class="register-container-product">
+
         <header>Accesorios</header>
-            <div class="form-first">
-                <div class="details-product">
-                    <span class="title">Lista de Accesorios</span>
-                    <div class="fields">
-                        <div class="container mt-4" id="app">
-                            <table class="GeneratedTable" >
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>NOMBRE</th>
-                                        <th>QUIEN MODIFICO</th>
-                                        <th>OPERACION</th>
-                                        <th>ULTIMA MODIFICACION</th>
-                                        <th>ESTATUS</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="datos in data">
-                                    <td>{{datos.autopartId}}</td>
-                                    <td>{{datos.autopartName}}</td>
-                                    <td>{{datos.userName}} {{datos.userSurname}}</td>
-                                    <td>{{datos.last_modification_description}}</td>
-                                    <td>{{datos.last_modification_date}}</td>
-                                    <td>{{datos.isDeleted}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        <DataTable ref="dt" :value="accessories" responsiveLayout="scroll" :paginator="true" :rows="10"
+                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                :rowsPerPageOptions="[10,20,50]"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" filterDisplay="menu"
+                dataKey="id" :globalFilterFields="['name', 'last_modification_description', 'user']" v-model:filters="filters1">
+
+                <template #header>
+                    <div class="flex justify-content-between">
+                        <Button icon="pi pi-external-link" label="Exportar" @click="exportCSV($event)" id="table-header-element"/>
+                        <!-- <Button type="button" icon="pi pi-filter-slash" label="Clear" class="p-button-outlined" @click="clearFilter1()"/> -->
+                        <span class="p-input-icon-left" id="table-header-element">
+                            <i class="pi pi-search" />
+                            <InputText v-model="filters1['global'].value" placeholder="Buscar" />
+                        </span>
                     </div>
-                </div>
-                <div class="details-btns">
-                    <button class="savebtn">
-                        <span class="btnGuardar">Aceptar</span> 
-                    </button>
-                </div>
+                </template>
+                <template #empty>
+                    No se encontraron accesorios.
+                </template>
+                <template #loading>
+                    Cargando la información de los accesorios. Por favor espere.
+                </template>
+
+                <Column field="id" header="Id"></Column>
+                <Column field="name" header="Nombre"></Column>
+                <Column field="last_modification_description" header="Ultimo Cambio"></Column>
+                <Column field="last_modification_date" header="Fecha Ultima Modificación"></Column>
+                <Column field="user" header="Usuario"></Column>
+                <Column :exportable="false" style="min-width:8rem">
+                    <template #body="slotProps">
+                        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" @click="editAccessory(slotProps.data)" />
+                        <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" @click="confirmDeleteAccessory(slotProps.data)" />
+                    </template>
+                </Column>
+
+
+
+        </DataTable>
+
+        <Dialog v-model:visible="deleteAccessoryDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                <span >Esta seguro de querer borrar <b>{{accessory.name}}</b>?</span>
             </div>
-    </div>
-</div>
+            <template #footer>
+                <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteAccessory" />
+                <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteAccessoryDialog = false"/>
+                
+            </template>
+        </Dialog>
+
 </template>
 
-<script>
-    import Navbar from '../components/Navbar.vue'
-    import axios from 'axios'
-    import { onBeforeMount, ref } from 'vue';
-    export default{
-        name : 'ClassificationList',
-        components: {
-            Navbar
-        },
-        setup(){
-            var data = ref();
-            function getData(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/autopart').then(response => {
-                    data.value = response.data
-                }).catch(error => {
-                    console.log(error)
-                })
-            }
-            onBeforeMount(() => {
-                getData();
-            });
+<script setup>
 
-            return {
-                data,
-                getData
-            }
-        }
-    }
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
+import {FilterMatchMode} from 'primevue/api';
+import { useRouter } from 'vue-router';
+import { notify } from "@kyvg/vue3-notification";
+
+
+const filters1 = ref({ 'global': { value: null, matchMode: FilterMatchMode.CONTAINS } });
+const router = useRouter();
+
+let accessories = ref();
+let accessory = ref({});
+let deleteAccessoryDialog = ref(false);
+
+function editAccessory(product) {
+    router.push({ name: 'AccesoryEdit', params: { id: product.id } });
+}
+
+function mapUsers(){
+    accessories.value.forEach(accessory => {
+        accessory.user = accessory.user.name + " " + accessory.user.surname;
+        accessory.last_modification_date = new Date(accessory.last_modification_date).toLocaleString();
+    });
+}
+
+function getAllAccessories(){
+    axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
+    .then(response => {
+        accessories.value = response.data;
+        mapUsers();
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
+function confirmDeleteAccessory(acc){
+    accessory.value = acc;
+    deleteAccessoryDialog.value = true;
+}
+
+function deleteAccessory(){
+    deleteAccessoryDialog.value = false;
+    const id = accessory.value.id;
+    accessory.value = {};
+
+    axios.delete(import.meta.env.VITE_API_URL + '/api/accessory/' + id)
+    .then(response => {
+        notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
+        getAllAccessories();
+    })
+    .catch(error => {
+        console.log(error);
+        notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
+    });
+}
+
+onMounted(() => {
+    getAllAccessories();
+});
+
+
 </script>

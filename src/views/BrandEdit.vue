@@ -97,10 +97,7 @@
                 axios.delete(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value)
                 .then(response => {
                     notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
-                    getAllBrands();
-                    brandSelected.value= null;
-                    brandName.value = null;
-                    key.value = null;
+                    router.go('/BrandEdit')
                 })
                 .catch(error => {
                     console.log(error);

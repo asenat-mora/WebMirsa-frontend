@@ -78,7 +78,7 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/BrandEdit",
+			path: "/BrandEdit/:id?",
 			name: "BrandEdit",
 			component: BrandEdit,
 			meta: {
@@ -110,7 +110,7 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/AccesoryEdit",
+			path: "/AccesoryEdit/:id?",
 			name: "AccesoryEdit",
 			component: AccesoryEdit,
 			meta: {

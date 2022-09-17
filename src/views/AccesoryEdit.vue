@@ -48,7 +48,7 @@
     import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
-    import { useRouter } from 'vue-router';
+    import { useRouter, useRoute } from 'vue-router';
     export default{
         name: 'AccesoryEdit',
         components: {
@@ -61,6 +61,7 @@
             var errors = ref(null);
             var vName = ref(false);
             var router = useRouter();
+            const route = useRoute();
 
             const fieldsMap = {
                 name: "Nombre"
@@ -70,6 +71,10 @@
                 axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
                 .then(response => {
                     accesories.value = response.data;
+                    if(route.params.id){
+                        accesorySelected.value = route.params.id;
+                        loadName();
+                    }
                 })
                 .catch(error => {
                     console.log(error);
@@ -88,9 +93,7 @@
                 axios.delete(import.meta.env.VITE_API_URL + '/api/accessory/' + accesorySelected.value)
                 .then(response => {
                     notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
-                    getAllAccessories();
-                    accesorySelected.value= null;
-                    accesoryName.value = null;
+                    router.go('/AccesoryEdit');
                 })
                 .catch(error => {
                     console.log(error);
@@ -156,6 +159,7 @@
 
             onBeforeMount(() => {
                 getAllAccessories();
+                
             })
 
             function goBack(event){
@@ -177,7 +181,8 @@
                 vName,
                 fieldsMap,
                 router, 
-                goBack
+                goBack,
+                route
                 
             }
         }

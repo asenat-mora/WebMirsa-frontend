@@ -14,6 +14,15 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { authStore } from "@/stores/auth";
 import axios from 'axios';
 import Notifications from '@kyvg/vue3-notification'
+import PrimeVue from 'primevue/config';
+import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
+import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
+import Dialog from 'primevue/dialog';
+import 'primevue/resources/themes/saga-blue/theme.css';
+import 'primevue/resources/primevue.min.css';               
+import 'primeicons/primeicons.css'; 
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -25,6 +34,14 @@ app.use(pinia)
 app.use(router)
 app.use(Notifications)
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(PrimeVue)
+
+app.component('Column', Column)
+app.component('DataTable', DataTable)
+app.component('Button', Button)
+app.component('InputText', InputText)
+app.component('Dialog', Dialog)
+
 
 const store = authStore();
 
