@@ -46,7 +46,13 @@ function searchAccessoryName(accessoryId) {
   return accessories.value.filter((accessory) => accessory.value == accessoryId)[0].label;
 }
 
-
+function cleanSearchFields (){
+  selectedBrands.value = [];
+  selectedAccessories.value = [];
+  selectedColors.value = [];
+  description.value = "";
+  selectedSide.value = [];
+}
 
 function search(){
     let queryObject = {
@@ -67,6 +73,8 @@ function search(){
         products.value = response.data;
         console.log(products.value.length)
     });
+
+
 }
 
 onBeforeMount(() => {
@@ -136,6 +144,7 @@ onBeforeMount(() => {
             </div>
             <div class="filter-buttons">
                 <button class="button" @click="search">Buscar</button>
+                <button class="button" @click="cleanSearchFields">Limpiar</button>
             </div>
         </div>
 

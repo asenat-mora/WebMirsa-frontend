@@ -45,7 +45,7 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
-import {FilterMatchMode,FilterOperator} from 'primevue/api';
+import {FilterMatchMode} from 'primevue/api';
 import { useRouter } from 'vue-router';
 
 let users = ref();
@@ -64,8 +64,8 @@ const filters1 = ref({
 const dt = ref();
 
 const exportCSV = () => {
-            dt.value.exportCSV();
-        };
+    dt.value.exportCSV();
+};
     
 function getAllUsers(){
     axios.get(import.meta.env.VITE_API_URL + "/api/users")

@@ -1,5 +1,6 @@
 <template>
-
+    <div class="body-register-marca">
+    <div class="register-container-marca">
 
         <header>Accesorios</header>
         <DataTable ref="dt" :value="accessories" responsiveLayout="scroll" :paginator="true" :rows="10"
@@ -52,6 +53,8 @@
                 
             </template>
         </Dialog>
+    </div>
+</div>
 
 </template>
 
@@ -66,6 +69,11 @@ import { notify } from "@kyvg/vue3-notification";
 
 const filters1 = ref({ 'global': { value: null, matchMode: FilterMatchMode.CONTAINS } });
 const router = useRouter();
+const dt = ref();
+
+const exportCSV = () => {
+    dt.value.exportCSV();
+};
 
 let accessories = ref();
 let accessory = ref({});
@@ -75,7 +83,7 @@ function editAccessory(product) {
     router.push({ name: 'AccesoryEdit', params: { id: product.id } });
 }
 
-function mapUsers(){
+function mapAccessories(){
     accessories.value.forEach(accessory => {
         accessory.user = accessory.user.name + " " + accessory.user.surname;
         accessory.last_modification_date = new Date(accessory.last_modification_date).toLocaleString();
@@ -86,7 +94,7 @@ function getAllAccessories(){
     axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
     .then(response => {
         accessories.value = response.data;
-        mapUsers();
+        mapAccessories();
     })
     .catch(error => {
         console.log(error);

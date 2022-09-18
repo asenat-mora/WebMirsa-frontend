@@ -35,7 +35,7 @@
                             </div>
                             <div class="input-field-b">
                                 <label>Confirmaci&oacute;n de contrase&ntilde;a*</label>
-                                <input type="password" v-model="confirmPassword">
+                                <input type="password" v-model="verificationPassword">
                                 <div class="error" v-if="vPasswordVerify"> {{ errors.verificationPassword }}</div>
                             </div>
                             <div class="input-field-b">
@@ -72,8 +72,7 @@
     import { notify } from "@kyvg/vue3-notification";
 
     const router = useRouter();
-    const password = ref(null);
-    const confirmPassword = ref(null);
+    let verificationPassword = ref();
     let errors = ref(null);
     let vName = ref(false);
     let vSurname = ref(false);
@@ -117,7 +116,7 @@
             email: props.email,
             verificationEmail: props.verificationEmail,
             roles: Array.of(parseInt(props.userRol)),
-            password: password.value,
+            password: props.password,
         }
 
         axios.post(import.meta.env.VITE_API_URL + '/api/users/signUp', user)
@@ -209,7 +208,7 @@
         /*quita espacios y los guarda en otra variable */
         let emailNoSpace = props.email.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
-        if (emailNoSpace.length < 8 || emailNoSpace.length > 20) {
+        if (emailNoSpace.length < 8 || emailNoSpace.length > 30) {
             errors.value.email = "El correo debe tener entre 8 y 20 caracteres";
             vEmail.value = true;
         }
@@ -271,22 +270,26 @@
 
     function checkPasswordVerify() {
         /* Busca que el nombre este definido */
-        if (!props.verificationPassword) {
+        if (!verificationPassword.value) {
             vPasswordVerify.value = true;
-            errors.value.verificationPassword = "Confiarmar su contraseña";
+            errors.value.verificationPassword = "Confirmar su contraseña";
             return;
         }
         /*quita espacios y los guarda en otra variable */
-        let passwordNoSpace = props.verificationPassword.replace(/ /g, '');
+        let passwordNoSpace = verificationPassword.value.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (passwordNoSpace.length < 8 || passwordNoSpace.length > 20) {
             errors.value.verificationPassword = "El password debe tener entre 8 y 20 caracteres";
             vPasswordVerify.value = true;
         }
         /* valida los caracteres aceptados */
-        if (!/^[a-zA-Z0-9.@*+?^${}()|[\] ]+$/.test(props.password)) {
+        if (!/^[a-zA-Z0-9.@*+?^${}()|[\] ]+$/.test(verificationPassword)) {
             errors.value.password = "Caracteres aceptados";
             vPassword.value = true
+        }
+        if(verificationPassword.value !== props.password){
+            errors.value.verificationPassword = "Las contraseñas no coinciden";
+            vPasswordVerify.value = true;
         }
     }
 
@@ -304,7 +307,7 @@
 
         event.preventDefault();
 
-        if(!vName.value && !vSurname.value && !vEmail.value && !vEmailVerify.value && vPassword.value && vPasswordVerify.value && vUserRol.value){
+        if(!vName.value && !vSurname.value && !vEmail.value && !vEmailVerify.value && !vPassword.value && !vPasswordVerify.value && !vUserRol.value){
             if (mode === 'Create') {
                 createUser();
             } else {

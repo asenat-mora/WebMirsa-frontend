@@ -46,7 +46,7 @@
     import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
-    import { useRouter } from 'vue-router';
+    import { useRouter, useRoute } from 'vue-router';
     export default{
         name: 'ColorEdit',
         components: {
@@ -59,6 +59,7 @@
             var errors = ref(null);
             var vName = ref(false);
             var router = useRouter();
+            const route = useRoute();
 
             const fieldsMap = {
                 name: "Nombre"
@@ -68,6 +69,10 @@
                 axios.get(import.meta.env.VITE_API_URL + '/api/color')
                 .then(response => {
                     colors.value = response.data;
+                    if(route.params.id != null){
+                        colorSelected.value = route.params.id;
+                        loadName();
+                    }
                 })
                 .catch(error => {
                     console.log(error);
@@ -172,7 +177,8 @@
                 vName,
                 fieldsMap,
                 router, 
-                goBack
+                goBack,
+                route
             }
         }
     }

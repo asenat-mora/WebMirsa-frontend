@@ -1,172 +1,129 @@
-<script>
-    import Navbar from '../components/Navbar.vue'
-    import axios from 'axios'
-    import { onBeforeMount, ref } from 'vue';
+<script setup>
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
+import {FilterMatchMode} from 'primevue/api';
+import { useRouter } from 'vue-router';
+import { notify } from "@kyvg/vue3-notification";
+
+const filters1 = ref({ 'global': { value: null, matchMode: FilterMatchMode.CONTAINS } });
+const router = useRouter();
+const dt = ref();
+
+const exportCSV = () => {
+    dt.value.exportCSV();
+};
 
 
-    async function getAllBrands() {
-        return axios.get(import.meta.env.VITE_API_URL + "/api/brand");
-    }
+let brands = ref();
+let brand = ref({});
+let deleteBrandDialog = ref(false);
 
-    function search(){
-    let queryObject = {
-        brands: selectedBrands.value,
-        accessories: selectedAccessories.value,
-        colors: selectedColors.value,
-        side: selectedSide.value,
-    };
 
-    if (description.value.length > 0) {
-        console.log(description.value.length);
-        queryObject.description = description.value;
-    }
-
-    var query = stringify(queryObject, {arrayFormat: 'bracket'});
-    
-    getProductsFiltered(query).then(response => {
-        products.value = response.data;
-        console.log(products.value.length)
+function getAllBrands(){
+    axios.get(import.meta.env.VITE_API_URL + '/api/brand')
+    .then(response => {
+        brands.value = response.data;
+        mapBrands();
+    })
+    .catch(error => {
+        console.log(error);
     });
-    }
+}
 
-    onBeforeMount(() => {
-  try {
-    const results = Promise.all([
-      getAllBrands(),
-      getAllAccessories(),
-      getAllProducts(),
-      getAllColors(),
-    ]);
-    results.then((response) => {
-      brands.value = response[0].data.map((brand) => {
-        return {
-          value: brand.id,
-          label: brand.name,
-        };
-      });
-      
+function mapBrands(){
+    brands.value.forEach(brand => {
+        brand.user = brand.user.name + " " + brand.user.surname;
+        brand.last_modification_date = new Date(brand.last_modification_date).toLocaleString();
     });
-  } catch (error) {
-    console.log(error);
-  }
+}
+
+function confirmDeleteBrand(brd){
+    brand.value = brd;
+    deleteBrandDialog.value = true;
+}
+
+function editBrand(brand) {
+    router.push({ name: 'BrandEdit', params: { id: brand.id } });
+}
+
+function deleteBrand(){
+    deleteBrandDialog.value = false;
+    const id = brand.value.id;
+    brand.value = {};
+
+    axios.delete(import.meta.env.VITE_API_URL + '/api/brand/' + id)
+    .then(response => {
+        notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
+        getAllBrands();
+    })
+    .catch(error => {
+        console.log(error);
+        notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
+    });
+
+}
+
+onMounted(() => {
+    getAllBrands();
 });
 
-    export default{
-        name : 'BrandList',
-        components: {
-            Navbar
-        },
-        setup(){
-            var data = ref();
-            function getData(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/brand').then(response => {
-                    data.value = response.data
-                }).catch(error => {
-                    console.log(error)
-                })
-            }
-            onBeforeMount(() => {
-                getData();
-            });
-
-            return {
-                data,
-                getData
-            }
-        }
-    }
 </script>
 
 <template>
 
 <div class="body-register-marca">
     <div class="register-container-marca">
-        <header>lISTA DE MARCAS</header>
-        <!-- barra de busqueda -->
-        <!-- <div class="container-filter">
-            <div class="filter-options">
-                 <div class="filter-a">
-                            <label>Marca</label>
-                            <select v-model="productBrand" required>
-                                <option disabled selected>Selecciona una marca</option>
-                                <option v-for="brand in brands" :value="brand.brandId">
-                                    {{ brand.brandName }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="filter-b">
-                            <label>Accesorio</label>
-                            <select v-model="productCategory" required>
-                                <option disabled selected>Selecciona una Categoria</option>
-                                <option v-for="autopart in autoparts" :value="autopart.autopartId">
-                                    {{ autopart.autopartName }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="filter-c">
-                            <label>Lado</label>
-                            <select v-model="productSide" required>
-                                <option disabled selected>Selecciona un lado</option>
-                                <option value="Derecho">Derecho</option>
-                                <option value="Izquierdo">Izquierdo</option>
-                                <option value="Ambos">Ambos</option>
-                            </select>
-                        </div>
-                        <div class="button-search">
-                            <button class="searchbtn" @click="getCodeItem">
-                                <span class="btnBuscar">Buscar</span>
-                            </button>
-                        </div>
-            
-            </div>
-        </div> -->
-        <div class="bar-filter">
-            <div class="filter-options">
-                <div class="option-first-row">
-                    <!-- <label>Marca</label> -->
-                    <input class="txtbox" type="text" v-model="brand" placeholder="Marca">
-                </div>
-                        
-            </div>
-            <div class="filter-buttons">
-                <button class="button" @click="search">Buscar</button>
-            </div>
-        </div>
-        
+        <header>LISTA DE MARCAS</header>
+        <DataTable ref="dt" :value="brands" responsiveLayout="scroll" :paginator="true" :rows="10"
+                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                :rowsPerPageOptions="[10,20,50]"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" filterDisplay="menu"
+                dataKey="id" :globalFilterFields="['name', 'last_modification_description', 'user', 'key']" v-model:filters="filters1">
 
-        <!-- tabla de productos -->
-            <div class="form-first">
-                <div class="details-product">
-                    <!-- <span class="title">Lista de marcas</span> -->
-                    <div class="fields">
-                        <div class="container mt-4" id="app">
-                            <table class="GeneratedTable" >
-                                <thead>
-                                    <tr>
-                                        <th>ID MARCA</th>
-                                        <th>NOMBRE</th>
-                                        <th>QUIEN MODIFIC&Oacute;</th>
-                                        <th>OPERACI&Oacute;N</th>
-                                        <th>ULTIMA MODIFICACI&Oacute;N</th>
-                                        <th>ESTATUS</th>
-                                        <th>DETALLE</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="datos in data">
-                                    <td align="center">{{datos.brandId}}</td>
-                                    <td align="center">{{datos.brandName}}</td>
-                                    <td align="center">{{datos.userName}} {{datos.userSurname}}</td>
-                                    <td align="center">{{datos.last_modification_description}}</td>
-                                    <td align="center">{{datos.last_modification_date}}</td>
-                                    <td align="center">{{datos.isDeleted}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <template #header>
+                    <div class="flex justify-content-between">
+                        <Button icon="pi pi-external-link" label="Exportar" @click="exportCSV($event)" id="table-header-element"/>
+                        <!-- <Button type="button" icon="pi pi-filter-slash" label="Clear" class="p-button-outlined" @click="clearFilter1()"/> -->
+                        <span class="p-input-icon-left" id="table-header-element">
+                            <i class="pi pi-search" />
+                            <InputText v-model="filters1['global'].value" placeholder="Buscar" />
+                        </span>
                     </div>
-                </div>
+                </template>
+                <template #empty>
+                    No se encontraron marcas.
+                </template>
+                <template #loading>
+                    Cargando la información de las marcas. Por favor espere.
+                </template>
+
+                <Column field="id" header="Id"></Column>
+                <Column field="name" header="Nombre"></Column>
+                <Column field="key" header="Clave"></Column>
+                <Column field="last_modification_description" header="Ultimo Cambio"></Column>
+                <Column field="last_modification_date" header="Fecha Ultima Modificación"></Column>
+                <Column field="user" header="Usuario"></Column>
+                <Column :exportable="false" style="min-width:8rem">
+                    <template #body="slotProps">
+                        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" @click="editBrand(slotProps.data)" />
+                        <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" @click="confirmDeleteBrand(slotProps.data)" />
+                    </template>
+                </Column>
+
+        </DataTable>
+
+        <Dialog v-model:visible="deleteBrandDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                <span >Esta seguro de querer borrar <b>{{brand.name}}</b>?</span>
             </div>
+            <template #footer>
+                <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteBrand" />
+                <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteBrandDialog = false"/>
+                
+            </template>
+        </Dialog>
+
     </div>
 </div>
 </template>

@@ -51,7 +51,7 @@
     import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
-    import { useRouter } from 'vue-router';
+    import { useRouter , useRoute} from 'vue-router';
     export default{
         name: 'BrandEdit',
         components: {
@@ -67,6 +67,7 @@
             var vKey = ref(false);       
             const brands = ref(null);
             var router = useRouter();
+            const route = useRoute();
 
             const fieldsMap = {
                 name: "Nombre",
@@ -77,6 +78,10 @@
                 axios.get(import.meta.env.VITE_API_URL + '/api/brand')
                 .then(response => {
                     brands.value = response.data;
+                    if(route.params.id){
+                        brandSelected.value = route.params.id;
+                        loadAttributes();
+                    }
                 })
                 .catch(error => {
                     console.log(error);
@@ -86,7 +91,6 @@
             function loadAttributes (){
                 brandName.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].name;
                 key.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].key;
-                
             }
 
             function deleteBrand(){
