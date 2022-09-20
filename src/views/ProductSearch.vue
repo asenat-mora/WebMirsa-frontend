@@ -46,12 +46,15 @@ function searchAccessoryName(accessoryId) {
   return accessories.value.filter((accessory) => accessory.value == accessoryId)[0].label;
 }
 
-function cleanSearchFields (){
+async function cleanSearchFields (){
   selectedBrands.value = [];
   selectedAccessories.value = [];
   selectedColors.value = [];
   description.value = "";
   selectedSide.value = [];
+  getAllProducts().then((response) => {
+    products.value = response.data;
+  });
 }
 
 function search(){
