@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button  type="button" class="deletebtn" @click="deleteAccessory">
+                    <button  type="button" class="deletebtn" @click="displayModal">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
                     <button type="button" class="cancelbtn" @click="goBack($event)">
@@ -39,6 +39,17 @@
                 </div>
             </div>
         </form>
+        <Dialog v-model:visible="deleteAccessoryDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                <span >Esta seguro de querer borrar <b>{{accesoryName}}</b>?</span>
+            </div>
+            <template #footer>
+                <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteAccessory" />
+                <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteAccessoryDialog = false"/>
+                
+            </template>
+        </Dialog>
     </div>
 </div>
 </template>
@@ -62,9 +73,16 @@
             var vName = ref(false);
             var router = useRouter();
             const route = useRoute();
+            let deleteAccessoryDialog = ref(false);
 
             const fieldsMap = {
                 name: "Nombre"
+            }
+
+            function displayModal(){
+                if(accesorySelected.value){
+                    deleteAccessoryDialog.value = true;
+                }
             }
 
             function getAllAccessories(){
@@ -182,7 +200,9 @@
                 fieldsMap,
                 router, 
                 goBack,
-                route
+                route,
+                deleteAccessoryDialog,
+                displayModal
                 
             }
         }

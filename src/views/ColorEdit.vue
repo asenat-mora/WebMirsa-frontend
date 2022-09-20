@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="deletebtn" type="button" @click="deleteColor">
+                    <button class="deletebtn" type="button" @click="displayModal">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
                     <button type="button" class="cancelbtn" @click="goBack($event)">
@@ -37,6 +37,18 @@
                 </div>
             </div>
         </form>
+
+        <Dialog v-model:visible="deleteColorDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+                <div class="confirmation-content">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                    <span >Esta seguro de querer borrar <b>{{colorName}}</b>?</span>
+                </div>
+                <template #footer>
+                    <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteColor" />
+                    <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteColorDialog = false"/>
+                    
+                </template>
+        </Dialog>
     </div>
 </div>
 </template>
@@ -58,6 +70,7 @@
             const colors = ref(null);
             var errors = ref(null);
             var vName = ref(false);
+            let deleteColorDialog = ref(false);
             var router = useRouter();
             const route = useRoute();
 
@@ -69,7 +82,7 @@
                 axios.get(import.meta.env.VITE_API_URL + '/api/color')
                 .then(response => {
                     colors.value = response.data;
-                    if(route.params.id != null){
+                    if(route.params.id){
                         colorSelected.value = route.params.id;
                         loadName();
                     }
@@ -77,6 +90,12 @@
                 .catch(error => {
                     console.log(error);
                 })
+            }
+
+            function displayModal(){
+                if(colorSelected.value){
+                    deleteColorDialog.value = true;
+                }
             }
 
             function loadName (){
@@ -178,7 +197,9 @@
                 fieldsMap,
                 router, 
                 goBack,
-                route
+                route,
+                deleteColorDialog,
+                displayModal
             }
         }
     }

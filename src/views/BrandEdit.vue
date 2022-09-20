@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button type="button" class="deletebtn" @click="deleteBrand">
+                    <button type="button" class="deletebtn" @click="displayModal">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
                     <button type="button" class="cancelbtn" @click="goBack($event)">
@@ -42,6 +42,18 @@
                 </div>
             </div>
         </form>
+
+        <Dialog v-model:visible="deleteBrandDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+                <div class="confirmation-content">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                    <span >Esta seguro de querer borrar <b>{{brandName}}</b>?</span>
+                </div>
+                <template #footer>
+                    <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteBrand" />
+                    <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteBrandDialog = false"/>
+                    
+                </template>
+        </Dialog>
     </div>
 </div>
 </template>
@@ -62,6 +74,8 @@
             var brandName = ref(null);
             var errors = ref(null);
             var key = ref(null);
+
+            var deleteBrandDialog = ref(false);
             
             var vName = ref(false);
             var vKey = ref(false);       
@@ -86,6 +100,13 @@
                 .catch(error => {
                     console.log(error);
                 })
+            }
+
+            function displayModal(){
+                
+                if(brandSelected.value){
+                    deleteBrandDialog.value = true;
+                }
             }
 
             function loadAttributes (){
@@ -220,7 +241,9 @@
                 validateForm,
                 fieldsMap,
                 router, 
-                goBack
+                goBack, 
+                deleteBrandDialog,
+                displayModal
             }
         }
     }

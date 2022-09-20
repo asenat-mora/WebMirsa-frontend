@@ -89,7 +89,7 @@
                     </template>
 
                     <template v-else>
-                        <button type="button" class="deletebtn" @click="deleteItem($event)">
+                        <button type="button" class="deletebtn" @click="displayModal">
                             <span class="btnEliminar">Eliminar</span>
                         </button>
                         <button type="button" class="updatelbtn" @click="validateForm($event, mode)">
@@ -103,6 +103,18 @@
                 
             </div>
         </form>
+
+        <Dialog v-model:visible="deleteProductDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                <span >Esta seguro de querer borrar el producto?</span>
+            </div>
+            <template #footer>
+                <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteItem" />
+                <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteProductDialog = false"/>
+                
+            </template>
+        </Dialog>
     </div>
 </div>
 </template>
@@ -141,6 +153,8 @@
     let vSide = ref(false);
     let vDescription = ref(false);
 
+    let deleteProductDialog = ref(false);
+
     const fieldsMap = {
         sku: "SKU"
     }
@@ -177,6 +191,10 @@
         arrayColors.value = [];
         subBrandsLabel.value = [];
         productSubBrands.value = [];
+    }
+
+    function displayModal(){
+        deleteProductDialog.value = true;
     }
 
     function uploadImageToBucket(event){
@@ -301,7 +319,6 @@
     }
 
     function deleteItem(event){
-        event.preventDefault();
         axios.delete(import.meta.env.VITE_API_URL + '/api/product/' + props.productId,)
             .then(response => {
                 notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
