@@ -1,7 +1,37 @@
 <template>
     <div class="body-register-marca">
         <div class="register-container-marca">
-            <header>LISTA DE SUBMARCAS</header>
+            <header>CATALOGO DE SUBMARCAS</header>
+
+            <form class="form-register-marca">
+                <div class="form-first">
+                    <div class="details-marca">
+                        
+                        <div class="fields">
+                            <div class="input-field-b">
+                                <label>Marca a quien pertenece*</label>
+                                <select v-model="brandSelected">
+                                    <option selected disabled >Seleccione una marca</option>
+                                    <option v-for="brand in brands" :value = "brand.id">
+                                        {{brand.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="input-field-b">
+                                <label>Nombre Submarca*</label>
+                                <input type="text" placeholder="Nuevo nombre" required v-model="subBrandName">
+                                <div class="error" v-if="vName"> {{ errors.name }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="details-btns">
+                        <button class="savebtn" type="button" @click="createSubBrand()">
+                            <span class="btnGuardar">Registrar</span>       
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <DataTable ref="dt" :value="subBrands" responsiveLayout="scroll" :paginator="true" :rows="10"
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 :rowsPerPageOptions="[10,20,50]"
@@ -51,6 +81,13 @@
                     
                 </template>
             </Dialog>
+
+            <div class="details-btns">
+                <button type="button" class="cancelbtn" @click="goBack($event)">
+                     <span class="btnCancelar">Volver</span>
+                </button>
+            </div>
+
         </div>
     </div>
 </template>

@@ -1,7 +1,29 @@
 <template>
     <div class="body-register-marca">
     <div class="register-container-marca">
-        <header>COLORES</header>
+        <header>CATALOGO DE COLORES</header>
+
+        <form class="form-register-marca"  @submit.prevent="validateForm">
+            <div class="form-first">
+                <div class="details-marca">
+                   <!--  <span class="title">DETALLES DE MARCA</span> -->
+                    <div class="fields">
+                        <div class="input-field-b">
+                            <label>Nombre</label>
+                            <input type="text" placeholder="Nombre del color" v-model="colorName">
+                            <div class="error" v-if="vName"> {{ errors.name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-btns">  
+                    <button class="savebtn" type="submit">
+                        <span class="btnGuardar">Registrar</span> 
+                    </button>
+                </div>
+            </div>
+        </form>
+
+
             <DataTable ref="dt" :value="colors" responsiveLayout="scroll" :paginator="true" :rows="10"
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     :rowsPerPageOptions="[10,20,50]"
@@ -49,7 +71,13 @@
                 <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteColorDialog = false"/>
                 
             </template>
-        </Dialog>
+            </Dialog>
+
+            <div class="details-btns">  
+                <button type="button" class="cancelbtn" @click="goBack($event)">
+                    <span class="btnCancelar">Volver</span>
+                </button>                   
+            </div>
     </div>
 </div>
 </template>

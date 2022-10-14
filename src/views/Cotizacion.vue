@@ -33,8 +33,9 @@
             </div>
             <div class="subSection-b">
                 <h2>Lista de productos</h2>
-                <div class="card-product">
-                    <div class="img">
+                <div class="cardProduct">
+                    <div class="cardContainer">
+                    <div class="img-cont">
                         <img src="https://elcanelo.mx/wp-content/uploads/2020/11/20-6362-05-1A.jpg" alt="prueba">
                     </div>
                     <div class="txt-info">
@@ -46,8 +47,68 @@
                     </div>
 
                 </div>
+                <div class="card-btn">
+                        <!-- <button type="submit" class="deletebtnn">
+                            <font-awesome-icon icon="fa-sharp fa-solid fa-trash-can" />
+                            <span class="btnGuardar">Borrar</span>
+                        </button> -->
+                        <div class="icons">
+                            <a href="#"><font-awesome-icon icon="fa-sharp fa-solid fa-trash-can" /></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardProduct">
+                    <div class="cardContainer">
+                    <div class="img-cont">
+                        <img src="https://elcanelo.mx/wp-content/uploads/2020/11/20-6362-05-1A.jpg" alt="prueba">
+                    </div>
+                    <div class="txt-info">
+                        <span class="sku">{{sku}}supersku</span>
+                        <span class="name">{{accessory}}supername</span>
+                        <span class="brand">{{brand}}supermarca</span>
+                        <span class="model">{{model}}supercolor</span>
+                        <span class="description">{{description}}superdesc</span>
+                    </div>
+
+                </div>
+                <div class="card-btn">
+                        <!-- <button type="submit" class="deletebtnn">
+                            <font-awesome-icon icon="fa-sharp fa-solid fa-trash-can" />
+                            <span class="btnGuardar">Borrar</span>
+                        </button> -->
+                        <div class="icons">
+                            <a href="#"><font-awesome-icon icon="fa-sharp fa-solid fa-trash-can" /></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardProduct">
+                    <div class="cardContainer">
+                    <div class="img-cont">
+                        <img src="https://elcanelo.mx/wp-content/uploads/2020/11/20-6362-05-1A.jpg" alt="prueba">
+                    </div>
+                    <div class="txt-info">
+                        <span class="sku">{{sku}}supersku</span>
+                        <span class="name">{{accessory}}supername</span>
+                        <span class="brand">{{brand}}supermarca</span>
+                        <span class="model">{{model}}supercolor</span>
+                        <span class="description">{{description}}superdesc</span>
+                    </div>
+
+                </div>
+                <div class="card-btn">
+                        <!-- <button type="submit" class="deletebtnn">
+                            <font-awesome-icon icon="fa-sharp fa-solid fa-trash-can" />
+                            <span class="btnGuardar">Borrar</span>
+                        </button> -->
+                        <div class="icons">
+                            <a href="#"><font-awesome-icon icon="fa-sharp fa-solid fa-trash-can" /></a>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
+        
         <div class="section-c">
             <div class="details"> 
                 <p>

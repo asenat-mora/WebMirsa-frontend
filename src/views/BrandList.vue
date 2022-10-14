@@ -73,7 +73,33 @@ onMounted(() => {
 
 <div class="body-register-marca">
     <div class="register-container-marca">
-        <header>LISTA DE MARCAS</header>
+        <header>CATALOGO DE MARCAS</header>
+        <!-- Formulario de alta -->
+        <form class="form-register-marca" @submit.prevent="validateForm">
+            <div class="form-first">
+                <div class="details-marca">
+                    <span class="title">ALTA DE MARCA</span>
+                    <div class="fields">
+                        <div class="input-field-b">
+                            <label>Nombre*</label>
+                            <input type="text" placeholder="Nombre de la marca" v-model="brandName" />
+                            <div class="error" v-if="vName">{{ errors.name }}</div>
+                        </div>
+                        <div class="input-field-b">
+                            <label>Clave*</label>
+                            <input type="text" placeholder="Clave de la marca" v-model="key" />
+                            <div class="error" v-if="vkey">{{ errors.key }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-btns">
+                    <button class="savebtn" type="submit">
+                        <span class="btnGuardar">Registrar</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        
         <DataTable ref="dt" :value="brands" responsiveLayout="scroll" :paginator="true" :rows="10"
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 :rowsPerPageOptions="[10,20,50]"
@@ -123,6 +149,12 @@ onMounted(() => {
                 
             </template>
         </Dialog>
+
+        <div class="details-btns">
+            <button type="button" class="cancelbtn" @click="goBack($event)">
+                    <span class="btnCancelar">Volver</span>
+            </button>           
+        </div>
 
     </div>
 </div>

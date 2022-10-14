@@ -1,8 +1,29 @@
 <template>
     <div class="body-register-marca">
     <div class="register-container-marca">
+        <header>CATALOGO DE ACCESORIOS</header>
+        <!-- alta de accesorio -->
+        <form class="form-register-category" @submit.prevent="validateForm">
+            <div class="form-first">
+                <div class="details-category">
+                    <!-- <span class="title">Detalle</span> -->
+                    <div class="fields">
+                        <div class="input-field-b">
+                            <label>Nombre del Accesorio*</label>
+                            <input type="text" placeholder="Tipo de accesorio" v-model="accesoryName">
+                            <div class="error" v-if="vName"> {{ errors.name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details-btns">
+                    <button class="savebtn" type="submit">
+                        <span class="btnGuardar">Registrar</span> <!-- @click="createAccesory" -->
+                    </button>
+                </div>
+            </div>
+        </form>
 
-        <header>Accesorios</header>
+       
         <DataTable ref="dt" :value="accessories" responsiveLayout="scroll" :paginator="true" :rows="10"
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 :rowsPerPageOptions="[10,20,50]"
@@ -53,6 +74,13 @@
                 
             </template>
         </Dialog>
+        <!-- boton de volver -->
+        <div class="details-btns">
+            <button type="button" class="cancelbtn" @click="goBack($event)">
+                <span class="btnCancelar">Volver</span>
+            </button>
+                    
+        </div>
     </div>
 </div>
 
