@@ -21,6 +21,18 @@
                     </button>
                 </div>
             </div>
+
+            <Dialog v-model:visible="createAccessoryDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+                <div class="confirmation-content">
+                    <i class="pi pi-question-circle mr-3" style="font-size: 2rem" />
+                    <span>Esta seguro de agregar <b>{{accesoryName}}</b>?</span>
+                </div>
+                <template #footer>
+                    <Button label="Si" icon="pi pi-check" class="p-button-text" @click="createAccessory" />
+                    <Button label="No" icon="pi pi-times" class="p-button-text" @click="createAccessoryDialog = false" />
+            
+                </template>
+            </Dialog>
         </form>
 
        
@@ -106,6 +118,74 @@ const exportCSV = () => {
 let accessories = ref();
 let accessory = ref({});
 let deleteAccessoryDialog = ref(false);
+let createAccessoryDialog = ref(false);
+
+//validation variables
+const vName = ref(false);
+const errors = ref();
+
+//vmodel var
+let accesoryName = ref('');
+
+
+const fieldsMap = {
+    name: "Nombre",
+    key: "Clave"
+}
+
+function createAccessory() {
+    createAccessoryDialog.value = false;
+    axios.post(import.meta.env.VITE_API_URL + '/api/accessory',
+        {
+            name: accesoryName.value
+        }
+    )
+        .then(response => {
+            notify({ title: "Exito", text: "¡Registro exitoso!", type: "success" });
+            accesoryName.value = "";
+            getAccessories();
+        })
+        .catch(error => {
+            if (error.response.status === 409) {
+                /* Validar duplicidad de datos */
+                notify({ title: "Advertencia", text: "¡El nombre " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn" });
+            } else {
+                notify({ title: "Error", text: "¡Error en el registro!", type: "error" });
+            }
+        })
+}
+function checkName() {
+    /* Busca que el nombre este definido */
+    if (!accesoryName.value) {
+        vName.value = true;
+        errors.value.name = "El nombre del accesorio es requerido";
+        return;
+    }
+    /*quita espacios y los guarda en otra variable */
+    let nameNoSpace = accesoryName.value.replace(/ /g, '');
+    /* checa la longitud de la cadena, sin contar espacios */
+    if (nameNoSpace.length < 3 || nameNoSpace.length > 20) {
+        vName.value = true;
+        errors.value.name = "El nombre del accesorio debe tener entre 3 y 20 caracteres";
+        return;
+    }
+    /* valida los caracteres aceptados */
+    if (!/^[a-zA-Z ]+$/.test(accesoryName.value)) {
+        errors.value.name = 'El nombre debe contener solo letras'
+        vName.value = true
+    }
+}
+
+function validateForm() {
+    errors.value = {};
+    vName.value = false;
+
+    checkName();
+
+    if (!vName.value) {
+        createAccessoryDialog.value = true;
+    }
+}
 
 function editAccessory(product) {
     router.push({ name: 'AccesoryEdit', params: { id: product.id } });

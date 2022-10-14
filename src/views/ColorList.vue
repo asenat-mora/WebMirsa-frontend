@@ -21,6 +21,18 @@
                     </button>
                 </div>
             </div>
+            <Dialog v-model:visible="createColorDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-question-circle mr-3" style="font-size: 2rem" />
+                <span >Esta seguro de agregar <b>{{colorName}}</b>?</span>
+            </div>
+            <template #footer>
+                <Button label="Si" icon="pi pi-check" class="p-button-text" @click="createColor" />
+                <Button label="No" icon="pi pi-times" class="p-button-text" @click="createColorDialog = false"/>
+                
+            </template>
+            </Dialog>
+
         </form>
 
 
@@ -100,6 +112,16 @@ const exportCSV = () => {
 let colors = ref();
 let color = ref({});
 let deleteColorDialog = ref(false);
+let createColorDialog = ref(false);
+let colorName = ref();
+
+const fieldsMap = {
+    name: "Nombre"
+}
+
+//validation variables
+let vName = ref(false);
+let errors = ref(null);
 
 function getAllColors() {
     axios.get(import.meta.env.VITE_API_URL + '/api/color')
@@ -147,6 +169,60 @@ function deleteColor() {
             notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
             console.log(error);
         });
+}
+
+function createColor() {
+    createColorDialog.value = false;
+    axios.post(import.meta.env.VITE_API_URL + '/api/color',
+        {
+            name: colorName.value
+        }
+    )
+        .then(response => {
+            notify({ title: "Exito", text: "¡Registro exitoso!", type: "success" });
+            colorName.value = "";
+            getAllColors();
+        }).catch(error => {
+            if (error.response.status === 409) {
+                /* Validar duplicidad de datos */
+                notify({ title: "Advertencia", text: "¡El nombre " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn" });
+            } else {
+                notify({ title: "Error", text: "¡Error en el registro!", type: "error" });
+            }
+        });
+}
+
+
+function checkName() {
+    /* Busca que el nombre este definido */
+    if (!colorName.value) {
+        vName.value = true;
+        errors.value.name = "El nombre del color es requerido";
+        return;
+    }
+    /*quita espacios y los guarda en otra variable */
+    let nameNoSpace = colorName.value.replace(/ /g, '');
+    /* checa la longitud de la cadena, sin contar espacios */
+    if (nameNoSpace.length < 3 || nameNoSpace.length > 20) {
+        vName.value = true;
+        errors.value.name = "El nombre del color debe tener entre 3 y 20 caracteres";
+        return;
+    }
+    /* valida los caracteres aceptados */
+    if (!/^[a-zA-Z ]+$/.test(colorName.value)) {
+        errors.value.name = 'El nombre debe contener solo letras'
+        vName.value = true
+    }
+}
+
+function validateForm() {
+    errors.value = {};
+    vName.value = false;
+    checkName();
+
+    if (!vName.value) {
+        createColorDialog.value = true;
+    }
 }
 
 onMounted(() => {

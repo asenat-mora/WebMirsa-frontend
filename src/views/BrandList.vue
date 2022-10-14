@@ -13,11 +13,122 @@ const exportCSV = () => {
     dt.value.exportCSV();
 };
 
-
+//data variables
 let brands = ref();
 let brand = ref({});
 let deleteBrandDialog = ref(false);
+let createBrandDialog = ref(false);
 
+//validation flag variables
+let vName = ref(false);
+let vKey = ref(false);
+
+//errors array
+let errors = ref(null);
+
+//vmodel variables
+let brandName = ref();
+let key = ref();
+
+const fieldsMap = {
+    name: "Nombre",
+    key: "Clave",
+};
+
+//validation functions
+function checkName() {
+    /* Busca que el nombre este definido */
+    if (!brandName.value) {
+        vName.value = true;
+        errors.value.name = "El nombre de la marca es requerido";
+        return;
+    }
+    /*quita espacios y los guarda en otra variable */
+    let nameNoSpace = brandName.value.replace(/ /g, '');
+    /* checa la longitud de la cadena, sin contar espacios */
+    if (nameNoSpace.length < 3 || nameNoSpace.length > 20) {
+        vName.value = true;
+        errors.value.name = "El nombre de la marca debe tener entre 3 y 20 caracteres";
+        return;
+    }
+    /* valida los caracteres aceptados */
+    if (!/^[a-zA-Z ]+$/.test(brandName.value)) {
+        errors.value.name = 'El nombre debe contener solo letras'
+        vName.value = true
+        /* console.log(brandName.value); */
+    }
+
+}
+
+function createBrand() {
+    createBrandDialog.value = false;
+    axios.post(
+        import.meta.env.VITE_API_URL + "/api/brand", {
+        name: brandName.value,
+        key: key.value,
+    })
+        .then((response) => {
+            notify({
+                title: "Exito",
+                text: "¡Registro exitoso!",
+                type: "success",
+            });
+            brandName.value = "";
+            key.value = "";
+            getAllBrands();
+        })
+        .catch((error) => {
+            console.log(error);
+            if (error.response.status === 409) {
+                /* Validar duplicidad de datos */
+                notify({
+                    title: "Advertencia",
+                    text: "¡El campo " +
+                        fieldsMap[error.response.data.target] + " se encuentra duplicado!",
+                    type: "warn",
+                });
+            } else {
+                notify({
+                    title: "Error",
+                    text: "¡Error en el registro!",
+                    type: "error",
+                });
+            }
+        });
+}
+
+function checkKey() {
+    /* Busca que la clave este definida */
+    if (!key.value) {
+        vKey.value = true;
+        errors.value.key = "La clave es requerida";
+        return;
+    }
+    /*quita espacios y los guarda en otra variable */
+    let nameNoSpace = key.value.replace(/ /g, '');
+    /* checa la longitud de la cadena, sin contar espacios */
+    if (nameNoSpace.length < 1 || nameNoSpace.length > 3) {
+        vKey.value = true;
+        errors.value.key = "La clave de marca debe tener entre 1 y 3 caracteres";
+        return;
+    }
+    /* valida los caracteres aceptados */
+    if (!/^[a-zA-Z ]+$/.test(key.value)) {
+        errors.value.key = 'La clave debe contener solo letras'
+        vKey.value = true
+    }
+}
+
+function validateForm() {
+    errors.value = {};
+    vName.value = false;
+    vKey.value = false;
+    checkName();
+    checkKey();
+    if (!vName.value && !vKey.value) {
+        createBrandDialog.value = true;
+    }
+}
 
 function getAllBrands(){
     axios.get(import.meta.env.VITE_API_URL + '/api/brand')
@@ -75,7 +186,7 @@ onMounted(() => {
     <div class="register-container-marca">
         <header>CATALOGO DE MARCAS</header>
         <!-- Formulario de alta -->
-        <form class="form-register-marca" @submit.prevent="validateForm">
+        <form class="form-register-marca">
             <div class="form-first">
                 <div class="details-marca">
                     <span class="title">ALTA DE MARCA</span>
@@ -88,17 +199,32 @@ onMounted(() => {
                         <div class="input-field-b">
                             <label>Clave*</label>
                             <input type="text" placeholder="Clave de la marca" v-model="key" />
-                            <div class="error" v-if="vkey">{{ errors.key }}</div>
+                            <div class="error" v-if="vKey">{{ errors.key }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="savebtn" type="submit">
+                    <button class="savebtn" type="button" @click="validateForm">
                         <span class="btnGuardar">Registrar</span>
                     </button>
+                    
                 </div>
+                
             </div>
+            <Dialog v-model:visible="createBrandDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+                <div class="confirmation-content">
+                    <i class="pi pi-question-circle mr-3" style="font-size: 2rem" />
+                    <span>Esta seguro de agregar <b>{{brandName}}</b>?</span>
+                </div>
+                <template #footer>
+                    <Button label="Si" icon="pi pi-check" class="p-button-text" @click="createBrand" />
+                    <Button label="No" icon="pi pi-times" class="p-button-text" @click="createBrandDialog = false" />
+            
+                </template>
+            </Dialog>
         </form>
+
+
         
         <DataTable ref="dt" :value="brands" responsiveLayout="scroll" :paginator="true" :rows="10"
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"

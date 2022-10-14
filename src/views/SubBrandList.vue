@@ -16,6 +16,7 @@
                                         {{brand.name}}
                                     </option>
                                 </select>
+                                <div class="error" v-if="vSelectedBrand"> {{ errors.brand }}</div>
                             </div>
                             <div class="input-field-b">
                                 <label>Nombre Submarca*</label>
@@ -25,12 +26,23 @@
                         </div>
                     </div>
                     <div class="details-btns">
-                        <button class="savebtn" type="button" @click="createSubBrand()">
+                        <button class="savebtn" type="button" @click="validateForm()">
                             <span class="btnGuardar">Registrar</span>       
                         </button>
                     </div>
                 </div>
             </form>
+
+            <Dialog v-model:visible="createSubBrandDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+                <div class="confirmation-content">
+                    <i class="pi pi-question-circle mr-3" style="font-size: 2rem" />
+                    <span>Esta seguro de agregar <b>{{subBrandName}}</b>?</span>
+                </div>
+                <template #footer>
+                    <Button label="Si" icon="pi pi-check" class="p-button-text" @click="createSubBrand" />
+                    <Button label="No" icon="pi pi-times" class="p-button-text" @click="createSubBrandDialog = false" />
+                </template>
+            </Dialog>
 
             <DataTable ref="dt" :value="subBrands" responsiveLayout="scroll" :paginator="true" :rows="10"
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
@@ -110,7 +122,87 @@ const exportCSV = () => {
 let subBrands = ref();
 let subBrand = ref({});
 let deleteSubBrandDialog = ref(false);
+let createSubBrandDialog = ref(false);
 
+let subBrandName = ref('');
+let brandSelected = ref(null);
+
+let brands = ref();
+let vName = ref(false);
+let vSelectedBrand = ref(false);
+let errors = ref(null);
+
+
+function getAllBrands() {
+    axios.get(import.meta.env.VITE_API_URL + '/api/brand')
+        .then(response => {
+            brands.value = response.data;
+        })
+        .catch(error => {
+
+            console.log(error);
+        })
+}
+
+function createSubBrand() {
+    createSubBrandDialog.value = false;
+    axios.post(import.meta.env.VITE_API_URL + '/api/sub-brand', {
+        name: subBrandName.value,
+        brandId: brandSelected.value
+    })
+        .then(response => {
+            notify({ title: "Exito", text: "¡Registro exitoso!", type: "success" });
+            //aqui va el clear
+            subBrandName.value = "";
+            brandSelected.value = null;
+            getAllSubBrands();
+        })
+        .catch(error => {
+            notify({ title: "Error", text: "¡Error en el registro!", type: "error" });
+            console.log(error);
+        })
+}
+
+function checkName() {
+    /* Busca que el nombre este definido */
+    if (!subBrandName.value) {
+        vName.value = true;
+        errors.value.name = "El nombre de la sub-marca es requerido";
+        return;
+    }
+    /*quita espacios y los guarda en otra variable */
+    let nameNoSpace = subBrandName.value.replace(/ /g, "");
+    /* checa la longitud de la cadena, sin contar espacios */
+    if (nameNoSpace.length < 3 || nameNoSpace.length > 20) {
+        vName.value = true;
+        errors.value.name = "El nombre debe tener entre 3 y 20 caracteres";
+        return;
+    }
+    /* valida los caracteres aceptados */
+    if (!/^[a-zA-Z ]+$/.test(subBrandName.value)) {
+        errors.value.name = "El nombre debe contener solo letras";
+        vName.value = true;
+    }
+}
+
+function checkIfBrandIsSelected(){
+    if(!brandSelected.value){
+        vSelectedBrand.value = true;
+        errors.value.brand = "Debe seleccionar una marca";
+    }
+}
+
+function validateForm() {
+    errors.value = {};
+    vName.value = false;
+    vSelectedBrand.value = false;
+    checkName();
+    checkIfBrandIsSelected();
+    if (!vName.value && !vSelectedBrand.value) {
+        createSubBrandDialog.value = true;
+
+    }
+}
 
 function getAllSubBrands(){
     axios.get(import.meta.env.VITE_API_URL + '/api/sub-brand')
@@ -164,6 +256,7 @@ function deleteSubBrand(){
 
 onMounted(() => {
     getAllSubBrands();
+    getAllBrands();
 });
 
 

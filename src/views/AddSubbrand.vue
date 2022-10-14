@@ -19,14 +19,10 @@
                             </div>
                             <div class="input-field-b">
                                 <label>Nombre Submarca*</label>
-                                <input type="text" placeholder="Nuevo nombre" required v-model="subBrandName">
+                                <input type="text" placeholder="Nombre Submarca" required v-model="subBrandName">
                                 <div class="error" v-if="vName"> {{ errors.name }}</div>
                             </div>
-                            <!-- <div class="input-field-b">
-                                <label>Clave*</label>
-                                <input type="text" placeholder="Nueva clave" required v-model="key">
-                                <div class="error" v-if="vKey"> {{ errors.key }}</div>
-                            </div> -->
+                            
                         </div>
                     </div>
                     <div class="details-btns">
@@ -104,7 +100,7 @@
             }
         }
 
-/*         function validateForm() {
+         function validateForm() {
             errors.value = {};
             vName.value = false;
             checkName();
@@ -112,7 +108,7 @@
             if (!vName.value) {
                 createSubBrand();
             }
-        } */
+        }
 
         function goBack(event){
             event.preventDefault();
