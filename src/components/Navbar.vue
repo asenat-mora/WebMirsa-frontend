@@ -98,6 +98,18 @@
                 </li>
               </ul>
             </li>
+
+            <li><a href="#">CAPTURISTA</a>
+              <div class="arrow spin-arrow">
+                <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
+              </div>
+
+              <ul class="js-sub-menu sub-menu">
+                <li>
+                  <a href="#" @click="handleLogoutButton">Cerrar sesión</a>
+                </li>
+              </ul>
+            </li>
             <!-- opciones habilitadas para administradores -->
             <template v-if="store.getIsAdmin">
               <!-- <li><a href="#">REPORTE</a></li> -->
