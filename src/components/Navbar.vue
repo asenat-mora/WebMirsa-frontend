@@ -2,17 +2,21 @@
 
   <nav>
     <div class="divNav">
+      <!-- lines menu -->
       <div class="bars-menu">
         <font-awesome-icon icon="fa-solid fa-bars" @click="menuOpenBtn" />
       </div>
+      <!-- logo -->
       <div class="logoNav">
         <!-- logotipo -->
         <img class="logo-navbar" src="../assets/img/logo.png" alt="" />
       </div>
       <div class="navlinks" ref="navLinks">
+      <!-- links -->  
         <div class="sidebarLogo">
           <span class="menuNav">MENU</span>
           <div class="xmark">
+            <!-- icono de flecha -->
             <font-awesome-icon icon="fa-solid fa-xmark" @click="menuCloseBtn" />
           </div>
           <!-- x del navbar -->
@@ -24,34 +28,37 @@
             <li>
               <a href="#">CATALAGO</a><!-- CAT&Aacute;LOGO -->
               <div class="arrow spin-arrow">
+                <!-- icono fecha apuntadora -->
                 <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
               </div>
+              <!-- opciones del menu -->
               <ul class="options-group sub-menu">
+                <!-- Grupo de marcas -->
                 <li class="option-sub-menu">
                   <span><a href="#">MARCAS</a>
-                    <div class="arrow more-arrow">
+                    <div class="arrow more-arrow"><!-- icono flecha que despliega -->
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </div>
                   </span>
                   <ul class="more-sub-menu sub-menu">
-                    <!-- <li><router-link to="#">SUB MARCAS</router-link></li> -->
+                    <!-- <li><router-link to="/AddBrand">NUEVO</router-link></li> -->
+                    <!-- <li><router-link to="/BrandEdit">EDITAR</router-link></li> -->
+                    <li><router-link to="/BrandList">DETALLE</router-link></li>                  
+                    <!-- Grupo de sub marcas -->
                     <li class="option-sub-menu">
-                      <span><a href="#">SUBMARCAS</a>
-                        <div class="arrow more-arrow">
+                      <span><a class="submarcas" href="#">SUBMARCAS</a>
+                        <!-- <div class="arrow more-arrow">
                           <font-awesome-icon icon="fa-solid fa-angle-right" />
-                        </div>
+                        </div> -->
                       </span>
-                      <ul class="more-sub-menu sub-menu">
-                        <li><router-link to="/AddSubBrand">NUEVO</router-link></li>
+                      <ul class="more-sub-menu sub-menu"><!-- links a vistas -->
+                        <!-- <li><router-link to="/AddSubBrand">NUEVO</router-link></li> -->
                         <li><router-link to="/SubBrandList">DETALLE</router-link></li>
                       </ul>
                     </li>
-                    <!-- ------------------------ -->
-                    <li><router-link to="/AddBrand">NUEVO</router-link></li>
-                    <li><router-link to="/BrandEdit">EDITAR</router-link></li>
-                    <li><router-link to="/BrandList">LISTA</router-link></li>
                   </ul>
                 </li>
+                <!-- Grupo de accesorios -->
                 <li class="option-sub-menu">
                   <span><a href="#">ACCESORIOS</a>
                     <div class="arrow more-arrow">
@@ -59,11 +66,12 @@
                     </div>
                   </span>
                   <ul class="more-sub-menu sub-menu">
-                    <li><router-link to="/AddAccesory">NUEVO</router-link></li>
-                    <li><router-link to="/AccesoryEdit">EDITAR</router-link></li>
-                    <li><router-link to="/AccesoryList">LISTA</router-link></li>
+                    <!-- <li><router-link to="/AddAccesory">NUEVO</router-link></li> -->
+                    <!-- <li><router-link to="/AccesoryEdit">EDITAR</router-link></li> -->
+                    <li><router-link to="/AccesoryList">DETALLE</router-link></li>
                   </ul>
                 </li>
+                <!-- Grupo de productos -->
                 <li class="option-sub-menu">
                   <span><a href="#">PRODUCTOS</a>
                     <div class="arrow more-arrow">
@@ -72,9 +80,10 @@
                   </span>
                   <ul class="more-sub-menu sub-menu">
                     <li><router-link to="/AddProduct">NUEVO</router-link></li>
-                    <li><router-link to="/productSearch">LISTA</router-link></li>
+                    <li><router-link to="/productSearch">DETALLE</router-link></li>
                   </ul>
                 </li>
+                <!-- Grupo de colores -->
                 <li class="option-sub-menu">
                   <span><a href="#">COLORES</a>
                     <div class="arrow more-arrow">
@@ -82,9 +91,9 @@
                     </div>
                   </span>
                   <ul class="more-sub-menu sub-menu">
-                    <li><router-link to="/AddColor">NUEVO</router-link></li>
-                    <li><router-link to="/ColorEdit">EDITAR</router-link></li>
-                    <li><router-link to="/ColorList">LISTA</router-link></li>
+                    <!-- <li><router-link to="/AddColor">NUEVO</router-link></li> -->
+                    <!-- <li><router-link to="/ColorEdit">EDITAR</router-link></li> -->
+                    <li><router-link to="/ColorList">DETALLE</router-link></li>
                   </ul>
                 </li>
               </ul>
@@ -92,13 +101,13 @@
             <!-- opciones habilitadas para administradores -->
             <template v-if="store.getIsAdmin">
               <!-- <li><a href="#">REPORTE</a></li> -->
-              <li><a href="#">USUARIOS</a>
+            <li><a href="#">USUARIOS</a>
               <div class="arrow spin-arrow">
                 <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
               </div>
               <ul class="js-sub-menu sub-menu">
                 <li><router-link to="/AddUser">ALTA</router-link></li>
-                <li><router-link to="/UserEdit">EDITAR</router-link></li>
+                <!-- <li><router-link to="/UserEdit">EDITAR</router-link></li> -->
                 <li><router-link to="/UserList">DETALLE</router-link></li>
               </ul>
             </li>  

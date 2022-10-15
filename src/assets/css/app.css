@@ -92,6 +92,7 @@ nav .divNav .option-menu li{
   list-style: none;
   padding: 0 14px;
 }
+/* titulos navbar*/
 nav .divNav .option-menu li a{
   height: 100%;
   text-decoration: none;
@@ -104,7 +105,7 @@ nav .divNav .option-menu li a{
 .option-menu li:hover .js-arrow{
   transform: rotate(180deg);
   }
-
+/* iconos flecha general*/
 nav .divNav .option-menu li .arrow{
   /* background: red; */
   height: 100%;
@@ -115,11 +116,12 @@ nav .divNav .option-menu li .arrow{
   color: #1a1a1a;;
   transition: all 0.3s ease;
 }
+/* configuracion de las opciones */
 nav .divNav .option-menu li .sub-menu{
   position: absolute;
   top: 70px;
   left: 0;
-  line-height: 55px;
+  line-height: 50px;
   background: var(--white);
   box-shadow: 0 1px 2px rgba(179, 92, 92, 0.2);
   border-radius: 0 0 4px 4px;
@@ -131,9 +133,16 @@ nav .divNav .option-menu li:hover .js-sub-menu{
   display: block;
 }
 .divNav .option-menu li .sub-menu li{
-  padding: 0 22px;
+  padding: 0 18px;/* separacion a los lados */
   border-bottom: 1px solid rgba(163, 60, 60, 0.753);
 }
+
+.divNav .option-menu li .sub-menu .submarcas{
+  color: #1a1a1a;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+/* Tamaño de letra de las opciones */
 .divNav .option-menu li .sub-menu a{
   color: #1a1a1a;
   font-size: 14px;
