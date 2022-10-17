@@ -95,14 +95,14 @@ const router = createRouter({
 				requiresAuth: true,
 			},
 		},
-		{
+		/* {
 			path: "/AddSubBrand",
 			name: "AddSubBrand",
 			component: AddSubBrand,
 			meta: {
 				requiresAuth: true,
 			},
-		},
+		}, */
 		{
 			path: "/AddAccesory",
 			name: "AddAccesory",
