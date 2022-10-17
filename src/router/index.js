@@ -17,7 +17,9 @@ import UserList from '../views/UserList.vue'
 import AddBrand from '../views/AddBrand.vue'
 import BrandEdit from '../views/BrandEdit.vue'
 import BrandList from '../views/BrandList.vue'
-import AddSubBrand from '../views/AddSubbrand.vue'
+
+import AddSubBrand from '../views/AddSubBrand.vue'
+import SubBrandList from '../views/SubBrandList.vue'
 
 /* Accesorios */
 import AddAccesory from '../views/AddAccesory.vue'
@@ -78,7 +80,7 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/BrandEdit",
+			path: "/BrandEdit/:id?",
 			name: "BrandEdit",
 			component: BrandEdit,
 			meta: {
@@ -110,7 +112,7 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/AccesoryEdit",
+			path: "/AccesoryEdit/:id?",
 			name: "AccesoryEdit",
 			component: AccesoryEdit,
 			meta: {
@@ -155,7 +157,7 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/ColorEdit",
+			path: "/ColorEdit/:id?",
 			name: "ColorEdit",
 			component: ColorEdit,
 			meta: {
@@ -201,7 +203,15 @@ const router = createRouter({
 			meta: {
 				requiresAuth: true,
 			},
-		}
+		},
+        {
+            path: "/SubBrandList",
+            name: "SubBrandList",
+            component: SubBrandList,
+            meta: {
+                requiresAuth: true,
+            },
+        }
         
         
         

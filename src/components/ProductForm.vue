@@ -75,7 +75,7 @@
                             <label>Imagen*</label>
                             <div class="p-image">
                                 <input id="vImagen" :src="productImage || defaultImageSrc" type="image" width="200" height="200">
-                                <input class="file-upload" type="file" accept="image/*" @change="uploadImageToImgur($event)" required/>
+                                <input class="file-upload" type="file" accept="image/*" @change="uploadImageToBucket($event)" required/>
                             </div>
                             <div class="error" v-if="vImage"> {{ errors.image }}</div>
                         </div>
@@ -89,7 +89,7 @@
                     </template>
 
                     <template v-else>
-                        <button type="button" class="deletebtn" @click="deleteItem($event)">
+                        <button type="button" class="deletebtn" @click="displayModal">
                             <span class="btnEliminar">Eliminar</span>
                         </button>
                         <button type="button" class="updatelbtn" @click="validateForm($event, mode)">
@@ -103,6 +103,18 @@
                 
             </div>
         </form>
+
+        <Dialog v-model:visible="deleteProductDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                <span >Esta seguro de querer borrar el producto?</span>
+            </div>
+            <template #footer>
+                <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteItem" />
+                <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteProductDialog = false"/>
+                
+            </template>
+        </Dialog>
     </div>
 </div>
 </template>
@@ -110,7 +122,6 @@
 <script setup>
 
     import axios from 'axios';
-    import axiosInstance from '../helpers/axiosInstance';
     import { notify } from "@kyvg/vue3-notification"; /* libreria para importar alertas */
     import { useRouter } from 'vue-router';
     import Multiselect from '@vueform/multiselect'
@@ -141,6 +152,8 @@
     let vImage = ref(false);
     let vSide = ref(false);
     let vDescription = ref(false);
+
+    let deleteProductDialog = ref(false);
 
     const fieldsMap = {
         sku: "SKU"
@@ -180,21 +193,50 @@
         productSubBrands.value = [];
     }
 
-    function uploadImageToImgur(event) {
+    function displayModal(){
+        deleteProductDialog.value = true;
+    }
+
+    function uploadImageToBucket(event){
         var file = event.target.files[0];
+
+        
+        if(file.type.indexOf("image") == -1){
+            notify({
+                title: "Error",
+                text: "El archivo seleccionado no es una imagen",
+                type: "error",
+                duration: 3000
+            });
+            document.getElementsByClassName("file-upload")[0].value = "";
+            return;
+        }
+
         var formData = new FormData();
+        formData.append('file', file);
 
-        formData.append('image', file);
-        axiosInstance.post('https://api.imgur.com/3/image', formData, {
-            headers: {
-                'Authorization': 'Client-ID ' + import.meta.env.VITE_IMGUR_CLIENT_ID
-            }
-
-        }).then(response => {
-            props.productImage.value = response.data.data.link;
-            //console.log(response.data.data.link);
+        axios.post(import.meta.env.VITE_API_URL + '/api/upload', formData)
+        .then(response => {
+            productImage.value = response.data.url;
         }).catch(error => {
-            console.log(error);
+            
+            if(error.response.data.message === 'File too large'){
+                notify({
+                    title: "Error",
+                    text: "El archivo es demasiado grande, la imagen debe ser de maximo 2MB",
+                    type: "error",
+                    duration: 3000
+                });
+            }
+            else{
+                notify({
+                    title: "Error",
+                    text: "Ocurrio un error al subir la imagen",
+                    type: "error",
+                    duration: 3000
+                });
+            }
+            
         });
     }
 
@@ -277,7 +319,6 @@
     }
 
     function deleteItem(event){
-        event.preventDefault();
         axios.delete(import.meta.env.VITE_API_URL + '/api/product/' + props.productId,)
             .then(response => {
                 notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});

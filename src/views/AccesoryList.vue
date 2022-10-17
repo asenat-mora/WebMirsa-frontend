@@ -1,74 +1,238 @@
 <template>
-
-<div class="body-register-product">
-    <div class="register-container-product">
-        <header>Accesorios</header>
+    <div class="body-register-marca">
+    <div class="register-container-marca">
+        <header>CATALOGO DE ACCESORIOS</header>
+        <!-- alta de accesorio -->
+        <form class="form-register-category" @submit.prevent="validateForm">
             <div class="form-first">
-                <div class="details-product">
-                    <span class="title">Lista de Accesorios</span>
+                <div class="details-category">
+                    <!-- <span class="title">Detalle</span> -->
                     <div class="fields">
-                        <div class="container mt-4" id="app">
-                            <table class="GeneratedTable" >
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>NOMBRE</th>
-                                        <th>QUIEN MODIFICO</th>
-                                        <th>OPERACION</th>
-                                        <th>ULTIMA MODIFICACION</th>
-                                        <th>ESTATUS</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="datos in data">
-                                    <td>{{datos.autopartId}}</td>
-                                    <td>{{datos.autopartName}}</td>
-                                    <td>{{datos.userName}} {{datos.userSurname}}</td>
-                                    <td>{{datos.last_modification_description}}</td>
-                                    <td>{{datos.last_modification_date}}</td>
-                                    <td>{{datos.isDeleted}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="input-field-b">
+                            <label>Nombre del Accesorio*</label>
+                            <input type="text" placeholder="Tipo de accesorio" v-model="accesoryName">
+                            <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button class="savebtn">
-                        <span class="btnGuardar">Aceptar</span> 
+                    <button class="savebtn" type="submit">
+                        <span class="btnGuardar">Registrar</span> <!-- @click="createAccesory" -->
                     </button>
                 </div>
             </div>
+
+            <Dialog v-model:visible="createAccessoryDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+                <div class="confirmation-content">
+                    <i class="pi pi-question-circle mr-3" style="font-size: 2rem" />
+                    <span>Esta seguro de agregar <b>{{accesoryName}}</b>?</span>
+                </div>
+                <template #footer>
+                    <Button label="Si" icon="pi pi-check" class="p-button-text" @click="createAccessory" />
+                    <Button label="No" icon="pi pi-times" class="p-button-text" @click="createAccessoryDialog = false" />
+            
+                </template>
+            </Dialog>
+        </form>
+
+       
+        <DataTable ref="dt" :value="accessories" responsiveLayout="scroll" :paginator="true" :rows="10"
+                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                :rowsPerPageOptions="[10,20,50]"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" filterDisplay="menu"
+                dataKey="id" :globalFilterFields="['name', 'last_modification_description', 'user']" v-model:filters="filters1">
+
+                <template #header>
+                    <div class="flex justify-content-between">
+                        <Button icon="pi pi-external-link" label="Exportar" @click="exportCSV($event)" id="table-header-element"/>
+                        <!-- <Button type="button" icon="pi pi-filter-slash" label="Clear" class="p-button-outlined" @click="clearFilter1()"/> -->
+                        <span class="p-input-icon-left" id="table-header-element">
+                            <i class="pi pi-search" />
+                            <InputText v-model="filters1['global'].value" placeholder="Buscar" />
+                        </span>
+                    </div>
+                </template>
+                <template #empty>
+                    No se encontraron accesorios.
+                </template>
+                <template #loading>
+                    Cargando la información de los accesorios. Por favor espere.
+                </template>
+
+                <Column field="id" header="Id"></Column>
+                <Column field="name" header="Nombre"></Column>
+                <Column field="last_modification_description" header="Ultimo Cambio"></Column>
+                <Column field="last_modification_date" header="Fecha Ultima Modificación"></Column>
+                <Column field="user" header="Usuario"></Column>
+                <Column :exportable="false" style="min-width:8rem">
+                    <template #body="slotProps">
+                        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" @click="editAccessory(slotProps.data)" />
+                        <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" @click="confirmDeleteAccessory(slotProps.data)" />
+                    </template>
+                </Column>
+
+
+
+        </DataTable>
+
+        <Dialog v-model:visible="deleteAccessoryDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                <span >Esta seguro de querer borrar <b>{{accessory.name}}</b>?</span>
+            </div>
+            <template #footer>
+                <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteAccessory" />
+                <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteAccessoryDialog = false"/>
+                
+            </template>
+        </Dialog>
+        <!-- boton de volver -->
+        <div class="details-btns">
+            <button type="button" class="cancelbtn" @click="goBack($event)">
+                <span class="btnCancelar">Volver</span>
+            </button>
+                    
+        </div>
     </div>
 </div>
+
 </template>
 
-<script>
-    import Navbar from '../components/Navbar.vue'
-    import axios from 'axios'
-    import { onBeforeMount, ref } from 'vue';
-    export default{
-        name : 'ClassificationList',
-        components: {
-            Navbar
-        },
-        setup(){
-            var data = ref();
-            function getData(){
-                axios.get(import.meta.env.VITE_API_URL + '/api/autopart').then(response => {
-                    data.value = response.data
-                }).catch(error => {
-                    console.log(error)
-                })
-            }
-            onBeforeMount(() => {
-                getData();
-            });
+<script setup>
 
-            return {
-                data,
-                getData
-            }
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
+import {FilterMatchMode} from 'primevue/api';
+import { useRouter } from 'vue-router';
+import { notify } from "@kyvg/vue3-notification";
+
+
+const filters1 = ref({ 'global': { value: null, matchMode: FilterMatchMode.CONTAINS } });
+const router = useRouter();
+const dt = ref();
+
+const exportCSV = () => {
+    dt.value.exportCSV();
+};
+
+let accessories = ref();
+let accessory = ref({});
+let deleteAccessoryDialog = ref(false);
+let createAccessoryDialog = ref(false);
+
+//validation variables
+const vName = ref(false);
+const errors = ref();
+
+//vmodel var
+let accesoryName = ref('');
+
+
+const fieldsMap = {
+    name: "Nombre",
+    key: "Clave"
+}
+
+function createAccessory() {
+    createAccessoryDialog.value = false;
+    axios.post(import.meta.env.VITE_API_URL + '/api/accessory',
+        {
+            name: accesoryName.value
         }
+    )
+        .then(response => {
+            notify({ title: "Exito", text: "¡Registro exitoso!", type: "success" });
+            accesoryName.value = "";
+            getAccessories();
+        })
+        .catch(error => {
+            if (error.response.status === 409) {
+                /* Validar duplicidad de datos */
+                notify({ title: "Advertencia", text: "¡El nombre " + fieldsMap[error.response.data.target] + " ya existe!", type: "warn" });
+            } else {
+                notify({ title: "Error", text: "¡Error en el registro!", type: "error" });
+            }
+        })
+}
+function checkName() {
+    /* Busca que el nombre este definido */
+    if (!accesoryName.value) {
+        vName.value = true;
+        errors.value.name = "El nombre del accesorio es requerido";
+        return;
     }
+    /*quita espacios y los guarda en otra variable */
+    let nameNoSpace = accesoryName.value.replace(/ /g, '');
+    /* checa la longitud de la cadena, sin contar espacios */
+    if (nameNoSpace.length < 3 || nameNoSpace.length > 20) {
+        vName.value = true;
+        errors.value.name = "El nombre del accesorio debe tener entre 3 y 20 caracteres";
+        return;
+    }
+    /* valida los caracteres aceptados */
+    if (!/^[a-zA-Z ]+$/.test(accesoryName.value)) {
+        errors.value.name = 'El nombre debe contener solo letras'
+        vName.value = true
+    }
+}
+
+function validateForm() {
+    errors.value = {};
+    vName.value = false;
+
+    checkName();
+
+    if (!vName.value) {
+        createAccessoryDialog.value = true;
+    }
+}
+
+function editAccessory(product) {
+    router.push({ name: 'AccesoryEdit', params: { id: product.id } });
+}
+
+function mapAccessories(){
+    accessories.value.forEach(accessory => {
+        accessory.user = accessory.user.name + " " + accessory.user.surname;
+        accessory.last_modification_date = new Date(accessory.last_modification_date).toLocaleString();
+    });
+}
+
+function getAllAccessories(){
+    axios.get(import.meta.env.VITE_API_URL + '/api/accessory')
+    .then(response => {
+        accessories.value = response.data;
+        mapAccessories();
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
+function confirmDeleteAccessory(acc){
+    accessory.value = acc;
+    deleteAccessoryDialog.value = true;
+}
+
+function deleteAccessory(){
+    deleteAccessoryDialog.value = false;
+    const id = accessory.value.id;
+    accessory.value = {};
+
+    axios.delete(import.meta.env.VITE_API_URL + '/api/accessory/' + id)
+    .then(response => {
+        notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
+        getAllAccessories();
+    })
+    .catch(error => {
+        console.log(error);
+        notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
+    });
+}
+
+onMounted(() => {
+    getAllAccessories();
+});
+
+
 </script>

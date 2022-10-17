@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="details-btns">
-                    <button type="button" class="deletebtn" @click="deleteBrand">
+                    <button type="button" class="deletebtn" @click="displayModal">
                         <span class="btnEliminar">Eliminar</span>
                     </button>
                     <button type="button" class="cancelbtn" @click="goBack($event)">
@@ -42,6 +42,18 @@
                 </div>
             </div>
         </form>
+
+        <Dialog v-model:visible="deleteBrandDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+                <div class="confirmation-content">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                    <span >Esta seguro de querer borrar <b>{{brandName}}</b>?</span>
+                </div>
+                <template #footer>
+                    <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteBrand" />
+                    <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteBrandDialog = false"/>
+                    
+                </template>
+        </Dialog>
     </div>
 </div>
 </template>
@@ -51,7 +63,7 @@
     import { notify } from "@kyvg/vue3-notification";
     import axios from 'axios';
     import { ref , onBeforeMount} from 'vue';
-    import { useRouter } from 'vue-router';
+    import { useRouter , useRoute} from 'vue-router';
     export default{
         name: 'BrandEdit',
         components: {
@@ -62,11 +74,14 @@
             var brandName = ref(null);
             var errors = ref(null);
             var key = ref(null);
+
+            var deleteBrandDialog = ref(false);
             
             var vName = ref(false);
             var vKey = ref(false);       
             const brands = ref(null);
             var router = useRouter();
+            const route = useRoute();
 
             const fieldsMap = {
                 name: "Nombre",
@@ -77,16 +92,26 @@
                 axios.get(import.meta.env.VITE_API_URL + '/api/brand')
                 .then(response => {
                     brands.value = response.data;
+                    if(route.params.id){
+                        brandSelected.value = route.params.id;
+                        loadAttributes();
+                    }
                 })
                 .catch(error => {
                     console.log(error);
                 })
             }
 
+            function displayModal(){
+                
+                if(brandSelected.value){
+                    deleteBrandDialog.value = true;
+                }
+            }
+
             function loadAttributes (){
                 brandName.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].name;
                 key.value = brands.value.filter(brand => brand.id == brandSelected.value)[0].key;
-                
             }
 
             function deleteBrand(){
@@ -97,10 +122,7 @@
                 axios.delete(import.meta.env.VITE_API_URL + '/api/brand/' + brandSelected.value)
                 .then(response => {
                     notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
-                    getAllBrands();
-                    brandSelected.value= null;
-                    brandName.value = null;
-                    key.value = null;
+                    router.go('/BrandEdit')
                 })
                 .catch(error => {
                     console.log(error);
@@ -219,7 +241,9 @@
                 validateForm,
                 fieldsMap,
                 router, 
-                goBack
+                goBack, 
+                deleteBrandDialog,
+                displayModal
             }
         }
     }
