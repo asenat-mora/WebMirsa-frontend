@@ -187,8 +187,8 @@
         /*quita espacios y los guarda en otra variable */
         let surnameNoSpace = props.surname.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
-        if (surnameNoSpace.length < 3 || surnameNoSpace.length > 20) {
-            errors.value.surname = "Los apellidos deben tener entre 3 y 20 caracteres alfabeticos";
+        if (surnameNoSpace.length < 3 || surnameNoSpace.length > 30) {
+            errors.value.surname = "Los apellidos deben tener entre 3 y 30 caracteres alfabeticos";
             vSurname.value = true;
         }
         /* valida los caracteres aceptados */
@@ -209,7 +209,7 @@
         let emailNoSpace = props.email.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (emailNoSpace.length < 8 || emailNoSpace.length > 30) {
-            errors.value.email = "El correo debe tener entre 8 y 20 caracteres";
+            errors.value.email = "El correo debe tener entre 8 y 30 caracteres";
             vEmail.value = true;
         }
         /* valida los caracteres aceptados */
