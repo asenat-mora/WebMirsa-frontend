@@ -338,7 +338,7 @@
 
     function checkSku(){
         /* Busca que el SKU este definido */
-        if(!productSKU){
+        if(!productSKU.value){
             vSku.value = true
             errors.value.sku = 'Campo obligatorio'
             return;

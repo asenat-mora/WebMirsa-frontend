@@ -18,7 +18,6 @@ import AddBrand from '../views/AddBrand.vue'
 import BrandEdit from '../views/BrandEdit.vue'
 import BrandList from '../views/BrandList.vue'
 
-/* Submarcas */
 import AddSubBrand from '../views/AddSubBrand.vue'
 import SubBrandList from '../views/SubBrandList.vue'
 
