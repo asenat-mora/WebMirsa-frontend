@@ -99,17 +99,7 @@
               </ul>
             </li>
 
-            <li><a href="#">CAPTURISTA</a>
-              <div class="arrow spin-arrow">
-                <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
-              </div>
-
-              <ul class="js-sub-menu sub-menu">
-                <li>
-                  <a href="#" @click="handleLogoutButton">Cerrar sesión</a>
-                </li>
-              </ul>
-            </li>
+            
             <!-- opciones habilitadas para administradores -->
             <template v-if="store.getIsAdmin">
               <!-- <li><a href="#">REPORTE</a></li> -->
@@ -122,8 +112,11 @@
                 <!-- <li><router-link to="/UserEdit">EDITAR</router-link></li> -->
                 <li><router-link to="/UserList">DETALLE</router-link></li>
               </ul>
-            </li>  
-            <li><a href="#">ADMINISTRADOR</a>
+            </li> 
+            </template>
+
+            <li ><a href="#" v-if="store.getIsAdmin">ADMINISTRADOR</a>
+                <a href="#" v-else>CAPTURISTA</a>
               <div class="arrow spin-arrow">
                 <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
               </div>
@@ -134,7 +127,6 @@
                 </li>
               </ul>
             </li>
-            </template>
 
           <!--   <li><a href="#">MI PERFIL</a>
               <div class="arrow spin-arrow">
