@@ -42,291 +42,142 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  text-decoration: none; /* quitar sub-rayas */
 } 
 
 .body{
-  height: 100vh;
+  min-height: 100vh;
 }
 /*
 ----------------------------------------------
 -----NAVBAR
 ----------------------------------------------
 */
-.logo-navbar{
-  width: 160px;/* tamaño de logo */
-}
-nav{
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #ffffff;
-  box-shadow: 0 1px 2px rgba(29, 24, 24, 0.2);
-  z-index: 99;
-  height: 65px;
-  margin: 0 !important;
-  border-bottom: 2px solid #c92b2b;
-}
-nav .divNav{
-  height: 100%;
-  max-width: 1550px;
-  width: 100%;
+header{
+  position: fixed;/* original fixed */
+  top: 0; left: 0; right: 0;
+  background-color: #ffffff;
+  padding: 0px 6%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin: auto;
-  padding: 0 50px;
+  z-index: 1000;
+  border-bottom: 2px solid #c92b2b;
 }
-
-nav .divNav .navlinks{
-  line-height: 7vh;
+/* header .logo{
+  font-weight: bolder;
+  font-size: 25px;
+  color: #b11f1f;
+} */
+header .logo-navbar{
+  width: 160px;
+/*   height: 10px; */
 }
-nav .divNav .option-menu{
-  display: flex;
-}
-nav .divNav .option-menu li{
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* quitar estilo de puntitos */
+header .menu ul{
   list-style: none;
-  padding: 0 14px;
 }
-/* titulos navbar*/
-nav .divNav .option-menu li a{
-  height: 100%;
-  text-decoration: none;
-  white-space: nowrap;
-  color: #1a1a1a;
+header .menu ul li{
+  position: relative;
+  float: left;
+}
+/* opciones principales */
+header .menu ul li a{
   font-size: 20px;
   font-weight: 500;
+  padding: 15px 20px;/* separacion de las opciones */
+  color: #131212;
+  display: block;
 }
-.option-menu li:hover .spin-arrow,
-.option-menu li:hover .js-arrow{
-  transform: rotate(180deg);
-  }
-/* iconos flecha general*/
-nav .divNav .option-menu li .arrow{
-  /* background: red; */
-  height: 100%;
-  width: 22px;
-  line-height: 70px;
-  text-align: center;
-  display: inline-block;
-  color: #1a1a1a;;
-  transition: all 0.3s ease;
+/* efecto de sombreado cuando pase el mouse */
+header .menu ul li a:hover{
+  background: #1c1c1d;
+  color: #fff;
 }
-/* configuracion de las opciones */
-nav .divNav .option-menu li .sub-menu{
+/* opciones secundarias */
+header .menu ul li ul{
   position: absolute;
-  top: 70px;
   left: 0;
-  line-height: 50px;
-  background: var(--white);
-  box-shadow: 0 1px 2px rgba(179, 92, 92, 0.2);
-  border-radius: 0 0 4px 4px;
+  width: 180px;
+  background: #fff;
   display: none;
-  z-index: 2;
 }
-nav .divNav .option-menu li:hover .options-group,
-nav .divNav .option-menu li:hover .js-sub-menu{
-  display: block;
+header .menu ul li ul li{
+  width: 100%;
+  border-top: 1px solid #fff;
 }
-.divNav .option-menu li .sub-menu li{
-  padding: 0 18px;/* separacion a los lados */
-  border-bottom: 1px solid rgba(163, 60, 60, 0.753);
-}
-
-.divNav .option-menu li .sub-menu .submarcas{
-  color: #1a1a1a;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-/* Tamaño de letra de las opciones */
-.divNav .option-menu li .sub-menu a{
-  color: #1a1a1a;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.divNav .option-menu li .sub-menu .more-arrow{
-  line-height: 40px;
-}
-.divNav .option-menu li .sub-menu .more-sub-menu{
-  position: absolute;
+header .menu ul li ul li ul{
+  left: 180px;
   top: 0;
-  left: 100%;
-  border-radius: 0 4px 4px 4px;
-  z-index: 1;
+}
+/* mostrar todas las opciones cuando pase el mouse */
+header .menu ul li:focus-within > ul,
+header .menu ul li:hover > ul{
+  display: inherit;
+}
+/* menu dropdown */
+#menu-bar{
   display: none;
 }
-.option-menu li .sub-menu .option-sub-menu:hover .more-sub-menu{
-  display: block;
+header label{
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+  display: none;/* esconder palabra menu */
 }
-.divNav .navlinks .sidebarLogo{
-  display: none;
-}
-.divNav .bars-menu{
-  display: none;
-}
- 
- @media (max-width:1124px) {
-  nav .divNav{
-    max-width: 100%;
-    padding: 0 20px;
-  }
-  nav .divNav .option-menu li{
-    padding: 0 15px;
-    white-space: nowrap;
-  }
-  nav .divNav .option-menu li a{
+
+@media(max-width:1100px){
+  header .menu ul li a{
     font-size: 15px;
-  }
-  .divNav .option-menu li .sub-menu a{
-    font-size: 12px;
+    padding: 15px;
+    
   }
 }
-  /*dimencion  768 x 1024 ipad */
-@media (max-width:800px){
-  .divNav .bars-menu{
-    display: block;
-  }
-  .home-logo{
-    display: block;
-    margin:  150px auto;
-    width: 300px;
-  }
 
-  /* colum menu */
-  nav .divNav .navlinks{
-    position: fixed;
-    top: 0;
-    left: -100%;
-    display: block;
-    max-width: 270px;
+@media(max-width:900px){
+  header{
+    padding: 15px;
+  }
+  /*aparecer palabra menu */
+  header label{
+    display: initial;
+    font-weight: 500;
+  }
+  header .menu{
+    position: absolute;
+    top: 100%; left:0; right: 0;
+    background: #fff;
+    border-top: 1px solid #242425;
+    display: none; /* esconder menu */
+  }
+  /* desplegar una lista tipo columna del menu de Opciones */
+  header .menu ul li{
     width: 100%;
-    background:  var(--white);
-    line-height: 45px;
-    padding: 0 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease;
-    z-index: 1000;
   }
-  .divNav .navlinks .sidebarLogo{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  /* desplegar las subopciones de cada Opcion */
+  header .menu ul li ul{
+    position: relative;
+    width: 100%;
   }
-  .sidebarLogo .menuNav{
-    font-size: 28px;
-    color: #1a1a1a;
-    margin-top: 25px;
+  header .menu ul li a{
+    font-size: 18px;
+    padding: 12px 18px;
+    
   }
-  .sidebarLogo  .xmark,
-  .divNav .bars-menu{
-    font-size: 40px;
-    color: #1a1a1a;/* menu lineas */
+  /* color de fondo de subopciones */
+  header .menu ul li ul li{
+    background: #dfe4e7;
   }
-  nav .divNav .option-menu{
-    display: block;
-    margin-top: 10px;
+  /* mostrar Dropdown alineadas de cada subopcion */
+  header .menu ul li ul li ul{
+    width: 100%;
+    left: 18px;
   }
-  nav .divNav .option-menu li .arrow{
-    line-height: 40px;
+  /* aparecer el menu cuando se de clic */
+  #menu-bar:checked ~ .menu{
+    display: initial;
   }
-nav .divNav .option-menu li{
-    display: block;
-  }
-
-.divNav .option-menu li .sub-menu a{
-    font-size: 16px;   
-  }
-
-nav .divNav .option-menu li .sub-menu{
-  position: relative;
-  top: 0;
-  box-shadow: none;
-  display: none;
 }
-nav .divNav .option-menu li .sub-menu li{
-  border-bottom: none;
-
-}
-.divNav .option-menu li .sub-menu .more-sub-menu{
-  display: none;
-  position: relative;
-  left: 0;
-}
-.divNav .option-menu li .sub-menu .more-sub-menu li{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.option-menu li:hover .spin-arrow,
-.option-menu li:hover .js-arrow{
-  transform: rotate(0deg);
-  }
-  .divNav .option-menu li .sub-menu .more-sub-menu{
-    display: none;
-  }
-  .divNav .option-menu li .sub-menu .option-sub-menu span{
-    /* background: red; */
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-  }
-
-  .option-menu li .sub-menu .option-sub-menu:hover .more-sub-menu{
-    display: none;
-  }
-  nav .divNav .option-menu li:hover .options-group,
-  nav .divNav .option-menu li:hover .js-sub-menu{
-    display: none;
-  }
-.divNav .navlinks.show1 .option-menu .options-group,
-  .divNav .navlinks.show3 .option-menu .js-sub-menu,
-  .divNav .navlinks.show2 .option-menu .option-sub-menu .more-sub-menu{
-      display: block;
-    }
-    .divNav .navlinks.show1 .option-menu .spin-arrow,
-    .divNav .navlinks.show3 .option-menu .js-arrow{
-        transform: rotate(180deg);
-}
-    .divNav .navlinks.show2 .option-menu .more-arrow{
-      transform: rotate(90deg);
-    }
-}
-/* dimencion 375 de celular */
-@media (max-width:375px){
-  nav .divNav .navlinks{
-  max-width: 100%;
-}
-/* colum menu */
-nav .divNav .navlinks{
-  max-width: 200px;
-  line-height: 25px;
-  padding: 10px;
-}
-.sidebarLogo .menuNav{
-  font-size: 20px;
-  color: var(--white);
-}
-.sidebarLogo  .xmark,
-.divNav .bars-menu{
-  font-size: 30px;
-}
-nav .divNav .option-menu{
-  display: block;
-  margin-top: 15px;
-}
-nav .divNav .option-menu li .arrow{
-  line-height: 30px;
-}
-.divNav .option-menu li .sub-menu a{
-  font-size: 15px;   
-}
-}
-
 
 /*-------------------------------------------
 -----------------FOOTER

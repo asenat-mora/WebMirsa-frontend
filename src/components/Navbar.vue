@@ -1,161 +1,110 @@
 <template>
 
-  <nav>
-    <div class="divNav">
-      <!-- lines menu -->
-      <div class="bars-menu">
-        <font-awesome-icon icon="fa-solid fa-bars" @click="menuOpenBtn" />
-      </div>
-      <!-- logo -->
-      <div class="logoNav">
-        <!-- logotipo -->
-        <img class="logo-navbar" src="../assets/img/logo.png" alt="" />
-      </div>
-      <div class="navlinks" ref="navLinks">
-      <!-- links -->  
-        <div class="sidebarLogo">
-          <span class="menuNav">MENU</span>
-          <div class="xmark">
-            <!-- icono de flecha -->
-            <font-awesome-icon icon="fa-solid fa-xmark" @click="menuCloseBtn" />
-          </div>
-          <!-- x del navbar -->
-        </div>
-        <ul class="option-menu">
-          <li><router-link to="/">INICIO</router-link></li>
-          <!-- menu para usuarios logeados -->
-          <template v-if="store.getIsLoggedIn">
-            <li>
-              <a href="#">CATALAGO</a><!-- CAT&Aacute;LOGO -->
-              <div class="arrow spin-arrow">
-                <!-- icono fecha apuntadora -->
-                <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
-              </div>
-              <!-- opciones del menu -->
-              <ul class="options-group sub-menu">
-                <!-- Grupo de marcas -->
-                <li class="option-sub-menu">
-                  <span><a href="#">MARCAS</a>
-                    <div class="arrow more-arrow"><!-- icono flecha que despliega -->
-                      <font-awesome-icon icon="fa-solid fa-angle-right" />
-                    </div>
-                  </span>
-                  <ul class="more-sub-menu sub-menu">
-                    <!-- <li><router-link to="/AddBrand">NUEVO</router-link></li> -->
-                    <!-- <li><router-link to="/BrandEdit">EDITAR</router-link></li> -->
-                    <li><router-link to="/BrandList">DETALLE</router-link></li>                  
-                    <!-- Grupo de sub marcas -->
-                    <li class="option-sub-menu">
-                      <span><a class="submarcas" href="#">SUBMARCAS</a>
-                        <!-- <div class="arrow more-arrow">
-                          <font-awesome-icon icon="fa-solid fa-angle-right" />
-                        </div> -->
-                      </span>
-                      <ul class="more-sub-menu sub-menu"><!-- links a vistas -->
-                        <!-- <li><router-link to="/AddSubBrand">NUEVO</router-link></li> -->
-                        <li><router-link to="/SubBrandList">DETALLE</router-link></li>
-                      </ul>
+  <header>
+
+    <!-- <div class="logo">Mirsa</div> -->
+
+    <!-- logotipo -->
+    <img class="logo-navbar" src="../assets/img/logo.png" alt="" />
+
+    <!-- responsive -->
+    <input type="checkbox" id="menu-bar">
+    <label for="menu-bar">MENU</label>
+
+    <!-- menu -->
+    <nav class="menu">
+      <ul>
+        <!-- menu al publico -->
+        <li>
+          <router-link to="/">INICIO</router-link>
+        </li>
+        <li><a href="/Philosophy">FILOSOFIA</a>
+          <!-- <ul>
+                    <li><a href="#">op1</a></li>
+                    <li><a href="#">op2 +</a>
+                        <ul>
+                            <li><a href="#">sub1</a></li>
+                            <li><a href="#">sub1</a></li>
+                            <li><a href="#">sub1</a></li>
+                        </ul>
+                    </li>
+                  </ul> -->
+        </li>
+        <li><a href="/History">HISTORIA</a></li>
+        <li><a href="/productSearch">PRODUCTOS</a></li>
+        <li><a href="/Cotizacion">COTIZACIÓN</a></li>
+        <li>
+          <router-link to="/login">ACCESO</router-link>
+        </li>
+    
+        <!-- menu para usuarios logeados -->
+    
+        <!-- Catalogos -->
+        <li><a href="#">CAT&Aacute;LOGOS +</a>
+          <ul>
+            <!-- Marcas -->
+            <li><a href="#">MARCAS+</a>
+              <ul>
+                <li>
+                  <router-link to="/BrandList">DETALLE</router-link>
+                </li>
+                <li><a href="#">SUBMARCAS+</a>
+                  <ul>
+                    <li>
+                      <router-link to="/SubBrandList">DETALLE</router-link>
                     </li>
                   </ul>
                 </li>
-                <!-- Grupo de accesorios -->
-                <li class="option-sub-menu">
-                  <span><a href="#">ACCESORIOS</a>
-                    <div class="arrow more-arrow">
-                      <font-awesome-icon icon="fa-solid fa-angle-right" />
-                    </div>
-                  </span>
-                  <ul class="more-sub-menu sub-menu">
-                    <!-- <li><router-link to="/AddAccesory">NUEVO</router-link></li> -->
-                    <!-- <li><router-link to="/AccesoryEdit">EDITAR</router-link></li> -->
-                    <li><router-link to="/AccesoryList">DETALLE</router-link></li>
-                  </ul>
-                </li>
-                <!-- Grupo de productos -->
-                <li class="option-sub-menu">
-                  <span><a href="#">PRODUCTOS</a>
-                    <div class="arrow more-arrow">
-                      <font-awesome-icon icon="fa-solid fa-angle-right" />
-                    </div>
-                  </span>
-                  <ul class="more-sub-menu sub-menu">
-                    <li><router-link to="/AddProduct">NUEVO</router-link></li>
-                    <li><router-link to="/productSearch">DETALLE</router-link></li>
-                  </ul>
-                </li>
-                <!-- Grupo de colores -->
-                <li class="option-sub-menu">
-                  <span><a href="#">COLORES</a>
-                    <div class="arrow more-arrow">
-                      <font-awesome-icon icon="fa-solid fa-angle-right" />
-                    </div>
-                  </span>
-                  <ul class="more-sub-menu sub-menu">
-                    <!-- <li><router-link to="/AddColor">NUEVO</router-link></li> -->
-                    <!-- <li><router-link to="/ColorEdit">EDITAR</router-link></li> -->
-                    <li><router-link to="/ColorList">DETALLE</router-link></li>
-                  </ul>
+              </ul>
+            </li>
+            <!-- Accesorios -->
+            <li><a href="#">ACCESORIOS+</a>
+              <ul>
+                <li>
+                  <router-link to="/AccesoryList">DETALLE</router-link>
                 </li>
               </ul>
             </li>
-
-            
-            <!-- opciones habilitadas para administradores -->
-            <template v-if="store.getIsAdmin">
-              <!-- <li><a href="#">REPORTE</a></li> -->
-            <li><a href="#">USUARIOS</a>
-              <div class="arrow spin-arrow">
-                <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
-              </div>
-              <ul class="js-sub-menu sub-menu">
-                <li><router-link to="/AddUser">ALTA</router-link></li>
-                <!-- <li><router-link to="/UserEdit">EDITAR</router-link></li> -->
-                <li><router-link to="/UserList">DETALLE</router-link></li>
-              </ul>
-            </li> 
-            </template>
-
-            <li ><a href="#" v-if="store.getIsAdmin">ADMINISTRADOR</a>
-                <a href="#" v-else>CAPTURISTA</a>
-              <div class="arrow spin-arrow">
-                <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
-              </div>
-
-              <ul class="js-sub-menu sub-menu">
+            <!-- Productos -->
+            <li><a href="#">PRODUCTOS+</a>
+              <ul>
                 <li>
-                  <a href="#" @click="handleLogoutButton">Cerrar sesión</a>
+                  <router-link to="/AddProduct">NUEVO</router-link>
+                </li>
+                <li>
+                  <router-link to="/productSearch">DETALLE</router-link>
                 </li>
               </ul>
             </li>
-
-          <!--   <li><a href="#">MI PERFIL</a>
-              <div class="arrow spin-arrow">
-                <font-awesome-icon icon="fa-solid fa-chevron-down" @click="htmlcssArrow" />
-              </div>
-
-              <ul class="js-sub-menu sub-menu">
-                <li><a href="#">Configuración</a></li>
+            <!-- Colores -->
+            <li><a href="#">COLORES+</a>
+              <ul>
                 <li>
-                  <a href="#" @click="handleLogoutButton">Cerrar sesión</a>
+                  <router-link to="/ColorList">DETALLE</router-link>
                 </li>
               </ul>
-            </li> -->
-          </template>
-
-          <!-- menu al publico -->
-          <template v-else>
-            <li><a href="/Philosophy">FILOSOFIA</a></li>
-            <li><a href="/History">HISTORIA</a></li>
-            <li><a href="/productSearch">PRODUCTOS</a></li>    
-            <li><a href="/Cotizacion">COTIZACIÓN</a></li>
+            </li>
+          </ul>
+        </li>
+        <!-- Usuarios -->
+        <li><a href="#">USUARIOS+</a>
+          <ul>
             <li>
-              <router-link to="/login">ACCESO</router-link>
+              <router-link to="/AddUser">NUEVO</router-link>
             </li>
-          </template>
-        </ul>
-      </div>
-    </div>
-  </nav>
+            <li>
+              <router-link to="/UserList">DETALLE</router-link>
+            </li>
+          </ul>
+        </li>
+        <!-- Cerrar sesión -->
+        <li><a href="#" @click="handleLogoutButton">CERRAR SESI&Oacute;N</a></li>
+    
+    
+    
+      </ul>
+    </nav>
+  </header>
 
 </template>
 
