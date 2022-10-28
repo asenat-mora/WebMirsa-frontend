@@ -1,164 +1,152 @@
 <template>
 
-  <header>
-
-    <!-- <div class="logo">Mirsa</div> -->
-
-    <!-- logotipo -->
-    <img class="logo-navbar" src="../assets/img/logo.png" alt="" />
-
-    <!-- responsive -->
-    <input type="checkbox" id="menu-bar">
-    <label for="menu-bar">MENU</label>
-
-    <!-- menu -->
-    <nav class="menu">
-      <ul>
-        <!-- menu al publico -->
-        <li>
-          <router-link to="/">INICIO</router-link>
-        </li>
-        <li><a href="/Philosophy">FILOSOFIA</a>
-          <!-- <ul>
-                    <li><a href="#">op1</a></li>
-                    <li><a href="#">op2 +</a>
-                        <ul>
-                            <li><a href="#">sub1</a></li>
-                            <li><a href="#">sub1</a></li>
-                            <li><a href="#">sub1</a></li>
-                        </ul>
-                    </li>
-                  </ul> -->
-        </li>
-        <li><a href="/History">HISTORIA</a></li>
-        <li><a href="/productSearch">PRODUCTOS</a></li>
-        <li><a href="/Cotizacion">COTIZACIÓN</a></li>
-        <li>
-          <router-link to="/login">ACCESO</router-link>
-        </li>
-    
-        <!-- menu para usuarios logeados -->
-    
-        <!-- Catalogos -->
-        <li><a href="#">CAT&Aacute;LOGOS +</a>
-          <ul>
-            <!-- Marcas -->
-            <li><a href="#">MARCAS+</a>
-              <ul>
-                <li>
-                  <router-link to="/BrandList">DETALLE</router-link>
-                </li>
-                <li><a href="#">SUBMARCAS+</a>
-                  <ul>
-                    <li>
-                      <router-link to="/SubBrandList">DETALLE</router-link>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <!-- Accesorios -->
-            <li><a href="#">ACCESORIOS+</a>
-              <ul>
-                <li>
-                  <router-link to="/AccesoryList">DETALLE</router-link>
-                </li>
-              </ul>
-            </li>
-            <!-- Productos -->
-            <li><a href="#">PRODUCTOS+</a>
-              <ul>
-                <li>
-                  <router-link to="/AddProduct">NUEVO</router-link>
-                </li>
-                <li>
-                  <router-link to="/productSearch">DETALLE</router-link>
-                </li>
-              </ul>
-            </li>
-            <!-- Colores -->
-            <li><a href="#">COLORES+</a>
-              <ul>
-                <li>
-                  <router-link to="/ColorList">DETALLE</router-link>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <!-- Usuarios -->
-        <li><a href="#">USUARIOS+</a>
-          <ul>
-            <li>
-              <router-link to="/AddUser">NUEVO</router-link>
-            </li>
-            <li>
-              <router-link to="/UserList">DETALLE</router-link>
-            </li>
-          </ul>
-        </li>
-        <!-- Cerrar sesión -->
-        <li><a href="#" @click="handleLogoutButton">CERRAR SESI&Oacute;N</a></li>
-    
-    
-    
-      </ul>
-    </nav>
-  </header>
+    <Menubar :model="items">
+        <template #start>
+			<img alt="logo" src="../assets/img/logo.png" height="40" class="mr-2">
+		</template>
+    </Menubar>
 
 </template>
 
 
-<script>
-import { ref } from "vue";
+<script setup>
+import { reactive } from "vue";
 import { authStore } from "../stores/auth";
-import { useRouter } from "vue-router";
 
-export default {
-  setup() {
-    const navLinks = ref("");
-    const store = authStore();
-    const router = useRouter();
+const store = authStore();
 
-    function handleLogoutButton() {
-      store
-        .logout()
-        .then(() => {
-          router.push("/");
-        })
-        .catch(() => {
-          router.push("/");
-        });
+const items = reactive([
+    {
+        label: "Inicio",
+        icon: "pi pi-fw pi-home",
+        to: "/"
+    },
+    {
+        label: "Filosofia",
+        icon: "pi pi-fw pi-book",
+        to: "/Philosophy",
+        visible:() => !store.getIsLoggedIn,
+    },
+    {
+        label: "Historia",
+        icon: "pi pi-fw pi-calendar",
+        to: "/History",
+        visible:() => !store.getIsLoggedIn,
+    },
+    {
+        label: "Productos",
+        icon: "pi pi-fw pi-shopping-cart",
+        to: "/productSearch",
+        visible:() => !store.getIsLoggedIn,
+    },
+    {
+        label: "Cotizacion",
+        icon: "pi pi-fw pi-dollar",
+        to: "/Cotizacion",
+        visible:() => !store.getIsLoggedIn,
+    },
+    {
+        label: "Acceso",
+        icon: "pi pi-fw pi-user",
+        to: "/Login",
+        visible:() => !store.getIsLoggedIn,
+    },
+    {
+        label:"Catalogo",
+        icon: "pi pi-fw pi-file",
+        visible:() => store.getIsLoggedIn,
+        items: [
+            {
+                label: "Marcas",
+                icon: "pi pi-fw pi-tag",
+                items:[
+                    {
+                        label: "Detalle",
+                        icon: "pi pi-fw pi-list",
+                        to: "/BrandList",
+                    }
+                ]
+            },
+            {
+                label: "SubMarcas",
+                icon: "pi pi-fw pi-tags",
+                items:[
+                    {
+                        label: "Detalle",
+                        icon: "pi pi-fw pi-list",
+                        to: "/SubBrandList",
+                    }
+                ]
+            },
+            {
+                label: "Accesorios",
+                icon: "pi pi-fw pi-car",
+                items:[
+                    {
+                        label: "Detalle",
+                        icon: "pi pi-fw pi-list",
+                        to: "/AccesoryList",
+                    }
+                ]
+            },
+            {
+                label: "Productos",
+                icon: "pi pi-fw pi-book",
+                items:[
+                    {
+                        label: "Nuevo",
+                        icon: "pi pi-fw pi-plus",
+                        to: "/AddProduct",
+                    },
+                    {
+                        label: "Detalle",
+                        icon: "pi pi-fw pi-list",
+                        to: "/productSearch",
+                    }
+                ]
+            },
+            {
+                label: "Colores",
+                icon: "pi pi-fw pi-palette",
+                items:[
+                    {
+                        label: "Detalle",
+                        icon: "pi pi-fw pi-list",
+                        to: "/ColorList",
+                    }
+                ]
+
+            }
+        ]
+    },
+    {
+        label: "Usuarios",
+        icon: "pi pi-fw pi-users",
+        visible:() => store.getIsAdmin,
+        items: [
+            {
+                label: "Nuevo",
+                icon: "pi pi-fw pi-plus",
+                to: "/AddUser",
+            },
+            {
+                label: "Detalle",
+                icon: "pi pi-fw pi-list",
+                to: "/UserList",
+            }
+        ]
+    },
+    {
+        label: "Cerrar sesión",
+        icon: "pi pi-fw pi-sign-out",
+        to: "/",
+        visible:() => store.getIsLoggedIn,
+        command: () => {
+            store.logout();
+        }
     }
-    function menuOpenBtn() {
-      navLinks.value.style.left = "0";
-    }
-    function menuCloseBtn() {
-      navLinks.value.style.left = "-100%";
-    }
+    
+]);
 
-    function htmlcssArrow() {
-      navLinks.value.classList.toggle("show1");
-    }
 
-    function moreSubMenu() {
-      navLinks.value.classList.toggle("show3");
-    }
-
-    return {
-      navLinks,
-      menuOpenBtn,
-      menuCloseBtn,
-      htmlcssArrow,
-      moreSubMenu,
-      store,
-      handleLogoutButton,
-    };
-  },
-
-};
 </script>
-
-<style scoped>
-/* aqui van las cositas que solo van a modificar esta vista  */
-</style>
