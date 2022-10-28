@@ -1113,9 +1113,10 @@
   margin: 10px;
 }
 .card-item .im{
-  width: 100%;
-  object-fit: cover;
+  width: 15rem;
+  object-fit: scale-down;
   border-radius: 3px;
+  height: 15rem;
 }
 .card-item .info{
   border-top: 1px solid rgb(245, 237, 237);/* linea */
@@ -1170,6 +1171,7 @@
 .card-item .product-a .delete{
   background-color: var(--red);
 }
+
 
 /*---------------------------------------------
 -------------------COTIZACION------------------
