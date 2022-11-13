@@ -56,6 +56,12 @@
 .p-menubar{
     justify-content: space-between;
 }
+#logoMenu{
+  position: relative;
+  margin-top: 5px;
+  left: 60px;
+}
+
 
 /*-------------------------------------------
 -----------------FOOTER
@@ -297,10 +303,11 @@
   /* producto, categoria, marca, color */
   .body-register-user,
   .body-register-marca,
+  .body-register-submarca,
   .body-register-category,
   .body-register-product{
     display: inline-block;
-/*     height: 100vh; */
+   /*  height: 100%; */
       display: flex;
       align-items: start;
       justify-content: center;
@@ -312,6 +319,7 @@
   producto, categoria, marca, color */
   .register-container-user,
   .register-container-marca,
+  .register-container-submarca,
   .register-container-category,
   .register-container-product{
      margin: 10px 0;
@@ -319,18 +327,19 @@
      padding: 2.5em;
      background-color: #fff;
      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-     width: 98%;
+     width: 90%;
   }
   .register-container-user,
   .register-container-marca,
   .register-container-category{
-    width: 98%;
+   /*  width: 98%; */
     /* height: 450px; */
   }
 
   /* titulo */
   .register-container-user header,
   .register-container-marca header,
+  .register-container-submarca header,
   .register-container-category header,
   .register-container-product header{
       position: relative;
@@ -343,6 +352,7 @@
   /* linea divisora - producto, categoria, marca */
   .register-container-user header::before,
   .register-container-marca header::before,
+  .register-container-submarca header::before,
   .register-container-category header::before,
   .register-container-product header::before{
       content: "";
@@ -357,6 +367,7 @@
 /* producto, categoria, marca*/
   .register-container-user .form-register-user,
   .register-container-marca .form-register-marca,
+  .register-container-submarca .form-register-submarca,
   .register-container-category .form-register-category,
   .register-container-product .form-register-product{
     position: relative;
@@ -371,6 +382,7 @@
 /* descripcion - producto, categoria, marca */
   .details-user .title,
   .details-marca .title,
+  .details-submarca .title,
   .details-category .title,
   .details-product .title{
     font-weight: 500;  
@@ -380,6 +392,7 @@
 /* producto, categoria, marca */
   .register-container-user .form-register-user .fields,
   .register-container-marca .form-register-marca .fields,
+  .register-container-submarca .form-register-submarca .fields,
   .register-container-category .form-register-category .fields,
   .register-container-product .form-register-product .fields{
     display: flex;
@@ -393,7 +406,7 @@
   form .fields .input-field-checkbox-colors,
   form .fields .input-field{
       display: flex;
-      width: calc(100% / 3 - 25px);
+      width: calc(100% / 4 - 25px);
       flex-direction: column;
       margin: 10px 0;
   }
@@ -436,6 +449,10 @@
   .input-field select:focus{
       box-shadow: 0 3px 6px rgba(138, 10, 10, 0.13);
   }
+  /* consejo sobre el tamanio de una img */
+  #adviceImg{
+    color: #56595f;
+  }
   /*-----alerta de error-----*/
   .input-field .error,
   .input-field-checkbox-colors .error,
@@ -455,14 +472,16 @@
   .register-container-user button,
   .register-container-product button,/* para listas */
   .register-container-marca form button,
+  .register-container-marca .returnbtn,
+  .register-container-submarca .returnbtn,
   .register-container-category form button,
   .register-container-product form button{
       color: var(--white);
       display: flex;
       border: none;
       border-radius: .25rem;
-      width: 100%;
-      font-size: 16px;
+      width: 130px;
+      font-size: 17px;
       margin: 20px 0;
       align-items: center;
       height: 45px;
@@ -482,49 +501,12 @@
   .updatelbtn{
   background-color: var(--button-blue);
   }
-  .cancelbtn{
+  .returnbtn{
       background-color: var(--button-gray);
   }
   form button:hover{
       background-color: var(--fondo);
   }
-/* ------Buscador--------- */
-/* .field-search{
-  width: 100%;
-  display: flex;
-  background-color: #ebeff3;
-}
-.field-search label{
-  margin-right: 15px;
-  font-size: 20px;
-  font-weight: 500;
-  color: #333;
-}
-.input-field-search{
-  margin: 20px 0;
-}
-.field-search .button-search{
-  margin-left: 15px;
-  width: 100px;
-}
- form .field-search{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-} 
-.searchbtn{
-  background-color: var(--green);
-}
-.input-field-search input{
-    outline: none;
-    font-size: 17px;
-    font-weight: 300px;
-    color: #333;
-    border-radius: 5px;
-    border: 1px solid var(--border-gray);
-    padding: 0 15px;
-    height: 42px;
-} */
 
 /*------------------- 
 --------Filtro-Marcas----
@@ -555,6 +537,7 @@
 
      /* contenedor */
     .register-container-marca,
+    .register-container-submarca,
     .register-container-category{
       width: 100%;
       margin: 90px 0 0 0;
@@ -570,6 +553,7 @@
   /* Botones */
   .register-container-product button,/* para listas */
   .register-container-marca form button,
+  .register-container-submarca form button,
   .register-container-category form button,
   .register-container-product form button{
     max-width: 130px;
@@ -599,21 +583,24 @@
       margin: 10px 0;
     }
     .body-register-marca,
+    .body-register-submarca,
     .body-register-category,
     .body-register-product{
       padding-top: 0;
     }
     
     .register-container-marca,
+    .register-container-submarca,
     .register-container-category,
     .register-container-product{
       height: none;
       min-width: 100%;
       padding-top: none;
-      margin: 60px 0 0 0;
+      margin: 6px 0 0 0;
     }
     /* titulo */
     .register-container-marca header,
+    .register-container-submarca header,
     .register-container-category header,
     .register-container-product header{
 
@@ -623,6 +610,7 @@
     }
     /* subtitulo */
     .details-marca .title,
+    .details-submarca .title,
     .details-category .title,
     .details-product .title{
         font-size: 16px;
@@ -671,11 +659,13 @@
   }
 
 /* Botones form */
+/*   .register-container-submarca .btnCancelar, */
   .register-container-product button,/* para listas */
   .register-container-marca form button,
+  .register-container-submarca form button,
   .register-container-category form button,
   .register-container-product form button{
-    max-width: 100px; /* anchura de botones */
+    max-width: 110px; /* anchura de botones */
   }
 
   /*----Buscador----*/
@@ -708,15 +698,8 @@
     height: 35px;
     margin: 2px 15px;
 }
-/* ---- */
-/* .field-search .searchbtn{
-    max-width: 775px;
-    font-size: 13px;
-} */
-
   
 }
-/*------Alertas------*/
 
 
 

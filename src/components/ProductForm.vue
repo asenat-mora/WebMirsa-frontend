@@ -73,6 +73,7 @@
                         </div>
                         <div class="input-field-image">
                             <label>Imagen</label>
+                            <h6 id="adviceImg">(Tamaño admitido 20MB)</h6>
                             <div class="p-image">
                                 <input id="vImagen" :src="productImage || defaultImageSrc" type="image" width="200" height="200">
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToBucket($event)" required/>
@@ -128,7 +129,7 @@
     import { ref, watch } from 'vue';
 
     const router = useRouter();
-    const defaultImageSrc = 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png';
+    const defaultImageSrc = 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg';
     let arrayColors = ref([]);
     let subBrandsLabel = ref([]);
     let errors = ref(null);

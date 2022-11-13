@@ -33,11 +33,25 @@
                 <Column :exportable="false" style="min-width:8rem">
                     <template #body="slotProps">
                         <Button icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" @click="editUser(slotProps.data)" />
-                        <!-- <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" @click="confirmDeleteProduct(slotProps.data)" /> -->
+                        <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" @click="confirmDeleteUser(slotProps.data)" />
                     </template>
                 </Column>
 
             </DataTable>
+
+            <Dialog v-model:visible="deleteUserDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                <span >Esta seguro de querer borrar <b>{{user.name}}</b>?</span>
+            </div>
+            <template #footer>
+                <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteUser" />
+                <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteUserDialog = false"/>
+                
+            </template>
+        </Dialog>
+
+
         </div>
     </div>
 </template>
@@ -49,6 +63,7 @@ import {FilterMatchMode} from 'primevue/api';
 import { useRouter } from 'vue-router';
 
 let users = ref();
+let user = ref({});
 let router = useRouter();
 
 const columns = ref([
@@ -86,6 +101,29 @@ function mapRoles(){
 function editUser(user){
     router.push({ name: 'UserEdit', params: { id: user.id } });
 }
+
+function confirmDeleteUser(user){
+    user.value = user;
+    deleteUserDialog.value = true;
+}
+
+function deleteUser(){
+    deleteUserDialog.value = false;
+    const id = user.value.id;
+    user.value = {};
+
+    axios.delete(import.meta.env.VITE_API_URL + '/api/users/' + id)
+    .then(response => {
+        notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
+        getAllBrands();
+    })
+    .catch(error => {
+        console.log(error);
+        notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
+    });
+
+}
+
 
 
 

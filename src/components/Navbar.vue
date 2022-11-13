@@ -2,7 +2,7 @@
 
     <Menubar :model="items">
         <template #start>
-			<img alt="logo" src="../assets/img/logo.png" height="40" class="mr-2">
+			<img alt="logo" src="../assets/img/logo.png" id="logoMenu" height="40" margin="400px" class="mr-2">
 		</template>
     </Menubar>
 

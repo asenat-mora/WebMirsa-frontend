@@ -1,11 +1,11 @@
 <template>
 
-    <div class="body-register-marca">
-       <div class="register-container-marca">
+    <div class="body-register-submarca">
+       <div class="register-container-submarca">
           <header>ALTA SE SUBMARCAS</header>
-            <form class="form-register-marca">
+            <form class="form-register-submarca">
                 <div class="form-first">
-                    <div class="details-marca">
+                    <div class="details-submarca">
                         
                         <div class="fields">
                             <div class="input-field-b">
