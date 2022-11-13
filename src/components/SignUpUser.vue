@@ -2,7 +2,7 @@
 
     <div class="body-register-user">
         <div class="register-container-user">
-            <header>ALTA DE USUARIO</header>
+            <header>USUARIO</header>
             <form class="form-register-user" @submit.prevent="validateForm">
                 <div class="form-first">
                     <div class="details-user">
@@ -54,7 +54,7 @@
                             <span class="btnCancelar">Volver</span>
                         </button>
                         <button class="savebtn" type="button" @click="validateFields($event, mode)">
-                            <span class="btnGuardar">Confirmar</span>
+                            <span class="btnGuardar">Registrar</span>
                         </button>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
         /* Busca que el nombre este definido */
         if (!props.name) {
             vName.value = true;
-            errors.value.name = "Campo obligatorio";
+            errors.value.name = "El nombre usuario es requerido";
             return;
         }
         /*quita espacios y los guarda en otra variable */
@@ -172,7 +172,7 @@
         }
         /* valida los caracteres aceptados */
         if (!/^[a-zA-Z ]+$/.test(props.name)) {
-            errors.value.name = "El nombre debe contener solo letras";
+            errors.value.name = "Solo se permiten caracteres alfabéticos";
             vName.value = true
         }
     }
@@ -193,7 +193,7 @@
         }
         /* valida los caracteres aceptados */
         if (!/^[a-zA-Z ]+$/.test(props.surname)) {
-            errors.value.surname = "Debe contener solo letras";
+            errors.value.surname = "Solo se permiten caracteres alfabéticos";
             vSurname.value = true
         }
     }
@@ -214,7 +214,7 @@
         }
         /* valida los caracteres aceptados */
         if (!/^[.@_a-zA-Z0-9 ]+$/.test(props.email)) {
-            errors.value.email = "Caracteres aceptados '@._' ";
+            errors.value.email = "Caracteres aceptados @._";
             vEmail.value = true
         }
     }
@@ -229,13 +229,13 @@
         /*quita espacios y los guarda en otra variable */
         let emailVerifyNoSpace = props.verificationEmail.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
-        if (emailVerifyNoSpace.length < 8 || emailVerifyNoSpace.length > 20) {
+        if (emailVerifyNoSpace.length < 8 || emailVerifyNoSpace.length > 30) {
             errors.value.verificationEmail = "El correo debe tener entre 8 y 20 caracteres";
             vEmailVerify.value = true;
         }
         /* valida los caracteres aceptados */
         if (!/^[.@_a-zA-Z0-9 ]+$/.test(props.email)) {
-            errors.value.email = "Caracteres aceptados '@._' ";
+            errors.value.email = "Caracteres aceptados @._ ";
             vEmail.value = true
         }
     }
@@ -258,7 +258,7 @@
         let passwordNoSpace = props.password.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (passwordNoSpace.length < 8 || passwordNoSpace.length > 20) {
-            errors.value.password = "El password debe tener entre 8 y 20 caracteres";
+            errors.value.password = "La contraseña debe tener entre 8 y 20 caracteres";
             vPassword.value = true;
         }
         /* valida los caracteres aceptados .@*+?^${}()|[\] */ 
@@ -279,7 +279,7 @@
         let passwordNoSpace = verificationPassword.value.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (passwordNoSpace.length < 8 || passwordNoSpace.length > 20) {
-            errors.value.verificationPassword = "El password debe tener entre 8 y 20 caracteres";
+            errors.value.verificationPassword = "La contraseña debe tener entre 8 y 20 caracteres";
             vPasswordVerify.value = true;
         }
         /* valida los caracteres aceptados */

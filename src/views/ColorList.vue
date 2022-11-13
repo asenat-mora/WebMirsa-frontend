@@ -9,7 +9,7 @@
                    <!--  <span class="title">DETALLES DE MARCA</span> -->
                     <div class="fields">
                         <div class="input-field-b">
-                            <label>Nombre</label>
+                            <label>Nombre*</label>
                             <input type="text" placeholder="Nombre del color" v-model="colorName">
                             <div class="error" v-if="vName"> {{ errors.name }}</div>
                         </div>

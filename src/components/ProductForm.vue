@@ -72,7 +72,7 @@
                             <div class="error" v-if="vDescription"> {{ errors.description }}</div>
                         </div>
                         <div class="input-field-image">
-                            <label>Imagen*</label>
+                            <label>Imagen</label>
                             <div class="p-image">
                                 <input id="vImagen" :src="productImage || defaultImageSrc" type="image" width="200" height="200">
                                 <input class="file-upload" type="file" accept="image/*" @change="uploadImageToBucket($event)" required/>

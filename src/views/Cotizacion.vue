@@ -10,19 +10,19 @@
                 <h2>Datos de cotización</h2>
                 <div class="container-colum">
                     <div class="txt">
-                        <label>Nombre* </label>
+                        <label>Nombre*</label>
                         <input type="text" placeholder="Nombre" />
                     </div>
                     <div class="txt">
-                        <label>Apellido* </label>
+                        <label>Apellido*</label>
                         <input type="text" placeholder="Apellido" />
                     </div>
                     <div class="txt">
-                        <label>Correo* </label>
+                        <label>Correo*</label>
                         <input type="text" placeholder="Correo" />
                     </div>
                     <div class="txt">
-                        <label>Ciudad* </label>
+                        <label>Ciudad*</label>
                         <input type="text" placeholder="Ciudad" />
                     </div>
                     <div class="txt">
