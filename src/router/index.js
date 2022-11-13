@@ -181,7 +181,7 @@ const router = createRouter({
 			},
 		},
 		{
-			path: "/UserEdit",
+			path: "/UserEdit/:id",
 			name: "UserEdit",
 			component: UserEdit,
 			meta: {
