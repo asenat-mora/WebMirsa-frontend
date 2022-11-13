@@ -42,14 +42,14 @@
             <Dialog v-model:visible="deleteUserDialog" :style="{width: '450px'}" header="Confirmar" :modal="true">
             <div class="confirmation-content">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-                <span >Esta seguro de querer borrar <b>{{user.name}}</b>?</span>
+                <span >Esta seguro de querer desactivar <b>{{user.name }}</b>?</span>
             </div>
             <template #footer>
                 <Button label="Si" icon="pi pi-check" class="p-button-text" @click="deleteUser" />
                 <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteUserDialog = false"/>
                 
             </template>
-        </Dialog>
+            </Dialog>
 
 
         </div>
@@ -61,10 +61,14 @@ import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import {FilterMatchMode} from 'primevue/api';
 import { useRouter } from 'vue-router';
+import { notify } from "@kyvg/vue3-notification";
 
 let users = ref();
-let user = ref({});
 let router = useRouter();
+
+let user = ref({});
+let deleteUserDialog = ref(false);
+
 
 const columns = ref([
     { field: 'id', header: 'Id' },
@@ -102,31 +106,31 @@ function editUser(user){
     router.push({ name: 'UserEdit', params: { id: user.id } });
 }
 
-function confirmDeleteUser(user){
-    user.value = user;
+function confirmDeleteUser(usr){
+    user.value = usr;
     deleteUserDialog.value = true;
 }
 
-function deleteUser(){
+function deleteUser() {
     deleteUserDialog.value = false;
     const id = user.value.id;
     user.value = {};
 
     axios.delete(import.meta.env.VITE_API_URL + '/api/users/' + id)
-    .then(response => {
-        notify({title: "Exito", text: "¡Registro eliminado!", type: "success"});
-        getAllBrands();
-    })
-    .catch(error => {
-        console.log(error);
-        notify({title: "Error", text: "¡Error al eliminar!", type: "error"});
-    });
-
+        .then(response => {
+            notify({
+                title: "Usuario desactivado",
+                text: "El color ha sido desactivado correctamente.",
+                type: "success",
+                duration: 5000,
+            });
+            getAllUsers();
+        })
+        .catch(error => {
+            notify({title: "Error", text: "¡Error al desactivar!", type: "error"});
+            console.log(error);
+        });
 }
-
-
-
-
 
 onMounted(() => {
     getAllUsers();
