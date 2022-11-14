@@ -95,7 +95,7 @@
             </Dialog>
 
             <div class="details-btns">
-                <button type="button" class="cancelbtn" @click="goBack($event)">
+                <button type="button" class="returnbtn" @click="goBack($event)">
                      <span class="btnCancelar">Volver</span>
                 </button>
             </div>
