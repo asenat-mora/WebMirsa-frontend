@@ -466,14 +466,13 @@
   .details-btns{
       display: flex;
       justify-content: space-around;
-      align-items: center;
+     /*  justify-content: flex-end; */
   }
-  /* Botones */
+  /* Diseño de Botones */
   .register-container-user button,
   .register-container-product button,/* para listas */
   .register-container-marca form button,
   .register-container-marca .returnbtn,
-  .register-container-submarca .returnbtn,
   .register-container-category form button,
   .register-container-product form button{
       color: var(--white);
@@ -491,6 +490,12 @@
       cursor: pointer;
       transition: all 0.3s linear;
   }
+
+.returnbtn{
+  position: unset;
+  justify-content: space-around;
+}
+
   /*Color de Botenes */
   .savebtn{
       background-color: var(--green);
@@ -659,7 +664,7 @@
   }
 
 /* Botones form */
-/*   .register-container-submarca .btnCancelar, */
+
   .register-container-product button,/* para listas */
   .register-container-marca form button,
   .register-container-submarca form button,
@@ -667,7 +672,6 @@
   .register-container-product form button{
     max-width: 110px; /* anchura de botones */
   }
-
   /*----Buscador----*/
   .field-search label{
     /* position: relative; */

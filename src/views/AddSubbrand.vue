@@ -25,14 +25,14 @@
                             
                         </div>
                     </div>
-                    <div class="details-btns">
+               <!--      <div class="details-btns">
                         <button type="button" class="cancelbtn" @click="goBack($event)">
                                 <span class="btnCancelar">Volver</span>
                         </button>
                         <button class="savebtn" type="button" @click="createSubBrand()">
                             <span class="btnGuardar">Registrar</span>       
                         </button>
-                    </div>
+                    </div> -->
                 </div>
             </form>
         </div>
