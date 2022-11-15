@@ -67,13 +67,30 @@
 <script setup>
 
     import { useRouter } from 'vue-router';
-    import { ref } from 'vue';
+    import { ref, watch, onMounted ,toRef} from 'vue';
     import axios from 'axios';
     import { notify } from "@kyvg/vue3-notification";
 
+    const props = defineProps({
+        idP: Number,
+        nameP: String,
+        surnameP: String,
+        emailP: String,
+        verificationEmailP: String,
+        userRolP: Number,
+        mode: String
+    })
+
     const router = useRouter();
     let verificationPassword = ref();
+    let name = toRef(props, 'nameP');
+    let surname = toRef(props, 'surnameP');
+    let email = toRef(props, 'emailP');
+    let verificationEmail = toRef(props, 'verificationEmailP');
+    let userRol = toRef(props, 'userRolP');
+    let password = ref(null);
     let errors = ref(null);
+    
     let vName = ref(false);
     let vSurname = ref(false);
     let vEmail = ref(false);
@@ -82,26 +99,16 @@
     let vPasswordVerify = ref(false);
     let vUserRol = ref(false);
 
-    const props = defineProps({
-        id: Number,
-        name: String,
-        surname: String,
-        email: String,
-        verificationEmail: String,
-        userRol: Number,
-        password: String,
-        id: Number,
-        mode: String
-    })
+    
 
     function clearForm(){
-        props.name = '';
-        props.surname = '';
-        props.email = '';
-        props.verificationEmail = '';
-        props.password = '';
-        props.verificationPassword = '';
-        props.userRol = '';
+        name.value = '';
+        surname.value = '';
+        email.value = '';
+        verificationEmail.value = '';
+        password.value = '';
+        verificationPassword.value = '';
+        userRol.value = '';
     }
 
     function goBack(event) {
@@ -109,14 +116,15 @@
         router.back();
     }
 
+    
     function createUser() {
         const user = {
-            name: props.name,
-            surname: props.surname,
-            email: props.email,
-            verificationEmail: props.verificationEmail,
-            roles: Array.of(parseInt(props.userRol)),
-            password: props.password,
+            name: name.value,
+            surname: surname.value,
+            email: email.value,
+            verificationEmail: verificationEmail.value,
+            roles: Array.of(parseInt(userRol.value)),
+            password: password.value,
         }
 
         axios.post(import.meta.env.VITE_API_URL + '/api/users/signUp', user)
@@ -135,17 +143,18 @@
 
     function updateUser() {
         const user = {
-            name: props.name,
-            surname: props.surname,
-            email: props.email,
-            verificationEmail: props.verificationEmail,
-            roles: Array.of(parseInt(props.userRol)),
+            name: name.value,
+            surname: surname.value,
+            email: email.value,
+            verificationEmail: verificationEmail.value,
+            roles: Array.of(parseInt(userRol.value)),
             password: password.value,
         }
 
-        axios.patch(import.meta.env.VITE_API_URL + '/api/users/' + props.id, user)
+        axios.patch(import.meta.env.VITE_API_URL + '/api/users/' + props.idP, user)
             .then(response => {
                 notify({ title: "Exito", text: "¡Registro exitoso!", type: "success" });
+                
             }).catch(error => {
                 if (error.response.status === 409) {
                     notify({ title: "Advertencia", text: "¡El correo ya se encuentra registrado!", type: "warn" });
@@ -158,20 +167,20 @@
     /* validaciones */
     function checkName() {
         /* Busca que el nombre este definido */
-        if (!props.name) {
+        if (!name.value) {
             vName.value = true;
             errors.value.name = "El nombre usuario es requerido";
             return;
         }
         /*quita espacios y los guarda en otra variable */
-        let nameNoSpace = props.name.replace(/ /g, '');
+        let nameNoSpace = name.value.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (nameNoSpace.length < 3 || nameNoSpace.length > 20) {
             errors.value.name = "El nombre debe tener entre 3 y 20 caracteres alfabeticos";
             vName.value = true;
         }
         /* valida los caracteres aceptados */
-        if (!/^[a-zA-Z ]+$/.test(props.name)) {
+        if (!/^[a-zA-Z ]+$/.test(name.value)) {
             errors.value.name = "Solo se permiten caracteres alfabéticos";
             vName.value = true
         }
@@ -179,20 +188,20 @@
 
     function checkSurname() {
         /* Busca que el nombre este definido */
-        if (!props.surname) {
+        if (!surname.value) {
             vSurname.value = true;
             errors.value.surname = "Campo obligatorio";
             return;
         }
         /*quita espacios y los guarda en otra variable */
-        let surnameNoSpace = props.surname.replace(/ /g, '');
+        let surnameNoSpace = surname.value.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (surnameNoSpace.length < 3 || surnameNoSpace.length > 30) {
             errors.value.surname = "Los apellidos deben tener entre 3 y 30 caracteres alfabeticos";
             vSurname.value = true;
         }
         /* valida los caracteres aceptados */
-        if (!/^[a-zA-Z ]+$/.test(props.surname)) {
+        if (!/^[a-zA-Z ]+$/.test(surname.value)) {
             errors.value.surname = "Solo se permiten caracteres alfabéticos";
             vSurname.value = true
         }
@@ -200,20 +209,20 @@
 
     function checkEmail() {
         /* Busca que el nombre este definido */
-        if (!props.email) {
+        if (!email.value) {
             vEmail.value = true;
             errors.value.email = "Campo obligatorio";
             return;
         }
         /*quita espacios y los guarda en otra variable */
-        let emailNoSpace = props.email.replace(/ /g, '');
+        let emailNoSpace = email.value.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (emailNoSpace.length < 8 || emailNoSpace.length > 30) {
             errors.value.email = "El correo debe tener entre 8 y 30 caracteres";
             vEmail.value = true;
         }
         /* valida los caracteres aceptados */
-        if (!/^[.@_a-zA-Z0-9 ]+$/.test(props.email)) {
+        if (!/^[.@_a-zA-Z0-9 ]+$/.test(email.value)) {
             errors.value.email = "Caracteres aceptados @._";
             vEmail.value = true
         }
@@ -221,22 +230,22 @@
 
     function checkEmailVerify() {
         /* Busca que el email este definido */
-        if (!props.verificationEmail) {
+        if (!verificationEmail.value) {
             vEmailVerify.value = true;
             errors.value.verificationEmail = "Campo obligatorio";
             return;
         }
         /*quita espacios y los guarda en otra variable */
-        let emailVerifyNoSpace = props.verificationEmail.replace(/ /g, '');
+        let emailVerifyNoSpace = verificationEmail.value.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (emailVerifyNoSpace.length < 8 || emailVerifyNoSpace.length > 30) {
             errors.value.verificationEmail = "El correo debe tener entre 8 y 20 caracteres";
             vEmailVerify.value = true;
         }
         /* valida los caracteres aceptados */
-        if (!/^[.@_a-zA-Z0-9 ]+$/.test(props.email)) {
-            errors.value.email = "Caracteres aceptados @._ ";
-            vEmail.value = true
+        if (!/^[.@_a-zA-Z0-9 ]+$/.test(verificationEmail.value)) {
+            errors.value.verificationEmail = "Caracteres aceptados @._ ";
+            vEmailVerify.value = true
         }
     }
   
@@ -249,20 +258,20 @@
 
     function checkPassword() {
         /* Busca que el nombre este definido */
-        if (!props.password) {
+        if (!password.value) {
             vPassword.value = true;
             errors.value.password = "Campo obligatorio";
             return;
         }
         /*quita espacios y los guarda en otra variable */
-        let passwordNoSpace = props.password.replace(/ /g, '');
+        let passwordNoSpace = password.value.replace(/ /g, '');
         /* checa la longitud de la cadena, sin contar espacios */
         if (passwordNoSpace.length < 8 || passwordNoSpace.length > 20) {
             errors.value.password = "La contraseña debe tener entre 8 y 20 caracteres";
             vPassword.value = true;
         }
         /* valida los caracteres aceptados .@*+?^${}()|[\] */ 
-        if (!/^[a-zA-Z0-9.@*+?^${}()|[\] ]+$/.test(props.password)) {
+        if (!/^[a-zA-Z0-9.@*+?^${}()|[\] ]+$/.test(password.value)) {
             errors.value.password = "Caracteres aceptados";
             vPassword.value = true
         }
@@ -317,6 +326,7 @@
 
         
     }
+
 
 
 </script>
