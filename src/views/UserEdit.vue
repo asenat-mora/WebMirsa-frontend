@@ -1,6 +1,6 @@
 <template>
-    <SignUpUser mode="Update" :id="parseInt(route.params.id)" :name="user.name" :surname="user.surname" :email="user.email"
-        :verificationEmail="user.verificationEmail" :userRol="user.roles" />
+    <SignUpUser mode="Update" :idP="parseInt(route.params.id)" :nameP="user.name" :surnameP="user.surname" :emailP="user.email"
+        :verificationEmailP="user.verificationEmail" :userRolP="user.roles" />
 </template>
 
 <script setup>
